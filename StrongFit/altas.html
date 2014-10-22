@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Altas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="altas.css">
+        <script src="validaciones.js"></script>
+    </head>
+    <body onLoad=mp();>
+        
+      
+            <div id="menu">
+            <h1>Altas</h1>
+            <br><br>
+            <p align="center">
+                        <a href="index.html" target="dos">Index</a>
+                        <br><br>
+                                          
+            </p>
+            
+            
+            
+            <form action="altas.jsp" method="post" name="altas">
+            
+                     <p><label for="textfieldboleta">Boleta</label><br />
+                     <input type="text" name="textfieldboleta" placeholder="solo numeros" onkeypress="return validanumeros(event, textfieldboleta);"></p>
+                     <br>
+                     
+                     
+                     <p><label for="contrasenia">Contraseña</label><br />
+                     <input type="password" name="contrasenia" placeholder="Contraseña" maxlength="11"></p>
+                     <br>
+                     
+                     
+                     <p><label for="textfieldnombre">Nombre</label><br />
+                     <input type="text" name="textfieldnombre" placeholder="solo letras" onkeypress="return validaletras(event, textfieldnombre);"></p>
+                     <br>
+                     
+                     
+                     <p><label for="radiosexo">Sexo</label><br />
+                            <input type="radio" name="radiosexo" value="Hombre" checked> <!-- onClick="validaradio(radiosexo)"-->  
+                            	Masculino
+                                <input type="radio" name="radiosexo" value="Mujer" checked> <!--onClick="validaradio(radiosexo)"/--> 
+                                Femenino
+                                <br></p>
+                    <br />
+                    
+                    
+                    <p><label for="textfieldemail">E-mail</label><br />
+                    <input type="text" name = "textfieldemail" placeholder = "correo@hotmail.com" onkeypress="return validacorreo(event, textfieldemail)" /></p>
+                    <br>
+                    
+                    
+                    <h3>DOMICILIO</h3>
+                    <p><label for="textfieldcalle">Calle</label><br />
+                        <input type="text" name="textfieldcalle" placeholder="lo que quieras"/></p>
+                    <br>
+                    
+                    
+                   <p><label>Delegación</label><br /></p>
+                    <select name="select" id="select" onchange="comboyole(this,this.form.select2)">
+			<option>Elije tu delegación</option>
+			<option value="delegacion1">Alvaro Obregon</option>
+			<option value="delegacion2">Iztacalco</option>
+			<option value="delegacion3">Iztapalapa</option>
+			<option value="delegacion4">Coyoacan</option>
+                    </select>
+                    <br>
+                    
+                    
+                  <p><label>Colonia</label><br /></p>
+                    <select name="select2" id="select2">
+			<option>- - - - - -</option>
+                    </select>
+                    <br>
+                    
+                    
+                    <p><label for="textfieldsueldo">Sueldo</label><br />
+                    <input type="text" name="textfieldsueldo" placeholder="solo numeros" onkeypress="return validanumeros(event, textfieldsueldo);"></p>
+                    <br>
+                    
+                    
+                    <p><label for="radiodeporte">Estado Civil</label><br />
+                    <input type="radio" name="radiodeporte" value="Soltero" onClick="validaradiodep(radiodeporte)"/>  
+			Soltero
+			<br>
+			<input type="radio" name="radiodeporte" value="Casado" onClick="validaradiodep(radiodeporte)"/> 
+			Casado
+			<br>
+			<input type="radio" name="radiodeporte" value="Unión libre" onClick="validaradiodep(radiodeporte)"/> 
+			Unión libre
+			<br>
+			<input type="radio" name="radiodeporte" value="Divorciado" onClick="validaradiodep(radiodeporte)"/> 
+			Divorciado
+			<br>
+			<input type="radio" name="radiodeporte" value="Viudo" onClick="validaradiodep(radiodeporte)"/> 
+			Viudo
+                        <br></p>
+                    <br />
+                    
+                    <input type="submit" name="alta" value="Alta">
+                    
+                    
+                    
+                    <br /><br />
+                    </form>
+            <br /><br />
+                    
+          
+        
+        
+        </div>
+      
+        
+    </body>
+</html>
