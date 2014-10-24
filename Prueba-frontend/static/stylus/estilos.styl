@@ -1,0 +1,124 @@
+@import 'nib'
+@import 'normalize.styl'
+@import 'style.styl'
+@import url(http://fonts.googleapis.com/css?family=Roboto)
+
+azulOsc = #01579b
+azulCla = #03a9f4
+amarillo = #ffea00
+
+body
+	font-family 'Roboto', sans-serif
+	background-color #f9f9f9
+	font-size 16px
+
+footer
+	background-color azulOsc
+	color white
+	padding 40px 20px
+	box-sizing border-box
+	.contenedor
+		margin 0 auto
+		.empresa
+			float right
+			position relative
+			bottom 10px
+		.contacto
+			float left
+			position relative
+			bottom 10px
+			span
+				vertical-align top
+			a
+				border-radius 50%	
+				margin 0 0.1em
+				padding 0.2em
+				font-size 1.5em
+				text-decoration none
+				color white
+				transition background-color 1s ease		
+				&:hover									
+					color black
+					background-color amarillo
+					transition background-color 2s ease
+					transition color 2s ease	
+
+header
+	background-color azulOsc
+	position relative
+	overflow hidden
+	h1
+		margin 20px 70px
+		color white
+		font-size 1.5em
+		font-weight normal
+		
+section
+	margin 1em
+	overflow hidden
+	min-height 625px
+	.col1
+		background-color azulCla
+		position relative
+		float left
+		width 50%
+		box-sizing border-box
+		form a
+			text-decoration none
+			color red
+			&:hover
+				text-decoration underline
+	.col2
+		box-sizing border-box
+		position relative
+		float left
+		width 50%
+input
+	border-radius 5px
+	&[type="email"], &[type="password"]
+		padding 0.1em
+	&[type="submit"]
+		padding 0.5em 2em
+		background-color amarillo
+		
+/*Escritorio o tv*/
+@media (min-width: 1200px)
+	body
+		color: red
+
+/*Escritorio pequño o tablet*/
+@media (min-width: 768px) and (max-width: 979px)
+	body 
+		color: green;
+
+/*Tablet o smartphone*/
+@media (max-width: 767px)
+	body 
+		color: blue;
+
+/*Smartphone*/
+@media (max-width: 480px)
+	header
+		text-align center
+	footer
+		text-align center
+		padding 0.5em 0
+		.contenedor
+			.contacto, .empresa
+				position static
+				float inherit
+	section
+		margin 0
+		max-width 480px
+		max-height 550px
+		min-height 500px
+		.col1
+			text-align center
+			width 100%
+			min-height 625px
+			form input
+				width 90%
+		.col2
+			display none
+		
+	
