@@ -22,6 +22,7 @@ footer
 	color white
 	padding 40px 20px
 	box-sizing border-box
+	postion relative
 	.contenedor
 		margin 0 auto
 		.empresa
@@ -62,6 +63,7 @@ section
 	padding 3em 2em
 	box-sizing border-box
 	background-color fondo
+	min-height 600px
 	.contenedor
 		width 100%
 		box-sizing border-box
@@ -92,6 +94,7 @@ section
 			h2
 				font-weight normal
 				border-bottom 1px solid gray
+				margin-bottom 1em
 			input		
 				margin 0 0 2em 0
 				box-sizing border-box
@@ -118,6 +121,9 @@ section
 @media (min-width: 1200px)
 	body
 		color: red
+		font-size 20px
+	section
+		min-height 800px
 
 /*Escritorio pequño o tablet*/
 @media (min-width: 768px) and (max-width: 979px)
@@ -126,13 +132,11 @@ section
 
 /*Tablet o smartphone*/
 @media (max-width: 767px)
-	body 
-		color: blue;
 	section
 		padding 1em
 		.contenedor
 			.formulario
-				padding 0
+				padding 1em
 				width 100%
 				text-align center
 				margin-bottom 1em
@@ -144,7 +148,7 @@ section
 					margin 0 0 1em 0
 					width 100%
 			.datos
-				width 100%
+				display none
 
 /*Smartphone*/
 @media (max-width: 480px)
