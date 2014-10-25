@@ -2,14 +2,19 @@
 @import 'normalize.styl'
 @import 'style.styl'
 @import url(http://fonts.googleapis.com/css?family=Roboto)
-
+//lightblue
 azulOsc = #01579b
 azulCla = #03a9f4
-amarillo = #ffea00
-
+//orange
+amarillo = #ffd180
+botones = #ff9800
+btnHover = #fb8c00
+btnActive = #f57c00
+//gris
+fondo = #f9f9f9
 body
 	font-family 'Roboto', sans-serif
-	background-color #f9f9f9
+	background-color azulOsc
 	font-size 16px
 
 footer
@@ -52,34 +57,62 @@ header
 		color white
 		font-size 1.5em
 		font-weight normal
-		
+		letter-spacing 2px
 section
-	margin 1em
-	overflow hidden
-	min-height 625px
-	.col1
-		background-color azulCla
-		position relative
-		float left
-		width 50%
+	padding 3em 2em
+	box-sizing border-box
+	background-color fondo
+	.contenedor
+		width 100%
 		box-sizing border-box
-		form a
-			text-decoration none
-			color red
-			&:hover
-				text-decoration underline
-	.col2
-		box-sizing border-box
-		position relative
-		float left
-		width 50%
-input
-	border-radius 5px
-	&[type="email"], &[type="password"]
-		padding 0.1em
-	&[type="submit"]
-		padding 0.5em 2em
-		background-color amarillo
+		margin 50px auto
+		.datos
+			display inline-block
+			vertical-align top
+			width 49.7%
+			border 1px solid
+			box-sizing border-box
+			padding 2em
+			p span
+				font-size 1.2em
+				font-style italic
+		.formulario
+			display inline-block
+			background-color white
+			width 49.7%
+			padding 1.5em 2em
+			box-sizing border-box
+			border-radius 4px
+			box-shadow 1px 1px 3px gray
+			span a
+				text-decoration none
+				color azulOsc
+				&:hover
+					text-decoration underline
+			h2
+				font-weight normal
+				border-bottom 1px solid gray
+			input		
+				margin 0 0 2em 0
+				box-sizing border-box
+				border-radius 4px
+				&[type="submit"]
+					font-size 1.2em
+					color white
+					padding 0.5em 2em
+					background-color botones 
+					border none
+					box-shadow 1px 1px 3px gray
+					&:hover
+						background-color btnHover
+					&:active
+						background-color btnActive
+				&[type="email"], &[type="password"]
+					border 1px solid gray
+					height 2.5em
+					width 100%
+					padding 0.8em 1em	
+					display block
 		
 /*Escritorio o tv*/
 @media (min-width: 1200px)
@@ -95,11 +128,28 @@ input
 @media (max-width: 767px)
 	body 
 		color: blue;
+	section
+		padding 1em
+		.contenedor
+			.formulario
+				padding 0
+				width 100%
+				text-align center
+				margin-bottom 1em
+				span
+					display block
+					margin 0 0 1em 0	
+				input[type="submit"]
+					display block
+					margin 0 0 1em 0
+					width 100%
+			.datos
+				width 100%
 
 /*Smartphone*/
 @media (max-width: 480px)
-	header
-		text-align center
+	body
+		color black
 	footer
 		text-align center
 		padding 0.5em 0
@@ -107,18 +157,24 @@ input
 			.contacto, .empresa
 				position static
 				float inherit
+	header
+		text-align center
 	section
-		margin 0
-		max-width 480px
-		max-height 550px
-		min-height 500px
-		.col1
-			text-align center
-			width 100%
-			min-height 625px
-			form input
-				width 90%
-		.col2
-			display none
-		
-	
+		padding 1em
+		.contenedor
+			.formulario
+				padding 0
+				width 100%
+				text-align center
+				background-color fondo
+				border none
+				box-shadow none
+				span
+					display block
+					margin 0 0 1em 0	
+				input[type="submit"]
+					display block
+					margin 0 0 1em 0
+					width 100%
+			.datos
+				display none
