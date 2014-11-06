@@ -3,8 +3,8 @@
 @import 'style.styl'
 @import url(http://fonts.googleapis.com/css?family=Roboto)
 //lightblue
-azulOsc = #01579b
-azulCla = #03a9f4
+azulOsc = #03A9F4 //500
+azulCla = #0288D1 //700
 //orange
 amarillo = #ffd180
 botones = #ff9800
@@ -46,8 +46,8 @@ footer
 				&:hover									
 					color black
 					background-color amarillo
-					transition background-color 2s ease
-					transition color 2s ease	
+					transition background-color 1s ease
+					transition color 1s ease	
 
 header
 	background-color azulOsc
@@ -88,7 +88,7 @@ section
 			box-shadow 1px 1px 3px gray
 			span a
 				text-decoration none
-				color azulOsc
+				color azulCla
 				&:hover
 					text-decoration underline
 			h2
@@ -120,7 +120,7 @@ section
 /*Escritorio o tv*/
 @media (min-width: 1200px)
 	body
-		color: red
+		color red
 		font-size 20px
 	section
 		min-height 800px
@@ -128,7 +128,7 @@ section
 /*Escritorio pequño o tablet*/
 @media (min-width: 768px) and (max-width: 979px)
 	body 
-		color: green;
+		color green
 
 /*Tablet o smartphone*/
 @media (max-width: 767px)

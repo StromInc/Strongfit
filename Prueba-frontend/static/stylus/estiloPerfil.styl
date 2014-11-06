@@ -1,0 +1,97 @@
+@import 'nib'
+@import 'normalize.styl'
+@import 'style.styl'
+@import url(http://fonts.googleapis.com/css?family=Roboto)
+//lightblue
+azulOsc = #03A9F4 //500
+azulCla = #0288D1 //700
+//orange
+amarillo = #ffd180
+botones = #ff9800
+btnHover = #fb8c00
+btnActive = #f57c00
+//gris
+fondo = #f9f9f9
+a
+	text-decoration none
+body
+	font-family 'Roboto', sans-serif
+	background-color fondo
+	font-size 16px
+header
+	background-color azulOsc
+	overflow hidden
+	position relative
+	box-sizing border-box
+	.contenedor
+		margin 0 auto
+		box-sizing border-box
+		.logo
+			float left
+			h1
+				color white
+				font-size 1.5em
+				font-weight normal
+				margin-left 1em
+		.menu
+			float right
+			font-size 1.2em
+			box-sizing border-box
+			ul
+				list-style none
+				li
+					display inline-block
+					a
+						color white
+						padding 1.2em
+						&:hover
+							background-color btnHover
+footer
+	background-color azulOsc
+	color white
+	padding 40px 20px
+	box-sizing border-box
+	postion relative
+	.contenedor
+		margin 0 auto
+		.empresa
+			float right
+			position relative
+			bottom 10px
+		.contacto
+			float left
+			position relative
+			bottom 10px
+			span
+				vertical-align top
+			a
+				border-radius 50%	
+				margin 0 0.1em
+				padding 0.2em
+				font-size 1.5em
+				text-decoration none
+				color white
+				transition background-color 1s ease		
+				&:hover									
+					color black
+					background-color amarillo
+					transition background-color 1s ease
+					transition color 1s ease	
+/*Escritorio o tv*/
+@media (min-width: 1200px)
+	body
+		color red
+
+/*Escritorio pequño o tablet*/
+@media (min-width: 768px) and (max-width: 979px)
+	body 
+		color green
+
+/*Tablet o smartphone*/
+@media (max-width: 767px)
+	body
+		color yellow
+/*Smartphone*/
+@media (max-width: 480px)
+	body
+		color blue
