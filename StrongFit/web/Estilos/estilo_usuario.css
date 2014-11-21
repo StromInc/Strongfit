@@ -15,6 +15,7 @@ body
     background-color: rgba(145, 145, 145, 0.8);
     margin-left: 15%;
     padding: 0 1em 2em 1em;
+    width: 23em;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
     -webkit-box-shadow: .5em .5em 2em black;
