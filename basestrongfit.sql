@@ -309,6 +309,30 @@ LOCK TABLES `paciente` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `rel_usr_dieta`
+--
+
+DROP TABLE IF EXISTS `rel_usr_dieta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rel_usr_dieta` (
+  `idRelUsrDieta` int(11) NOT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
+  `idDieta` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idRelUsrDieta`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rel_usr_dieta`
+--
+
+LOCK TABLES `rel_usr_dieta` WRITE;
+/*!40000 ALTER TABLE `rel_usr_dieta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rel_usr_dieta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tipoAlimento`
 --
 
@@ -346,9 +370,7 @@ CREATE TABLE `usuario` (
   `apellidos` varchar(250) DEFAULT NULL,
   `idPaciente` int(11) DEFAULT NULL,
   `idMedico` int(11) DEFAULT NULL,
-  `idDieta` int(11) DEFAULT NULL,
   `idSalud` int(11) DEFAULT NULL,
-  `idMensaje` int(11) DEFAULT NULL,
   `idConteo` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -376,4 +398,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-21 15:19:18
+-- Dump completed on 2014-11-21 15:26:50
