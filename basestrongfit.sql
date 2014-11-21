@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `basestrongfit` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `basestrongfit`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: basestrongfit
+-- Host: 127.0.0.1    Database: basestrongfit
 -- ------------------------------------------------------
--- Server version	5.1.59-community
+-- Server version	5.5.40-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,6 +28,7 @@ CREATE TABLE `alimento` (
   `idAlimento` int(11) NOT NULL,
   `nombre` varchar(250) DEFAULT NULL,
   `calorias` int(11) DEFAULT NULL,
+  `idTipoAlimento` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`idAlimento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,6 +39,7 @@ CREATE TABLE `alimento` (
 
 LOCK TABLES `alimento` WRITE;
 /*!40000 ALTER TABLE `alimento` DISABLE KEYS */;
+INSERT INTO `alimento` VALUES (1,'taco al pastor',400,'1');
 /*!40000 ALTER TABLE `alimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,6 +100,8 @@ CREATE TABLE `comidas` (
   `idComidas` int(11) NOT NULL,
   `idTiempoComida` int(11) DEFAULT NULL,
   `idAlimento` int(11) DEFAULT NULL,
+  `idDia` int(11) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
   PRIMARY KEY (`idComidas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -146,7 +150,7 @@ DROP TABLE IF EXISTS `dia`;
 CREATE TABLE `dia` (
   `idDia` int(11) NOT NULL,
   `idCatDia` int(11) DEFAULT NULL,
-  `idComidas` int(11) DEFAULT NULL,
+  `idDieta` int(11) DEFAULT NULL,
   PRIMARY KEY (`idDia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -170,7 +174,6 @@ DROP TABLE IF EXISTS `dieta`;
 CREATE TABLE `dieta` (
   `idDieta` int(11) NOT NULL,
   `nombre` varchar(250) DEFAULT NULL,
-  `idDia` int(11) DEFAULT NULL,
   PRIMARY KEY (`idDieta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -306,6 +309,30 @@ LOCK TABLES `paciente` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tipoAlimento`
+--
+
+DROP TABLE IF EXISTS `tipoAlimento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipoAlimento` (
+  `idTipoAlimento` int(11) NOT NULL,
+  `tipoAlimento` varchar(250) DEFAULT NULL,
+  `imagen` blob,
+  PRIMARY KEY (`idTipoAlimento`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipoAlimento`
+--
+
+LOCK TABLES `tipoAlimento` WRITE;
+/*!40000 ALTER TABLE `tipoAlimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipoAlimento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuario`
 --
 
@@ -349,4 +376,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-14 16:48:32
+-- Dump completed on 2014-11-21 15:19:18
