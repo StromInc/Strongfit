@@ -365,7 +365,7 @@ DROP TABLE IF EXISTS `tipoAlimento`;
 CREATE TABLE `tipoAlimento` (
   `idTipoAlimento` int(11) NOT NULL,
   `tipoAlimento` varchar(250) DEFAULT NULL,
-  `imagen` blob,
+  `idImagenAlimento` int(11) DEFAULT NULL,
   PRIMARY KEY (`idTipoAlimento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -421,4 +421,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-21 21:06:14
+-- Dump completed on 2014-11-21 21:26:27
