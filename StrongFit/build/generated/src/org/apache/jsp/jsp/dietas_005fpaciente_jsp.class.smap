@@ -1,0 +1,22 @@
+SMAP
+dietas_005fpaciente_jsp.java
+JSP
+*S JSP
+*F
++ 0 dietas_paciente.jsp
+jsp/dietas_paciente.jsp
++ 1 meta.jsp
+jsp/meta.jsp
++ 2 barra_menu.jsp
+jsp/barra_menu.jsp
++ 3 footer.jsp
+jsp/footer.jsp
+*L
+1,5:51
+1#1,22:56
+5#0,6:78
+1#2,11:84
+10#0,31:95
+1#3,4:126
+40#0,4:130
+*E

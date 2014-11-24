@@ -11,10 +11,12 @@ public class cConexion {
     
     private Connection con = null;
     private Statement st;
+    private String dominio = "";
     
     //Para conectar por default
     public Connection conectar()
     {
+        dominio = "http://localhost:8080/StrongFit/";
         try
         {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -46,6 +48,11 @@ public class cConexion {
             e.printStackTrace();
         }
         return con;
+    }
+    
+    public String getDominio()
+    {
+        return dominio;
     }
     
 }
