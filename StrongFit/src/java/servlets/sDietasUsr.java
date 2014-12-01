@@ -52,7 +52,7 @@ public class sDietasUsr extends HttpServlet {
         
             Map<String, Object> map = new HashMap<>();
 //            String dieta = Integer.toString(idDieta);
-            map.put("idDieta", request.getParameter("nombreDieta"));
+            map.put("idDieta", request.getParameter("idDieta"));
             
             write(response, map);
             registrarDieta(idUser, idDieta, quit);

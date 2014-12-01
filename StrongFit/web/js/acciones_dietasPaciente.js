@@ -30,8 +30,7 @@ function drop(ev) {
             dataType: 'json',
             data: $('#formularioDietasPaciente').serialize(),
             success: function(datos){
-                alert(datos.idDieta);
-                alert($('#inputQuitar').val());
+                console.log("Exito");
             }
             
         })
