@@ -4,7 +4,6 @@
     <head>
         <%@include file = "meta.jsp" %>
         <link rel="stylesheet" type = "text/css" href="../Estilos/estilo_inicio.css">
-        <script src = " http://code.jquery.com/jquery-2.1.0.min.js"></script>
         <script src = "../js/acciones_inicio.js"></script>
     </head>
     <body>

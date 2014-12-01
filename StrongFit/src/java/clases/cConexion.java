@@ -21,7 +21,7 @@ public class cConexion {
         {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             String base, usr, pass;
-            base = "jdbc:mysql://localhost/basestrongfit";
+            base = "jdbc:mysql://127.0.0.1/basestrongfit";
             usr = "root";
             pass = "n0m3l0";
             con = DriverManager.getConnection(base, usr, pass);
@@ -43,7 +43,7 @@ public class cConexion {
             con = DriverManager.getConnection(puerto, usuario, pasword);
             System.out.println("Conexion exitosa");
         }
-        catch(Exception e)
+        catch(ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e)
         {
             e.printStackTrace();
         }
@@ -53,6 +53,27 @@ public class cConexion {
     public String getDominio()
     {
         return dominio;
+    }
+    
+    //Esto actualizara la dieta en la parte de dietas paciente
+    public ResultSet actualizarDieta(int idUser, int idDietas, String quitar) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spActualizarDieta("+idUser+", "+idDietas+", '"+quitar+"');");
+    }
+    
+    //Esto traera las dietas de tipo 1, es decir sugeridas por la aplicacion que el usuario no este usando
+    public ResultSet getDietasSugeridas(int idUser) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetDietasSugeridas("+idUser+");");
+    }
+    
+    //Esto traera las dietas que el usuario este usando
+    public ResultSet getDietasRegistradas(int idUser) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetDietasRegistradas("+idUser+");");
     }
     
 }

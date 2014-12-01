@@ -19,4 +19,5 @@
 <link rel = "stylesheet" type ="text/css" href="../Estilos/barra_menu.css">
 <link rel = "stylesheet" type ="text/css" href="../Estilos/estilo_footer.css">
 <link rel="shortcut icon" href="../Imagenes/logo_s.jpg">
+<script src = " http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <title>Strongfit</title>

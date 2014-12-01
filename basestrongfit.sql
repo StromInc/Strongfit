@@ -90,6 +90,30 @@ LOCK TABLES `cat_tiempocomida` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `cat_tipodieta`
+--
+
+DROP TABLE IF EXISTS `cat_tipodieta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cat_tipodieta` (
+  `idTipoDieta` int(11) NOT NULL,
+  `tipoDieta` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`idTipoDieta`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cat_tipodieta`
+--
+
+LOCK TABLES `cat_tipodieta` WRITE;
+/*!40000 ALTER TABLE `cat_tipodieta` DISABLE KEYS */;
+INSERT INTO `cat_tipodieta` VALUES (1,'muestra'),(2,'nutriologo'),(3,'pagada');
+/*!40000 ALTER TABLE `cat_tipodieta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `comidas`
 --
 
@@ -174,6 +198,7 @@ DROP TABLE IF EXISTS `dieta`;
 CREATE TABLE `dieta` (
   `idDieta` int(11) NOT NULL,
   `nombre` varchar(250) DEFAULT NULL,
+  `idTipoDieta` int(11) DEFAULT NULL,
   PRIMARY KEY (`idDieta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -184,6 +209,7 @@ CREATE TABLE `dieta` (
 
 LOCK TABLES `dieta` WRITE;
 /*!40000 ALTER TABLE `dieta` DISABLE KEYS */;
+INSERT INTO `dieta` VALUES (1,'Dieta de 1600Kc',1),(2,'Dieta vegetariana 1600Kc',1);
 /*!40000 ALTER TABLE `dieta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,6 +358,30 @@ LOCK TABLES `paciente` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `rel_medicoPaciente`
+--
+
+DROP TABLE IF EXISTS `rel_medicoPaciente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rel_medicoPaciente` (
+  `idMedicoPaciente` int(11) NOT NULL,
+  `idPaciente` int(11) DEFAULT NULL,
+  `idMedico` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idMedicoPaciente`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rel_medicoPaciente`
+--
+
+LOCK TABLES `rel_medicoPaciente` WRITE;
+/*!40000 ALTER TABLE `rel_medicoPaciente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rel_medicoPaciente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `rel_usr_dieta`
 --
 
@@ -352,7 +402,31 @@ CREATE TABLE `rel_usr_dieta` (
 
 LOCK TABLES `rel_usr_dieta` WRITE;
 /*!40000 ALTER TABLE `rel_usr_dieta` DISABLE KEYS */;
+INSERT INTO `rel_usr_dieta` VALUES (2,1,1),(3,1,2);
 /*!40000 ALTER TABLE `rel_usr_dieta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sexo`
+--
+
+DROP TABLE IF EXISTS `sexo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sexo` (
+  `idSexo` int(11) NOT NULL,
+  `sexo` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`idSexo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sexo`
+--
+
+LOCK TABLES `sexo` WRITE;
+/*!40000 ALTER TABLE `sexo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sexo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -411,6 +485,77 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'basestrongfit'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `spActualizarDieta` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spActualizarDieta`(in idUsr int, in idDiet int, in quita nvarchar(10))
+begin
+	declare relacion int;
+	declare idRelacion int;
+	
+	if quita = "no" then
+		set relacion = (select count(*) from rel_usr_dieta where idUsuario = idUsr and idDieta = idDiet);
+		if relacion = 0 then
+			set idRelacion = (select ifnull(max(idRelUsrDieta), 0) + 1 from rel_usr_dieta);
+			insert into rel_usr_dieta(idRelUsrDieta, idUsuario, idDieta) values(idRelacion, idUsr, idDiet);
+		else
+			select 0 valido, "Ya existe la relacion";
+		end if;
+	else
+		set idRelacion = (select idRelUsrDieta from rel_usr_dieta where idUsuario = idUsr and idDieta = idDiet);
+		delete from rel_usr_dieta where idRelUsrDieta = idRelacion;
+	end if;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spGetDietasRegistradas` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spGetDietasRegistradas`(in idUsr int)
+begin
+	select * from rel_usr_dieta join dieta using(idDieta) where idUsuario = idUsr;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spGetDietasSugeridas` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spGetDietasSugeridas`()
+begin
+	select * from dieta where idTipoDieta = 1;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -421,4 +566,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-21 21:26:27
+-- Dump completed on 2014-11-30 19:23:20

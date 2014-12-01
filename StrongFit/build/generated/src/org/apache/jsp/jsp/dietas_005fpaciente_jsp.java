@@ -3,19 +3,22 @@ package org.apache.jsp.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import clases.cConexion;
 
 public final class dietas_005fpaciente_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
+
+
+    cConexion conecta = new cConexion();
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List<String> _jspx_dependants;
 
   static {
-    _jspx_dependants = new java.util.ArrayList<String>(3);
+    _jspx_dependants = new java.util.ArrayList<String>(2);
     _jspx_dependants.add("/jsp/meta.jsp");
     _jspx_dependants.add("/jsp/barra_menu.jsp");
-    _jspx_dependants.add("/jsp/footer.jsp");
   }
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
@@ -49,8 +52,16 @@ public final class dietas_005fpaciente_jsp extends org.apache.jasper.runtime.Htt
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
       out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
+      out.write("    ");
+
+        /*esto es temporal debido a que las variables de sesion como usrid y usrname se deben obtener en el momento del login*/
+        HttpSession sesion = request.getSession();
+        sesion.setAttribute("idUsr", 1);
+    
+      out.write("\n");
       out.write("    <head>\n");
       out.write("        ");
       out.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
@@ -74,20 +85,33 @@ public final class dietas_005fpaciente_jsp extends org.apache.jasper.runtime.Htt
       out.write("<link rel = \"stylesheet\" type =\"text/css\" href=\"../Estilos/barra_menu.css\">\n");
       out.write("<link rel = \"stylesheet\" type =\"text/css\" href=\"../Estilos/estilo_footer.css\">\n");
       out.write("<link rel=\"shortcut icon\" href=\"../Imagenes/logo_s.jpg\">\n");
+      out.write("<script src = \" http://code.jquery.com/jquery-2.1.0.min.js\"></script>\n");
       out.write("<title>Strongfit</title>");
       out.write("\n");
       out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"../Estilos/estilo_dietasusr.css\">\n");
-      out.write("        <script src = \"../js/acciones_dietasusr.js\"></script>\n");
+      out.write("        <script src = \"../js/acciones_dietasPaciente.js\"></script>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
       out.write("        ");
+
+            int usrid = 133; //Provisional
+            //Esto es provisional, despues se construira el metodo para extraer las dietas de la base de datos
+        
+      out.write("        \n");
+      out.write("        ");
+      out.write('\n');
+      out.write('\n');
+
+    conecta.conectar();
+    String dom = conecta.getDominio();
+
       out.write("\n");
       out.write("<!--Su hoja de estilos esta definida en la pagina meta.jsp, que debe de ser incluida en todas las paginas de este proyecto-->\n");
       out.write("<header class = \"Header\">\n");
       out.write("    <p class=\"Header-title\"><a href = \"../index.jsp\">Strongfit</a></p>\n");
       out.write("    <ul class=\"Header-lista\">\n");
       out.write("        <li class=\"Header-li\"><a href=\"inicio.jsp\" class=\"icon-house\"></a></li><!--Inicio-->\n");
-      out.write("        <li class=\"Header-li\"><a href=\"dietas_paciente.jsp\" class=\"icon-food2\"></a></li><!--Dieta-->\n");
+      out.write("        <li class=\"Header-li\"><a href= \"dietas_paciente.jsp\" class=\"icon-food2\"></a></li><!--Dieta-->\n");
       out.write("        <li class=\"Header-li\"><a href = \"nutriologo.jsp\" class=\"icon-uniE60D\"></a></li><!--Mi Nutriólogo-->\n");
       out.write("        <li class=\"Header-li user-name\"><a href = \"usuario.jsp\">Nombre del usuario</a></li>\n");
       out.write("    </ul>\n");
@@ -95,39 +119,41 @@ public final class dietas_005fpaciente_jsp extends org.apache.jasper.runtime.Htt
       out.write("\n");
       out.write("        \n");
       out.write("        <section class = \"Section-dietas\">\n");
-      out.write("            <article class = \"Article-dietas\" ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\" id = \"Article-dietas\">\n");
+      out.write("            <article class = \"Article-dietas\"  id = \"Article-dietas\" ondrop=\"dropDiv(event)\" ondragover=\"allowDrop(event)\" >\n");
       out.write("                <h2>Dietas sugeridas</h2>\n");
       out.write("                <hr>\n");
-      out.write("                <!--Estas son de muestra-->\n");
-      out.write("                <figure class = \"Figure-dietas\" draggable=\"true\" ondragstart=\"drag(event)\" id = \"figure-user\">\n");
-      out.write("                    <figcaption>Título de la dieta</figcaption>\n");
-      out.write("                    <img src = \"../Imagenes/imagen-dietas.jpg\" class = \"img-dietas\" draggable=\"false\">\n");
-      out.write("                </figure>\n");
-      out.write("                <figure class = \"Figure-dietas\" draggable=\"true\" ondragstart=\"drag(event)\" id = \"figure-user2\">\n");
-      out.write("                    <figcaption>Título de la dieta</figcaption>\n");
-      out.write("                    <img src = \"../Imagenes/imagen-dietas.jpg\" class = \"img-dietas\" draggable=\"false\">\n");
-      out.write("                </figure>\n");
-      out.write("                <figure class = \"Figure-dietas\" draggable=\"true\" ondragstart=\"drag(event)\" id = \"figure-user3\">\n");
-      out.write("                    <figcaption>Título de la dieta</figcaption>\n");
-      out.write("                    <img src = \"../Imagenes/imagen-dietas.jpg\" class = \"img-dietas\" draggable=\"false\">\n");
-      out.write("                </figure>\n");
-      out.write("                <figure class = \"Figure-dietas\" draggable=\"true\" ondragstart=\"drag(event)\" id = \"figure-user4\">\n");
-      out.write("                    <figcaption>Título de la dieta</figcaption>\n");
-      out.write("                    <img src = \"../Imagenes/imagen-dietas.jpg\" class = \"img-dietas\" draggable=\"false\">\n");
-      out.write("                </figure>\n");
+      out.write("                <form id = \"quitarForm\">\n");
+      out.write("                    <input type = \"hidden\" id = \"inputQuitar2\" name = \"quitar\" value = \"\">\n");
+      out.write("                </form>\n");
+      out.write("                <div id = \"divDietasPaciente\" >\n");
+      out.write("                    <!--Estas son de muestra-->\n");
+      out.write("                    <figure class = \"Figure-dietas\" draggable=\"true\" ondragstart=\"drag(event)\" id = \"figure-usr\">\n");
+      out.write("                        <input type=\"hidden\" name = \"nombreDieta\" value = \"");
+      out.print(1);
+      out.write("\" >\n");
+      out.write("                        <figcaption>Título de la dieta</figcaption>\n");
+      out.write("                        <img src = \"../Imagenes/imagen-dietas.jpg\" class = \"img-dietas\" draggable=\"false\">\n");
+      out.write("                    </figure>\n");
+      out.write("                        \n");
+      out.write("                    <figure class = \"Figure-dietas\" draggable=\"true\" ondragstart=\"drag(event)\" id = \"figure-usr2\">\n");
+      out.write("                        <input type=\"hidden\" name = \"nombreDieta\" value = \"");
+      out.print(2);
+      out.write("\" >\n");
+      out.write("                        <figcaption>Título de la dieta</figcaption>\n");
+      out.write("                        <img src = \"../Imagenes/imagen-dietas.jpg\" class = \"img-dietas\" draggable=\"false\">\n");
+      out.write("                    </figure>\n");
+      out.write("                </div>\n");
       out.write("            </article>\n");
       out.write("            <article class = \"Article-usr\" ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\" id = \"Article-user\">\n");
       out.write("                <h2>Tus dietas</h2>\n");
       out.write("                <hr>\n");
+      out.write("                <div id = \"divForm\"></div>\n");
+      out.write("                <form id = \"formularioDietasPaciente\">\n");
+      out.write("                    <input type = \"hidden\" id = \"inputQuitar\" name = \"quitar\" value = \"\">\n");
+      out.write("                </form>\n");
       out.write("            </article>\n");
       out.write("        </section>\n");
       out.write("        \n");
-      out.write("        ");
-      out.write("<footer class = \"Footer\">\n");
-      out.write("    <p class=\"Footer-parrafo Footer-parrafo1\">Strongfit es un proyecto creado por <a href=\"#\" class=\"Footer-link\">Strom</a>.</p>\n");
-      out.write("    <p class=\"Footer-parrafo\"><a href=\"#\" class = \"Footer-link\">Politicas de privacidad</a></p>\n");
-      out.write("</footer>");
-      out.write("\n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {

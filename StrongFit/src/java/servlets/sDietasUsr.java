@@ -5,13 +5,21 @@
  */
 package servlets;
 
+import clases.cConexion;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,13 +36,26 @@ public class sDietasUsr extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            response.sendRedirect("jsp/dietas_paciente.jsp");
+            
+            HttpSession sesion = request.getSession(false);
+            int idUser = (Integer)sesion.getAttribute("idUsr");
+            int idDieta = Integer.parseInt(request.getParameter("idDieta"));
+            String quit = request.getParameter("quitar");
+            System.out.println(idDieta);
+        
+            Map<String, Object> map = new HashMap<>();
+//            String dieta = Integer.toString(idDieta);
+            map.put("idDieta", request.getParameter("nombreDieta"));
+            
+            write(response, map);
+            registrarDieta(idUser, idDieta, quit);
         }
     }
 
@@ -50,7 +71,11 @@ public class sDietasUsr extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(sDietasUsr.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -64,7 +89,11 @@ public class sDietasUsr extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(sDietasUsr.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -76,5 +105,21 @@ public class sDietasUsr extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    //Escribe un archivo json como respuesta a la peticion ajax
+    private void write(HttpServletResponse response, Map<String, Object> map) throws IOException 
+    {
+        response.setContentType("aplication/json");
+        response.setCharacterEncoding("charset=UTF-8");
+        response.getWriter().write(new Gson().toJson(map));
+    }
+    
+    //Usa el procedure para crear o eliminar una relacion con las dietas que el usuario esta usando
+    public void registrarDieta(int idUser, int idDietas, String quit) throws SQLException
+    {
+        cConexion conecta = new cConexion();
+        conecta.conectar();
+        conecta.actualizarDieta(idUser, idDietas, quit);
+    }
 
 }
