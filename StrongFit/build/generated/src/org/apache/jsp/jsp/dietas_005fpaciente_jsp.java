@@ -3,6 +3,9 @@ package org.apache.jsp.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.util.HashMap;
+import java.util.*;
+import java.sql.ResultSet;
 import clases.cConexion;
 
 public final class dietas_005fpaciente_jsp extends org.apache.jasper.runtime.HttpJspBase
@@ -53,6 +56,9 @@ public final class dietas_005fpaciente_jsp extends org.apache.jasper.runtime.Htt
 
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    ");
@@ -90,11 +96,18 @@ public final class dietas_005fpaciente_jsp extends org.apache.jasper.runtime.Htt
       out.write("\n");
       out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"../Estilos/estilo_dietasusr.css\">\n");
       out.write("        <script src = \"../js/acciones_dietasPaciente.js\"></script>\n");
+      out.write("        \n");
+      out.write("        <style>\n");
+      out.write("            .invisible\n");
+      out.write("            {\n");
+      out.write("                display: none;\n");
+      out.write("            }\n");
+      out.write("        </style>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
       out.write("        ");
 
-            int usrid = 133; //Provisional
+            int usrid = 1; //Provisional
             //Esto es provisional, despues se construira el metodo para extraer las dietas de la base de datos
         
       out.write("        \n");
@@ -122,32 +135,94 @@ public final class dietas_005fpaciente_jsp extends org.apache.jasper.runtime.Htt
       out.write("            <article class = \"Article-dietas\"  id = \"Article-dietas\" ondrop=\"dropDiv(event)\" ondragover=\"allowDrop(event)\" >\n");
       out.write("                <h2>Dietas sugeridas</h2>\n");
       out.write("                <hr>\n");
+      out.write("                ");
+
+                    conecta.conectar();
+                
+      out.write("\n");
       out.write("                <form id = \"quitarForm\">\n");
       out.write("                    <input type = \"hidden\" id = \"inputQuitar2\" name = \"quitar\" value = \"\">\n");
       out.write("                </form>\n");
       out.write("                <div id = \"divDietasPaciente\" >\n");
-      out.write("                    <!--Estas son de muestra-->\n");
-      out.write("                    <figure class = \"Figure-dietas\" draggable=\"true\" ondragstart=\"drag(event)\" id = \"figure-usr\">\n");
-      out.write("                        <input type=\"hidden\" name = \"nombreDieta\" value = \"");
-      out.print(1);
+      out.write("                    ");
+
+                        //llenando el campo de las dietas sugeridas
+                        ResultSet rs = conecta.getDietasSugeridas();
+                        String nombreD;
+                        int idD, contador = 0, contadorid = 0;
+                        
+                        while(rs.next())
+                        {
+                            ResultSet rs2 = conecta.getDietasRegistradas(usrid);
+                            contador = 0;
+                            while(rs2.next())
+                            {
+                                if(rs.getInt("idDieta") == rs2.getInt("idDieta"))
+                                {
+                                    contador++;
+                                }
+                            }
+                            
+                            if(contador == 0)
+                            {
+                                nombreD = rs.getString("nombre");
+                                idD = rs.getInt("idDieta");
+                    
+      out.write("\n");
+      out.write("                    <figure class = \"Figure-dietas\" draggable=\"true\" ondragstart=\"drag(event)\" id = \"");
+      out.print("figure-usr" + contadorid);
+      out.write("\">\n");
+      out.write("                        <input type=\"hidden\" name = \"idDieta\" value = \"");
+      out.print(idD);
       out.write("\" >\n");
-      out.write("                        <figcaption>Título de la dieta</figcaption>\n");
+      out.write("                        <figcaption>");
+      out.print(nombreD);
+      out.write("</figcaption>\n");
       out.write("                        <img src = \"../Imagenes/imagen-dietas.jpg\" class = \"img-dietas\" draggable=\"false\">\n");
       out.write("                    </figure>\n");
-      out.write("                        \n");
-      out.write("                    <figure class = \"Figure-dietas\" draggable=\"true\" ondragstart=\"drag(event)\" id = \"figure-usr2\">\n");
-      out.write("                        <input type=\"hidden\" name = \"nombreDieta\" value = \"");
-      out.print(2);
-      out.write("\" >\n");
-      out.write("                        <figcaption>Título de la dieta</figcaption>\n");
-      out.write("                        <img src = \"../Imagenes/imagen-dietas.jpg\" class = \"img-dietas\" draggable=\"false\">\n");
-      out.write("                    </figure>\n");
+      out.write("                    ");
+
+                                contadorid += 1;
+                            }
+                        }
+                    
+      out.write("\n");
       out.write("                </div>\n");
       out.write("            </article>\n");
       out.write("            <article class = \"Article-usr\" ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\" id = \"Article-user\">\n");
       out.write("                <h2>Tus dietas</h2>\n");
       out.write("                <hr>\n");
-      out.write("                <div id = \"divForm\"></div>\n");
+      out.write("                <div id = \"spanIn\" style=\"opacity: .5; text-align: center; margin-top: 2em;\">\n");
+      out.write("                    Arrastra aquí las dietas que te gustaría seguir, los datos se actualizaran automáticamente\n");
+      out.write("                </div>\n");
+      out.write("                <div id = \"divForm\">\n");
+      out.write("                    ");
+
+                        ResultSet rs3 = conecta.getDietasRegistradas(usrid);
+                        while(rs3.next())
+                        {                            
+                            idD = rs3.getInt("idDieta");
+                            nombreD = rs3.getString("nombre");
+                    
+      out.write("\n");
+      out.write("                    <figure class = \"Figure-dietas\" draggable=\"true\" ondragstart=\"drag(event)\" id = \"");
+      out.print("figure-usr" + contadorid);
+      out.write("\">\n");
+      out.write("                        <input type=\"hidden\" name = \"idDieta\" value = \"");
+      out.print(idD);
+      out.write("\" >\n");
+      out.write("                        <figcaption>");
+      out.print(nombreD);
+      out.write("</figcaption>\n");
+      out.write("                        <img src = \"../Imagenes/imagen-dietas.jpg\" class = \"img-dietas\" draggable=\"false\">\n");
+      out.write("                    </figure>\n");
+      out.write("                    ");
+
+                        contadorid += 1;
+                        }  
+                    
+      out.write("\n");
+      out.write("                </div>\n");
       out.write("                <form id = \"formularioDietasPaciente\">\n");
       out.write("                    <input type = \"hidden\" id = \"inputQuitar\" name = \"quitar\" value = \"\">\n");
       out.write("                </form>\n");

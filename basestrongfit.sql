@@ -199,6 +199,7 @@ CREATE TABLE `dieta` (
   `idDieta` int(11) NOT NULL,
   `nombre` varchar(250) DEFAULT NULL,
   `idTipoDieta` int(11) DEFAULT NULL,
+  `kcalorias` int(22) DEFAULT NULL,
   PRIMARY KEY (`idDieta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -209,7 +210,7 @@ CREATE TABLE `dieta` (
 
 LOCK TABLES `dieta` WRITE;
 /*!40000 ALTER TABLE `dieta` DISABLE KEYS */;
-INSERT INTO `dieta` VALUES (1,'Dieta de 1600Kc',1),(2,'Dieta vegetariana 1600Kc',1);
+INSERT INTO `dieta` VALUES (1,'Dieta de 1600Kc',1,NULL),(2,'Dieta vegetariana 1600Kc',1,NULL),(3,'Dieta de carne 1600Kc',1,NULL),(4,'Dieta baja en grasa de 1600Kc',1,NULL),(5,'Dieta de pechuga de 1600Kc',1,NULL);
 /*!40000 ALTER TABLE `dieta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -344,6 +345,7 @@ CREATE TABLE `paciente` (
   `peso` int(11) DEFAULT NULL,
   `estatura` int(11) DEFAULT NULL,
   `medidaCintura` int(11) DEFAULT NULL,
+  `calorias` int(11) DEFAULT NULL,
   PRIMARY KEY (`idPaciente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -392,6 +394,7 @@ CREATE TABLE `rel_usr_dieta` (
   `idRelUsrDieta` int(11) NOT NULL,
   `idUsuario` int(11) DEFAULT NULL,
   `idDieta` int(11) DEFAULT NULL,
+  `posicion` int(11) DEFAULT NULL,
   PRIMARY KEY (`idRelUsrDieta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -402,7 +405,6 @@ CREATE TABLE `rel_usr_dieta` (
 
 LOCK TABLES `rel_usr_dieta` WRITE;
 /*!40000 ALTER TABLE `rel_usr_dieta` DISABLE KEYS */;
-INSERT INTO `rel_usr_dieta` VALUES (2,1,1),(3,1,2);
 /*!40000 ALTER TABLE `rel_usr_dieta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -566,4 +568,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-30 19:23:20
+-- Dump completed on 2014-12-03 16:04:53

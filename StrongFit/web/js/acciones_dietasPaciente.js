@@ -21,6 +21,7 @@ function drop(ev) {
         
         formulario.appendChild(document.getElementById(dat));
         $('#inputQuitar').val("no");
+        $('#spanIn').addClass("invisible");        
         
         //funcion para enviar la dieta de una por una para su registro
         $.ajax({
@@ -62,6 +63,7 @@ function dropDiv(ev) {
         form.appendChild(document.getElementById(data));
         $('#inputQuitar2').val("si");
         
+        
         $.ajax({
             url: 'http://localhost:8080/StrongFit/sDietasUsr',
             type: 'POST',
@@ -80,6 +82,10 @@ function dropDiv(ev) {
         });
         
         div.appendChild(document.getElementById(data));
-        
+        $('.img-dietas').removeClass("invisible");
+        if ($('#divForm').innerHTML === "") 
+        {
+            $("#spanIn").removeClass("invisible");
+        }
     });
 }

@@ -63,10 +63,10 @@ public class cConexion {
     }
     
     //Esto traera las dietas de tipo 1, es decir sugeridas por la aplicacion que el usuario no este usando
-    public ResultSet getDietasSugeridas() throws SQLException
+    public ResultSet getDietasSugeridas(int calorias) throws SQLException
     {
         this.st = con.createStatement();
-        return this.st.executeQuery("call spGetDietasSugeridas();");
+        return this.st.executeQuery("call spGetDietasSugeridas("+calorias+");");
     }
     
     //Esto traera las dietas que el usuario este usando

@@ -14,6 +14,13 @@
         <%@include file = "meta.jsp" %>
         <link rel="stylesheet" type="text/css" href="../Estilos/estilo_dietasusr.css">
         <script src = "../js/acciones_dietasPaciente.js"></script>
+        
+        <style>
+            .invisible
+            {
+                display: none;
+            }
+        </style>
     </head>
     <body>
         <%
@@ -35,32 +42,26 @@
                 <div id = "divDietasPaciente" >
                     <%
                         //llenando el campo de las dietas sugeridas
-                        ResultSet rs = conecta.getDietasSugeridas();
-                        ResultSet rs2 = conecta.getDietasRegistradas(usrid);
-                        ArrayList <Integer> lista = new ArrayList();
+                        ResultSet rs = conecta.getDietasSugeridas(2000);
                         String nombreD;
-                        int idD, contador = 0, contador2 = 0, contador3 = 0, contadorid = 0;
-                        
-                        while(rs2.next())
-                        {
-                            contador2 = 1;
-                            lista.add(rs2.getInt("idDieta"));
-                        }   
+                        int idD, contador = 0, contadorid = 0;
                         
                         while(rs.next())
                         {
-                            for(int i = 0; i < lista.size(); ++i)
+                            ResultSet rs2 = conecta.getDietasRegistradas(usrid);
+                            contador = 0;
+                            while(rs2.next())
                             {
-                                contador3 = 1;
-                                if(rs.getInt("idDieta") == lista.get(i))
+                                if(rs.getInt("idDieta") == rs2.getInt("idDieta"))
                                 {
-                                    contador += 1;
+                                    contador++;
                                 }
-                                    
-                                if(contador == 0 && contador3 == 1)
-                                {
-                                    nombreD = rs.getString("nombre");
-                                    idD = rs.getInt("idDieta");
+                            }
+                            
+                            if(contador == 0)
+                            {
+                                nombreD = rs.getString("nombre");
+                                idD = rs.getInt("idDieta");
                     %>
                     <figure class = "Figure-dietas" draggable="true" ondragstart="drag(event)" id = "<%="figure-usr" + contadorid%>">
                         <input type="hidden" name = "idDieta" value = "<%=idD%>" >
@@ -68,25 +69,6 @@
                         <img src = "../Imagenes/imagen-dietas.jpg" class = "img-dietas" draggable="false">
                     </figure>
                     <%
-                                    contadorid += 1;
-                                }
-                            }
-                        }
-                        
-                        if(contador2 == 0)
-                        {
-                            ResultSet rs4 = conecta.getDietasSugeridas();
-                            while(rs4.next())
-                            {
-                                nombreD = rs4.getString("nombre");
-                                idD = rs4.getInt("idDieta");
-                                %>
-                    <figure class = "Figure-dietas" draggable="true" ondragstart="drag(event)" id = "<%="figure-usr" + contadorid%>">
-                        <input type="hidden" name = "idDieta" value = "<%=idD%>" >
-                        <figcaption><%=nombreD%></figcaption>
-                        <img src = "../Imagenes/imagen-dietas.jpg" class = "img-dietas" draggable="false">
-                    </figure>
-                                <%
                                 contadorid += 1;
                             }
                         }
@@ -96,6 +78,9 @@
             <article class = "Article-usr" ondrop="drop(event)" ondragover="allowDrop(event)" id = "Article-user">
                 <h2>Tus dietas</h2>
                 <hr>
+                <div id = "spanIn" style="opacity: .5; text-align: center; margin-top: 2em;">
+                    Arrastra aquí las dietas que te gustaría seguir, los datos se actualizaran automáticamente
+                </div>
                 <div id = "divForm">
                     <%
                         ResultSet rs3 = conecta.getDietasRegistradas(usrid);
