@@ -31,6 +31,15 @@
                     <input type = "text" name = "estatura" required class = "Section-m" placeholder = "(m)">
                     <input type = "text" name = "cintura" required class = "Section-m" placeholder = "(m)">
                     <hr>
+                    <h2 class = "Article-title">Tu edad</h2>
+                    <input type = "text" name = "edad" required class = "Section-usr">
+                    <hr>
+                    <h2 class = "Article-title">Tu sexo</h2>
+                    <select name = "sexo">
+                        <option value="masculino">Masculino </option>
+                        <option value="femenino">femenino </option>
+                    </select>
+                    <hr>
                     <h2 class = "Article-title">Tu dirección</h2>
                     <p class = "personal-p">Estado</p>
                     <input type = "text" name = "estado" required class = "Section-usr">

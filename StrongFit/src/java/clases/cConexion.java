@@ -54,6 +54,27 @@ public class cConexion {
     {
         return dominio;
     }
+    //Esto da de alta los primeros 3 campos de los nuevos usuarios
+    public String altausuario(String idUser, String pass, String nombre) throws SQLException
+    {
+        this.st = con.createStatement();
+        ResultSet resultado = this.st.executeQuery("call sp_AltaUsuario('"+idUser+"','"+pass+"' ,'"+nombre+"');");
+        String validacion = "";
+        if(resultado.next()){
+        validacion = resultado.getString("nombre");
+        }     
+        return validacion;
+    }
+    //Esto sirve para buscar y validar usuarios
+    public String busquedadeusuarios(String idUser, String pass) throws SQLException{
+       this.st = con.createStatement();
+       ResultSet resultado = this.st.executeQuery("call sp_Login('"+idUser+"','"+pass+"');");
+       String existente = "";
+       if(resultado.next()){
+       existente = resultado.getString("valido");
+       }
+       return existente;
+    }
     
     //Esto actualizara la dieta en la parte de dietas paciente
     public ResultSet actualizarDieta(int idUser, int idDietas, String quitar) throws SQLException

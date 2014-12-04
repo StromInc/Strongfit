@@ -34,7 +34,7 @@
     <body>
         <header class = "Header">
             <p class="Header-title"><a href = "index.jsp">Strongfit</a></p>
-            <form action = "" method="post" class="Header-form">
+            <form action = "sLogIn" method="post" class="Header-form">
                     <input type = "email" name = "txt-mail" class="Header-mail Header-txt" placeholder = "Correo" required>
                     <input type = "password" name = "txt-pass" class = "Header-pass Header-txt" placeholder="Contraseña" required>
                     <input type = "submit" name = "btn-signin" class="Header-submit" value="Entrar">
@@ -45,7 +45,7 @@
             <article class="Section-article">
                 <h3 class = "Section-login">¿No tienes cuenta? &nbsp;<strong style="font-size: 1.4em;">Registrate</strong></h3>
                 <hr class="Section-line">
-                <form action = "" method="post" class="Section-form">
+                <form action = "sAltaDeUsuario" method="post" class="Section-form">
                     <input type = "text" name = "txt-name" class="Section-nombre Section-txt" placeholder = "Nombre" required>
                     <input type = "email" name = "txt-mail" class="Section-mail Section-txt" placeholder = "Correo" required>
                     <input type = "password" name = "txt-pass" class = "Section-pass Section-txt" placeholder="Contraseña" required>
