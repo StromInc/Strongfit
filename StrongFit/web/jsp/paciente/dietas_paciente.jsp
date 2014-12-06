@@ -11,9 +11,9 @@
         sesion.setAttribute("idUsr", 1);
     %>
     <head>
-        <%@include file = "meta.jsp" %>
-        <link rel="stylesheet" type="text/css" href="../Estilos/estilo_dietasusr.css">
-        <script src = "../js/acciones_dietasPaciente.js"></script>
+        <%@include file = "../meta.jsp" %>
+        <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_dietasusr.css">
+        <script src = "../../js/acciones_dietasPaciente.js"></script>
         
         <style>
             .invisible
@@ -66,7 +66,7 @@
                     <figure class = "Figure-dietas" draggable="true" ondragstart="drag(event)" id = "<%="figure-usr" + contadorid%>">
                         <input type="hidden" name = "idDieta" value = "<%=idD%>" >
                         <figcaption><%=nombreD%></figcaption>
-                        <img src = "../Imagenes/imagen-dietas.jpg" class = "img-dietas" draggable="false">
+                        <img src = "../../Imagenes/imagen-dietas.jpg" class = "img-dietas" draggable="false">
                     </figure>
                     <%
                                 contadorid += 1;
@@ -92,7 +92,7 @@
                     <figure class = "Figure-dietas" draggable="true" ondragstart="drag(event)" id = "<%="figure-usr" + contadorid%>">
                         <input type="hidden" name = "idDieta" value = "<%=idD%>" >
                         <figcaption><%=nombreD%></figcaption>
-                        <img src = "../Imagenes/imagen-dietas.jpg" class = "img-dietas" draggable="false">
+                        <img src = "../../Imagenes/imagen-dietas.jpg" class = "img-dietas" draggable="false">
                     </figure>
                     <%
                         contadorid += 1;

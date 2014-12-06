@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file = "meta.jsp" %>
-        <link rel="stylesheet" type="text/css" href="../Estilos/estilo_usuario.css">
+        <%@include file = "../meta.jsp" %>
+        <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
     </head>
     <body>
         <%@include file="barra_menu.jsp"%>       
         <section class = "Section-tbl-usr">
             <article class = "Article-tbl-usr2" style = "margin-left: 0">
-                <img src = "../Imagenes/usr-sin-img.jpg" class ="img-usr" alt = "foto de usuario">
+                <img src = "../../Imagenes/usr-sin-img.jpg" class ="img-usr" alt = "foto de usuario">
                 <input type = "button" value="cambiar" class="btn-imagen">
             </article> 
             <article class = "Article-tbl-usr">
@@ -23,13 +23,13 @@
                     <p class = "personal-p">Contraseña</p>
                     <input type = "text" name = "contra" required class = "Section-usr">
                     <hr>
-                    <h2 class = "Article-title">Información nutrimental</h2>
-                    <p class = "m1 medidas-p">Peso</p>
-                    <p class = "m2 medidas-p">Estatura</p>
-                    <p class = "m3 medidas-p">Cintura</p>
-                    <input type = "text" name = "peso" required class = "Section-m" placeholder = "(Kg)">
-                    <input type = "text" name = "estatura" required class = "Section-m" placeholder = "(m)">
-                    <input type = "text" name = "cintura" required class = "Section-m" placeholder = "(m)">
+                    <h2>Información pública</h2>
+                    <p class = "personal-p">Cédula profesional</p>
+                    <input type = "text" name = "plicense" required class = "Section-usr">
+                    <p class = "personal-p">Escuela de procedencia</p>
+                    <input type = "email" name = "school" required class = "Section-usr">
+                    <p class = "personal-p">Carrera</p>
+                    <input type = "text" name = "carrier" required class = "Section-usr">
                     <hr>
                     <h2 class = "Article-title">Tu dirección</h2>
                     <p class = "personal-p">Estado</p>
@@ -43,6 +43,6 @@
                 </form>
             </article>
         </section>
-        <%@include file = "footer.jsp" %>
+        
     </body>
 </html>

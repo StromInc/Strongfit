@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file = "meta.jsp" %>
-        <link rel="stylesheet" type = "text/css" href="../Estilos/estilo_inicio.css">
-        <script src = "../js/acciones_inicio.js"></script>
+        <%@include file = "../meta.jsp" %>
+        <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio.css">
+        <script src = "../../js/acciones_inicio.js"></script>
     </head>
     <body>
         <%@include file = "barra_menu.jsp" %>
@@ -78,6 +78,6 @@
             </article>
         </section>  
         
-        <%@include file = "footer.jsp" %>
+        
     </body>
 </html>
