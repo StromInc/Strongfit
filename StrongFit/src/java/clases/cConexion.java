@@ -65,6 +65,12 @@ public class cConexion {
         }     
         return validacion;
     }
+    //Esto da de alta a el paciente y la direccion
+    public void altapaciente(String idUser)throws SQLException
+    {
+    this.st = con.createStatement();
+    this.st.executeQuery("call sp_AltaPaciente('"+idUser+"');");   
+    }        
     //Esto sirve para buscar y validar usuarios
     public String busquedadeusuarios(String idUser, String pass) throws SQLException{
        this.st = con.createStatement();
@@ -75,7 +81,38 @@ public class cConexion {
        }
        return existente;
     }
+    //Esto verifica la posible existencia de un nuevo correo
+    public String cambiarcorreo(String idUser) throws SQLException{
+    this.st = con.createStatement();
+    ResultSet resultado = this.st.executeQuery("select * from usuario where usuario.idUsuario = '"+idUser+"';");
+    String existente = "libre";
+       if(resultado.isLast()){
+       existente = "existente";
+       }
+       return existente;
+    }
+    //Esto recupera los valores en el login
     
+    //cambia los datos del usuario si tiene el mismo correo(id)
+    public void cambioUsuario(String idUser, String nombre, String pass , String peso, String estatura, String cintura, String edad, String sexo, String estado, String municipio, String colonia) throws SQLException
+    {
+     this.st = con.createStatement();
+     int peso1 = Integer.parseInt(peso);
+     int estatura1 = Integer.parseInt(estatura);
+     int cintura1 = Integer.parseInt(cintura);
+     int edad1 = Integer.parseInt(edad);
+     this.st.executeQuery("call sp_CambioUsuarioPaciente('"+idUser+"','"+pass+"','"+nombre+"', "+peso1+" , "+estatura1+" , "+cintura1+" , "+edad1+" ,'"+sexo+"','"+estado+"','"+municipio+"' ,'"+colonia+"');");
+    }
+    // Esto cambia los datos de l usuario si este camia su correo
+    public void cambioUsuarioConCorreo(String idUser, String nombre, String pass , String peso, String estatura, String cintura, String edad, String sexo, String estado, String municipio, String colonia, String correo) throws SQLException
+    {
+     this.st = con.createStatement();
+     int peso1 = Integer.parseInt(peso);
+     int estatura1 = Integer.parseInt(estatura);
+     int cintura1 = Integer.parseInt(cintura);
+     int edad1 = Integer.parseInt(edad);
+     this.st.executeQuery("call sp_CambioUsuarioPacienteConCorreo('"+idUser+"','"+pass+"','"+nombre+"', "+peso1+" , "+estatura1+" , "+cintura1+" , "+edad1+" ,'"+sexo+"','"+estado+"','"+municipio+"' ,'"+colonia+"','"+correo+"');");
+    }
     //Esto actualizara la dieta en la parte de dietas paciente
     public ResultSet actualizarDieta(int idUser, int idDietas, String quitar) throws SQLException
     {
