@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author jorge pastrana
  */
-@WebServlet(name = "sAltaDeUsuario", urlPatterns = {"/sAltaDeUsuario"})
-public class sAltaDeUsuario extends HttpServlet {
+@WebServlet(name = "sPerfilDeUsuario", urlPatterns = {"/sPerfilDeUsuario"})
+public class sPerfilDeUsuario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,47 +37,63 @@ public class sAltaDeUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-             HttpSession sesion = request.getSession();
-             //Recuperando Valores
-             String idUser = request.getParameter("txt-mail");
-             String pass = request.getParameter("txt-pass");
-             String nombre = request.getParameter("txt-name");
-             // conectar a la base de datos                                     
-             try{
+            HttpSession sesion = request.getSession();
+            // recuperamos los valores
+            String idUser = (String)sesion.getAttribute("idUsr");
+            String nombre = request.getParameter("name");
+            String idUsr = request.getParameter("email");
+            String pass = request.getParameter("contra");
+            String peso = request.getParameter("peso");
+            String estatura = request.getParameter("estatura");
+            String cintura = request.getParameter("cintura");
+            String edad = request.getParameter("edad");
+            String sexo = request.getParameter("sexo");
+            String estado = request.getParameter("estado");
+            String municipio = request.getParameter("municipio");
+            String colonia = request.getParameter("colonia");
+            String verificacion = "";
+           // Conectar a la base de datos
+            try{
              clases.cConexion objconexion = new clases.cConexion();
              objconexion.conectar();
-            // verificar usuario
-            String verificacion = objconexion.altausuario(idUser, pass, nombre);           
-             if (verificacion.equals("valido")){                                     
-                 objconexion.altapaciente(idUser);
-                 // cargar datos a la sesion
-                 sesion.setAttribute("idUsr",idUser);
-                 sesion.setAttribute("passUsr",pass);
-                 sesion.setAttribute("nomUsr",nombre);
-                 response.sendRedirect("jsp/paciente/usuario.jsp");
+             // verificar si el nuevo correo esta disponible
+             if(idUser.equals(idUsr)){
+             objconexion.cambioUsuario(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, estado, municipio, colonia);
+             sesion.setAttribute("idUsr",idUser);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
-                 sesion.setAttribute("peso", "" );
-                 sesion.setAttribute("estatura", "");
-                 sesion.setAttribute("cintura", "");
-                 sesion.setAttribute("edad", "");
-                 sesion.setAttribute("sexo", "");
-                 sesion.setAttribute("estado", "");
-                 sesion.setAttribute("municipio", "");
-                 sesion.setAttribute("colonia", "");
-                 // Mandar al usuario a su perfil
+                 sesion.setAttribute("peso", peso );
+                 sesion.setAttribute("estatura", estatura);
+                 sesion.setAttribute("cintura", cintura);
+                 sesion.setAttribute("edad", edad);
+                 sesion.setAttribute("sexo", sexo);
+                 sesion.setAttribute("estado", estado);
+                 sesion.setAttribute("municipio", municipio);
+                 sesion.setAttribute("colonia", colonia);
                  response.sendRedirect("jsp/usuario.jsp");
-                 out.print("<script>alert('Alta realizada');</script>");
-             }
-             else{
-             out.println("<script>alert('Actuelmente ya existe una cuenta registrada con ese correo');</script>");    
+             }else{
+             verificacion = objconexion.cambiarcorreo(idUser);
+             if(verificacion.equals("libre")){
+             objconexion.cambioUsuarioConCorreo(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, estado, municipio, colonia, idUsr);
+             sesion.setAttribute("idUsr",idUsr);
+                 sesion.setAttribute("nombre",nombre);
+                 sesion.setAttribute("pass",pass);
+                 sesion.setAttribute("peso", peso );
+                 sesion.setAttribute("estatura", estatura);
+                 sesion.setAttribute("cintura", cintura);
+                 sesion.setAttribute("edad", edad);
+                 sesion.setAttribute("sexo", sexo);
+                 sesion.setAttribute("estado", estado);
+                 sesion.setAttribute("municipio", municipio);
+                 sesion.setAttribute("colonia", colonia);
+                 response.sendRedirect("jsp/usuario.jsp");
+             }else{
              response.sendRedirect("index.jsp");
              }
              }
-             catch(SQLException ex){
+        }catch(SQLException ex){
              out.print(ex.toString());
              }
-             
         }
     }
 
