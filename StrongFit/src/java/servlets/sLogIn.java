@@ -47,9 +47,9 @@ public class sLogIn extends HttpServlet {
             String verificacion = objconexion.busquedadeusuarios(idUser, pass);
             // Logica para permitir o no el acceso
             if (verificacion.equals("si")){ 
-                response.sendRedirect("jsp/inicio.jsp");
                 sesion.setAttribute("idUsr",idUser);
-                 out.print("<script>alert('Bienenido');</script>");
+                response.sendRedirect("jsp/inicio.jsp");
+                out.print("<script>alert('Bienveido');</script>");
                 }
             if (verificacion.equals("no")){ 
                 response.sendRedirect("index.jsp");

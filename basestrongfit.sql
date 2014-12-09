@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `basestrongfit` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `basestrongfit`;
--- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
 --
--- Host: 127.0.0.1    Database: basestrongfit
+-- Host: localhost    Database: basestrongfit
 -- ------------------------------------------------------
--- Server version	5.5.40-0ubuntu0.14.04.1
+-- Server version	5.6.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -222,9 +222,10 @@ DROP TABLE IF EXISTS `direccion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `direccion` (
-  `idDireccion` int(11) NOT NULL,
+  `idDireccion` varchar(200) NOT NULL,
   `estado` varchar(250) DEFAULT NULL,
   `municipio` varchar(250) DEFAULT NULL,
+  `colonia` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idDireccion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -262,13 +263,13 @@ LOCK TABLES `estadosalud` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `imagenAlimento`
+-- Table structure for table `imagenalimento`
 --
 
-DROP TABLE IF EXISTS `imagenAlimento`;
+DROP TABLE IF EXISTS `imagenalimento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `imagenAlimento` (
+CREATE TABLE `imagenalimento` (
   `idImagenAlimento` int(11) NOT NULL,
   `imagen` blob,
   PRIMARY KEY (`idImagenAlimento`)
@@ -276,12 +277,12 @@ CREATE TABLE `imagenAlimento` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `imagenAlimento`
+-- Dumping data for table `imagenalimento`
 --
 
-LOCK TABLES `imagenAlimento` WRITE;
-/*!40000 ALTER TABLE `imagenAlimento` DISABLE KEYS */;
-/*!40000 ALTER TABLE `imagenAlimento` ENABLE KEYS */;
+LOCK TABLES `imagenalimento` WRITE;
+/*!40000 ALTER TABLE `imagenalimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `imagenalimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -292,7 +293,7 @@ DROP TABLE IF EXISTS `medico`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `medico` (
-  `idMedico` int(11) NOT NULL,
+  `idMedico` varchar(200) NOT NULL,
   `cedulaProf` int(11) DEFAULT NULL,
   `escuela` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`idMedico`)
@@ -341,7 +342,7 @@ DROP TABLE IF EXISTS `paciente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `paciente` (
-  `idPaciente` int(11) NOT NULL,
+  `idPaciente` varchar(200) NOT NULL,
   `peso` int(11) DEFAULT NULL,
   `estatura` int(11) DEFAULT NULL,
   `medidaCintura` int(11) DEFAULT NULL,
@@ -360,13 +361,13 @@ LOCK TABLES `paciente` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `rel_medicoPaciente`
+-- Table structure for table `rel_medicopaciente`
 --
 
-DROP TABLE IF EXISTS `rel_medicoPaciente`;
+DROP TABLE IF EXISTS `rel_medicopaciente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rel_medicoPaciente` (
+CREATE TABLE `rel_medicopaciente` (
   `idMedicoPaciente` int(11) NOT NULL,
   `idPaciente` int(11) DEFAULT NULL,
   `idMedico` int(11) DEFAULT NULL,
@@ -375,12 +376,12 @@ CREATE TABLE `rel_medicoPaciente` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `rel_medicoPaciente`
+-- Dumping data for table `rel_medicopaciente`
 --
 
-LOCK TABLES `rel_medicoPaciente` WRITE;
-/*!40000 ALTER TABLE `rel_medicoPaciente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rel_medicoPaciente` ENABLE KEYS */;
+LOCK TABLES `rel_medicopaciente` WRITE;
+/*!40000 ALTER TABLE `rel_medicopaciente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rel_medicopaciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -416,7 +417,7 @@ DROP TABLE IF EXISTS `sexo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sexo` (
-  `idSexo` int(11) NOT NULL,
+  `idSexo` varchar(200) NOT NULL,
   `sexo` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`idSexo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -432,13 +433,13 @@ LOCK TABLES `sexo` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tipoAlimento`
+-- Table structure for table `tipoalimento`
 --
 
-DROP TABLE IF EXISTS `tipoAlimento`;
+DROP TABLE IF EXISTS `tipoalimento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tipoAlimento` (
+CREATE TABLE `tipoalimento` (
   `idTipoAlimento` int(11) NOT NULL,
   `tipoAlimento` varchar(250) DEFAULT NULL,
   `idImagenAlimento` int(11) DEFAULT NULL,
@@ -447,12 +448,12 @@ CREATE TABLE `tipoAlimento` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tipoAlimento`
+-- Dumping data for table `tipoalimento`
 --
 
-LOCK TABLES `tipoAlimento` WRITE;
-/*!40000 ALTER TABLE `tipoAlimento` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tipoAlimento` ENABLE KEYS */;
+LOCK TABLES `tipoalimento` WRITE;
+/*!40000 ALTER TABLE `tipoalimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipoalimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -463,14 +464,15 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
-  `idUsuario` int(11) NOT NULL,
+  `idUsuario` varchar(200) NOT NULL,
   `passUsuario` varchar(50) DEFAULT NULL,
   `nombre` varchar(200) DEFAULT NULL,
   `apellidos` varchar(250) DEFAULT NULL,
-  `idPaciente` int(11) DEFAULT NULL,
+  `idPaciente` varchar(200) DEFAULT NULL,
   `idMedico` int(11) DEFAULT NULL,
   `idSalud` int(11) DEFAULT NULL,
   `idConteo` int(11) DEFAULT NULL,
+  `edad` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -558,6 +560,141 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_AltaPaciente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_AltaPaciente`(in idUsr varchar(200))
+begin
+insert into paciente(idPaciente) values(idUsr);
+insert into direccion(idDireccion) values(idUsr);
+insert into sexo(idSexo) values(idUsr);
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_AltaUsuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_AltaUsuario`(in idUsr varchar(45), in contasena varchar(45),in nombre varchar(45))
+begin
+declare contador int;
+set contador = (select count(*) from usuario where usuario.idUsuario = idUsr);
+if contador > 0 then
+select 'invalido' as 'nombre';
+else
+insert into usuario(idUsuario, passUsuario, nombre) values (idUsr, contasena, nombre);
+select 'valido' as 'nombre';
+end if;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_CambioUsuarioPaciente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CambioUsuarioPaciente`(in idUsr varchar(200), in pass varchar(45), in nombre varchar(45), in peso int(11), in estatura int(11), in cintura int(11), in edad varchar(11),in sexo varchar(11), in estado varchar(45), in municipio varchar(45), in colonia varchar(45) )
+begin
+update usuario set usuario.nombre = nombre where usuario.idUsuario = idUsr;  
+update usuario set usuario.passUsuario = pass where usuario.idUsuario = idUsr;
+update usuario set usuario.idPaciente = idUsr where usuario.idUsuario = idUsr;
+update paciente set paciente.peso = peso where paciente.idPaciente = idUsr;
+update paciente set paciente.estatura = estatura where paciente.idPaciente = idUsr;
+update paciente set paciente.medidaCintura = cintura where paciente.idPaciente = idUsr;
+update usuario set usuario.edad = edad where usuario.idUsuario = idUsr;
+update sexo set sexo.sexo = sexo  where sexo.idSexo = idUsr; 
+update direccion set direccion.estado = estado  where direccion.idDireccion = idUsr;  
+update direccion set direccion.municipio = municipio where direccion.idDireccion = idUsr;  
+update direccion set direccion.colonia = colonia where direccion.idDireccion = idUsr;  
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_CambioUsuarioPacienteConCorreo` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CambioUsuarioPacienteConCorreo`(in idUsr varchar(200), in pass varchar(45), in nombre varchar(45), in peso int(11), in estatura int(11), in cintura int(11), in edad varchar(11),in sexo varchar(11), in estado varchar(45), in municipio varchar(45), in colonia varchar(45), in correo varchar(200) )
+begin
+insert into usuario(idUsuario, passUsuario, nombre, idPaciente, edad) values (correo, pass, nombre, correo,edad);
+insert into paciente(idPaciente, peso, estatura, medidaCintura) values (correo, peso, estatura, cintura);
+insert into sexo(idSexo, sexo) values (correo, sexo);
+insert into direccion(idDireccion, estado, municipio, colonia) values (correo, estado, municipio, colonia);
+delete from usuario where usuario.idUsuario = idUsr;
+delete from paciente where paciente.idPaciente = idUsr;
+delete from sexo where sexo.idSexo = idUsr;
+delete from direccion where direccion.idDireccion = idUsr;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_Login` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_Login`(in idUsr varchar(200), in pass varchar(50))
+begin
+declare contador int;
+declare contador2 int;
+declare valor varchar(50);
+set contador = (select count(*) from usuario  where usuario.idusuario = idUsr);
+set contador2 = (select count(*) from usuario  where usuario.idusuario = idUsr and usuario.passUsuario = pass);
+if contador > 0 then
+if contador2 > 0 then
+select 'si' as 'valido';
+else 
+select 'nop' as 'valido';
+end if;
+else 
+select 'no' as 'valido';
+end if;
+
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -568,4 +705,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-03 16:04:53
+-- Dump completed on 2014-12-09 15:02:35
