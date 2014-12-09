@@ -52,7 +52,7 @@ public class sAltaDeUsuario extends HttpServlet {
                  sesion.setAttribute("idUsr",idUser);
                  sesion.setAttribute("passUsr",pass);
                  sesion.setAttribute("nomUsr",nombre);
-                 response.sendRedirect("jsp/usuario.jsp");
+                 response.sendRedirect("jsp/paciente/usuario.jsp");
                  out.print("<script>alert('Alta realizada');</script>");
              }
              else{

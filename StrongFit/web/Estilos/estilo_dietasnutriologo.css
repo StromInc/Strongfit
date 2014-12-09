@@ -1,16 +1,29 @@
 .arrow-left 
 {
-    margin-top: 10em;
-     width: 0;
-    height: 0;
-    border-top: 12px solid transparent;
-    border-right: 25px solid #000;
-    border-bottom: 12px solid transparent;
+    border: 7px solid black;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-width: 10px 20px 10px 0px;
+    border-left-color: transparent;
+    position: absolute;
+    height: 0em;
+    margin-top: 1.5em;
 }
 
-.invisible
+.dietaCreada
 {
-    display: none;
+    background-color: rgba(145, 145, 145, 0.8);
+    width: 80%;
+    display: inline-block;
+    padding: .6em 0;
+    position: relative;
+    color: white;
+}
+
+.dietaCreada:hover
+{
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .btn-act-usr
@@ -31,5 +44,160 @@
     margin-top: 4em;
     width: 25%;
     height: 85%;
+    max-height: 85%;
     position: fixed;
+    padding: 0em;
+    overflow-y: auto;
 }
+
+.Article-dietas2
+{
+    margin-left: 26%;
+    width: 50%;
+}
+
+.Article-dietas3
+{
+    margin-left: 77%;
+    width: 23%;
+}
+
+.label-search
+{
+    cursor: pointer;
+    padding: 0 .2em 0 .3em;
+    background-color: transparent;
+    display: inline-block;
+}
+
+.span-search
+{
+    cursor: pointer;
+    background-color: transparent;
+    position: absolute;
+    display: inline-block;
+    margin-top: .15em;
+}
+
+.contenedor-search
+{
+    background-color: white;
+    margin: 1em 0;
+    width: 80%;
+    border: solid;
+    border-color: #0F5515;
+    position: relative;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.search
+{
+    background-color: transparent;
+    position: relative;
+    top: 0;
+    font-size: .8em;
+}
+
+.input-search
+{
+    padding: .3em .2em .3em 2.1em;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+.input-search:focus
+{
+    outline: none;
+}
+
+.opciones
+{
+    display: inline-block;
+    position: absolute;
+    right: -6.5em;
+    top: -.5em
+}
+
+.opcionesDiv
+{
+    background-color: black;
+    width: 5rem;
+    display: inline-block;
+    margin-left: 1.2em;
+}
+
+.opcionesDiv p
+{
+    margin: 0;
+    padding: .5rem;
+    display: inline-block;
+}
+
+.menuCrear
+{
+    text-align: center;
+    border-bottom: solid black thin;
+}
+
+.opcionMenu
+{
+    display: inline-block;
+    width: 13%;
+    border: solid;
+    border-width: thin;
+    border-bottom: none;
+    border-color: black;
+    padding: .2em 0;
+    background-color: rgba(105, 105, 105, .7);
+    cursor: pointer;
+}
+
+.diasDieta h2
+{
+    text-align: left;
+    background-color: rgb(220, 220, 220);
+    margin-bottom: 0;
+    padding-left: 1em;
+    
+}
+
+.espacioDieta
+{
+    background-color: rgb(211, 211, 211);
+    height: 15em;
+    padding: 1em;
+}
+
+/*------------------------------------Esta parte es de manipulacion con javascript y jquery-----------------------------------------*/
+.invisible
+{
+    display: none;
+}
+
+.textoBueno
+{
+    width: 10em;
+}
+
+.tamano
+{
+    width: 0;
+}
+
+.tam1
+{
+    width: 25%;
+}
+
+.tam2
+{
+    width: 50%;
+}
+
+.tam3
+{
+    width: 23%;
+}
+
