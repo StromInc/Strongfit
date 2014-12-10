@@ -63,6 +63,10 @@
     border-width: thin;
 }
 
+.Header-mail, .Header-pass
+{
+    color: black;
+}
 /*-------------------------------------------------Esta parte es para el section de inicio de sesion-----------------------------------------------------*/
 
 .Section

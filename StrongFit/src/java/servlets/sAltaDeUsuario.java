@@ -47,14 +47,13 @@ public class sAltaDeUsuario extends HttpServlet {
              clases.cConexion objconexion = new clases.cConexion();
              objconexion.conectar();
             // verificar usuario
-            String verificacion = objconexion.altausuario(idUser, pass, nombre);           
+            String verificacion = objconexion.altausuario(idUser, pass, nombre);
              if (verificacion.equals("valido")){                                     
                  objconexion.altapaciente(idUser);
                  // cargar datos a la sesion
                  sesion.setAttribute("idUsr",idUser);
                  sesion.setAttribute("passUsr",pass);
-                 sesion.setAttribute("nomUsr",nombre);
-                 response.sendRedirect("jsp/paciente/usuario.jsp");
+                 sesion.setAttribute("nomUsr",nombre);            
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
                  sesion.setAttribute("peso", "" );
@@ -66,11 +65,11 @@ public class sAltaDeUsuario extends HttpServlet {
                  sesion.setAttribute("municipio", "");
                  sesion.setAttribute("colonia", "");
                  // Mandar al usuario a su perfil
-                 response.sendRedirect("jsp/usuario.jsp");
+                 response.sendRedirect("jsp/paciente/usuario.jsp");
                  out.print("<script>alert('Alta realizada');</script>");
              }
              else{
-             out.println("<script>alert('Actuelmente ya existe una cuenta registrada con ese correo');</script>");    
+             out.print("<script>alert('Actuelmente ya existe una cuenta registrada con ese correo');</script>");    
              response.sendRedirect("index.jsp");
              }
              }
