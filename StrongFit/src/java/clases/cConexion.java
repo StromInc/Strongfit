@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class cConexion {
@@ -133,6 +134,32 @@ public class cConexion {
         this.st = con.createStatement();
         return this.st.executeQuery("call spGetDietasRegistradas("+idUser+");");
     }
-    
+    //Esto busca los alimentos 
+    public ArrayList<String> buscar(String info) throws SQLException{
+        ArrayList<String> lista =new ArrayList();
+        this.st = con.createStatement();
+        String info2 = info +"%";
+        System.out.print(info2);
+        ResultSet rs= this.st.executeQuery("select * from alimento where nombre like '"+info2+"';");
+        while(rs.next()){
+            System.out.print("***************Entro al while************************");
+            String data = rs.getString("nombre");
+            String otro = rs.getString("calorias");
+            String todo= data + ": " + " " + otro + " calorias";
+            lista.add(todo);
+            /*
+                Aqui creo que necesito hacer un objeto para despues hacerlo una objeto Json
+                pero aun no se como xD
+                deberia quedar algo asi
+                var alimento ={
+                    id:
+                    nombre:
+                    calorias:
+                }
+            */
+        }
+        System.out.print(lista.size());
+        return lista;
+    }
 }
 
