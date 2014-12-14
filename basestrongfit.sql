@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `basestrongfit` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `basestrongfit`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: basestrongfit
+-- Host: 127.0.0.1    Database: basestrongfit
 -- ------------------------------------------------------
--- Server version	5.6.17
+-- Server version	5.5.40-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,8 +27,11 @@ DROP TABLE IF EXISTS `alimento`;
 CREATE TABLE `alimento` (
   `idAlimento` int(11) NOT NULL,
   `nombre` varchar(250) DEFAULT NULL,
-  `calorias` int(11) DEFAULT NULL,
+  `calorias` float DEFAULT NULL,
   `idTipoAlimento` varchar(250) DEFAULT NULL,
+  `proteinas` float DEFAULT NULL,
+  `lipidos` float DEFAULT NULL,
+  `carbohidratos` float DEFAULT NULL,
   PRIMARY KEY (`idAlimento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,7 +42,7 @@ CREATE TABLE `alimento` (
 
 LOCK TABLES `alimento` WRITE;
 /*!40000 ALTER TABLE `alimento` DISABLE KEYS */;
-INSERT INTO `alimento` VALUES (1,'taco al pastor',400,'1');
+INSERT INTO `alimento` VALUES (1,'taco al pastor',400,'1',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `alimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,10 +225,9 @@ DROP TABLE IF EXISTS `direccion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `direccion` (
-  `idDireccion` varchar(200) NOT NULL,
+  `idDireccion` int(11) NOT NULL,
   `estado` varchar(250) DEFAULT NULL,
   `municipio` varchar(250) DEFAULT NULL,
-  `colonia` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idDireccion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -260,6 +262,29 @@ CREATE TABLE `estadosalud` (
 LOCK TABLES `estadosalud` WRITE;
 /*!40000 ALTER TABLE `estadosalud` DISABLE KEYS */;
 /*!40000 ALTER TABLE `estadosalud` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `imagenAlimento`
+--
+
+DROP TABLE IF EXISTS `imagenAlimento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `imagenAlimento` (
+  `idImagenAlimento` int(11) NOT NULL,
+  `imagen` blob,
+  PRIMARY KEY (`idImagenAlimento`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `imagenAlimento`
+--
+
+LOCK TABLES `imagenAlimento` WRITE;
+/*!40000 ALTER TABLE `imagenAlimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `imagenAlimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -361,6 +386,30 @@ LOCK TABLES `paciente` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `rel_medicoPaciente`
+--
+
+DROP TABLE IF EXISTS `rel_medicoPaciente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rel_medicoPaciente` (
+  `idMedicoPaciente` int(11) NOT NULL,
+  `idPaciente` int(11) DEFAULT NULL,
+  `idMedico` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idMedicoPaciente`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rel_medicoPaciente`
+--
+
+LOCK TABLES `rel_medicoPaciente` WRITE;
+/*!40000 ALTER TABLE `rel_medicoPaciente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rel_medicoPaciente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `rel_medicopaciente`
 --
 
@@ -417,7 +466,7 @@ DROP TABLE IF EXISTS `sexo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sexo` (
-  `idSexo` varchar(200) NOT NULL,
+  `idSexo` int(11) NOT NULL,
   `sexo` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`idSexo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -430,6 +479,30 @@ CREATE TABLE `sexo` (
 LOCK TABLES `sexo` WRITE;
 /*!40000 ALTER TABLE `sexo` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sexo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipoAlimento`
+--
+
+DROP TABLE IF EXISTS `tipoAlimento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipoAlimento` (
+  `idTipoAlimento` int(11) NOT NULL,
+  `tipoAlimento` varchar(250) DEFAULT NULL,
+  `idImagenAlimento` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idTipoAlimento`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipoAlimento`
+--
+
+LOCK TABLES `tipoAlimento` WRITE;
+/*!40000 ALTER TABLE `tipoAlimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipoAlimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -468,11 +541,11 @@ CREATE TABLE `usuario` (
   `passUsuario` varchar(50) DEFAULT NULL,
   `nombre` varchar(200) DEFAULT NULL,
   `apellidos` varchar(250) DEFAULT NULL,
-  `idPaciente` varchar(200) DEFAULT NULL,
+  `idPaciente` int(11) DEFAULT NULL,
   `idMedico` int(11) DEFAULT NULL,
   `idSalud` int(11) DEFAULT NULL,
   `idConteo` int(11) DEFAULT NULL,
-  `edad` int(11) DEFAULT NULL,
+  `idSexo` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -483,6 +556,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES ('ianmj2013@gmail.com','123','ian',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -560,27 +634,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_AltaPaciente` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_AltaPaciente`(in idUsr varchar(200))
-begin
-insert into paciente(idPaciente) values(idUsr);
-insert into direccion(idDireccion) values(idUsr);
-insert into sexo(idSexo) values(idUsr);
-end ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_AltaUsuario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -601,61 +654,6 @@ else
 insert into usuario(idUsuario, passUsuario, nombre) values (idUsr, contasena, nombre);
 select 'valido' as 'nombre';
 end if;
-end ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_CambioUsuarioPaciente` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CambioUsuarioPaciente`(in idUsr varchar(200), in pass varchar(45), in nombre varchar(45), in peso int(11), in estatura int(11), in cintura int(11), in edad varchar(11),in sexo varchar(11), in estado varchar(45), in municipio varchar(45), in colonia varchar(45) )
-begin
-update usuario set usuario.nombre = nombre where usuario.idUsuario = idUsr;  
-update usuario set usuario.passUsuario = pass where usuario.idUsuario = idUsr;
-update usuario set usuario.idPaciente = idUsr where usuario.idUsuario = idUsr;
-update paciente set paciente.peso = peso where paciente.idPaciente = idUsr;
-update paciente set paciente.estatura = estatura where paciente.idPaciente = idUsr;
-update paciente set paciente.medidaCintura = cintura where paciente.idPaciente = idUsr;
-update usuario set usuario.edad = edad where usuario.idUsuario = idUsr;
-update sexo set sexo.sexo = sexo  where sexo.idSexo = idUsr; 
-update direccion set direccion.estado = estado  where direccion.idDireccion = idUsr;  
-update direccion set direccion.municipio = municipio where direccion.idDireccion = idUsr;  
-update direccion set direccion.colonia = colonia where direccion.idDireccion = idUsr;  
-end ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_CambioUsuarioPacienteConCorreo` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_CambioUsuarioPacienteConCorreo`(in idUsr varchar(200), in pass varchar(45), in nombre varchar(45), in peso int(11), in estatura int(11), in cintura int(11), in edad varchar(11),in sexo varchar(11), in estado varchar(45), in municipio varchar(45), in colonia varchar(45), in correo varchar(200) )
-begin
-insert into usuario(idUsuario, passUsuario, nombre, idPaciente, edad) values (correo, pass, nombre, correo,edad);
-insert into paciente(idPaciente, peso, estatura, medidaCintura) values (correo, peso, estatura, cintura);
-insert into sexo(idSexo, sexo) values (correo, sexo);
-insert into direccion(idDireccion, estado, municipio, colonia) values (correo, estado, municipio, colonia);
-delete from usuario where usuario.idUsuario = idUsr;
-delete from paciente where paciente.idPaciente = idUsr;
-delete from sexo where sexo.idSexo = idUsr;
-delete from direccion where direccion.idDireccion = idUsr;
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -705,4 +703,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-12-09 15:02:35
+-- Dump completed on 2014-12-13 19:56:38

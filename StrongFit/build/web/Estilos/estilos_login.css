@@ -42,6 +42,7 @@
     border-width: thin;
     border-color: #D2D4D5;
     border-radius: 5px;
+    color:black;
 }
 
 .Header-txt:focus

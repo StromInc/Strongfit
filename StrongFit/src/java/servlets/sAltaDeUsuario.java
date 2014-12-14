@@ -66,7 +66,7 @@ public class sAltaDeUsuario extends HttpServlet {
                  sesion.setAttribute("municipio", "");
                  sesion.setAttribute("colonia", "");
                  // Mandar al usuario a su perfil
-                 response.sendRedirect("jsp/usuario.jsp");
+                 response.sendRedirect("jsp/paciente/usuario.jsp");
                  out.print("<script>alert('Alta realizada');</script>");
              }
              else{

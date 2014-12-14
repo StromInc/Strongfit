@@ -48,7 +48,7 @@ public class sLogIn extends HttpServlet {
             // Logica para permitir o no el acceso
             if (verificacion.equals("si")){ 
                 sesion.setAttribute("idUsr",idUser);
-                response.sendRedirect("jsp/inicio.jsp");
+                response.sendRedirect("jsp/paciente/inicio.jsp");
                 out.print("<script>alert('Bienveido');</script>");
                 }
             if (verificacion.equals("no")){ 

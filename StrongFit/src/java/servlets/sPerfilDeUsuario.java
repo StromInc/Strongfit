@@ -86,7 +86,7 @@ public class sPerfilDeUsuario extends HttpServlet {
                  sesion.setAttribute("estado", estado);
                  sesion.setAttribute("municipio", municipio);
                  sesion.setAttribute("colonia", colonia);
-                 response.sendRedirect("jsp/usuario.jsp");
+                 response.sendRedirect("jsp/paciente/usuario.jsp");
              }else{
              response.sendRedirect("index.jsp");
              }
