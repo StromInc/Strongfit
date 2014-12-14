@@ -4,7 +4,33 @@
     <head>
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio.css">
-        <script src = "../../js/acciones_inicio.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+        <!--El script lo puse aqui porque no me cargaba desde un archivo externo, no se porque, luego lo checo-->
+        <script>
+            $(document).ready(function() {
+                /*autocomplete es una funcion de jquery ui para hacer las cosas mas faciles*/
+                $("#search").autocomplete({     
+                    source : function(request, response) {
+                        /*Esto es para la barra de busqueda*/
+                        $.ajax({
+                            url : "http://localhost:8080/StrongFit/sBusqueda",
+                            type : "post",
+                            dataType : "json",
+                            data : {
+                                info : request.term
+                            },             
+                            success : function(respuesta) {
+                                    console.log("********Regreso algo******");
+                                    console.log(respuesta);
+                                    response(respuesta);
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
     </head>
     <body>
         <%@include file = "barra_menu.jsp" %>
@@ -14,7 +40,7 @@
             <article class = "Article-menu">
                 <p class="contenedor-search">
                     <span class = "span-search"><label class = "icon-search label-search" for = "buscar"></label></span>
-                    <span class = "search"><input type="search" placeholder = "buscar alimentos ..." class = "input-search" id = "buscar"></span>
+                    <span class = "search"><input type="text" id="search" name="search" class="search"></span>
                 </p>
                 <div class = "div">
                     <div class = "content-title">
