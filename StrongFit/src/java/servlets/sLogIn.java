@@ -42,14 +42,21 @@ public class sLogIn extends HttpServlet {
             HttpSession sesion = request.getSession();
             String idUser = request.getParameter("txt-mail");
             String pass = request.getParameter("txt-pass");
+            String tipo = "";
             // identificar al usuario
             try{
-            String verificacion = objconexion.busquedadeusuarios(idUser, pass);
+            String verificacion = objconexion.busquedadeusuarios(idUser, pass);           
             // Logica para permitir o no el acceso
             if (verificacion.equals("si")){ 
                 sesion.setAttribute("idUsr",idUser);
-                response.sendRedirect("jsp/inicio.jsp");
+                //logica para mandar al usuario a donde deba
+                tipo = objconexion.tipodeusuario(idUser);
+                if(tipo.equals("medico")){
+                response.sendRedirect("jsp/nutriologo/inicio.jsp");
+                }else{
+                response.sendRedirect("jsp/paciente/inicio.jsp");
                 out.print("<script>alert('Bienveido');</script>");
+                }
                 }
             if (verificacion.equals("no")){ 
                 response.sendRedirect("index.jsp");

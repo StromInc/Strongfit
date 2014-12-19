@@ -74,9 +74,9 @@ public class sPerfilDeMedico extends HttpServlet {
              }else{
              verificacion = objconexion.cambiarcorreo(idUser);
              if(verificacion.equals("libre")){
-             objconexion.cambioUsuarioConCorreo(idUser, nombre, pass, cedula, escuela, carrera, edad, sexo, estado, municipio, colonia, idUsr);
+             objconexion.cambioUsuariomedicoConCorreo(idUser, nombre, pass, cedula, escuela, carrera, edad, sexo, estado, municipio, colonia, idUsr);
              sesion.setAttribute("idUsr",idUsr);
-                 sesion.setAttribute("idUsr",idUser);
+                 sesion.setAttribute("idUsr",idUsr);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
                  sesion.setAttribute("cedula", cedula );

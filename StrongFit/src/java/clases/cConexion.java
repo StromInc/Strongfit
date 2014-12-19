@@ -148,6 +148,17 @@ public class cConexion {
      int edad1 = Integer.parseInt(edad);
      this.st.executeQuery("call sp_CambioUsuarioMedicoConCorreo('"+idUser+"','"+pass+"','"+nombre+"', "+cedula1+" , '"+escuela+"' , '"+carrera+"' , "+edad1+" ,'"+sexo+"','"+estado+"','"+municipio+"' ,'"+colonia+"','"+correo+"');");
     }
+    //Esto identifica al usuario como medico o paciente
+    public String tipodeusuario(String idUsr)throws SQLException{
+    ResultSet resultado;
+    String valor = "";
+    this.st = con.createStatement();
+    resultado = this.st.executeQuery("call sp_TipoDeUsuario('"+idUsr+"');");
+    if(resultado.next()){
+    valor = resultado.getString("tipo");
+    }
+    return valor;
+    }
     //Esto actualizara la dieta en la parte de dietas paciente
     public ResultSet actualizarDieta(int idUser, int idDietas, String quitar) throws SQLException
     {
