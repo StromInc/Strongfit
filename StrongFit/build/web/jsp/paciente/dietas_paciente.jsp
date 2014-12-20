@@ -8,7 +8,7 @@
     <%
         /*esto es temporal debido a que las variables de sesion como usrid y usrname se deben obtener en el momento del login*/
         HttpSession sesion = request.getSession();
-        sesion.setAttribute("idUsr", 1);
+        String usrid = (String)sesion.getAttribute("idUsr");
     %>
     <head>
         <%@include file = "../meta.jsp" %>
@@ -22,11 +22,7 @@
             }
         </style>
     </head>
-    <body>
-        <%
-            int usrid = 1; //Provisional
-            //Esto es provisional, despues se construira el metodo para extraer las dietas de la base de datos
-        %>        
+    <body>      
         <%@include file = "barra_menu.jsp" %>
         
         <section class = "Section-dietas">

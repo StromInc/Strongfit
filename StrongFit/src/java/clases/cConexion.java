@@ -160,10 +160,10 @@ public class cConexion {
     return valor;
     }
     //Esto actualizara la dieta en la parte de dietas paciente
-    public ResultSet actualizarDieta(int idUser, int idDietas, String quitar) throws SQLException
+    public ResultSet actualizarDieta(String idUser, int idDietas, String quitar) throws SQLException
     {
         this.st = con.createStatement();
-        return this.st.executeQuery("call spActualizarDieta("+idUser+", "+idDietas+", '"+quitar+"');");
+        return this.st.executeQuery("call spActualizarDieta('"+idUser+"', "+idDietas+", '"+quitar+"');");
     }
     
     //Esto traera las dietas de tipo 1, es decir sugeridas por la aplicacion que el usuario no este usando
@@ -174,10 +174,10 @@ public class cConexion {
     }
     
     //Esto traera las dietas que el usuario este usando
-    public ResultSet getDietasRegistradas(int idUser) throws SQLException
+    public ResultSet getDietasRegistradas(String idUser) throws SQLException
     {
         this.st = con.createStatement();
-        return this.st.executeQuery("call spGetDietasRegistradas("+idUser+");");
+        return this.st.executeQuery("call spGetDietasRegistradas('"+idUser+"');");
     }
     //Esto busca los alimentos 
     public ArrayList<String> buscar(String info) throws SQLException{

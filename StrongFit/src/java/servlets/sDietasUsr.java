@@ -45,7 +45,7 @@ public class sDietasUsr extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             HttpSession sesion = request.getSession(false);
-            int idUser = (Integer)sesion.getAttribute("idUsr");
+            String idUser = (String)sesion.getAttribute("idUsr");
             int idDieta = Integer.parseInt(request.getParameter("idDieta"));
             String quit = request.getParameter("quitar");
             System.out.println(idDieta);
@@ -115,7 +115,7 @@ public class sDietasUsr extends HttpServlet {
     }
     
     //Usa el procedure para crear o eliminar una relacion con las dietas que el usuario esta usando
-    public void registrarDieta(int idUser, int idDietas, String quit) throws SQLException
+    public void registrarDieta(String idUser, int idDietas, String quit) throws SQLException
     {
         cConexion conecta = new cConexion();
         conecta.conectar();
