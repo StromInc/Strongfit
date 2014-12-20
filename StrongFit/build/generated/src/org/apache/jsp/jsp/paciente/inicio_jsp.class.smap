@@ -1,0 +1,22 @@
+SMAP
+inicio_jsp.java
+JSP
+*S JSP
+*F
++ 0 inicio.jsp
+jsp/paciente/inicio.jsp
++ 1 meta.jsp
+jsp/paciente/../meta.jsp
++ 2 barra_menu.jsp
+jsp/paciente/barra_menu.jsp
+*L
+1,5:54
+1#1,23:59
+5#0,32:82
+1#2:114
+3,2:12
+4:115
+6,3:117
+8,11:120
+36#0,75:131
+*E
