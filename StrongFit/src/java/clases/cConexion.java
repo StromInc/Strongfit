@@ -159,6 +159,14 @@ public class cConexion {
     }
     return valor;
     }
+    // Esto carga los datos del paciente
+    public ResultSet cargadedatos(String idUsr,String tipo)throws SQLException
+    {
+    this.st = con.createStatement();
+    ResultSet resultado = this.st.executeQuery("call sp_cargadedatosespecificos('"+idUsr+"', '"+tipo+"');");
+    return resultado;
+    }
+    
     //Esto actualizara la dieta en la parte de dietas paciente
     public ResultSet actualizarDieta(int idUser, int idDietas, String quitar) throws SQLException
     {

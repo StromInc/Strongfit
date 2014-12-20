@@ -4,12 +4,12 @@
     <head>
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
-    </head><%
+    </head>
+    <%
     HttpSession sesion = request.getSession();
     String nombre = (String)sesion.getAttribute("nombre");
     String idUsr = (String)sesion.getAttribute("idUsr");
     String pass = (String)sesion.getAttribute("pass");
-    String peso = (String)sesion.getAttribute("peso");
     String cedula = (String)sesion.getAttribute("cedula");
     String escuela = (String)sesion.getAttribute("escuela");
     String carrera = (String)sesion.getAttribute("carrera");
