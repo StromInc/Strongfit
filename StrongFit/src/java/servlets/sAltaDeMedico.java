@@ -7,21 +7,20 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 /**
  *
  * @author jorge pastrana
  */
-@WebServlet(name = "sLogIn", urlPatterns = {"/sLogIn"})
-public class sLogIn extends HttpServlet {
+@WebServlet(name = "sAltaDeMedico", urlPatterns = {"/sAltaDeMedico"})
+public class sAltaDeMedico extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,38 +35,46 @@ public class sLogIn extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            clases.cConexion objconexion = new clases.cConexion();
-            objconexion.conectar();
             HttpSession sesion = request.getSession();
+            /* TODO output your page here. You may use following sample code. */
+            String nombre = request.getParameter("txt-name");
             String idUser = request.getParameter("txt-mail");
             String pass = request.getParameter("txt-pass");
-            String tipo = "";
-            // identificar al usuario
+            String edad = request.getParameter("edad");
+            String sexo = request.getParameter("sexo");
+            String estado = request.getParameter("estado");
+            String municipio = request.getParameter("municipio");
+            String colonia = request.getParameter("colonia");
+            String cedula = request.getParameter("plicense");
+            String escuela = request.getParameter("school");
+            String carrera = request.getParameter("carrier");
+            // Conectamos la base y damos de alta al usuario 
             try{
-            String verificacion = objconexion.busquedadeusuarios(idUser, pass);           
-            // Logica para permitir o no el acceso
-            if (verificacion.equals("si")){ 
-                sesion.setAttribute("idUsr",idUser);
-                //logica para mandar al usuario a donde deba
-                tipo = objconexion.tipodeusuario(idUser);
-                if(tipo.equals("medico")){
-                response.sendRedirect("jsp/nutriologo/inicio.jsp");
-                }else{
-                response.sendRedirect("jsp/paciente/inicio.jsp");
-                out.print("<script>alert('Bienveido');</script>");
-                }
-                }
-            if (verificacion.equals("no")){ 
-                response.sendRedirect("index.jsp");
-                 out.print("<script>alert('Usuario inexistente');</script>");
-                }
-            if (verificacion.equals("nop")){ 
-                response.sendRedirect("index.jsp");
-                 out.print("<script>alert('Contraseña incorrecta');</script>");
-                }
-            }
-             catch(SQLException ex){
+             clases.cConexion objconexion = new clases.cConexion();
+             objconexion.conectar();
+             String verificacion = objconexion.altausuario(idUser, pass, nombre);
+              if (verificacion.equals("valido")){ 
+                  objconexion.altamedico(idUser,cedula,escuela,estado,municipio,colonia,sexo,edad, carrera);
+                  // cargar datos a la sesion
+                 sesion.setAttribute("idUsr",idUser);
+                 sesion.setAttribute("nombre",nombre);
+                 sesion.setAttribute("pass",pass);
+                 sesion.setAttribute("cedula", cedula );
+                 sesion.setAttribute("escuela", escuela);
+                 sesion.setAttribute("carrera", carrera);
+                 sesion.setAttribute("edad", edad);
+                 sesion.setAttribute("sexo", sexo);
+                 sesion.setAttribute("estado", estado);
+                 sesion.setAttribute("municipio", municipio);
+                 sesion.setAttribute("colonia", colonia);
+                 // Mandar al usuario a su perfil
+                 response.sendRedirect("jsp/nutriologo/usuario.jsp");
+                 out.print("<script>alert('Alta realizada');</script>");
+              }else{
+             out.print("<script>alert('Actuelmente ya existe una cuenta registrada con ese correo');</script>");    
+             response.sendRedirect("index.jsp");
+             }
+             }catch(SQLException ex){
              out.print(ex.toString());
              }
         }
