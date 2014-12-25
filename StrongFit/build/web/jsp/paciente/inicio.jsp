@@ -7,30 +7,6 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-        <!--El script lo puse aqui porque no me cargaba desde un archivo externo, no se porque, luego lo checo-->
-        <script>
-            $(document).ready(function() {
-                /*autocomplete es una funcion de jquery ui para hacer las cosas mas faciles*/
-                $("#search").autocomplete({     
-                    source : function(request, response) {
-                        /*Esto es para la barra de busqueda*/
-                        $.ajax({
-                            url : "http://localhost:8080/StrongFit/sBusqueda",
-                            type : "post",
-                            dataType : "json",
-                            data : {
-                                info : request.term
-                            },             
-                            success : function(respuesta) {
-                                    console.log("********Regreso algo******");
-                                    console.log(respuesta);
-                                    response(respuesta);
-                            }
-                        });
-                    }
-                });
-            });
-        </script>
     </head>
     <body>
         <%@include file = "barra_menu.jsp" %>
@@ -103,7 +79,32 @@
                 Aqui van los articulos que los medicos escriben para hacerse mas populares y asi tener mas clientes
             </article>
         </section>  
-        
-        
+        <script>
+            $(function(){
+               $('#search').autocomplete({
+                   source: function(request, response){
+                       $.ajax({
+                           url: 'http://localhost:8080/StrongFit/sBusqueda',
+                           type: 'post',
+                           dataType: 'json',
+                           data: {
+                               info : request.term
+                           },
+                           success: function(respuesta){
+                               console.log(respuesta);
+                               response(respuesta);
+                           }
+                       });
+                   },
+                   select: function(event, res){
+                       event.preventDefault();
+                       console.log("hola");
+                       $clon = $('.racion').first().clone();
+                       $clon.html(res.item.label + '<span class="calorias"><br>Calorias: ' + res.item.calorias +'kc</span>');
+                       $('.content-contador').prepend($clon);
+                   }
+               }) 
+            });
+        </script>
     </body>
 </html>
