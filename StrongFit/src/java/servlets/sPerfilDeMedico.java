@@ -44,7 +44,7 @@ public class sPerfilDeMedico extends HttpServlet {
             String idUsr = request.getParameter("txt-email");
             String pass = request.getParameter("txt-pass");
             String edad = request.getParameter("edad");
-            String sexo = request.getParameter("sexo");
+            int sexo = Integer.parseInt(request.getParameter("sexo"));
             String estado = request.getParameter("estado");
             String municipio = request.getParameter("municipio");
             String colonia = request.getParameter("colonia");

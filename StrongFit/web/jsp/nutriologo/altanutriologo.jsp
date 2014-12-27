@@ -36,7 +36,7 @@
                     <p class = "personal-p">Colonia</p>
                     <input type = "text" name = "colonia" required class = "Section-usr" placeholder = "">
                     <hr>
-                     <h2>Informacion Profecional</h2>
+                     <h2>Informacion Profesional</h2>
                     <p class = "personal-p">Cédula profesional</p>
                     <input type = "text" name = "plicense" required class = "Section-usr">
                     <p class = "personal-p">Escuela de procedencia</p>

@@ -37,24 +37,10 @@ body
     display: inline-block;
     float: left;
     margin: 1em 0 0 0;
+    padding-left: 1em;
     color: white;
     text-align: center;
     display: block;
-}
-
-.m1
-{
-    padding-left: 1em;
-}
-
-.m2
-{
-    padding-left: 4.5em;
-}
-
-.m3
-{
-    padding-left: 3em;
 }
 
 .Article-tbl-usr h2
@@ -144,3 +130,77 @@ body
    outline: none;
    box-shadow: 0px 0px 10px #0C98A2;
 }
+
+.div-informacion
+{
+    width: 15em;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.div-informacion h2
+{
+    color: #198627
+}
+
+.div-nutrimental
+{
+    display: inline-block;
+    width: 6.5em;
+}
+
+.select-sexo
+{
+    padding: 0.59em 2.9em;
+}
+
+.estatura
+{
+    margin: 0 1em;
+}
+
+.sexo
+{
+    width: 13.2em;
+}
+
+.edad
+{
+    margin-right: 2em;
+}
+
+.actividad
+{
+    width: 11em; 
+}
+
+.select-actividad
+{
+    padding: .59em 0;
+}
+
+.horas
+{
+    width: 6em;
+}
+
+.input-horas
+{
+    width: 7.5em;
+    margin-left: 3.2em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

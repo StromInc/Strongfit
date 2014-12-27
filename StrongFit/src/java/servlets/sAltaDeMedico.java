@@ -41,7 +41,7 @@ public class sAltaDeMedico extends HttpServlet {
             String idUser = request.getParameter("txt-mail");
             String pass = request.getParameter("txt-pass");
             String edad = request.getParameter("edad");
-            String sexo = request.getParameter("sexo");
+            int sexo = Integer.parseInt(request.getParameter("idSexo"));
             String estado = request.getParameter("estado");
             String municipio = request.getParameter("municipio");
             String colonia = request.getParameter("colonia");

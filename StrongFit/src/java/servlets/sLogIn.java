@@ -7,8 +7,9 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,24 +41,76 @@ public class sLogIn extends HttpServlet {
             clases.cConexion objconexion = new clases.cConexion();
             objconexion.conectar();
             HttpSession sesion = request.getSession();
+            sesion.setMaxInactiveInterval(-1);
             String idUser = request.getParameter("txt-mail");
             String pass = request.getParameter("txt-pass");
             String tipo = "";
+            ResultSet resultado;
             // identificar al usuario
             try{
             String verificacion = objconexion.busquedadeusuarios(idUser, pass);           
             // Logica para permitir o no el acceso
             if (verificacion.equals("si")){ 
                 sesion.setAttribute("idUsr",idUser);
+                 sesion.setAttribute("pass",pass);
                 //logica para mandar al usuario a donde deba
                 tipo = objconexion.tipodeusuario(idUser);
                 if(tipo.equals("medico")){
+                resultado = objconexion.cargadedatos(idUser, tipo);
+                if(resultado.next()){
+                int cedula = resultado.getInt("cedulaProf");
+                int edad = resultado.getInt("edad");
+                String cedula1 = Integer.toString(cedula);
+                String edad1 = Integer.toString(edad);
+                int sexo = resultado.getInt("idSexo");
+                String nombre = resultado.getString("nombre");
+                String carrera = resultado.getString("carrera");
+                String escuela = resultado.getString("escuela");
+                String estado = resultado.getString("estado");
+                String municipio = resultado.getString("municipio");
+                String colonia = resultado.getString("colonia");
+                 sesion.setAttribute("nombre",nombre);
+                 sesion.setAttribute("cedula", cedula1 );
+                 sesion.setAttribute("escuela", escuela);
+                 sesion.setAttribute("carrera", carrera);
+                 sesion.setAttribute("edad", edad1);
+                 sesion.setAttribute("sexo", sexo);
+                 sesion.setAttribute("estado", estado);
+                 sesion.setAttribute("municipio", municipio);
+                 sesion.setAttribute("colonia", colonia);
                 response.sendRedirect("jsp/nutriologo/inicio.jsp");
+                }
                 }else{
+                tipo = "paciente";
+                resultado = objconexion.cargadedatos(idUser, tipo);
+                if(resultado.next()){
+                int peso = resultado.getInt("peso");
+                int edad = resultado.getInt("edad");
+                int sexo = resultado.getInt("idSexo");
+                String nombre = resultado.getString("nombre");
+                int estatura = resultado.getInt("estatura");
+                int cintura = resultado.getInt("medidaCintura");
+                String estado = resultado.getString("estado");
+                String municipio = resultado.getString("municipio");
+                String colonia = resultado.getString("colonia");
+                String edad1 = Integer.toString(edad);
+                String peso1 = Integer.toString(peso);
+                String estatura1 = Integer.toString(estatura);
+                String cintura1 = Integer.toString(cintura);
+                sesion.setAttribute("nombre",nombre);                 
+                 sesion.setAttribute("peso", peso1 );
+                 sesion.setAttribute("estatura", estatura1);
+                 sesion.setAttribute("cintura", cintura1);
+                 sesion.setAttribute("edad", edad1);
+                 sesion.setAttribute("sexo", sexo);
+                 sesion.setAttribute("estado", estado);
+                 sesion.setAttribute("municipio", municipio);
+                 sesion.setAttribute("colonia", colonia);
                 response.sendRedirect("jsp/paciente/inicio.jsp");
                 out.print("<script>alert('Bienveido');</script>");
                 }
                 }
+            }
             if (verificacion.equals("no")){ 
                 response.sendRedirect("index.jsp");
                  out.print("<script>alert('Usuario inexistente');</script>");

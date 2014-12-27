@@ -41,7 +41,7 @@ public class cSugerirDietas
     {
         int estado = 0;
         /*
-            = 1 = normal
+            = 1 = saludable
             = 2 = sobrepeso
             = 3 = obesidad
             = 4 = bajo de peso

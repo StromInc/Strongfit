@@ -47,7 +47,7 @@ public class sPerfilDeUsuario extends HttpServlet {
             String estatura = request.getParameter("estatura");
             String cintura = request.getParameter("cintura");
             String edad = request.getParameter("edad");
-            String sexo = request.getParameter("sexo");
+            int sexo = Integer.parseInt(request.getParameter("sexo"));
             String estado = request.getParameter("estado");
             String municipio = request.getParameter("municipio");
             String colonia = request.getParameter("colonia");
