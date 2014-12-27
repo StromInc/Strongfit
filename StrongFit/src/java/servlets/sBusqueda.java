@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import clases.cAlimento;
 import clases.cConexion;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -43,8 +44,7 @@ public class sBusqueda extends HttpServlet {
             cConexion con = new cConexion();
             con.conectar();
             String valor = request.getParameter("info");
-            String nom = request.getParameter("info2");
-            ArrayList<String> lista=con.buscar(valor);
+            ArrayList<cAlimento> lista=con.buscar(valor);
             buscar(response, lista);
         }
     }
@@ -96,7 +96,7 @@ public class sBusqueda extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     //Esto convierte el array en un Json y lo regresa
-    private void buscar(HttpServletResponse response, ArrayList<String> lista) throws IOException 
+    private void buscar(HttpServletResponse response, ArrayList<cAlimento> lista) throws IOException 
     {
         response.setContentType("aplication/json");
         response.setCharacterEncoding("charset=UTF-8");

@@ -210,30 +210,20 @@ public class cConexion {
     }
     
     //Esto busca los alimentos 
-    public ArrayList<String> buscar(String info) throws SQLException{
-        ArrayList<String> lista =new ArrayList();
+    public ArrayList<cAlimento> buscar(String info) throws SQLException{
+        ArrayList<cAlimento> lista = new ArrayList();
         this.st = con.createStatement();
         String info2 = info +"%";
         System.out.print(info2);
         ResultSet rs= this.st.executeQuery("select * from alimento where nombre like '"+info2+"';");
         while(rs.next()){
             System.out.print("***************Entro al while************************");
-            String data = rs.getString("nombre");
-            String otro = rs.getString("calorias");
-            String todo= data + ": " + " " + otro + " calorias";
-            lista.add(todo);
-            /*
-                Aqui creo que necesito hacer un objeto para despues hacerlo una objeto Json
-                pero aun no se como xD
-                deberia quedar algo asi
-                var alimento ={
-                    id:
-                    nombre:
-                    calorias:
-                }
-            */
+            int id = Integer.parseInt(rs.getString("idAlimento"));
+            String nombre = rs.getString("nombre");
+            float calorias = Float.parseFloat(rs.getString("calorias"));
+            lista.add(new cAlimento(id, nombre, calorias));
         }
-        System.out.print(lista.size());
+        System.out.print("Tamaño " + lista.size());
         return lista;
     }
 }
