@@ -40,10 +40,10 @@ public class sBusqueda extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             cConexion con = new cConexion();
             con.conectar();
             String valor = request.getParameter("info");
+            //Array de objetos
             ArrayList<cAlimento> lista=con.buscar(valor);
             buscar(response, lista);
         }
@@ -95,7 +95,7 @@ public class sBusqueda extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    //Esto convierte el array en un Json y lo regresa
+    //Esto convierte el array en un Json y lo regresa al html
     private void buscar(HttpServletResponse response, ArrayList<cAlimento> lista) throws IOException 
     {
         response.setContentType("aplication/json");

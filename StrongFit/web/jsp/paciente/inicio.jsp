@@ -4,7 +4,6 @@
     <head>
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio.css">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
     </head>
@@ -16,7 +15,7 @@
             <article class = "Article-menu">
                 <p class="contenedor-search">
                     <span class = "span-search"><label class = "icon-search label-search" for = "buscar"></label></span>
-                    <span class = "search"><input type="text" id="search" name="search" class="search"></span>
+                    <span class = "search"><input type="search" id="search" name="search" class="search"></span>
                 </p>
                 <div class = "div">
                     <div class = "content-title">
@@ -78,33 +77,7 @@
             <article class = "Article-articulos">
                 Aqui van los articulos que los medicos escriben para hacerse mas populares y asi tener mas clientes
             </article>
-        </section>  
-        <script>
-            $(function(){
-               $('#search').autocomplete({
-                   source: function(request, response){
-                       $.ajax({
-                           url: 'http://localhost:8080/StrongFit/sBusqueda',
-                           type: 'post',
-                           dataType: 'json',
-                           data: {
-                               info : request.term
-                           },
-                           success: function(respuesta){
-                               console.log(respuesta);
-                               response(respuesta);
-                           }
-                       });
-                   },
-                   select: function(event, res){
-                       event.preventDefault();
-                       console.log("hola");
-                       $clon = $('.racion').first().clone();
-                       $clon.html(res.item.label + '<span class="calorias"><br>Calorias: ' + res.item.calorias +'kc</span>');
-                       $('.content-contador').prepend($clon);
-                   }
-               }) 
-            });
-        </script>
+        </section>
+        <script src="../../js/buscar-alimento.js"></script>
     </body>
 </html>
