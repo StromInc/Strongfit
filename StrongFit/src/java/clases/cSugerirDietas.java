@@ -9,10 +9,11 @@ public class cSugerirDietas
     private final int estatura;
     private final int sexo;
     private final int actividad;
-    private int imc;
+    private final int horas;
+    private float imc;
     cConexion conecta = new cConexion();
     
-    public cSugerirDietas(String idUsr, int edad, int peso, int cintura, int estatura, int sexo, int actividad)
+    public cSugerirDietas(String idUsr, int edad, int peso, int cintura, int estatura, int sexo, int actividad, int horas)
     {
         this.idUsr = idUsr;
         this.edad = edad;//en años
@@ -20,6 +21,7 @@ public class cSugerirDietas
         this.cintura = cintura;
         this.estatura = estatura;//en centimetros
         this.sexo = sexo;
+        this.horas = horas;
         this.actividad = actividad;
         /*
             actividad = 1 = nada de ejercicio
@@ -31,13 +33,14 @@ public class cSugerirDietas
     }
     
     //calcula el indice de masa corporal
-    public void calcularIMC()
+    public float calcularIMC()
     {
-        this.imc = this.peso / ((this.estatura / 100) * (this.estatura / 100));
+        this.imc = (float) (this.peso / Math.pow(estatura / 100f, 2));
+        return imc;
     }
     
     //calcula el estado de salud del paciente
-    public int estadoSalud()
+    public int estadoSalud(float imc)
     {
         int estado = 0;
         /*
@@ -46,35 +49,37 @@ public class cSugerirDietas
             = 3 = obesidad
             = 4 = bajo de peso
         */
+        
+        //aplicando los criterios de Garrow para el diagnostico de obesidad
         if(this.sexo == 1)
         {
-            if(this.imc < 27)
+            if(imc < 27)
             {
                 estado = 1;
             }
             else
-                if(this.imc >= 27 && this.imc < 30)
+                if(imc >= 27 && imc < 30)
                 {
                     estado = 2;
                 }
                 else
-                    if(this.imc >= 30)
+                    if(imc >= 30)
                     {
                         estado = 3;
                     }
         }
         else
-            if(this.imc < 25)
+            if(imc < 25)
             {
                 estado = 1;
             }
             else
-                if(this.imc >= 25 && this.imc < 30)
+                if(imc >= 25 && imc < 30)
                 {
                     estado = 2;
                 }
                 else
-                    if(this.imc >= 30)
+                    if(imc >= 30)
                     {
                         estado = 3;
                     }

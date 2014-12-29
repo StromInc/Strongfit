@@ -95,24 +95,24 @@ public class cConexion {
     //Esto recupera los valores en el login
     
     //cambia los datos del usuario si tiene el mismo correo(id)
-    public void cambioUsuario(String idUser, String nombre, String pass , String peso, String estatura, String cintura, String edad, int sexo, String estado, String municipio, String colonia) throws SQLException
+    public void cambioUsuario(String idUser, String nombre, String pass , String peso, String estatura, String cintura, String edad, int sexo, int idActividad, int horas, int idSalud, int cal, String estado, String municipio, String colonia) throws SQLException
     {
      this.st = con.createStatement();
      int peso1 = Integer.parseInt(peso);
      int estatura1 = Integer.parseInt(estatura);
      int cintura1 = Integer.parseInt(cintura);
      int edad1 = Integer.parseInt(edad);
-     this.st.executeQuery("call sp_CambioUsuarioPaciente('"+idUser+"','"+pass+"','"+nombre+"', "+peso1+" , "+estatura1+" , "+cintura1+" , "+edad1+" ,"+sexo+",'"+estado+"','"+municipio+"' ,'"+colonia+"');");
+     this.st.executeQuery("call sp_CambioUsuarioPaciente('"+idUser+"','"+pass+"','"+nombre+"', "+peso1+" , "+estatura1+" , "+cintura1+" , "+edad1+" ,"+sexo+", "+idActividad+", "+horas+", "+idSalud+", "+cal+" ,'"+estado+"','"+municipio+"' ,'"+colonia+"');");
     }
     // Esto cambia los datos de l usuario si este camia su correo
-    public void cambioUsuarioConCorreo(String idUser, String nombre, String pass , String peso, String estatura, String cintura, String edad, int sexo, String estado, String municipio, String colonia, String correo) throws SQLException
+    public void cambioUsuarioConCorreo(String idUser, String nombre, String pass , String peso, String estatura, String cintura, String edad, int sexo, String estado, String municipio, String colonia, String correo, int cal, int idActividad, int horas, int idSalud) throws SQLException
     {
      this.st = con.createStatement();
      int peso1 = Integer.parseInt(peso);
      int estatura1 = Integer.parseInt(estatura);
      int cintura1 = Integer.parseInt(cintura);
      int edad1 = Integer.parseInt(edad);
-     this.st.executeQuery("call sp_CambioUsuarioPacienteConCorreo('"+idUser+"','"+pass+"','"+nombre+"', "+peso1+" , "+estatura1+" , "+cintura1+" , "+edad1+" ,"+sexo+",'"+estado+"','"+municipio+"' ,'"+colonia+"','"+correo+"');");
+     this.st.executeQuery("call sp_CambioUsuarioPacienteConCorreo('"+idUser+"','"+pass+"','"+nombre+"', "+peso1+" , "+estatura1+" , "+cintura1+" , "+edad1+" ,"+sexo+",'"+estado+"','"+municipio+"' ,'"+colonia+"','"+correo+"', "+cal+", "+idActividad+", "+horas+", "+idSalud+");");
     }
     //Esto identifica al usuario como paciente o como nutriologo
     public String determinarusuario(String idUser)throws SQLException{
@@ -199,7 +199,7 @@ public class cConexion {
     public ResultSet spGetInfoNutricional(String idUsr) throws SQLException
     {
         this.st = con.createStatement();
-        return this.st.executeQuery("call spGetInfoNutricional("+idUsr+");");
+        return this.st.executeQuery("call spGetInfoNutricional('"+idUsr+"');");
     }
     
     //Hace una consulta al catalogo estado de salud

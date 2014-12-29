@@ -8,6 +8,8 @@
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
     </head>
+    
+    <body>
     <!-- obtenemos los datos del usuario -->
     <%
     HttpSession sesion = request.getSession();
@@ -41,30 +43,31 @@
         }
          if(sexo == 0){
             v1 = "selected";
-            
-        ResultSet info = conecta.spGetInfoNutricional(idUsr);
-        if(info.next())
-        {
-            calorias = info.getInt("calorias");
-            horas = info.getInt("horas");
-            idActividad = info.getInt("idActividad");
-            idSalud = info.getInt("idSalud");
-        }
-        
-        if(idSalud != 0)
-        {
-            ResultSet es = conecta.spGetInfoEstado(idSalud);
-            if(es.next())
-            {
-                estadoS = es.getString("tipoEstado");
-            }
-        }
-        else
-            estadoS = "Aún sin calcular";
     }
+    conecta.conectar();
+
+   ResultSet info = conecta.spGetInfoNutricional(idUsr);
+   if(info.next())
+   {
+       calorias = info.getInt("calorias");%><script>alert(<%=calorias%>);</script><%
+       horas = info.getInt("horas");%><script>alert(<%=horas%>);</script><%
+       idActividad = info.getInt("idActividad");%><script>alert(<%=idActividad%>);</script><%
+       idSalud = info.getInt("idSalud");%><script>alert(<%=idSalud%>);</script><%
+   }
+
+   if(idSalud != 0)
+   {
+       ResultSet es = conecta.spGetInfoEstado(idSalud);
+       if(es.next())
+       {
+           estadoS = es.getString("tipoEstado");
+       }
+   }
+   else
+       estadoS = "Aún sin calcular";
 //    cSugerirDietas sugerirD = new cSugerirDietas(idUsr, edad, peso, cintura, estatura, sexo, actividad);
     %>
-    <body>
+    
         <%@include file="barra_menu.jsp"%>       
         <section class = "Section-tbl-usr">
             <div class="div-informacion">
@@ -134,7 +137,7 @@
                     </div>
                     <div class="div-nutrimental actividad">
                         <p class = "medidas-p">Actividad Física</p>
-                        <select required class = "select-actividad">
+                        <select required name ="actividad" class = "select-actividad">
                             <option value="">Selcciona actividad</option>
                             <%
                             conecta.conectar();
@@ -155,14 +158,9 @@
                     <div class = "div-nutrimental input-horas">
                         <p class="medidas-p">Horas</p>
                         <%
-                            if(horas == 0)
-                            {
-                                %><input type="text" placeholder = "hrs/semana" class="Section-m horas" required><%
-                            }
-                            else
-                            {
-                                %><input type="text" placeholder = "hrs/semana" value="<%=horas%>" class="Section-m horas" required><%
-                            }
+                            
+                                %><input type="text" placeholder = "hrs/semana" name ="horas" value="<%=horas%>" class="Section-m horas" required><%
+                            
                         %>
                         
                     </div>
