@@ -62,35 +62,35 @@ public class cConexion {
         ResultSet resultado = this.st.executeQuery("call sp_AltaUsuario('"+idUser+"','"+pass+"' ,'"+nombre+"');");
         String validacion = "";
         if(resultado.next()){
-        validacion = resultado.getString("nombre");
+            validacion = resultado.getString("nombre");
         }     
         return validacion;
     }
     //Esto da de alta a el paciente y la direccion
     public void altapaciente(String idUser)throws SQLException
     {
-    this.st = con.createStatement();
-    this.st.executeQuery("call sp_AltaPaciente('"+idUser+"');");   
+        this.st = con.createStatement();
+        this.st.executeQuery("call sp_AltaPaciente('"+idUser+"');");
     }        
     //Esto sirve para buscar y validar usuarios
     public String busquedadeusuarios(String idUser, String pass) throws SQLException{
-       this.st = con.createStatement();
-       ResultSet resultado = this.st.executeQuery("call sp_Login('"+idUser+"','"+pass+"');");
-       String existente = "";
-       if(resultado.next()){
-       existente = resultado.getString("valido");
-       }
-       return existente;
+        this.st = con.createStatement();
+        ResultSet resultado = this.st.executeQuery("call sp_Login('"+idUser+"','"+pass+"');");
+        String existente = "";
+        if(resultado.next()){
+            existente = resultado.getString("valido");
+        }
+        return existente;
     }
     //Esto verifica la posible existencia de un nuevo correo
     public String cambiarcorreo(String idUser) throws SQLException{
-    this.st = con.createStatement();
-    ResultSet resultado = this.st.executeQuery("select * from usuario where usuario.idUsuario = '"+idUser+"';");
-    String existente = "libre";
-       if(resultado.isLast()){
-       existente = "existente";
-       }
-       return existente;
+        this.st = con.createStatement();
+        ResultSet resultado = this.st.executeQuery("select * from usuario where usuario.idUsuario = '"+idUser+"';");
+        String existente = "libre";
+        if(resultado.isLast()){
+             existente = "existente";
+        }
+        return existente;
     }
     //Esto recupera los valores en el login
     
@@ -116,13 +116,13 @@ public class cConexion {
     }
     //Esto identifica al usuario como paciente o como nutriologo
     public String determinarusuario(String idUser)throws SQLException{
-    String validacion = "doctor";
-    this.st = con.createStatement();
-    ResultSet resultado = this.st.executeQuery("call sp_DeterminarUsuario("+idUser+")");
-    if(resultado.isLast()){
-    validacion = "paciente";
-    }
-    return validacion;
+        String validacion = "doctor";
+        this.st = con.createStatement();
+        ResultSet resultado = this.st.executeQuery("call sp_DeterminarUsuario("+idUser+")");
+        if(resultado.isLast()){
+        validacion = "paciente";
+        }
+        return validacion;
     }
     //Esto da de alta a los medicos
     public void altamedico(String idUser, String cedula, String escuela, String estado, String municipio, String colonia, int sexo, String edad, String carrera) throws SQLException
@@ -135,36 +135,36 @@ public class cConexion {
     //cambia los datos del medico si tiene el mismo correo(id)
     public void cambioUsuariomedico(String idUser, String nombre, String pass , String cedula, String escuela, String carrera, String edad, int sexo, String estado, String municipio, String colonia) throws SQLException
     {
-     this.st = con.createStatement();
-     int cedula1 = Integer.parseInt(cedula);
-     int edad1 = Integer.parseInt(edad);
-     this.st.executeQuery("call sp_CambioUsuarioMedico('"+idUser+"','"+pass+"','"+nombre+"', "+cedula1+" , '"+escuela+"' , '"+carrera+"' , "+edad1+" ,'"+sexo+"','"+estado+"','"+municipio+"' ,'"+colonia+"');");
+        this.st = con.createStatement();
+        int cedula1 = Integer.parseInt(cedula);
+        int edad1 = Integer.parseInt(edad);
+        this.st.executeQuery("call sp_CambioUsuarioMedico('"+idUser+"','"+pass+"','"+nombre+"', "+cedula1+" , '"+escuela+"' , '"+carrera+"' , "+edad1+" ,'"+sexo+"','"+estado+"','"+municipio+"' ,'"+colonia+"');");
     }
     //Cambia los datos del medico incluyendo el correo
     public void cambioUsuariomedicoConCorreo(String idUser, String nombre, String pass , String cedula, String escuela, String carrera, String edad, int sexo, String estado, String municipio, String colonia, String correo) throws SQLException
     {
-     this.st = con.createStatement();
-     int cedula1 = Integer.parseInt(cedula);
-     int edad1 = Integer.parseInt(edad);
-     this.st.executeQuery("call sp_CambioUsuarioMedicoConCorreo('"+idUser+"','"+pass+"','"+nombre+"', "+cedula1+" , '"+escuela+"' , '"+carrera+"' , "+edad1+" ,'"+sexo+"','"+estado+"','"+municipio+"' ,'"+colonia+"','"+correo+"');");
+        this.st = con.createStatement();
+        int cedula1 = Integer.parseInt(cedula);
+        int edad1 = Integer.parseInt(edad);
+        this.st.executeQuery("call sp_CambioUsuarioMedicoConCorreo('"+idUser+"','"+pass+"','"+nombre+"', "+cedula1+" , '"+escuela+"' , '"+carrera+"' , "+edad1+" ,'"+sexo+"','"+estado+"','"+municipio+"' ,'"+colonia+"','"+correo+"');");
     }
     //Esto identifica al usuario como medico o paciente
     public String tipodeusuario(String idUsr)throws SQLException{
-    ResultSet resultado;
-    String valor = "";
-    this.st = con.createStatement();
-    resultado = this.st.executeQuery("call sp_TipoDeUsuario('"+idUsr+"');");
-    if(resultado.next()){
-    valor = resultado.getString("tipo");
-    }
-    return valor;
+        ResultSet resultado;
+        String valor = "";
+        this.st = con.createStatement();
+        resultado = this.st.executeQuery("call sp_TipoDeUsuario('"+idUsr+"');");
+        if(resultado.next()){
+            valor = resultado.getString("tipo");
+        }
+        return valor;
     }
     // Esto carga los datos del paciente
     public ResultSet cargadedatos(String idUsr,String tipo)throws SQLException
     {
-    this.st = con.createStatement();
-    ResultSet resultado = this.st.executeQuery("call sp_cargadedatosespecificos('"+idUsr+"', '"+tipo+"');");
-    return resultado;
+        this.st = con.createStatement();
+        ResultSet resultado = this.st.executeQuery("call sp_cargadedatosespecificos('"+idUsr+"', '"+tipo+"');");
+        return resultado;
     }
     
     //Esto actualizara la dieta en la parte de dietas paciente
@@ -209,18 +209,21 @@ public class cConexion {
         return this.st.executeQuery("call spGetInfoEstado("+estado+");");
     }
     
-    //Esto busca los alimentos 
+    //Esto busca los alimentos y los agrega a un Array 
     public ArrayList<cAlimento> buscar(String info) throws SQLException{
+        int id;
+        float calorias;
+        String nombre;
         ArrayList<cAlimento> lista = new ArrayList();
         this.st = con.createStatement();
         String info2 = info +"%";
-        System.out.print(info2);
-        ResultSet rs= this.st.executeQuery("select * from alimento where nombre like '"+info2+"';");
+        ResultSet rs = this.st.executeQuery("select * from alimento where nombre like '"+info2+"';");
+        
         while(rs.next()){
             System.out.print("***************Entro al while************************");
-            int id = Integer.parseInt(rs.getString("idAlimento"));
-            String nombre = rs.getString("nombre");
-            float calorias = Float.parseFloat(rs.getString("calorias"));
+            id = Integer.parseInt(rs.getString("idAlimento"));
+            nombre = rs.getString("nombre");
+            calorias = Float.parseFloat(rs.getString("calorias"));
             lista.add(new cAlimento(id, nombre, calorias));
         }
         System.out.print("Tamaño " + lista.size());
