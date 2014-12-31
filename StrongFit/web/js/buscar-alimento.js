@@ -1,12 +1,16 @@
 $(function(){
     //obtenemos los elementos a modificar
+    var $elemento = $('#noCaloria'); 
+    var numCalorias = parseFloat($elemento.html());
     var $contenido = $('.content-contador'),
         $item = $('.racion').first();
         function agregar(e, res){
             //obtenemos lo que queremos del JSON
-            var nombre = res.item.label,
-                calorias = res.item.calorias;
             e.preventDefault();
+            var nombre = res.item.label,
+                calorias = res.item.calorias,
+                idAlimento = res.item.id;
+            numCalorias += calorias;
             //hacemos un cron
             var $clon = $item.clone();
             //cambiamos los datos del cron
@@ -15,6 +19,19 @@ $(function(){
             //insertamos cron
             $contenido.prepend($clon);
             $clon.slideDown();
+            $elemento.html(numCalorias);
+            $.post('http://localhost:8080/StrongFit/sAgregarAlimento', 
+                {dataType: 'json', valor: idAlimento});
+            /*
+             * Esto es lo de arriba
+            $.ajax({
+               url: 'http://localhost:8080/StrongFit/sAgregarAlimento',
+               type: 'post',
+               dataType: 'json',
+               data: {
+                   valor: idAlimento
+               }
+            });*/
         }
     //utilizamos autocomplete (Funcion de jquery-ui)
     $('#search').autocomplete({

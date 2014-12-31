@@ -30,7 +30,7 @@
                         <p class = "racion">Huevos con jamón<span class = "calorias"><br>Calorias: 100kc</span></p>
                     </div>
                     <div class = "content-total">
-                        Kilocalorías consumidas: <span>0kc</span>
+                        Kilocalorías consumidas: <span id="noCaloria">0</span>kc
                     </div>
                 </div>
             </article>

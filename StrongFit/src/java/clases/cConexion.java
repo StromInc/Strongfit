@@ -194,9 +194,9 @@ public class cConexion {
         String nombre;
         ArrayList<cAlimento> lista = new ArrayList();
         this.st = con.createStatement();
-        String info2 = info +"%";
-        ResultSet rs = this.st.executeQuery("select * from alimento where nombre like '"+info2+"';");
-        
+        System.out.print(info);
+        ResultSet rs = this.st.executeQuery("call spBuscarAlimento('"+info+"');");
+        System.out.print(info + "2");
         while(rs.next()){
             System.out.print("***************Entro al while************************");
             id = Integer.parseInt(rs.getString("idAlimento"));
@@ -206,6 +206,11 @@ public class cConexion {
         }
         System.out.print("Tamaño " + lista.size());
         return lista;
+    }
+
+    public void agregarAlimento(String id) throws SQLException {
+        this.st = con.createStatement();
+        this.st.executeQuery("Select * from alimento");
     }
 }
 
