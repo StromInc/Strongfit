@@ -10,6 +10,7 @@ $(function(){
             var nombre = res.item.label,
                 calorias = res.item.calorias,
                 idAlimento = res.item.id;
+        
             numCalorias += calorias;
             //hacemos un cron
             var $clon = $item.clone();

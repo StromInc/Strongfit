@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,9 +41,13 @@ public class sAgregarAlimento extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             cConexion con = new cConexion();
             con.conectar();
+            HttpSession sesion = request.getSession();
+            //id del conteo calorico
+            String idCont = (String) sesion.getAttribute("idcont");
+            System.out.print(idCont);
             String id = request.getParameter("valor");
-            System.out.print("Tipico ID " + id);
-            con.agregarAlimento(id);
+            System.out.print("ID Alimento" + id + " id usuario " +idCont);
+            con.agregarAlimento(id, idCont);
         }
     }
 

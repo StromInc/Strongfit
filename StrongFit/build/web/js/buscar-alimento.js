@@ -1,19 +1,19 @@
 $(function(){
     //obtenemos los elementos a modificar
-    var $elemento = $('#noCaloria'), 
-    	numCalorias = parseFloat($elemento.html()),
-    	$contenido = $('.content-contador'),
+    var $elemento = $('#noCaloria'); 
+    var numCalorias = parseFloat($elemento.html());
+    var $contenido = $('.content-contador'),
         $item = $('.racion').first();
-
         function agregar(e, res){
             //obtenemos lo que queremos del JSON
             e.preventDefault();
             var nombre = res.item.label,
                 calorias = res.item.calorias,
                 idAlimento = res.item.id;
+        
+            numCalorias += calorias;
             //hacemos un cron
             var $clon = $item.clone();
-            numCalorias += calorias;
             //cambiamos los datos del cron
             $clon.html(nombre + '<span class="calorias"><br>Calorias: ' + calorias +'kc</span>');
             $clon.hide();
@@ -21,7 +21,6 @@ $(function(){
             $contenido.prepend($clon);
             $clon.slideDown();
             $elemento.html(numCalorias);
-            
             $.post('http://localhost:8080/StrongFit/sAgregarAlimento', 
                 {dataType: 'json', valor: idAlimento});
             /*

@@ -8,8 +8,7 @@
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
     </head>
     <body>
-        <%@include file = "barra_menu.jsp" %>
-        
+        <%@include file = "barra_menu.jsp" %>   
         <section class="Section-todo">
             <!--Esta es la seccion de la barra de busqueda, el sabias que y el conteo calorico-->
             <article class = "Article-menu">

@@ -47,81 +47,84 @@ public class sLogIn extends HttpServlet {
             ResultSet resultado;
             // identificar al usuario
             try{
-            String verificacion = objconexion.busquedadeusuarios(idUser, pass);           
+                String verificacion = objconexion.busquedadeusuarios(idUser, pass);           
             // Logica para permitir o no el acceso
-            if (verificacion.equals("si")){ 
+            if (verificacion.equals("si")){
                 sesion.setAttribute("idUsr",idUser);
-                 sesion.setAttribute("pass",pass);
+                sesion.setAttribute("pass",pass);
                 //logica para mandar al usuario a donde deba
                 tipo = objconexion.tipodeusuario(idUser);
                 if(tipo.equals("medico")){
-                resultado = objconexion.cargadedatos(idUser, tipo);
+                    resultado = objconexion.cargadedatos(idUser, tipo);
                 if(resultado.next()){
-                int cedula = resultado.getInt("cedulaProf");
-                int edad = resultado.getInt("edad");
-                String cedula1 = Integer.toString(cedula);
-                String edad1 = Integer.toString(edad);
-                String sexo = resultado.getString("sexo");
-                String nombre = resultado.getString("nombre");
-                String carrera = resultado.getString("carrera");
-                String escuela = resultado.getString("escuela");
-                String estado = resultado.getString("estado");
-                String municipio = resultado.getString("municipio");
-                String colonia = resultado.getString("colonia");
-                 sesion.setAttribute("nombre",nombre);
-                 sesion.setAttribute("cedula", cedula1 );
-                 sesion.setAttribute("escuela", escuela);
-                 sesion.setAttribute("carrera", carrera);
-                 sesion.setAttribute("edad", edad1);
-                 sesion.setAttribute("sexo", sexo);
-                 sesion.setAttribute("estado", estado);
-                 sesion.setAttribute("municipio", municipio);
-                 sesion.setAttribute("colonia", colonia);
-                response.sendRedirect("jsp/nutriologo/inicio.jsp");
-                }
+                    int cedula = resultado.getInt("cedulaProf");
+                    int edad = resultado.getInt("edad");
+                    String cedula1 = Integer.toString(cedula);
+                    String edad1 = Integer.toString(edad);
+                    String sexo = resultado.getString("idSexo"); //En la base dice idSexo no sexo 
+                    String nombre = resultado.getString("nombre");
+                    String carrera = resultado.getString("carrera");
+                    String escuela = resultado.getString("escuela");
+                    String estado = resultado.getString("estado");
+                    String municipio = resultado.getString("municipio");
+                    String colonia = resultado.getString("colonia");
+                    //variables de sesion
+                    sesion.setAttribute("nombre",nombre);
+                    sesion.setAttribute("cedula", cedula1 );
+                    sesion.setAttribute("escuela", escuela);
+                    sesion.setAttribute("carrera", carrera);
+                    sesion.setAttribute("edad", edad1);
+                    sesion.setAttribute("sexo", sexo);
+                    sesion.setAttribute("estado", estado);
+                    sesion.setAttribute("municipio", municipio);
+                    sesion.setAttribute("colonia", colonia);
+                    response.sendRedirect("jsp/nutriologo/inicio.jsp");
+                }//falta un else, se traba si el usuario no existe
                 }else{
-                tipo = "paciente";
-                resultado = objconexion.cargadedatos(idUser, tipo);
-                if(resultado.next()){
-                int peso = resultado.getInt("peso");
-                int edad = resultado.getInt("edad");
-                String sexo = resultado.getString("sexo");
-                String nombre = resultado.getString("nombre");
-                int estatura = resultado.getInt("estatura");
-                int cintura = resultado.getInt("medidaCintura");
-                String estado = resultado.getString("estado");
-                String municipio = resultado.getString("municipio");
-                String colonia = resultado.getString("colonia");
-                String edad1 = Integer.toString(edad);
-                String peso1 = Integer.toString(peso);
-                String estatura1 = Integer.toString(estatura);
-                String cintura1 = Integer.toString(cintura);
-                sesion.setAttribute("nombre",nombre);                 
-                 sesion.setAttribute("peso", peso1 );
-                 sesion.setAttribute("estatura", estatura1);
-                 sesion.setAttribute("cintura", cintura1);
-                 sesion.setAttribute("edad", edad1);
-                 sesion.setAttribute("sexo", sexo);
-                 sesion.setAttribute("estado", estado);
-                 sesion.setAttribute("municipio", municipio);
-                 sesion.setAttribute("colonia", colonia);
-                response.sendRedirect("jsp/paciente/inicio.jsp");
-                out.print("<script>alert('Bienveido');</script>");
-                }
+                    tipo = "paciente";
+                    resultado = objconexion.cargadedatos(idUser, tipo);
+                    if(resultado.next()){  
+                        int peso = resultado.getInt("peso");
+                        int edad = resultado.getInt("edad");
+                        String sexo = resultado.getString("idSexo"); //en la base es idSexo
+                        String idCont = resultado.getString("idCont");
+                        String nombre = resultado.getString("nombre");
+                        int estatura = resultado.getInt("estatura");
+                        int cintura = resultado.getInt("medidaCintura");
+                        String estado = resultado.getString("estado");
+                        String municipio = resultado.getString("municipio");
+                        String colonia = resultado.getString("colonia");
+                        String edad1 = Integer.toString(edad);
+                        String peso1 = Integer.toString(peso);
+                        String estatura1 = Integer.toString(estatura);
+                        String cintura1 = Integer.toString(cintura);
+                        //variables de sesion
+                        sesion.setAttribute("nombre",nombre); 
+                        sesion.setAttribute("idcont", idCont); //el id del conteo calorico
+                        sesion.setAttribute("peso", peso1 );
+                        sesion.setAttribute("estatura", estatura1);
+                        sesion.setAttribute("cintura", cintura1);
+                        sesion.setAttribute("edad", edad1);
+                        sesion.setAttribute("sexo", sexo);
+                        sesion.setAttribute("estado", estado);
+                        sesion.setAttribute("municipio", municipio);
+                        sesion.setAttribute("colonia", colonia);
+                        response.sendRedirect("jsp/paciente/inicio.jsp");
+                        out.print("<script>alert('Bienveido');</script>");
+                    }
                 }
             }
             if (verificacion.equals("no")){ 
                 response.sendRedirect("index.jsp");
-                 out.print("<script>alert('Usuario inexistente');</script>");
-                }
+                out.print("<script>alert('Usuario inexistente');</script>");
+            }
             if (verificacion.equals("nop")){ 
                 response.sendRedirect("index.jsp");
-                 out.print("<script>alert('Contraseña incorrecta');</script>");
-                }
+                out.print("<script>alert('Contraseña incorrecta');</script>");
             }
-             catch(SQLException ex){
-             out.print(ex.toString());
-             }
+            }catch(SQLException ex){
+                out.print(ex.toString());
+            }
         }
     }
 
