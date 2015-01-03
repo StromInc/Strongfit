@@ -9,7 +9,11 @@ package servlets;
 import clases.cSugerirDietas;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,12 +38,14 @@ public class sPerfilDeUsuario extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession sesion = request.getSession();
             // recuperamos los valores
+            clases.cConexion objconexion = new clases.cConexion();
+            objconexion.conectar();
             String idUser = (String)sesion.getAttribute("idUsr");
             String nombre = request.getParameter("name");
             String idUsr = request.getParameter("email");
@@ -50,10 +56,41 @@ public class sPerfilDeUsuario extends HttpServlet {
             String edad = request.getParameter("edad");
             int sexo = Integer.parseInt(request.getParameter("sexo"));
             int actividad = Integer.parseInt(request.getParameter("actividad"));
-            int horas = Integer.parseInt(request.getParameter("horas"));
+            String d[] = request.getParameterValues("dias");
+            int con = 0;
+            for(int i = 0; i < d.length; ++i)
+            {
+                con++;
+            }
+            int dias[] = new int[con];
+            for(int i = 0; i < dias.length; ++i)
+            {
+                dias[i] = Integer.parseInt(d[i]);
+            }
+            String hrs[] = request.getParameterValues("horas");
+            ArrayList<Integer> horas = new ArrayList();
+            for(int i = 0; i < hrs.length; ++i)
+            {
+                if(!hrs[i].equals(""))
+                {
+                    horas.add(Integer.parseInt(hrs[i]));
+                }
+            }
+            int horasR[] = new int[horas.size()];
+            for(int i = 0; i < horasR.length; ++i)
+            {
+                horasR[i] = horas.get(i);
+            }
             String estado = request.getParameter("estado");
             String municipio = request.getParameter("municipio");
             String colonia = request.getParameter("colonia");
+            ResultSet factor = objconexion.getActividadEspecifica(actividad);
+            int f = 0;
+            if(factor.next())
+            {
+                f = factor.getInt("factor");
+            }
+            System.out.println("ESTE ES EL F:" + f);
             String verificacion = "";
             
             //Calculamos el estado de salud del paciente y las calorias que debe de consumir para estar saludable
@@ -61,21 +98,23 @@ public class sPerfilDeUsuario extends HttpServlet {
             int peso2 = Integer.parseInt(peso);
             int cintura2 = Integer.parseInt(cintura);
             int estatura2 = Integer.parseInt(estatura);
-            cSugerirDietas sugerir = new cSugerirDietas(idUser, edad2, peso2, cintura2, estatura2, sexo, actividad, horas);
+            cSugerirDietas sugerir = new cSugerirDietas(idUser, edad2, peso2, cintura2, estatura2, sexo, actividad, dias, horasR);
             float imc = sugerir.calcularIMC();
-            System.out.println("IMC: " + imc);
-            System.out.println("Peso: " + peso2);
-            System.out.println("Estatura: " + estatura2);
             int estadoSalud = sugerir.estadoSalud(imc);
-            int kcalorias = sugerir.determinarKcalorias();
+            int kcalorias[] = sugerir.determinarKcalorias();
+            int horasS[] = sugerir.getHoras();
+            //Guardamos
+            for(int i = 0; i < kcalorias.length; ++i)
+            {
+                System.out.println(kcalorias[i]);
+                objconexion.modificarCalorias(idUser, kcalorias[i], (i+1), horasS[i], actividad);
+            }
             
            // Conectar a la base de datos
             try{
-             clases.cConexion objconexion = new clases.cConexion();
-             objconexion.conectar();
              // verificar si el nuevo correo esta disponible
              if(idUser.equals(idUsr)){
-             objconexion.cambioUsuario(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, actividad, horas, estadoSalud, kcalorias, estado, municipio, colonia);
+             objconexion.cambioUsuario(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, estadoSalud, estado, municipio, colonia);
              sesion.setAttribute("idUsr",idUser);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
@@ -91,7 +130,7 @@ public class sPerfilDeUsuario extends HttpServlet {
              }else{
              verificacion = objconexion.cambiarcorreo(idUser);
              if(verificacion.equals("libre")){
-             objconexion.cambioUsuarioConCorreo(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, estado, municipio, colonia, idUsr, kcalorias, actividad, horas, estadoSalud);
+             objconexion.cambioUsuarioConCorreo(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, estado, municipio, colonia, idUsr, estadoSalud);
              sesion.setAttribute("idUsr",idUsr);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
@@ -126,7 +165,11 @@ public class sPerfilDeUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(sPerfilDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -140,7 +183,11 @@ public class sPerfilDeUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(sPerfilDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

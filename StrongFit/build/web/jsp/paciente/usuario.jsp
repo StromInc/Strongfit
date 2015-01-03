@@ -7,6 +7,7 @@
     <head>
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
+        <script src = "../../js/acciones_usuarioPaciente.js"></script>
     </head>
     
     <body>
@@ -25,10 +26,8 @@
     String municipio = (String)sesion.getAttribute("municipio");
     String colonia = (String)sesion.getAttribute("colonia");
     
-    int calorias = 0;
-    int horas = 0;
-    int idActividad = 0;
     int idSalud = 0;
+    int calorias = 0;
     String estadoS = "";
     
     // creamos un booleano para la parte del sexo
@@ -46,15 +45,6 @@
     }
     conecta.conectar();
 
-   ResultSet info = conecta.spGetInfoNutricional(idUsr);
-   if(info.next())
-   {
-       calorias = info.getInt("calorias");%><script>alert(<%=calorias%>);</script><%
-       horas = info.getInt("horas");%><script>alert(<%=horas%>);</script><%
-       idActividad = info.getInt("idActividad");%><script>alert(<%=idActividad%>);</script><%
-       idSalud = info.getInt("idSalud");%><script>alert(<%=idSalud%>);</script><%
-   }
-
    if(idSalud != 0)
    {
        ResultSet es = conecta.spGetInfoEstado(idSalud);
@@ -66,6 +56,28 @@
    else
        estadoS = "Aún sin calcular";
 //    cSugerirDietas sugerirD = new cSugerirDietas(idUsr, edad, peso, cintura, estatura, sexo, actividad);
+    int seleccion = 0, con = 0;
+    String horas[] = new String[7];
+    String seleccionDias[] = new String[7];
+    ResultSet select = conecta.spGetCaloriasPaciente(idUsr);
+    while(select.next())
+    {
+        seleccion = select.getInt("idActividad");
+        
+        if(select.getInt("horas") != 0)
+        {
+            seleccionDias[con] = "checked";
+            horas[con] = String.valueOf(select.getInt("horas"));
+        }
+        else
+        {
+            seleccionDias[con] = "";
+            horas[con] = "";
+        }   
+        con++;
+    }
+    
+    
     %>
     
         <%@include file="barra_menu.jsp"%>       
@@ -137,32 +149,57 @@
                     </div>
                     <div class="div-nutrimental actividad">
                         <p class = "medidas-p">Actividad Física</p>
-                        <select required name ="actividad" class = "select-actividad">
+                        <select required name ="actividad" class = "select-actividad" id = "select-actividad" onchange = "deplegarDias();">
                             <option value="">Selcciona actividad</option>
                             <%
                             conecta.conectar();
                             ResultSet rs = conecta.getActividades();
+                            
                             int idAct = 0;
                             String nombreAct = "";
+                            String actividadSeleccionada = "";
                             while(rs.next())
                             {
                                 idAct = rs.getInt("idActividad");
+                                
                                 nombreAct = rs.getString("actividad");
+                                if(idAct == seleccion)
+                                {
+                                    actividadSeleccionada = "selected";
+                                }
                             %>
-                            <option value="<%=idAct%>"><%=nombreAct%></option>
+                            <option value="<%=idAct%>" <%=actividadSeleccionada%>><%=nombreAct%></option>
                             <%
+                                actividadSeleccionada = "";
                             }
                             %>
                         </select>
+                        <script>deplegarDias();</script>
                     </div>
-                    <div class = "div-nutrimental input-horas">
-                        <p class="medidas-p">Horas</p>
-                        <%
-                            
-                                %><input type="text" placeholder = "hrs/semana" name ="horas" value="<%=horas%>" class="Section-m horas" required><%
-                            
-                        %>
-                        
+                    <div class = "div-ocupacion">
+                        <p class = "medidas-p">Ocupación</p>
+                        <select required name = "ocupacion" class="select-ocupacion" id="div-ocupacion">
+                            <%
+                                ResultSet rs2 = conecta.getOcupacion();
+                                while(rs2.next())
+                                {
+                                    %><option value = "<%=rs2.getInt("idCatOcupacion")%>"><%=rs2.getString("ocupacion") + ": " + rs2.getString("descripcion")%></option><%
+                                }
+                            %>
+                        </select>
+                    </div>
+                    <div class = "div-actividadTiempo invisible" id = "div-actividadTiempo">
+                        <div id = "contenedor-dias1">
+                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="1" id = "dom" <%=seleccionDias[0]%>><label for = "dom" id="dom-label">Domingo</label><input type="text" name="horas" value ="<%=horas[0]%>" placeholder="(min)" class = "Section-h invisible" id="dom-horas2"></div>
+                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="2" id = "lun" <%=seleccionDias[1]%>><label for = "lun" id="lun-label">Lunes</label><input type="text" name="horas" value ="<%=horas[1]%>" placeholder="(min)" class = "Section-h invisible" id="lun-horas2"></div>
+                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="3" id = "mar" <%=seleccionDias[2]%>><label for = "mar" id="mar-label">Martes</label><input type="text" name="horas" value ="<%=horas[2]%>" placeholder="(min)" class = "Section-h invisible" id="mar-horas2"></div>
+                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="4" id = "mie" <%=seleccionDias[3]%>><label for = "mie" id="mie-label">Miércoles</label><input type="text" name="horas" value ="<%=horas[3]%>" placeholder="(min)" class = "Section-h invisible" id = "mie-horas2"></div>
+                        </div>
+                        <div id = "contenedor-dias2">
+                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="5" id = "jue" <%=seleccionDias[4]%>><label for = "jue" id="jue-label">Jueves</label><input type="text" name="horas" value ="<%=horas[4]%>" placeholder="(min)" class = "Section-h invisible" id="jue-horas2"></div>
+                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="6" id = "vie" <%=seleccionDias[5]%>><label for = "vie" id="vie-label">Viernes</label><input type="text" name="horas" value ="<%=horas[5]%>" placeholder="(min)" class = "Section-h invisible" id="vie-horas2"></div>
+                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="7" id = "sab" <%=seleccionDias[6]%>><label for = "sab" id="sab-label">Sábado</label><input type="text" name="horas" value ="<%=horas[6]%>" placeholder="(min)" class = "Section-h invisible" id="sab-horas2"></div>
+                        </div>
                     </div>
                     <hr>
                     <h2 class = "Article-title">Tu dirección</h2>

@@ -1,5 +1,9 @@
 package clases;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class cSugerirDietas 
 {
     private final String idUsr;
@@ -9,11 +13,14 @@ public class cSugerirDietas
     private final int estatura;
     private final int sexo;
     private final int actividad;
-    private final int horas;
+    private final int[] dias;
+    private final int[] horas;
+    private final int[] horasR;
     private float imc;
+    private int[] kcalorias;
     cConexion conecta = new cConexion();
     
-    public cSugerirDietas(String idUsr, int edad, int peso, int cintura, int estatura, int sexo, int actividad, int horas)
+    public cSugerirDietas(String idUsr, int edad, int peso, int cintura, int estatura, int sexo, int actividad, int[] dias, int[]horas)
     {
         this.idUsr = idUsr;
         this.edad = edad;//en años
@@ -21,7 +28,6 @@ public class cSugerirDietas
         this.cintura = cintura;
         this.estatura = estatura;//en centimetros
         this.sexo = sexo;
-        this.horas = horas;
         this.actividad = actividad;
         /*
             actividad = 1 = nada de ejercicio
@@ -30,6 +36,20 @@ public class cSugerirDietas
                       = 4 = ejercicio de alta intencidad
                       = 5 = ejercicio de extrema intencidad
         */
+        this.dias = dias;
+        this.horas = horas;
+        
+        this.kcalorias = new int[7];
+        for(int i = 0; i < kcalorias.length; ++i)
+        {
+            this.kcalorias[i] = 100;
+        }
+        
+        this.horasR = new int[7];
+        for(int i = 0; i < horasR.length; ++i)
+        {
+            this.horasR[i] = 0;
+        }
     }
     
     //calcula el indice de masa corporal
@@ -88,48 +108,74 @@ public class cSugerirDietas
     }
     
     //determina la cantidad de kilo kalorias que debe de consumir el paciente para estar sano
-    public int determinarKcalorias()
+    public int[] determinarKcalorias() throws SQLException
     {
-        int kcalorias = 0;
         double ktem = 0;
         
         //Se obtienen las calorias por el sexo, es diferente gasto entre un hombre o una mujer
         if(this.sexo == 1)
         {
-            ktem =  66.47 + (13.75 * this.peso) + (5 * this.estatura) - (6.76 * this.edad);
+            ktem =  (11.3 * this.peso) + (16f * ((float)this.estatura / 100f)) + 901;
         }
         else
-            ktem = 655.1 + (9.56 * this.peso) + (1.85 * this.estatura) - (4.68 * this.edad);
+            ktem = (8.7 * this.peso) + (25f * ((float)this.estatura / 100f)) + 865;
         
-        //Se ajusta el resultado anterior segun su actividad fisica
-        if(this.actividad == 1)
+        //Se hace el ajuste por actividad y ocupacion
+        int dia = 1, actividadF = 1;
+        float factorActividad = 0.03f;
+        boolean diaActivo = false;
+        int minutos = 0, posicion;
+        conecta.conectar();
+        ResultSet fac;
+        while(dia <= 7)
         {
-            ktem = ktem * 1.2;
-        }
-        else
-            if(this.actividad == 2)
+            posicion = dia -1;
+            for(int i = 0; i < this.dias.length; ++i)
             {
-                ktem = ktem * 1.375;
-            }
-            else
-                if(this.actividad == 3)
+                if(this.dias[i] == dia)
                 {
-                    ktem = ktem * 1.55;
+                    diaActivo = true;
+                    System.out.println("Este es el valor de horas: " + this.horas[i]);
+                    minutos = this.horas[i];
+                    this.horasR[posicion] = this.horas[i]; 
                 }
-                else
-                    if(this.actividad == 4)
-                    {
-                        ktem = ktem * 1.725;
-                    }
-                    else
-                        if(this.actividad == 5)
-                        {
-                            ktem = ktem * 1.9;
-                        }
+            }
+            
+            if(diaActivo && this.actividad != 1)
+            {
+                fac = conecta.getActividadEspecifica(this.actividad);
+                if(fac.next())
+                {
+                    factorActividad = fac.getFloat("factor");
+                }
+            }
+
+            //sumando el gasto calorico del metabolismo basal, la actividad y la ocupacion y quitando decimales
+            this.kcalorias[posicion] = (int)Math.floor(ktem + (this.peso * minutos * factorActividad));
+            
+            System.out.println("Esta es la clase sugerir-----------------------");
+            System.out.println("Este es la actividad: " + this.actividad);
+            System.out.println("Este es el dia: " + dia);
+            System.out.println("Este es ktem: " + ktem);
+            System.out.println("Este es minutos: " + minutos);
+            System.out.println("Este es factorActividad: " + factorActividad);
+            System.out.println("Este es diaActivo: " + diaActivo);
+            System.out.println("Este es kcalorias: " + this.kcalorias[posicion]);
+            System.out.println("-----------------------------------------------");
+            
+            dia++;
+            diaActivo = false;
+            minutos = 0;
+            factorActividad = 0.03f;
+        }
         
-        //quitandole los decimales
-        kcalorias = (int) Math.floor(ktem);
         
-        return kcalorias;
+        
+        return this.kcalorias;
+    }
+    
+    public int[] getHoras()
+    {
+        return this.horasR;
     }
 }
