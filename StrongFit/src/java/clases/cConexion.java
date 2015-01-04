@@ -67,10 +67,16 @@ public class cConexion {
         return validacion;
     }
     //Esto da de alta a el paciente y la direccion
-    public void altapaciente(String idUser)throws SQLException
+    //Esta sera una variable de sesion 
+    public int altapaciente(String idUser)throws SQLException
     {
         this.st = con.createStatement();
-        this.st.executeQuery("call sp_AltaPaciente('"+idUser+"');");
+        ResultSet rs = this.st.executeQuery("call sp_AltaPaciente('"+idUser+"');");
+        int idConteo = 0;
+        if(rs.next()){
+            idConteo = rs.getInt("idConteo");
+        }
+        return idConteo;
     }        
     //Esto sirve para buscar y validar usuarios
     public String busquedadeusuarios(String idUser, String pass) throws SQLException{
@@ -246,9 +252,7 @@ public class cConexion {
         String nombre;
         ArrayList<cAlimento> lista = new ArrayList();
         this.st = con.createStatement();
-        String info2 = info +"%";
-        ResultSet rs = this.st.executeQuery("select * from alimento where nombre like '"+info2+"';");
-        
+        ResultSet rs = this.st.executeQuery("call spBuscarAlimento('"+info+"');");
         while(rs.next()){
             System.out.print("***************Entro al while************************");
             id = Integer.parseInt(rs.getString("idAlimento"));
@@ -258,6 +262,26 @@ public class cConexion {
         }
         System.out.print("Tamaño " + lista.size());
         return lista;
+    }
+    //Esto agrega las calorias al conteo calorico
+    public void agregarAlimento(String id, String idCont) throws SQLException {
+        this.st = con.createStatement();
+        ResultSet rs = this.st.executeQuery("select calorias from alimento where idAlimento ="+id+";");
+        float calo = 0;
+        float calTotal = 0;
+        if(rs.next()){
+            calo = rs.getFloat("calorias");    
+        }
+        System.out.print("las calorias " + calo);
+        //Obtiene las calorias guardadas en la base
+        ResultSet rs2 = this.st.executeQuery("select caloriasDia from conteocalorico where idConteo ="+idCont+";");
+        if(rs2.next()){
+            calTotal = rs2.getFloat("caloriasDia");
+        }
+        //Se suma las calorias del alimento mas las del conteo calorico
+        calTotal +=calo;
+        this.st.executeUpdate("update conteocalorico set caloriasDia = "+calTotal+" where idConteo = "+idCont+";");
+        System.out.print("Calorias totales " + calTotal);
     }
 }
 

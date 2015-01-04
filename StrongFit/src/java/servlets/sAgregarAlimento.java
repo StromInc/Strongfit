@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
+import clases.cConexion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,10 +20,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author jorge pastrana
+ * @author USER
  */
-@WebServlet(name = "sAltaDeUsuario", urlPatterns = {"/sAltaDeUsuario"})
-public class sAltaDeUsuario extends HttpServlet {
+@WebServlet(name = "sAgregarAlimento", urlPatterns = {"/sAgregarAlimento"})
+public class sAgregarAlimento extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,48 +35,19 @@ public class sAltaDeUsuario extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            cConexion con = new cConexion();
+            con.conectar();
             HttpSession sesion = request.getSession();
-            //Recuperando Valores
-            String idUser = request.getParameter("txt-mail");
-            String pass = request.getParameter("txt-pass");
-            String nombre = request.getParameter("txt-name");
-             // conectar a la base de datos                                     
-            try{
-                clases.cConexion objconexion = new clases.cConexion();
-                objconexion.conectar();
-                // verificar usuario
-                String verificacion = objconexion.altausuario(idUser, pass, nombre);
-                if (verificacion.equals("valido")){                                     
-                    int idCont = objconexion.altapaciente(idUser);
-                    // cargar datos a la sesion
-                    sesion.setAttribute("idUsr",idUser);
-                    sesion.setAttribute("passUsr",pass);
-                    sesion.setAttribute("nomUsr",nombre);            
-                    sesion.setAttribute("nombre",nombre);
-                    sesion.setAttribute("pass",pass);
-                    sesion.setAttribute("idcont", idCont);
-                    sesion.setAttribute("peso", "" );
-                    sesion.setAttribute("estatura", "");
-                    sesion.setAttribute("cintura", "");
-                    sesion.setAttribute("edad", "");
-                    sesion.setAttribute("sexo", "");
-                    sesion.setAttribute("estado", "");
-                    sesion.setAttribute("municipio", "");
-                    sesion.setAttribute("colonia", "");
-                    // Mandar al usuario a su perfil
-                    response.sendRedirect("jsp/paciente/usuario.jsp");
-                    out.print("<script>alert('Alta realizada');</script>");
-                }else{
-                    out.print("<script>alert('Actuelmente ya existe una cuenta registrada con ese correo');</script>");    
-                    response.sendRedirect("index.jsp");
-                }
-            }catch(SQLException ex){
-                out.print(ex.toString());
-            }     
+            //id del conteo calorico
+            String idCont = (String) sesion.getAttribute("idcont");
+            System.out.print(idCont);
+            String id = request.getParameter("valor");
+            System.out.print("ID Alimento" + id + " id usuario " +idCont);
+            con.agregarAlimento(id, idCont);
         }
     }
 
@@ -90,7 +63,11 @@ public class sAltaDeUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(sAgregarAlimento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -104,7 +81,11 @@ public class sAltaDeUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(sAgregarAlimento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
