@@ -55,6 +55,7 @@ public class sPerfilDeUsuario extends HttpServlet {
             String cintura = request.getParameter("cintura");
             String edad = request.getParameter("edad");
             int sexo = Integer.parseInt(request.getParameter("sexo"));
+            int ocupacion = Integer.parseInt(request.getParameter("ocupacion"));
             int actividad = Integer.parseInt(request.getParameter("actividad"));
             String d[] = request.getParameterValues("dias");
             int con = 0;
@@ -68,11 +69,13 @@ public class sPerfilDeUsuario extends HttpServlet {
                 dias[i] = Integer.parseInt(d[i]);
             }
             String hrs[] = request.getParameterValues("horas");
+            
             ArrayList<Integer> horas = new ArrayList();
             for(int i = 0; i < hrs.length; ++i)
             {
                 if(!hrs[i].equals(""))
                 {
+                    System.out.println("ESTE ES EL VALOR DE HRS: " + hrs[i]);
                     horas.add(Integer.parseInt(hrs[i]));
                 }
             }
@@ -84,13 +87,6 @@ public class sPerfilDeUsuario extends HttpServlet {
             String estado = request.getParameter("estado");
             String municipio = request.getParameter("municipio");
             String colonia = request.getParameter("colonia");
-            ResultSet factor = objconexion.getActividadEspecifica(actividad);
-            int f = 0;
-            if(factor.next())
-            {
-                f = factor.getInt("factor");
-            }
-            System.out.println("ESTE ES EL F:" + f);
             String verificacion = "";
             
             //Calculamos el estado de salud del paciente y las calorias que debe de consumir para estar saludable
@@ -98,16 +94,17 @@ public class sPerfilDeUsuario extends HttpServlet {
             int peso2 = Integer.parseInt(peso);
             int cintura2 = Integer.parseInt(cintura);
             int estatura2 = Integer.parseInt(estatura);
-            cSugerirDietas sugerir = new cSugerirDietas(idUser, edad2, peso2, cintura2, estatura2, sexo, actividad, dias, horasR);
+            cSugerirDietas sugerir = new cSugerirDietas(idUser, edad2, peso2, cintura2, estatura2, sexo, actividad, dias, horasR, ocupacion);
             float imc = sugerir.calcularIMC();
             int estadoSalud = sugerir.estadoSalud(imc);
+            System.out.println("ESTE ES EL ESTADO DE SALUD" + estadoSalud);
             int kcalorias[] = sugerir.determinarKcalorias();
             int horasS[] = sugerir.getHoras();
             //Guardamos
             for(int i = 0; i < kcalorias.length; ++i)
             {
                 System.out.println(kcalorias[i]);
-                objconexion.modificarCalorias(idUser, kcalorias[i], (i+1), horasS[i], actividad);
+                objconexion.modificarCalorias(idUser, kcalorias[i], (i+1), horasS[i], actividad, ocupacion);
             }
             
            // Conectar a la base de datos
@@ -126,6 +123,7 @@ public class sPerfilDeUsuario extends HttpServlet {
                  sesion.setAttribute("estado", estado);
                  sesion.setAttribute("municipio", municipio);
                  sesion.setAttribute("colonia", colonia);
+                 sesion.setAttribute("salud", estadoSalud);
                  response.sendRedirect("jsp/paciente/usuario.jsp");
              }else{
              verificacion = objconexion.cambiarcorreo(idUser);

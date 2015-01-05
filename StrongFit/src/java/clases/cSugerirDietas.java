@@ -12,6 +12,7 @@ public class cSugerirDietas
     private final int cintura;
     private final int estatura;
     private final int sexo;
+    private final int ocupacion;
     private final int actividad;
     private final int[] dias;
     private final int[] horas;
@@ -20,7 +21,7 @@ public class cSugerirDietas
     private int[] kcalorias;
     cConexion conecta = new cConexion();
     
-    public cSugerirDietas(String idUsr, int edad, int peso, int cintura, int estatura, int sexo, int actividad, int[] dias, int[]horas)
+    public cSugerirDietas(String idUsr, int edad, int peso, int cintura, int estatura, int sexo, int actividad, int[] dias, int[]horas, int ocupacion)
     {
         this.idUsr = idUsr;
         this.edad = edad;//en años
@@ -36,6 +37,7 @@ public class cSugerirDietas
                       = 4 = ejercicio de alta intencidad
                       = 5 = ejercicio de extrema intencidad
         */
+        this.ocupacion = ocupacion;
         this.dias = dias;
         this.horas = horas;
         
@@ -122,10 +124,15 @@ public class cSugerirDietas
         
         //Se hace el ajuste por actividad y ocupacion
         int dia = 1, actividadF = 1;
-        float factorActividad = 0.03f;
+        float factorActividad = 0.03f, factorOcupacion = 0f;
         boolean diaActivo = false;
         int minutos = 0, posicion;
         conecta.conectar();
+        ResultSet facO = conecta.getOcupacionEspecifica(this.ocupacion);
+        if(facO.next())
+        {
+            factorOcupacion = facO.getFloat("factor");
+        }
         ResultSet fac;
         while(dia <= 7)
         {
@@ -151,7 +158,7 @@ public class cSugerirDietas
             }
 
             //sumando el gasto calorico del metabolismo basal, la actividad y la ocupacion y quitando decimales
-            this.kcalorias[posicion] = (int)Math.floor(ktem + (this.peso * minutos * factorActividad));
+            this.kcalorias[posicion] = (int)Math.floor(ktem + (this.peso * minutos * factorActividad) + (this.peso * 60 * factorOcupacion));
             
             System.out.println("Esta es la clase sugerir-----------------------");
             System.out.println("Este es la actividad: " + this.actividad);

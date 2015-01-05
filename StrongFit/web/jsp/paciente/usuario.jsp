@@ -9,10 +9,9 @@
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
         <script src = "../../js/acciones_usuarioPaciente.js"></script>
     </head>
-    
     <body>
-    <!-- obtenemos los datos del usuario -->
-    <%
+        <%@include file="barra_menu.jsp"%> 
+        <%
     HttpSession sesion = request.getSession();
     String nombre = (String)sesion.getAttribute("nombre");
     String idUsr = (String)sesion.getAttribute("idUsr");
@@ -25,15 +24,15 @@
     String estado = (String)sesion.getAttribute("estado");
     String municipio = (String)sesion.getAttribute("municipio");
     String colonia = (String)sesion.getAttribute("colonia");
-    
-    int idSalud = 0;
-    int calorias = 0;
+    int idSalud = (Integer)sesion.getAttribute("salud");
     String estadoS = "";
+    String color = "";
     
     // creamos un booleano para la parte del sexo
     String v1 = "";
     String v2 = "";
     String v3 = "";
+
     if(sexo == 1){
         v2 = "selected";
         }
@@ -44,26 +43,30 @@
             v1 = "selected";
     }
     conecta.conectar();
-
-   if(idSalud != 0)
-   {
-       ResultSet es = conecta.spGetInfoEstado(idSalud);
-       if(es.next())
-       {
-           estadoS = es.getString("tipoEstado");
-       }
-   }
-   else
-       estadoS = "Aún sin calcular";
+    ResultSet es = conecta.spGetInfoEstado(idSalud);
+    if(es.next())
+    {
+       estadoS = es.getString("tipoEstado");
+    }
+    else
+        estadoS = "Aún sin calcular";
+    
 //    cSugerirDietas sugerirD = new cSugerirDietas(idUsr, edad, peso, cintura, estatura, sexo, actividad);
-    int seleccion = 0, con = 0;
+    int seleccion = 0, con = 0, seleccionOcupacion = 0;
+    int caloriasD[] = new int[7];
     String horas[] = new String[7];
     String seleccionDias[] = new String[7];
+    String diasSemana[] = {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"};
     ResultSet select = conecta.spGetCaloriasPaciente(idUsr);
+    for(int i = 0; i < horas.length; ++i)
+    {
+        horas[i] = "";
+    }
     while(select.next())
     {
+        caloriasD[con] = select.getInt("calorias");
         seleccion = select.getInt("idActividad");
-        
+        seleccionOcupacion = select.getInt("ocupacion");
         if(select.getInt("horas") != 0)
         {
             seleccionDias[con] = "checked";
@@ -79,9 +82,7 @@
     
     
     %>
-    
-        <%@include file="barra_menu.jsp"%>       
-        <section class = "Section-tbl-usr">
+    <section class = "Section-tbl-usr">
             <div class="div-informacion">
                 <!--esta es la imagen que el usuario elija-->
                 <article class = "Article-tbl-usr2" style = "margin-left: 0">
@@ -93,18 +94,15 @@
                 <article class = "Article-tbl-usr2" style = "margin-left: 0">
                     <h2 class = "Article-title">Calorias a consumir diariamente</h2>
                     <hr>
+                    <%for(int i = 0; i < caloriasD.length; ++i)
+                        {
+                    %>
+                    <div class = "micha" style="text-align: left;"><div class = "diaCalorias"><%=diasSemana[i]%></div></div><div class = "micha" style ="text-align: right;"><div class = "caloriasPaciente "><%=caloriasD[i]%> kcal</div></div>
                     <%
-                        if(calorias == 0)
-                        {
-                            %><h3>Aún sin calcular</h3><%
-                        }
-                        else
-                        {
-                            %><h3><%=calorias%></h3><%
                         }
                     %>
                 </article>
-                <article class = "Article-tbl-usr2" style = "margin-left: 0">
+                <article class = "Article-tbl-usr2" style = "margin-left: 0; <%=color%>">
                     <h2 class = "Article-title">Estado de salud</h2>
                     <hr>
                     <h3><%=estadoS%></h3>
@@ -179,11 +177,17 @@
                     <div class = "div-ocupacion">
                         <p class = "medidas-p">Ocupación</p>
                         <select required name = "ocupacion" class="select-ocupacion" id="div-ocupacion">
+                            <option value = "">Selecciona una opción</option>
                             <%
                                 ResultSet rs2 = conecta.getOcupacion();
                                 while(rs2.next())
                                 {
-                                    %><option value = "<%=rs2.getInt("idCatOcupacion")%>"><%=rs2.getString("ocupacion") + ": " + rs2.getString("descripcion")%></option><%
+                                    actividadSeleccionada = "";
+                                    if(rs2.getInt("idCatOcupacion") == seleccionOcupacion)
+                                    {
+                                        actividadSeleccionada = "selected";
+                                    }
+                                    %><option value = "<%=rs2.getInt("idCatOcupacion")%>" <%=actividadSeleccionada%>><%=rs2.getString("ocupacion") + ": " + rs2.getString("descripcion")%></option><%
                                 }
                             %>
                         </select>
@@ -214,6 +218,5 @@
                 </form>
             </article>
         </section>
-        
     </body>
 </html>

@@ -122,10 +122,10 @@ public class cConexion {
     }
     
     //Esto agregara o quitara las calorias de un usuario
-    public ResultSet modificarCalorias(String idUser, int cal, int dia, int hrs, int actividad) throws SQLException
+    public ResultSet modificarCalorias(String idUser, int cal, int dia, int hrs, int actividad, int ocupacion) throws SQLException
     {
         this.st = con.createStatement();
-        return this.st.executeQuery("call spSetCaloriasUsuario('"+idUser+"', "+cal+" , "+dia+" ,"+hrs+", '"+actividad+"');");
+        return this.st.executeQuery("call spSetCaloriasUsuario('"+idUser+"', "+cal+" , "+dia+" ,"+hrs+", "+actividad+", "+ocupacion+");");
     }
     
     //Esto identifica al usuario como paciente o como nutriologo

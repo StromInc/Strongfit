@@ -64,7 +64,7 @@ public class sLogIn extends HttpServlet {
                     int edad = resultado.getInt("edad");
                     String cedula1 = Integer.toString(cedula);
                     String edad1 = Integer.toString(edad);
-                    String sexo = resultado.getString("idSexo"); //En la base dice idSexo no sexo 
+                    int sexo = resultado.getInt("idSexo"); //En la base dice idSexo no sexo 
                     String nombre = resultado.getString("nombre");
                     String carrera = resultado.getString("carrera");
                     String escuela = resultado.getString("escuela");
@@ -89,8 +89,9 @@ public class sLogIn extends HttpServlet {
                     if(resultado.next()){  
                         int peso = resultado.getInt("peso");
                         int edad = resultado.getInt("edad");
-                        String sexo = resultado.getString("idSexo"); //en la base es idSexo
-                        String idCont = resultado.getString("idCont");
+                        int sexo = resultado.getInt("idSexo"); //en la base es idSexousuario
+                        int salud = resultado.getInt("idSalud");
+                        String idCont = resultado.getString("idConteo");
                         String nombre = resultado.getString("nombre");
                         int estatura = resultado.getInt("estatura");
                         int cintura = resultado.getInt("medidaCintura");
@@ -104,6 +105,7 @@ public class sLogIn extends HttpServlet {
                         //variables de sesion
                         sesion.setAttribute("nombre",nombre); 
                         sesion.setAttribute("idcont", idCont); //el id del conteo calorico
+                        sesion.setAttribute("salud", salud);
                         sesion.setAttribute("peso", peso1 );
                         sesion.setAttribute("estatura", estatura1);
                         sesion.setAttribute("cintura", cintura1);

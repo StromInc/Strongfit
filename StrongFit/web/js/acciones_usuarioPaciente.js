@@ -1,7 +1,7 @@
 function deplegarDias()
 {
     $(function(){
-        if($('#select-actividad').val() !== 1)
+        if($('#select-actividad').val() !== "" && $('#select-actividad').val() !== 1)
         {
             $('#div-actividadTiempo').removeClass("invisible");
         }

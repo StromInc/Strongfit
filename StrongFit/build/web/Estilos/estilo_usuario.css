@@ -274,6 +274,35 @@ body
     max-width: 10em;
 }
 
+.micha
+{
+    width: 50%;
+    display: inline-block;
+    font-size: 1.1rem;
+}
+
+.diaCalorias
+{
+    background-color: rgba(23, 113, 40, .9);
+    padding: .5em 0;
+    margin-top: 1em;
+    display: inline-block;
+    width: 5.5em;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.caloriasPaciente
+{
+    background-color: white;
+    padding: .5em 0;
+    margin-top: 1em;
+    display: inline-block;
+    width: 6.5em;
+    text-align: center;
+    border-radius: 5px;
+}
+
 #dom:checked ~ #dom-label,
 #lun:checked ~ #lun-label,
 #mar:checked ~ #mar-label,
