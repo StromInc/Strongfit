@@ -6,41 +6,37 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
          <!-- Metadatos para buscadores -->
-	<!-- Descripción de la página -->
-	<meta name="description" content="Mejora tu salud y vive plenamente" />
-	<!-- Autor de la página -->
-	<meta name="author" content="StrongFit, Strom" />
-	<!-- Indexación para los motores de búsqueda -->
-	<meta name="robots" content="index, follow, noarchive" />
-	<!-- Palabras clave de la página -->
-	<meta name="keywords" content="Strong, fit, dieta, salud, HTML5, CSS3, JavaScript" />
-	<!-- Para el responsive design de la página -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
+    	<!-- Descripción de la página -->
+    	<meta name="description" content="Mejora tu salud y vive plenamente" />
+    	<!-- Autor de la página -->
+    	<meta name="author" content="Strom" />
+    	<!-- Indexación para los motores de búsqueda -->
+    	<meta name="robots" content="index, follow, noarchive" />
+    	<!-- Para el responsive design de la página -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
         <!--<link rel="stylesheet" href="Estilos/estilo.css">-->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
         <link rel = "stylesheet" type ="text/css" href="Estilos/normalize.css">
         <link rel = "stylesheet" type ="text/css" href="Estilos/estilos_login.css">
         <link rel="shortcut icon" href="Imagenes/logo_s.jpg">
         <title>StrongFit</title>
-    </head>
-    
+    </head> 
     <body>
         <header class = "Header">
-            <p class="Header-title"><a href = "index.jsp">Strongfit</a></p>
-            <form action = "sLogIn" method="post" class="Header-form">
+            <h1 class="Header-title"><a href = "index.jsp">Strongfit</a></h1>
+            <button class="Header-button is-active" id="show">Iniciar sesión</button>
+            <form action = "sLogIn" method="post" class="Header-form" id="formu">
                     <input type = "email" name = "txt-mail" class="Header-mail Header-txt" placeholder = "Correo" required>
                     <input type = "password" name = "txt-pass" class = "Header-pass Header-txt" placeholder="Contraseña" required>
                     <input type = "submit" name = "btn-signin" class="Header-submit" value="Entrar">
             </form>
-        </header>
-        
+        </header>      
         <section class="Section">
             <article class="Section-article">
                 <h3 class = "Section-login">¿No tienes cuenta? &nbsp;<strong style="font-size: 1.4em;">Registrate</strong></h3>
@@ -56,11 +52,26 @@
             <article class="Section-signup">
                 <p>Administra tus comidas diarias, tus dietas, tu gasto calórico, encuentra nutriólogos y mucho más con <strong>Strongfit</strong>.</p>
             </article>
-        </section>
-        
+        </section>    
         <footer class = "Footer">
             <p class="Footer-parrafo Footer-parrafo1">Strongfit es un proyecto creado por <a href="#" class="Footer-link">Strom</a>.</p>
             <p class="Footer-parrafo"><a href="#" class = "Footer-link">Politicas de privacidad</a></p>
         </footer>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+            if (window.matchMedia('(max-width: 768px)').matches){
+               var $buttonShow = document.getElementById('show');
+               var $menu = document.getElementById('formu');
+
+               function showMenu(e) {
+                  // body...
+                  e.preventDefault();
+                  $menu.classList.add('is-active');
+               }
+               $buttonShow.addEventListener('click', showMenu);
+            }
+         });
+        </script>
     </body>
 </html>
