@@ -34,6 +34,7 @@
 .Header-form {
   display: inline-block;
   position: absolute;
+  background: #1b5e20;
   right: 1em;
   top: 2em;
 }
@@ -47,6 +48,7 @@
   -webkit-border-radius: 5px;
   border-radius: 5px;
   color: #000;
+  margin-bottom: 0.5em;
 }
 .Header-txt:focus {
   outline: none;
@@ -61,6 +63,7 @@
   padding: 0.3rem 1.5rem;
   -webkit-border-radius: 5px;
   border-radius: 5px;
+  margin: 0 auto;
   border: 1px solid #083481;
 }
 .Header-mail,
@@ -171,22 +174,22 @@
   margin-right: 7em;
 }
 @media screen and (max-width: 767px) {
-  .Header {
-    background-color: #f00;
-  }
   .Header-title {
     font-size: 2em;
+  }
+  .Header-submit {
+    width: 13em;
   }
   .Header-button.is-active {
     display: block;
   }
   .Header-form {
-    top: -95px;
-    height: 80px;
+    top: -125px;
+    height: auto;
     left: 0;
     right: 0;
-    background: #f00;
     text-align: center;
+    padding: 0.5em;
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
     -o-transition: 0.3s;
@@ -204,7 +207,14 @@
   }
 }
 @media screen and (max-width: 480px) {
-  .Header {
-    background-color: #00f;
+  .Header-title {
+    display: block;
+  }
+  .Header-txt {
+    width: 90%;
+  }
+  .Header-submit {
+    display: block;
+    width: 90%;
   }
 }

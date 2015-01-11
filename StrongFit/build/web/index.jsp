@@ -31,6 +31,7 @@
         <header class = "Header">
             <h1 class="Header-title"><a href = "index.jsp">Strongfit</a></h1>
             <button class="Header-button is-active" id="show">Iniciar sesión</button>
+            <button class="Header-button" id="hide">Ocultar</button>
             <form action = "sLogIn" method="post" class="Header-form" id="formu">
                     <input type = "email" name = "txt-mail" class="Header-mail Header-txt" placeholder = "Correo" required>
                     <input type = "password" name = "txt-pass" class = "Header-pass Header-txt" placeholder="Contraseña" required>
@@ -58,20 +59,6 @@
             <p class="Footer-parrafo"><a href="#" class = "Footer-link">Politicas de privacidad</a></p>
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script type="text/javascript">
-            $(function() {
-            if (window.matchMedia('(max-width: 768px)').matches){
-               var $buttonShow = document.getElementById('show');
-               var $menu = document.getElementById('formu');
-
-               function showMenu(e) {
-                  // body...
-                  e.preventDefault();
-                  $menu.classList.add('is-active');
-               }
-               $buttonShow.addEventListener('click', showMenu);
-            }
-         });
-        </script>
+        <script src="js/acciones_index.js"></script>
     </body>
 </html>

@@ -2,8 +2,9 @@
 
 azul = #01579B
 azulBorde = #083481
+verdeHeader = #1B5E20
 .Header
-   background-color #1B5E20
+   background-color verdeHeader
    height 96px
    color white
    padding-left 1em
@@ -36,6 +37,7 @@ azulBorde = #083481
 .Header-form
     display inline-block
     position absolute
+    background verdeHeader
     right 1em
     top 2em
 
@@ -48,6 +50,7 @@ azulBorde = #083481
     border-color #D2D4D5
     border-radius 5px
     color black
+    margin-bottom 0.5em
     &:focus
         outline none
         box-shadow 0px 0px 10px #0C98A2
@@ -59,6 +62,7 @@ azulBorde = #083481
     display inline-block
     padding .3rem 1.5rem
     border-radius 5px
+    margin 0 auto
     border 1px solid azulBorde
 
 .Header-mail, .Header-pass
@@ -159,22 +163,23 @@ azulBorde = #083481
     margin-right 7em
 @media screen and (max-width: 767px)
     .Header
-        background-color red
         &-title
             font-size 2em
+        &-submit
+            width 13em
         &-button
             &.is-active
                 display block
         &-form
-            top -95px
-            height 80px
+            top -125px
+            height auto
             left 0
             right 0
-            background red
             text-align center
-            transition 0.3s
+            padding 0.5em
+            transition 0.3s         
             &.is-active
-                top 95px
+                top 95px               
     .Footer
         &-parrafo1
             margin 0
@@ -182,4 +187,10 @@ azulBorde = #083481
           display block  
 @media screen and (max-width: 480px)
     .Header
-        background-color blue
+        &-title
+            display block
+        &-txt
+            width 90%
+        &-submit
+            display block
+            width 90%
