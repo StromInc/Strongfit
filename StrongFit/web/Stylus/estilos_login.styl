@@ -3,13 +3,14 @@
 azul = #01579B
 azulBorde = #083481
 verdeHeader = #1B5E20
+azulHover = #0042B6
 .Header
    background-color verdeHeader
    height 96px
    color white
    padding-left 1em
    position fixed
-   z-index 1
+   top 0
    right 0
    left 0
 
@@ -24,6 +25,8 @@ verdeHeader = #1B5E20
     padding 0.3rem 1rem
     color white
     display none
+    &:hover
+        background azulHover
     
 .Header-title
     font-weight normal
@@ -64,6 +67,8 @@ verdeHeader = #1B5E20
     border-radius 5px
     margin 0 auto
     border 1px solid azulBorde
+    &:hover
+        background azulHover
 
 .Header-mail, .Header-pass
     color black
@@ -73,31 +78,29 @@ verdeHeader = #1B5E20
     background-repeat no-repeat
     background-size cover
     background-position center
-    position absolute
-    width 100%
-    height 100%
+    margin-top 96px
+    padding 2em
     text-align center
 
 .Section-article
     display inline-block
     background-color rgba(145, 145, 145, 0.8)
     border-radius 10px 10px 0px 0px
-    position absolute
-    bottom 0
-    left 0
-    margin-left 10%
     padding .5em .5em 6em .5em
-    width 30em
+    max-width 30em
     box-shadow .5em .5em 2em black
+    text-align center
 
 .Section-login
     font-size 1em
     color white
+    border-bottom 1px solid white
+    padding-bottom 1em
 
 .Section-txt
     padding .7em
     font-size 1em
-    width 25em
+    width 90%
     border solid
     border-width thin
     border-color #D2D4D5
@@ -111,12 +114,16 @@ verdeHeader = #1B5E20
     background-color azul
     color white
     font-size 1.3em
-    display inline-blockblock
+    display inline-block
     padding .8em 2em
     border none
     margin-top 1.4em
+    margin-bottom 1em
     margin-left 30px
     border-radius 10px
+    border 1px solid azulBorde
+    &:hover
+        background azulHover
 
 .Section-form
     p
@@ -132,27 +139,20 @@ verdeHeader = #1B5E20
     display inline-block
     background-color rgba(145, 145, 145, 0.8)
     border-radius 10px
-    position absolute
-    bottom 0
-    right 0
     padding .7em
-    width 18em
-    text-align justify
-    margin-bottom 15%
-    margin-right 10%
+    max-width 18em
     color white
     font-size 1.2rem
+    margin-left 5em
+    margin-top 5em
+    vertical-align top
 
 .Footer
     color white
     background-color black
     text-align center
-    position absolute
     bottom 0
     padding 2em 0
-    margin-bottom -5.2em
-    left 0
-    right 0
 
 .Footer-parrafo
     font-size 1em
@@ -161,6 +161,12 @@ verdeHeader = #1B5E20
 
 .Footer-parrafo1
     margin-right 7em
+    
+@media screen and (max-width: 1050px)
+    .Section
+        &-signup
+            display none
+            
 @media screen and (max-width: 767px)
     .Header
         &-title
@@ -179,7 +185,7 @@ verdeHeader = #1B5E20
             padding 0.5em
             transition 0.3s         
             &.is-active
-                top 95px               
+                top 95px                  
     .Footer
         &-parrafo1
             margin 0
@@ -194,3 +200,6 @@ verdeHeader = #1B5E20
         &-submit
             display block
             width 90%
+    .Section
+        &-submit
+            margin-left 0   

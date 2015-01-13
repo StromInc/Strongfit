@@ -40,8 +40,7 @@
         </header>      
         <section class="Section">
             <article class="Section-article">
-                <h3 class = "Section-login">¿No tienes cuenta? &nbsp;<strong style="font-size: 1.4em;">Registrate</strong></h3>
-                <hr class="Section-line">
+                <h3 class = "Section-login">¿No tienes cuenta?, &nbsp;<strong style="font-size: 1.4em;">Registrate</strong></h3>
                 <form action = "sAltaDeUsuario" method="post" class="Section-form">
                     <input type = "text" name = "txt-name" class="Section-nombre Section-txt" placeholder = "Nombre" required>
                     <input type = "email" name = "txt-mail" class="Section-mail Section-txt" placeholder = "Correo" required>
