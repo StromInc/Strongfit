@@ -1,0 +1,79 @@
+@import "normalize.styl"
+@import "nib"
+
+azul = #01579B
+azulBorde = #083481
+verdeHeader = #1B5E20
+azulHover = #0042B6
+
+body
+	background-color verdeHeader
+.Footer
+	color white
+	background-color black
+	text-align center
+	bottom 0
+	padding 2em 0
+	&-parrafo
+		font-size 1em
+		display inline-block
+		margin 0
+	&-parrafo1
+		margin-right 7em
+    
+.Section
+	text-align center
+	padding 3em
+	color white
+	margin 0 auto
+	max-width 50em
+	&-login
+		display inline-block
+		margin-left 1.5em
+	&-title
+		border-bottom 1px solid white
+		padding-bottom 0.5em
+	&-submit
+		background-color azul
+		color white
+		font-size 1.3em
+		display inline-block
+		padding .8em 2em
+		border none
+		border-radius 10px
+		border 1px solid azulBorde
+		&:hover
+			background azulHover
+.Section-txt
+	padding .7em
+	color black
+	border solid
+	display block
+	border-width thin
+	border-color #D2D4D5
+	border-radius 10px
+	margin 0 auto
+	width 50%
+	margin-bottom 1.6em
+	&:focus
+		outline none
+		box-shadow 0px 0px 10px #0C98A2
+        
+.Section-article
+	background-color rgba(145, 145, 145, 0.8)
+	border-radius 10px 10px 0px 0px
+	padding .5em .5em 2em .5em
+	max-width 65em
+	box-shadow 4px 4px 15px black
+	text-align center
+
+@media screen and (max-width: 767px)
+	.Footer
+		&-parrafo1
+			margin 0
+		&-parrafo
+			display block 
+	.Section
+		padding 1em
+		&-txt
+			width 85%
