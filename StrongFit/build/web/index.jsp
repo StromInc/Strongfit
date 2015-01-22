@@ -9,7 +9,6 @@
 <html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-         <!-- Metadatos para buscadores -->
     	<!-- Descripción de la página -->
     	<meta name="description" content="Mejora tu salud y vive plenamente" />
     	<!-- Autor de la página -->
@@ -22,7 +21,6 @@
         <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-        <link rel = "stylesheet" type ="text/css" href="Estilos/normalize.css">
         <link rel = "stylesheet" type ="text/css" href="Estilos/estilos_login.css">
         <link rel="shortcut icon" href="Imagenes/logo_s.jpg">
         <title>StrongFit</title>
@@ -33,9 +31,9 @@
             <button class="Header-button is-active" id="show">Iniciar sesión</button>
             <button class="Header-button" id="hide">Ocultar</button>
             <form action = "sLogIn" method="post" class="Header-form" id="formu">
-                    <input type = "email" name = "txt-mail" class="Header-mail Header-txt" placeholder = "Correo" required>
-                    <input type = "password" name = "txt-pass" class = "Header-pass Header-txt" placeholder="Contraseña" required>
-                    <input type = "submit" name = "btn-signin" class="Header-submit" value="Entrar">
+                <input type = "email" name = "txt-mail" class="Header-mail Header-txt" placeholder = "Correo" required>
+                <input type = "password" name = "txt-pass" class = "Header-pass Header-txt" placeholder="Contraseña" required>
+                <input type = "submit" name = "btn-signin" class="Header-submit" value="Entrar">
             </form>
         </header>      
         <section class="Section">
