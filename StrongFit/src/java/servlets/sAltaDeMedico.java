@@ -8,6 +8,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,21 +49,31 @@ public class sAltaDeMedico extends HttpServlet {
             String cedula = request.getParameter("plicense");
             String escuela = request.getParameter("school");
             String carrera = request.getParameter("carrier");
+            
+            int cedula2 = Integer.parseInt(cedula);
+            int edad2 = Integer.parseInt(edad);
+            
             // Conectamos la base y damos de alta al usuario 
             try{
              clases.cConexion objconexion = new clases.cConexion();
              objconexion.conectar();
              String verificacion = objconexion.altausuario(idUser, pass, nombre);
               if (verificacion.equals("valido")){ 
-                  objconexion.altamedico(idUser,cedula,escuela,estado,municipio,colonia,sexo,edad, carrera);
-                  // cargar datos a la sesion
+                  ResultSet rs = objconexion.altamedico(idUser,cedula,escuela,estado,municipio,colonia,sexo,edad, carrera);
+                  int idMedico = 0;
+                  if(rs.next())
+                 {
+                     idMedico = rs.getInt("idMedico");
+                 }
+                 // cargar datos a la sesion
                  sesion.setAttribute("idUsr",idUser);
+                 sesion.setAttribute("idMedico", idMedico);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
-                 sesion.setAttribute("cedula", cedula );
+                 sesion.setAttribute("cedula", cedula2);
                  sesion.setAttribute("escuela", escuela);
                  sesion.setAttribute("carrera", carrera);
-                 sesion.setAttribute("edad", edad);
+                 sesion.setAttribute("edad", edad2);
                  sesion.setAttribute("sexo", sexo);
                  sesion.setAttribute("estado", estado);
                  sesion.setAttribute("municipio", municipio);

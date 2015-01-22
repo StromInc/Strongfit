@@ -22,10 +22,10 @@
                     <input type = "text" name = "edad" required class = "Section-usr" placeholder = "">
                     <hr>
                     <h2 class = "Article-title">Tu sexo</h2>
-                    <select name = "sexo">
+                    <select name = "idSexo">
                         <option value="" >Seleccionar </option>
                         <option value="1" >Masculino </option>
-                        <option value="2" >femenino </option>
+                        <option value="2" >Femenino </option>
                     </select>
                     <hr>
                     <h2 class = "Article-title">Tu dirección</h2>

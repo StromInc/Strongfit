@@ -22,7 +22,9 @@ $(function(){
             $clon.slideDown();
             $elemento.html(numCalorias);
             $.post('http://localhost:8080/StrongFit/sAgregarAlimento', 
-                {dataType: 'json', valor: idAlimento});
+                {dataType: 'json', valor: idAlimento}, function(){
+                    cambiarMetas();
+                });
             /*
              * Esto es lo de arriba
             $.ajax({
@@ -34,6 +36,22 @@ $(function(){
                }
             });*/
         }
+        
+        function cambiarMetas()
+        {
+            $.ajax({
+                url: 'http://localhost:8080/StrongFit/sCambiarMetas',
+                type: 'post',
+                dataType: 'json',
+                data: $('#formularioOculto').serialize(),
+                success: function(datos)
+                {
+                    $('#consumido').html(datos.calDia);
+                    $('#falta').html($('#metaCalorias').html() - $('#consumido').html());
+                }
+            });
+        }
+        
     //utilizamos autocomplete (Funcion de jquery-ui)
     $('#search').autocomplete({
         //busqueda del alimento

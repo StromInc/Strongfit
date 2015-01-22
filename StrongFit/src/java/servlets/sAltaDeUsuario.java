@@ -8,6 +8,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,20 +49,28 @@ public class sAltaDeUsuario extends HttpServlet {
                 objconexion.conectar();
                 // verificar usuario
                 String verificacion = objconexion.altausuario(idUser, pass, nombre);
-                if (verificacion.equals("valido")){                                     
-                    int idCont = objconexion.altapaciente(idUser);
+                if (verificacion.equals("valido")){
+                    int idConteo = 0;
+                    int idPaciente = 0;
+                    ResultSet rs = objconexion.altapaciente(idUser);
+                    if(rs.next())
+                    {
+                        idConteo = rs.getInt("idConteo");
+                        idPaciente = rs.getInt("idPaciente");
+                    }
                     // cargar datos a la sesion
                     sesion.setAttribute("idUsr",idUser);
+                    sesion.setAttribute("idPaciente", idPaciente);
                     sesion.setAttribute("passUsr",pass);
                     sesion.setAttribute("nomUsr",nombre);            
                     sesion.setAttribute("nombre",nombre);
                     sesion.setAttribute("pass",pass);
-                    sesion.setAttribute("idcont", idCont);
-                    sesion.setAttribute("peso", "" );
-                    sesion.setAttribute("estatura", "");
-                    sesion.setAttribute("cintura", "");
-                    sesion.setAttribute("edad", "");
-                    sesion.setAttribute("sexo", "");
+                    sesion.setAttribute("idcont", idConteo);
+                    sesion.setAttribute("peso", 0 );
+                    sesion.setAttribute("estatura", 0);
+                    sesion.setAttribute("cintura", 0);
+                    sesion.setAttribute("edad", 0);
+                    sesion.setAttribute("sexo", 0);
                     sesion.setAttribute("estado", "");
                     sesion.setAttribute("municipio", "");
                     sesion.setAttribute("colonia", "");

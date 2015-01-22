@@ -40,6 +40,7 @@ public class sPerfilDeMedico extends HttpServlet {
            HttpSession sesion = request.getSession();
             // recuperamos los valores
             String idUser = (String)sesion.getAttribute("idUsr");
+            int idMedico = (Integer)sesion.getAttribute("idMedico");
             String nombre = request.getParameter("txt-name");
             String idUsr = request.getParameter("txt-email");
             String pass = request.getParameter("txt-pass");
@@ -52,20 +53,24 @@ public class sPerfilDeMedico extends HttpServlet {
             String escuela = request.getParameter("school");
             String carrera = request.getParameter("carrier");
             String verificacion = "";
+            
+            int edad2 = Integer.parseInt(edad);
+            int cedula2 = Integer.parseInt(cedula);
+            
            // Conectar a la base de datos
             try{
              clases.cConexion objconexion = new clases.cConexion();
              objconexion.conectar();
              // verificar si el nuevo correo esta disponible
              if(idUser.equals(idUsr)){
-             objconexion.cambioUsuariomedico(idUser, nombre, pass, cedula, escuela, carrera, edad, sexo, estado, municipio, colonia);
+             objconexion.cambioUsuariomedico(idUser, nombre, pass, cedula, escuela, carrera, edad, sexo, estado, municipio, colonia, idMedico);
              sesion.setAttribute("idUsr",idUser);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
-                 sesion.setAttribute("cedula", cedula );
+                 sesion.setAttribute("cedula", cedula2);
                  sesion.setAttribute("escuela", escuela);
                  sesion.setAttribute("carrera", carrera);
-                 sesion.setAttribute("edad", edad);
+                 sesion.setAttribute("edad", edad2);
                  sesion.setAttribute("sexo", sexo);
                  sesion.setAttribute("estado", estado);
                  sesion.setAttribute("municipio", municipio);
@@ -74,15 +79,15 @@ public class sPerfilDeMedico extends HttpServlet {
              }else{
              verificacion = objconexion.cambiarcorreo(idUser);
              if(verificacion.equals("libre")){
-             objconexion.cambioUsuariomedicoConCorreo(idUser, nombre, pass, cedula, escuela, carrera, edad, sexo, estado, municipio, colonia, idUsr);
+             objconexion.cambioUsuariomedicoConCorreo(idUser, nombre, pass, cedula, escuela, carrera, edad, sexo, estado, municipio, colonia, idUsr, idMedico);
              sesion.setAttribute("idUsr",idUsr);
                  sesion.setAttribute("idUsr",idUsr);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
-                 sesion.setAttribute("cedula", cedula );
+                 sesion.setAttribute("cedula", cedula2);
                  sesion.setAttribute("escuela", escuela);
                  sesion.setAttribute("carrera", carrera);
-                 sesion.setAttribute("edad", edad);
+                 sesion.setAttribute("edad", edad2);
                  sesion.setAttribute("sexo", sexo);
                  sesion.setAttribute("estado", estado);
                  sesion.setAttribute("municipio", municipio);

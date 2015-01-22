@@ -54,6 +54,39 @@ public class cSugerirDietas
         }
     }
     
+    public cSugerirDietas(String idUsr, int edad, int peso, int cintura, int estatura, int sexo, int actividad, int ocupacion)
+    {
+        this.idUsr = idUsr;
+        this.edad = edad;//en años
+        this.peso = peso;// en kilogramos
+        this.cintura = cintura;
+        this.estatura = estatura;//en centimetros
+        this.sexo = sexo;
+        this.actividad = actividad;
+        /*
+            actividad = 1 = nada de ejercicio
+                      = 2 = ejercicio de baja intencidad
+                      = 3 = ejercicio de media intencidad
+                      = 4 = ejercicio de alta intencidad
+                      = 5 = ejercicio de extrema intencidad
+        */
+        this.ocupacion = ocupacion;
+        this.dias = new int[0];
+        this.horas = new int[0];
+        
+        this.kcalorias = new int[7];
+        for(int i = 0; i < kcalorias.length; ++i)
+        {
+            this.kcalorias[i] = 100;
+        }
+        
+        this.horasR = new int[7];
+        for(int i = 0; i < horasR.length; ++i)
+        {
+            this.horasR[i] = 0;
+        }
+    }
+    
     //calcula el indice de masa corporal
     public float calcularIMC()
     {

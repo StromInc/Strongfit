@@ -60,10 +60,9 @@ public class sLogIn extends HttpServlet {
                 if(tipo.equals("medico")){
                     resultado = objconexion.cargadedatos(idUser, tipo);
                 if(resultado.next()){
+                    int idMedico = resultado.getInt("idMedico");
                     int cedula = resultado.getInt("cedulaProf");
                     int edad = resultado.getInt("edad");
-                    String cedula1 = Integer.toString(cedula);
-                    String edad1 = Integer.toString(edad);
                     int sexo = resultado.getInt("idSexo"); //En la base dice idSexo no sexo 
                     String nombre = resultado.getString("nombre");
                     String carrera = resultado.getString("carrera");
@@ -73,10 +72,11 @@ public class sLogIn extends HttpServlet {
                     String colonia = resultado.getString("colonia");
                     //variables de sesion
                     sesion.setAttribute("nombre",nombre);
-                    sesion.setAttribute("cedula", cedula1 );
+                    sesion.setAttribute("idMedico", idMedico);
+                    sesion.setAttribute("cedula", cedula);
                     sesion.setAttribute("escuela", escuela);
                     sesion.setAttribute("carrera", carrera);
-                    sesion.setAttribute("edad", edad1);
+                    sesion.setAttribute("edad", edad);
                     sesion.setAttribute("sexo", sexo);
                     sesion.setAttribute("estado", estado);
                     sesion.setAttribute("municipio", municipio);
@@ -86,30 +86,28 @@ public class sLogIn extends HttpServlet {
                 }else{
                     tipo = "paciente";
                     resultado = objconexion.cargadedatos(idUser, tipo);
-                    if(resultado.next()){  
+                    if(resultado.next()){
+                        int idPaciente = resultado.getInt("idPaciente");
                         int peso = resultado.getInt("peso");
                         int edad = resultado.getInt("edad");
                         int sexo = resultado.getInt("idSexo"); //en la base es idSexousuario
                         int salud = resultado.getInt("idSalud");
-                        String idCont = resultado.getString("idConteo");
+                        int idCont = resultado.getInt("idConteo");
                         String nombre = resultado.getString("nombre");
                         int estatura = resultado.getInt("estatura");
                         int cintura = resultado.getInt("medidaCintura");
                         String estado = resultado.getString("estado");
                         String municipio = resultado.getString("municipio");
                         String colonia = resultado.getString("colonia");
-                        String edad1 = Integer.toString(edad);
-                        String peso1 = Integer.toString(peso);
-                        String estatura1 = Integer.toString(estatura);
-                        String cintura1 = Integer.toString(cintura);
                         //variables de sesion
+                        sesion.setAttribute("idPaciente", idPaciente);
                         sesion.setAttribute("nombre",nombre); 
                         sesion.setAttribute("idcont", idCont); //el id del conteo calorico
                         sesion.setAttribute("salud", salud);
-                        sesion.setAttribute("peso", peso1 );
-                        sesion.setAttribute("estatura", estatura1);
-                        sesion.setAttribute("cintura", cintura1);
-                        sesion.setAttribute("edad", edad1);
+                        sesion.setAttribute("peso", peso);
+                        sesion.setAttribute("estatura", estatura);
+                        sesion.setAttribute("cintura", cintura);
+                        sesion.setAttribute("edad", edad);
                         sesion.setAttribute("sexo", sexo);
                         sesion.setAttribute("estado", estado);
                         sesion.setAttribute("municipio", municipio);

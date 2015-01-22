@@ -47,6 +47,7 @@ public class sPerfilDeUsuario extends HttpServlet {
             clases.cConexion objconexion = new clases.cConexion();
             objconexion.conectar();
             String idUser = (String)sesion.getAttribute("idUsr");
+            int idPaciente = (Integer)sesion.getAttribute("idPaciente");
             String nombre = request.getParameter("name");
             String idUsr = request.getParameter("email");
             String pass = request.getParameter("contra");
@@ -54,47 +55,65 @@ public class sPerfilDeUsuario extends HttpServlet {
             String estatura = request.getParameter("estatura");
             String cintura = request.getParameter("cintura");
             String edad = request.getParameter("edad");
+            
+            int edad2 = Integer.parseInt(edad);
+            int peso2 = Integer.parseInt(peso);
+            int cintura2 = Integer.parseInt(cintura);
+            int estatura2 = Integer.parseInt(estatura);
             int sexo = Integer.parseInt(request.getParameter("sexo"));
             int ocupacion = Integer.parseInt(request.getParameter("ocupacion"));
             int actividad = Integer.parseInt(request.getParameter("actividad"));
-            String d[] = request.getParameterValues("dias");
+            String d[], hrs[];
+            int horasR[], dias[];
+            d = request.getParameterValues("dias");
             int con = 0;
-            for(int i = 0; i < d.length; ++i)
-            {
-                con++;
-            }
-            int dias[] = new int[con];
-            for(int i = 0; i < dias.length; ++i)
-            {
-                dias[i] = Integer.parseInt(d[i]);
-            }
-            String hrs[] = request.getParameterValues("horas");
             
-            ArrayList<Integer> horas = new ArrayList();
-            for(int i = 0; i < hrs.length; ++i)
+            System.out.println("=====================================");
+            System.out.println(actividad);
+            System.out.println("=====================================");
+            cSugerirDietas sugerir;
+            
+            if(actividad != 1)
             {
-                if(!hrs[i].equals(""))
+                for(int i = 0; i < d.length; ++i)
                 {
-                    System.out.println("ESTE ES EL VALOR DE HRS: " + hrs[i]);
-                    horas.add(Integer.parseInt(hrs[i]));
+                    con++;
                 }
+                dias = new int[con];
+                for(int i = 0; i < dias.length; ++i)
+                {
+                    dias[i] = Integer.parseInt(d[i]);
+                }
+                hrs = request.getParameterValues("horas");
+
+                ArrayList<Integer> horas = new ArrayList();
+                for(int i = 0; i < hrs.length; ++i)
+                {
+                    if(!hrs[i].equals(""))
+                    {
+                        System.out.println("ESTE ES EL VALOR DE HRS: " + hrs[i]);
+                        horas.add(Integer.parseInt(hrs[i]));
+                    }
+                }
+                horasR = new int[horas.size()];
+                for(int i = 0; i < horasR.length; ++i)
+                {
+                    horasR[i] = horas.get(i);
+                }
+                sugerir = new cSugerirDietas(idUser, edad2, peso2, cintura2, estatura2, sexo, actividad, dias, horasR, ocupacion);
             }
-            int horasR[] = new int[horas.size()];
-            for(int i = 0; i < horasR.length; ++i)
-            {
-                horasR[i] = horas.get(i);
-            }
+            else
+                sugerir = new cSugerirDietas(idUser, edad2, peso2, cintura2, estatura2, sexo, actividad, ocupacion);
+            
+            
             String estado = request.getParameter("estado");
             String municipio = request.getParameter("municipio");
             String colonia = request.getParameter("colonia");
             String verificacion = "";
             
             //Calculamos el estado de salud del paciente y las calorias que debe de consumir para estar saludable
-            int edad2 = Integer.parseInt(edad);
-            int peso2 = Integer.parseInt(peso);
-            int cintura2 = Integer.parseInt(cintura);
-            int estatura2 = Integer.parseInt(estatura);
-            cSugerirDietas sugerir = new cSugerirDietas(idUser, edad2, peso2, cintura2, estatura2, sexo, actividad, dias, horasR, ocupacion);
+
+            
             float imc = sugerir.calcularIMC();
             int estadoSalud = sugerir.estadoSalud(imc);
             System.out.println("ESTE ES EL ESTADO DE SALUD" + estadoSalud);
@@ -103,22 +122,23 @@ public class sPerfilDeUsuario extends HttpServlet {
             //Guardamos
             for(int i = 0; i < kcalorias.length; ++i)
             {
+                System.out.println("###########################################");
                 System.out.println(kcalorias[i]);
-                objconexion.modificarCalorias(idUser, kcalorias[i], (i+1), horasS[i], actividad, ocupacion);
+                objconexion.modificarCalorias(idPaciente, kcalorias[i], (i+1), horasS[i], actividad, ocupacion);
             }
             
            // Conectar a la base de datos
             try{
              // verificar si el nuevo correo esta disponible
              if(idUser.equals(idUsr)){
-             objconexion.cambioUsuario(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, estadoSalud, estado, municipio, colonia);
+             objconexion.cambioUsuario(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, estadoSalud, estado, municipio, colonia, idPaciente);
              sesion.setAttribute("idUsr",idUser);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
-                 sesion.setAttribute("peso", peso );
-                 sesion.setAttribute("estatura", estatura);
-                 sesion.setAttribute("cintura", cintura);
-                 sesion.setAttribute("edad", edad);
+                 sesion.setAttribute("peso", peso2);
+                 sesion.setAttribute("estatura", estatura2);
+                 sesion.setAttribute("cintura", cintura2);
+                 sesion.setAttribute("edad", edad2);
                  sesion.setAttribute("sexo", sexo);
                  sesion.setAttribute("estado", estado);
                  sesion.setAttribute("municipio", municipio);
@@ -128,14 +148,14 @@ public class sPerfilDeUsuario extends HttpServlet {
              }else{
              verificacion = objconexion.cambiarcorreo(idUser);
              if(verificacion.equals("libre")){
-             objconexion.cambioUsuarioConCorreo(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, estado, municipio, colonia, idUsr, estadoSalud);
+             objconexion.cambioUsuarioConCorreo(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, estado, municipio, colonia, idUsr, estadoSalud, idPaciente);
              sesion.setAttribute("idUsr",idUsr);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
-                 sesion.setAttribute("peso", peso );
-                 sesion.setAttribute("estatura", estatura);
-                 sesion.setAttribute("cintura", cintura);
-                 sesion.setAttribute("edad", edad);
+                 sesion.setAttribute("peso", peso2);
+                 sesion.setAttribute("estatura", estatura2);
+                 sesion.setAttribute("cintura", cintura2);
+                 sesion.setAttribute("edad", edad2);
                  sesion.setAttribute("sexo", sexo);
                  sesion.setAttribute("estado", estado);
                  sesion.setAttribute("municipio", municipio);

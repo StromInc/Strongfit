@@ -1,4 +1,4 @@
-function deplegarDias()
+function desplegarDias()
 {
     $(function(){
         if($('#select-actividad').val() !== "" && $('#select-actividad').val() !== 1)
@@ -11,6 +11,11 @@ function deplegarDias()
             {
                 $('#div-actividadTiempo').addClass("invisible");
             }
+        }
+        
+        if($('#select-actividad').val() == 1)
+        {
+            $('#div-actividadTiempo').addClass("invisible");
         }
     });
 }

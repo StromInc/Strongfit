@@ -15,11 +15,12 @@
     HttpSession sesion = request.getSession();
     String nombre = (String)sesion.getAttribute("nombre");
     String idUsr = (String)sesion.getAttribute("idUsr");
+    int idPaciente = (Integer)sesion.getAttribute("idPaciente");
     String pass = (String)sesion.getAttribute("pass");
-    String peso = (String)sesion.getAttribute("peso");
-    String estatura = (String)sesion.getAttribute("estatura");
-    String cintura = (String)sesion.getAttribute("cintura");
-    String edad = (String)sesion.getAttribute("edad");
+    int peso = (Integer)sesion.getAttribute("peso");
+    int estatura = (Integer)sesion.getAttribute("estatura");
+    int cintura = (Integer)sesion.getAttribute("cintura");
+    int edad = (Integer)sesion.getAttribute("edad");
     int sexo = (Integer)sesion.getAttribute("sexo");
     String estado = (String)sesion.getAttribute("estado");
     String municipio = (String)sesion.getAttribute("municipio");
@@ -57,7 +58,7 @@
     String horas[] = new String[7];
     String seleccionDias[] = new String[7];
     String diasSemana[] = {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"};
-    ResultSet select = conecta.spGetCaloriasPaciente(idUsr);
+    ResultSet select = conecta.spGetCaloriasPaciente(idPaciente);
     for(int i = 0; i < horas.length; ++i)
     {
         horas[i] = "";
@@ -121,22 +122,50 @@
                     <input type = "text" name = "contra" required class = "Section-usr" value="<%=pass%>">
                     <hr>
                     <h2 class = "Article-title">Información nutrimental</h2>
-                    <div class = "div-nutrimental">
-                        <p class = "m1 medidas-p">Peso</p>
-                        <input type = "text" name = "peso" required class = "Section-m" value = "<%=peso%>" placeholder="(Kg)">
-                    </div>
-                    <div class = "div-nutrimental estatura">
-                        <p class = "m2 medidas-p">Estatura</p>
-                        <input type = "text" name = "estatura" required class = "Section-m" value = "<%=estatura%>" placeholder="cm">
-                    </div>
-                    <div class = "div-nutrimental">
-                        <p class = "m3 medidas-p">Cintura</p>
-                        <input type = "text" name = "cintura" required class = "Section-m" value = "<%=cintura%>" placeholder="cm">
-                    </div>
-                    <div class = "div-nutrimental edad">
-                        <p class = "medidas-p">Edad</p>
-                        <input type = "text" name = "edad" required class = "Section-m" value = "<%=edad%>">
-                    </div>
+                    <%
+                        if(peso != 0)
+                        {
+                            %>
+                                <div class = "div-nutrimental">
+                                    <p class = "m1 medidas-p">Peso</p>
+                                    <input type = "text" name = "peso" required class = "Section-m" value = "<%=peso%>" placeholder="(Kg)">
+                                </div>
+                                <div class = "div-nutrimental estatura">
+                                    <p class = "m2 medidas-p">Estatura</p>
+                                    <input type = "text" name = "estatura" required class = "Section-m" value = "<%=estatura%>" placeholder="cm">
+                                </div>
+                                <div class = "div-nutrimental">
+                                    <p class = "m3 medidas-p">Cintura</p>
+                                    <input type = "text" name = "cintura" required class = "Section-m" value = "<%=cintura%>" placeholder="cm">
+                                </div>
+                                <div class = "div-nutrimental edad">
+                                    <p class = "medidas-p">Edad</p>
+                                    <input type = "text" name = "edad" required class = "Section-m" value = "<%=edad%>" placeholder="años">
+                                </div>
+                            <%
+                        }
+                        else
+                        {
+                            %>
+                                <div class = "div-nutrimental">
+                                    <p class = "m1 medidas-p">Peso</p>
+                                    <input type = "text" name = "peso" required class = "Section-m" value = "" placeholder="(Kg)">
+                                </div>
+                                <div class = "div-nutrimental estatura">
+                                    <p class = "m2 medidas-p">Estatura</p>
+                                    <input type = "text" name = "estatura" required class = "Section-m" value = "" placeholder="cm">
+                                </div>
+                                <div class = "div-nutrimental">
+                                    <p class = "m3 medidas-p">Cintura</p>
+                                    <input type = "text" name = "cintura" required class = "Section-m" value = "" placeholder="cm">
+                                </div>
+                                <div class = "div-nutrimental edad">
+                                    <p class = "medidas-p">Edad</p>
+                                    <input type = "text" name = "edad" required class = "Section-m" value = "" placeholder="años">
+                                </div>
+                            <%
+                        }
+                    %>
                     <div class = "div-nutrimental sexo">
                         <p class = "medidas-p">Sexo</p>
                         <select name = "sexo" class = "select-sexo">
@@ -147,7 +176,7 @@
                     </div>
                     <div class="div-nutrimental actividad">
                         <p class = "medidas-p">Actividad Física</p>
-                        <select required name ="actividad" class = "select-actividad" id = "select-actividad" onchange = "deplegarDias();">
+                        <select required name ="actividad" class = "select-actividad" id = "select-actividad" onchange = "desplegarDias();">
                             <option value="">Selcciona actividad</option>
                             <%
                             conecta.conectar();
@@ -172,7 +201,7 @@
                             }
                             %>
                         </select>
-                        <script>deplegarDias();</script>
+                        <script>desplegarDias();</script>
                     </div>
                     <div class = "div-ocupacion">
                         <p class = "medidas-p">Ocupación</p>
@@ -206,13 +235,32 @@
                         </div>
                     </div>
                     <hr>
-                    <h2 class = "Article-title">Tu dirección</h2>
-                    <p class = "personal-p">Estado</p>
-                    <input type = "text" name = "estado" required class = "Section-usr" value = "<%=estado%>">
-                    <p class = "personal-p">Municipio</p>
-                    <input type = "text" name = "municipio" required class = "Section-usr" value = "<%=municipio%>">
-                    <p class = "personal-p">Colonia</p>
-                    <input type = "text" name = "colonia" required class = "Section-usr" value = "<%=colonia%>">
+                    <%
+                        if(estado != null)
+                        {
+                            %>
+                            <h2 class = "Article-title">Tu dirección</h2>
+                            <p class = "personal-p">Estado</p>
+                            <input type = "text" name = "estado" required class = "Section-usr" value = "<%=estado%>">
+                            <p class = "personal-p">Municipio</p>
+                            <input type = "text" name = "municipio" required class = "Section-usr" value = "<%=municipio%>">
+                            <p class = "personal-p">Colonia</p>
+                            <input type = "text" name = "colonia" required class = "Section-usr" value = "<%=colonia%>">
+                            <%
+                        }
+                        else
+                        {
+                            %>
+                            <h2 class = "Article-title">Tu dirección</h2>
+                            <p class = "personal-p">Estado</p>
+                            <input type = "text" name = "estado" required class = "Section-usr" value = "" placeholder="Estado en el que vives">
+                            <p class = "personal-p">Municipio</p>
+                            <input type = "text" name = "municipio" required class = "Section-usr" value = "" placeholder="Municipio en el que vives">
+                            <p class = "personal-p">Colonia</p>
+                            <input type = "text" name = "colonia" required class = "Section-usr" value = "" placeholder="Colonia en la que vives">
+                            <%
+                        }
+                    %>
                     <hr>
                     <input type = "submit" value = "Actualizar" name = "act_usr" class = "btn-act-usr">
                 </form>

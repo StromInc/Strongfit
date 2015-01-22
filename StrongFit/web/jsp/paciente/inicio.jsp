@@ -1,3 +1,7 @@
+<%@page import="clases.cConexion"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -6,9 +10,32 @@
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio.css">
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+        <script src="../../js/buscar-alimento.js"></script>
+        <script src="../../js/acciones_cambiarMetas.js"></script>
     </head>
-    <body>
-        <%@include file = "barra_menu.jsp" %>   
+ <body onload="cambiarMetas();">
+        <%
+            HttpSession sesion = request.getSession();
+            int idPaciente = (Integer)sesion.getAttribute("idPaciente");
+            int idCon = (Integer)sesion.getAttribute("idcont");
+            
+            Calendar c2 = new GregorianCalendar();
+            
+            int dia = c2.get(Calendar.DAY_OF_WEEK);
+            int caloriasdia = 0;
+            
+            cConexion conecta = new cConexion();
+            conecta.conectar();
+            ResultSet rs = conecta.spGetCaloriasPacienteEspecifico(idPaciente, dia);
+            if(rs.next())
+            {
+                caloriasdia = rs.getInt("calorias");
+            }
+        %>
+        <%@include file = "barra_menu.jsp" %>
+        <form id = "formularioOculto">
+            <input type="hidden" name="idCon" value="<%=idCon%>">
+        </form>
         <section class="Section-todo">
             <!--Esta es la seccion de la barra de busqueda, el sabias que y el conteo calorico-->
             <article class = "Article-menu">
@@ -41,17 +68,17 @@
                         <div class = "meta estadisticas">
                             Meta
                             <hr>
-                            <p>1800kc</p>
+                            <p id="metaCalorias"><%=caloriasdia%></p>
                         </div>
                         <div class = "consumido estadisticas">
                             Consumido
                             <hr>
-                            <p>1300kc</p>
+                            <p id="consumido"></p>
                         </div>
                         <div class = "faltante estadisticas">
                             Falta
                             <hr>
-                            <p>500kc</p>
+                            <p id="falta"></p>
                         </div>
                     </div>
                 </article>
@@ -77,6 +104,6 @@
                 Aqui van los articulos que los medicos escriben para hacerse mas populares y asi tener mas clientes
             </article>
         </section>
-        <script src="../../js/buscar-alimento.js"></script>
+        
     </body>
 </html>
