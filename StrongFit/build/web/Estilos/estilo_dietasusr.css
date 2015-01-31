@@ -11,10 +11,7 @@
     padding: 1em;
     text-align: center;
     width: 50%;
-    -webkit-box-shadow: .5em .5em 2em black;
-    -moz-box-shadow: .5em .5em 2em black;
-    -o-box-shadow: .5em .5em 2em black;
-    -ms-box-shadow: .5em .5em 2em black;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .Figure-dietas
@@ -46,10 +43,7 @@
     min-height: 10em;
     vertical-align: top;
     margin-left: 10%;
-    -webkit-box-shadow: .5em .5em 2em black;
-    -moz-box-shadow: .5em .5em 2em black;
-    -o-box-shadow: .5em .5em 2em black;
-    -ms-box-shadow: .5em .5em 2em black;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 

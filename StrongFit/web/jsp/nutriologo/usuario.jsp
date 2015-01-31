@@ -4,7 +4,6 @@
     <head>
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
-        <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_nutriologo.css">
     </head>
     <%
     HttpSession sesion = request.getSession();
@@ -43,17 +42,24 @@
             </article> 
             <article class = "Article-tbl-usr">
                 <form action = "/StrongFit/sPerfilDeMedico" method = "post">
-                    <hr>
-                    <h2 class = "Article-title" style="font-size: 1.5em;">Información de cuenta</h2>
+                    <nav class="Menu">
+                        <ul class="Menu-list">
+                            <li class="Menu-item"><a href="#" id="link_1" class="activo">1</a></li>
+                            <li class="Menu-item"><a href="#" id="link_2">2</a></li>
+                            <li class="Menu-item"><a href="#" id="link_3">3</a></li>
+                        </ul>
+                    </nav>      
+                    <div class="prueba is-active" id="formu_1">          
+                    <h2 class = "Article-title">Información de cuenta</h2>
                     <p class = "personal-p">Nombre</p>
                     <input type = "text" name = "txt-name" required class = "Section-usr" placeholder="" value="<%=nombre%>">
                     <p class = "personal-p">Correo</p>
                     <input type = "email" name = "txt-email" required class = "Section-usr" placeholder="" value="<%=idUsr%>">
                     <p class = "personal-p">Contraseña</p>
                     <input type = "text" name = "txt-pass" required class = "Section-usr" placeholder="" value="<%=pass%>">
-                    <hr>
-                    
-                    <h2>Información pública</h2>
+                    </div>
+                    <div class="prueba" id="formu_2">
+                    <h2 class = "Article-title">Información pública</h2>
                     <div class="div-edad">
                         <p class = "medidas-p">Edad</p>
                         <input type = "text" name = "edad" required class = "Section-m" placeholder = "" value="<%=edad%>">
@@ -72,7 +78,8 @@
                     <input type = "text" name = "school" required class = "Section-usr" placeholder="" value="<%=escuela%>">
                     <p class = "personal-p">Carrera</p>
                     <input type = "text" name = "carrier" required class = "Section-usr" placeholder="" value="<%=carrera%>">
-                    <hr>
+                    </div>
+                    <div class="prueba" id="formu_3">
                     <h2 class = "Article-title">Tu dirección</h2>
                     <p class = "personal-p">Estado</p>
                     <input type = "text" name = "estado" required class = "Section-usr" placeholder = "" value="<%=estado%>">
@@ -80,11 +87,12 @@
                     <input type = "text" name = "municipio" required class = "Section-usr" placeholder = "" value="<%=municipio%>">
                     <p class = "personal-p">Colonia</p>
                     <input type = "text" name = "colonia" required class = "Section-usr" placeholder = "" value="<%=colonia%>">
+                    </div>
                     <hr>
                     <input type = "submit" value = "Actualizar" name = "act_usr" class = "btn-act-usr">
                 </form>
             </article>
         </section>
-        
+        <script src="../../js/acciones_perfil.js"></script>
     </body>
 </html>

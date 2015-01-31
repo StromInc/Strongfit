@@ -105,7 +105,7 @@
                         <div class = "diasDieta" id="domingoDieta">
                             <div class="desalluno">
                                 <h2>
-                                    Desalluno
+                                    Desayuno
                                 </h2>
                                 <div class="espacioDieta" id ="DesallunoDomingo" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
