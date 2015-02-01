@@ -1,375 +1,301 @@
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
-.Section-tbl-usr
-{
-    margin-top: 4em;
-    text-align: center;
+a.activo {
+  background: #01579b;
+  color: #fff;
 }
-
-.Article-tbl-usr
-{
-    display: inline-block;
-    background-color: white;
-    margin-left: 15%;
-    padding: 0 1em 2em 1em;
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
-    width: 23em;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+.Section-tbl-usr {
+  margin: 0 0.5em;
+  margin-top: 4em;
+  margin-bottom: 1em;
+  text-align: center;
 }
-.prueba{
-    display: none;
+.Article-tbl-usr {
+  display: inline-block;
+  background-color: #fff;
+  padding: 0 1em 2em 1em;
+  margin-bottom: 1.5em;
+  max-width: 30em;
+  margin-left: 5em;
+  margin-top: 1.5em;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-.is-active{
-    display: block;
+.Article-tbl-usr h2 {
+  color: #198627;
 }
-.personal-p
-{
-    margin: 2em 0 0 1em;
-    color: black;
-    text-align: left;
-    display: block;
+.Article-tbl-usr hr {
+  margin-top: 3em;
 }
-
-.medidas-p
-{
-    display: inline-block;
-    float: left;
-    margin: 1em 0 0 0;
-    padding-left: 1em;
-    color: black;
-    text-align: center;
-    display: block;
+.prueba {
+  display: none;
+  max-width: 30em;
 }
-
-.Article-tbl-usr h2
-{
-    color: #198627;
+.is-active {
+  display: inline-block;
+  width: 100%;
 }
-
-.Article-tbl-usr hr
-{
-    margin-top: 3em;
+.personal-p {
+  margin: 2em 0 0 1em;
+  color: #000;
+  text-align: left;
+  display: block;
 }
-
-.Article-title
-{
-    font-size: 1.3em;
-    border-top: 1px solid #CBCBCB;
-    padding-top: 1em;
+.medidas-p {
+  display: inline-block;
+  float: left;
+  margin: 1em 0 0 0;
+  padding-left: 1em;
+  color: #000;
+  text-align: center;
+  display: block;
 }
-.Menu-list{
-    list-style: none;
-    padding: 0;
+.Article-title {
+  font-size: 1.3em;
+  border-top: 1px solid #cbcbcb;
+  padding-top: 1em;
 }
-.Menu-item{
-    display: inline-block;
+.Menu-list {
+  list-style: none;
+  padding: 0;
 }
-.Menu-item a{
-    padding: 0.5em 1.2em;
-    border-radius: 0.5em;
+.Menu-item {
+  display: inline-block;
 }
-.Menu-item a:hover{
-    background: #016CC0;
-    color: white;
+.Menu-item a {
+  padding: 0.5em 1.2em;
+  -webkit-border-radius: 0.5em;
+  border-radius: 0.5em;
 }
-a.activo{
-    background: #01579B;
-    color: white;
+.Menu-item a:hover {
+  background: #016cc0;
+  color: #fff;
 }
-.Section-usr
-{
-    width: 20em;
-    padding: .7em;
-    border-radius: 10px;
-    border: solid;
-    border-width: thin;
-    border-color: #D2D4D5;
+.Section-usr {
+  width: 20em;
+  padding: 0.7em;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: solid;
+  border-width: thin;
+  border-color: #d2d4d5;
 }
-
-.Section-m
-{
-    width: 5em;
-    padding: .7em;
-    border-radius: 10px;
-    border: solid;
-    border-width: thin;
-    border-color: #D2D4D5;
+.Section-m {
+  width: 5em;
+  padding: 0.7em;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: solid;
+  border-width: thin;
+  border-color: #d2d4d5;
 }
-
-.btn-act-usr
-{
-    background-color: #01579B;
-    color: white;
-    font-size: 1.3em;
-    display: inline-block;
-    padding: .8em 2em;
-    border: none;
-    margin-top: 1.4em;
-    border-radius: 10px;
+.btn-act-usr {
+  background-color: #01579b;
+  color: #fff;
+  font-size: 1.3em;
+  display: inline-block;
+  padding: 0.8em 2em;
+  border: none;
+  margin-top: 1.4em;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
-
-.img-usr
-{
-    width: 15em;
-    height: 15em;
-    border: 1px solid #F9F9F9;
+.img-usr {
+  width: 15em;
+  height: 15em;
+  border: 1px solid #f9f9f9;
 }
-
-.btn-imagen
-{
-    background-color: #01579B;
-    color: white;
-    font-size: 1.3em;
-    display: inline-block;
-    padding: .4em 2em;
-    border: none;
-    margin-top: 1.4em;
-    border-radius: 10px;
+.btn-imagen {
+  background-color: #01579b;
+  color: #fff;
+  font-size: 1.3em;
+  display: inline-block;
+  padding: 0.4em 2em;
+  border: none;
+  margin-top: 1.4em;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
-
-.Article-tbl-usr2
-{
-    display: inline-block;
-    background-color: white;
-    padding: 2em;
-    width: 15em;
-    vertical-align: top;
-    text-align: center;
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+.Article-tbl-usr2 {
+  display: inline-block;
+  background-color: #fff;
+  padding: 2em;
+  max-width: 15em;
+  vertical-align: top;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-
 .Section-usr:focus,
 .Section-m:focus,
-.Section-h:focus
-{
-   outline: none;
-   box-shadow: 0px 0px 10px #0C98A2;
+.Section-h:focus {
+  outline: none;
+  -webkit-box-shadow: 0px 0px 10px #0c98a2;
+  box-shadow: 0px 0px 10px #0c98a2;
 }
-
-.div-edad
-{
-    display: inline-block;
-    width: 6.6em;
-    margin-right: 1.8em; 
+.div-edad {
+  display: inline-block;
+  width: 6.6em;
 }
-
-.div-sexo
-{
-    display: inline-block;
-    width: 13em;
+.div-sexo {
+  display: inline-block;
+  width: 13em;
 }
-
-.div-informacion
-{
-    width: 15em;
-    display: inline-block;
-    vertical-align: top;
+.div-informacion {
+  width: 15em;
+  display: inline-block;
+  vertical-align: top;
 }
-
-.div-informacion h2
-{
-    color: #198627
+.div-nutrimental {
+  display: inline-block;
+  width: 6.5em;
 }
-
-.div-nutrimental
-{
-    display: inline-block;
-    width: 6.5em;
+.select-sexo {
+  padding: 0.59em 2.9em;
 }
-
-.select-sexo
-{
-    padding: 0.59em 2.9em;
+.estatura {
+  margin: 0 1em;
 }
-
-.estatura
-{
-    margin: 0 1em;
+.sexo {
+  width: 13.2em;
 }
-
-.sexo
-{
-    width: 13.2em;
+.edad {
+  margin-right: 2em;
 }
-
-.edad
-{
-    margin-right: 2em;
+.select-actividad {
+  padding: 0.59em 0;
 }
-
-.actividad
-{
-    width: 11em; 
+.horas {
+  width: 6em;
 }
-
-.select-actividad
-{
-    padding: .59em 0;
+.input-horas {
+  width: 7.5em;
+  margin-left: 3.2em;
 }
-
-.horas
-{
-    width: 6em;
+.div-actividadTiempo {
+  text-align: center;
+  margin-top: 1em;
 }
-
-.input-horas
-{
-    width: 7.5em;
-    margin-left: 3.2em;
+.div-actividadTiempo label {
+  padding: 0.5em 0.2em;
+  background-color: rgba(23,113,40,0.4);
+  margin-top: 0.5em;
+  display: inline-block;
+  width: 4.5em;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
 }
-
-.div-actividadTiempo
-{
-    text-align: center;
-    margin-top: 1em;
+.div-actividadTiempo label:hover {
+  background-color: rgba(23,113,40,0.9);
 }
-
 .div-Semana,
 #contenedor-dias1,
-#contenedor-dias2
-{
-    display: inline-block;
-    width: 9em;
+#contenedor-dias2 {
+  display: inline-block;
+  width: 9em;
 }
-
 #contenedor-dias1,
-#contenedor-dias2
-{
-    text-align: left;
+#contenedor-dias2 {
+  text-align: left;
 }
-
-#contenedor-dias1
-{
-    margin-right: 1em;
+#contenedor-dias1 {
+  margin-right: 1em;
 }
-
-#contenedor-dias2
-{
-    vertical-align: top;
+#contenedor-dias2 {
+  vertical-align: top;
 }
-
-.div-dia
-{
-    display: none;
+.div-dia {
+  display: none;
 }
-
-.div-actividadTiempo label
-{
-    padding: .5em .2em;
-    background-color: rgba(23, 113, 40, .4);
-    margin-top: .5em;
-    display: inline-block;
-    width: 4.5em;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
+.Section-h {
+  width: 3.3em;
+  padding: 0.45em 0.2em;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border: solid;
+  border-width: thin;
+  border-color: #d2d4d5;
+  margin-left: 0.2em;
 }
-
-.div-actividadTiempo label:hover
-{
-    background-color: rgba(23, 113, 40, .9);
+.div-ocupacion {
+  width: 10em;
+  display: inline-block;
+  margin-left: 1em;
 }
-
-.Section-h
-{
-    width: 3.3em;
-    padding: .45em .2em;
-    border-radius: 6px;
-    border: solid;
-    border-width: thin;
-    border-color: #D2D4D5;
-    margin-left: .2em;
+.select-ocupacion {
+  width: 9.45em;
+  display: inline-block;
+  padding: 0.59em 0;
 }
-
-.div-ocupacion
-{
-    width: 10em;
-    display: inline-block;
-    margin-left: 1em;
+.select-ocupacion option {
+  width: 10em;
+  max-width: 10em;
 }
-
-.select-ocupacion
-{
-    width: 9.45em;
-    display: inline-block;
-    padding: .59em 0;
+.micha {
+  width: 50%;
+  display: inline-block;
+  font-size: 1.1rem;
 }
-
-.select-ocupacion option
-{
-    width: 10em;
-    max-width: 10em;
+.diaCalorias {
+  background-color: rgba(23,113,40,0.9);
+  padding: 0.5em 0;
+  margin-top: 1em;
+  display: inline-block;
+  width: 5.5em;
+  text-align: center;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
-
-.micha
-{
-    width: 50%;
-    display: inline-block;
-    font-size: 1.1rem;
+.caloriasPaciente {
+  background-color: #fff;
+  padding: 0.5em 0;
+  margin-top: 1em;
+  display: inline-block;
+  width: 6.5em;
+  text-align: center;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
-
-.diaCalorias
-{
-    background-color: rgba(23, 113, 40, .9);
-    padding: .5em 0;
-    margin-top: 1em;
-    display: inline-block;
-    width: 5.5em;
-    text-align: center;
-    border-radius: 5px;
-}
-
-.caloriasPaciente
-{
-    background-color: white;
-    padding: .5em 0;
-    margin-top: 1em;
-    display: inline-block;
-    width: 6.5em;
-    text-align: center;
-    border-radius: 5px;
-}
-
 #dom:checked ~ #dom-label,
 #lun:checked ~ #lun-label,
 #mar:checked ~ #mar-label,
 #mie:checked ~ #mie-label,
 #jue:checked ~ #jue-label,
 #vie:checked ~ #vie-label,
-#sab:checked ~ #sab-label
-{
-    background-color: rgba(23, 113, 40, .9);
+#sab:checked ~ #sab-label {
+  background-color: rgba(23,113,40,0.9);
 }
-
 #dom:checked ~ #dom-horas2,
 #lun:checked ~ #lun-horas2,
 #mar:checked ~ #mar-horas2,
 #mie:checked ~ #mie-horas2,
 #jue:checked ~ #jue-horas2,
 #vie:checked ~ #vie-horas2,
-#sab:checked ~ #sab-horas2
-{
-    display: inline-block;
+#sab:checked ~ #sab-horas2 {
+  display: inline-block;
 }
-
-/*------------------------------------Esto es manipulado por javascript------------------------------------------*/
-
-.invisible
-{
-    display: none;
+.invisible {
+  display: none;
 }
-
-
-
-
-
-
-
-
-
-
-
+@media screen and (max-width: 767px) {
+  .Section-usr {
+    width: 90%;
+  }
+  .Section-tbl-usr {
+    margin-top: 6em;
+  }
+  .Article-tbl-usr {
+    margin: 0 auto;
+    padding-top: 1em;
+    display: block;
+  }
+}
+@media screen and (max-width: 480px) {
+  .Section-tbl-usr {
+    margin-top: 9em;
+  }
+}

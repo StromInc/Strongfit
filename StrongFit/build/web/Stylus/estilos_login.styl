@@ -1,12 +1,15 @@
-@import "nib"
+@import "nib/vendor"
+@import "nib/gradients"
 @import "normalize.styl"
 azul = #01579B
 azulBorde = #083481
 verdeHeader = #1B5E20
 azulHover = #0042B6
 gris = #F9F9F9
+vendor-prefixes = webkit o ms moz official
 .Header
    background-color verdeHeader
+   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
    height 96px
    color white
    padding-left 1em
