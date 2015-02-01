@@ -1,51 +1,51 @@
-.Section-dietas
-{
-    margin-top: 4em;
-    text-align: center;
+.Section-dietas {
+  margin-top: 5em;
+  text-align: center;
 }
-
-.Article-dietas
-{
-    display: inline-block;
-    background-color: rgba(145, 145, 145, 0.8);
-    padding: 1em;
-    text-align: center;
-    width: 50%;
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+.Article-dietas {
+  display: inline-block;
+  background-color: #fff;
+  padding: 1.5em;
+  text-align: center;
+  width: 50%;
+  float: left;
+  margin-left: 1em;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-
-.Figure-dietas
-{
-    text-align: center;
-    margin: 2em 1em;
-    color: white;
-    display: inline-block;
-    background-color: #3266AB;
-    padding: .3rem;
-    border-radius: 5px;
-    cursor: move;
-    width: 10em;
+.Figure-dietas {
+  text-align: center;
+  margin: 2em 1em;
+  color: #fff;
+  display: inline-block;
+  background-color: #3266ab;
+  padding: 0.3rem;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  cursor: move;
+  width: 10em;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-
-.img-dietas
-{
-    width: 90%;
-    height: 8em;
+.img-dietas {
+  width: 90%;
+  height: 8em;
 }
-
-.Article-usr
-{
-    display: inline-block;
-    background-color: rgba(145, 145, 145, 0.8);
-    padding: 1em;
-    text-align: center;
-    width: 30%;
-    min-height: 10em;
-    vertical-align: top;
-    margin-left: 10%;
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+.Article-usr {
+  display: inline-block;
+  background-color: #fff;
+  padding: 1em;
+  text-align: center;
+  width: 30%;
+  min-height: 10em;
+  vertical-align: top;
+  margin-right: 1.5em;
+  float: right;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-
-
+@media screen and (max-width: 767px) {
+  .Section-dietas {
+    margin-top: 6em;
+  }
+}
