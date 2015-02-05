@@ -48,7 +48,7 @@
             <article class="Article-dietas invisible tamano" id = "buscarAlimentos">
                 <p class="contenedor-search">
                     <span class = "span-search"><label class = "icon-search label-search" for = "buscar"></label></span>
-                    <span class = "search"><input type="search" placeholder = "buscar alimentos ..." class = "input-search" id = "buscar"></span>
+                    <input type="search" placeholder = "buscar alimentos ..." class = "input-search" id = "buscar">
                 </p>
                 <div class = "contenedor-resultados">
                     <div class = "resultado" id = "resultado1" draggable = "true" ondragstart="drag(event)">

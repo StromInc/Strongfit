@@ -102,200 +102,6 @@ figure {
 }
 hr {
   -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 0;
-}
-pre {
-  overflow: auto;
-}
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
-button,
-input,
-optgroup,
-select,
-textarea {
-  color: inherit;
-  font: inherit;
-  margin: 0;
-}
-button {
-  overflow: visible;
-}
-button,
-select {
-  text-transform: none;
-}
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  -webkit-appearance: button;
-  cursor: pointer;
-}
-button[disabled],
-html input[disabled] {
-  cursor: default;
-}
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-input {
-  line-height: normal;
-}
-input[type="checkbox"],
-input[type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
-}
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-input[type="search"] {
-  -webkit-appearance: textfield;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-}
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-fieldset {
-  border: 1px solid #c0c0c0;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
-}
-legend {
-  border: 0;
-  padding: 0;
-}
-textarea {
-  overflow: auto;
-}
-optgroup {
-  font-weight: bold;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-td,
-th {
-  padding: 0;
-}
-/* normalize.css v3.0.0 | MIT License | git.io/normalize */
-html {
-  font-family: 'Varela Round', sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-a:link {
-  color: #9f0;
-}
-a:visited {
-  color: #9c6;
-}
-a:active {
-  color: #9f0;
-}
-a:hover {
-  color: #c3ff68;
-}
-body {
-  margin: 0;
-  font-size: 16px;
-  background-color: #e8f5e9;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-main,
-nav,
-section,
-summary {
-  display: block;
-}
-audio,
-canvas,
-progress,
-video {
-  display: inline-block;
-  vertical-align: baseline;
-}
-audio:not([controls]) {
-  display: none;
-  height: 0;
-}
-[hidden],
-template {
-  display: none;
-}
-a {
-  background: transparent;
-}
-a:active,
-a:hover {
-  outline: 0;
-}
-abbr[title] {
-  border-bottom: 1px dotted;
-}
-b,
-strong {
-  font-weight: bold;
-}
-dfn {
-  font-style: italic;
-}
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-mark {
-  background: #ff0;
-  color: #000;
-}
-small {
-  font-size: 80%;
-}
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-sup {
-  top: -0.5em;
-}
-sub {
-  bottom: -0.25em;
-}
-img {
-  border: 0;
-}
-svg:not(:root) {
-  overflow: hidden;
-}
-figure {
-  margin: 1em 40px;
-}
-hr {
-  -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
@@ -394,6 +200,8 @@ th {
 }
 .Header {
   background-color: #1b5e20;
+  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   height: 96px;
   color: #fff;
   padding-left: 1em;
@@ -407,16 +215,18 @@ th {
   position: absolute;
   top: 2em;
   right: 20px;
-  background: #01579b;
-  border: 1px solid #083481;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  background: #0070c8;
+  border: none;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   padding: 0.3rem 1rem;
   color: #fff;
   display: none;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .Header-button:hover {
-  background: #0042b6;
+  background: #01579b;
 }
 .Header-title {
   font-weight: normal;
@@ -453,7 +263,7 @@ th {
   box-shadow: 0px 0px 10px #0c98a2;
 }
 .Header-submit {
-  background-color: #01579b;
+  background-color: #0070c8;
   color: #fff;
   font-size: 0.9rem;
   display: inline-block;
@@ -461,10 +271,12 @@ th {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   margin: 0 auto;
-  border: 1px solid #083481;
+  border: none;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .Header-submit:hover {
-  background: #0042b6;
+  background: #01579b;
 }
 .Header-mail,
 .Header-pass {
@@ -488,8 +300,8 @@ th {
   border-radius: 10px 10px 0px 0px;
   padding: 0.5em 0.5em 3em 0.5em;
   max-width: 30em;
-  -webkit-box-shadow: 0.5em 0.5em 2em #000;
-  box-shadow: 0.5em 0.5em 2em #000;
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   text-align: center;
 }
 .Section-login {
@@ -515,7 +327,7 @@ th {
   box-shadow: 0px 0px 10px #0c98a2;
 }
 .Section-submit {
-  background-color: #01579b;
+  background-color: #0070c8;
   color: #fff;
   font-size: 1.3em;
   display: inline-block;
@@ -524,12 +336,13 @@ th {
   margin-top: 1.4em;
   margin-bottom: 1em;
   margin-left: 30px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  border: 1px solid #083481;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .Section-submit:hover {
-  background: #0042b6;
+  background: #01579b;
 }
 .Section-form p {
   width: 14rem;
@@ -553,6 +366,8 @@ th {
   margin-left: 5em;
   margin-top: 5em;
   vertical-align: top;
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 .Footer {
   color: #fff;
@@ -560,6 +375,8 @@ th {
   text-align: center;
   bottom: 0;
   padding: 2em 0;
+  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 .Footer-parrafo {
   font-size: 1em;
@@ -591,10 +408,12 @@ th {
     right: 0;
     text-align: center;
     padding: 0.5em;
+    -webkit-box-shadow: 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
     -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
     -o-transition: 0.3s;
     -ms-transition: 0.3s;
+    -moz-transition: 0.3s;
     transition: 0.3s;
   }
   .Header-form.is-active {
