@@ -36,10 +36,10 @@
                 <input type = "email" name = "txt-mail" class="Section-mail Section-txt" placeholder = "Correo" required>
                 <input type = "password" name = "txt-pass" class = "Section-pass Section-txt" placeholder="Contraseña" required>
                 <input type = "text" name = "edad" required class = "Section-txt" placeholder = "Edad">
-                <select name = "sexo" class="Section-txt">
+                <select name = "idSexo" class="Section-txt">
                     <option value="" >Seleccion de sexo</option>
                     <option value="1" >Masculino</option>
-                    <option value="2" >femenino</option>
+                    <option value="2" >Femenino</option>
                 </select>
                 <h2 class="Article-title">Tu dirección</h2>
                 <input type="text" name="estado" required class="Section-txt" placeholder="Estado">

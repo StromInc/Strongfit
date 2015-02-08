@@ -1,18 +1,21 @@
-@import "nib"
+@import "nib/vendor"
+@import "nib/gradients"
 @import "normalize.styl"
-azul = #01579B
-azulBorde = #083481
+azul = #0070c8
 verdeHeader = #1B5E20
-azulHover = #0042B6
+azulHover = #01579B
+gris = #F9F9F9
+vendor-prefixes = webkit o ms moz official
 .Header
-   background-color verdeHeader
-   height 96px
-   color white
-   padding-left 1em
-   position fixed
-   top 0
-   right 0
-   left 0
+    background-color verdeHeader
+    box-shadow 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+    height 96px
+    color white
+    padding-left 1em
+    position fixed
+    top 0
+    right 0
+    left 0
 
 .Header-button
     font-size 16px
@@ -20,11 +23,12 @@ azulHover = #0042B6
     top 2em
     right 20px
     background azul
-    border 1px solid azulBorde
-    border-radius 5px
+    border none
+    border-radius 3px
     padding 0.3rem 1rem
     color white
     display none
+    box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
     &:hover
         background azulHover
     
@@ -66,7 +70,8 @@ azulHover = #0042B6
     padding .3rem 1.5rem
     border-radius 5px
     margin 0 auto
-    border 1px solid azulBorde
+    border none
+    box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
     &:hover
         background azulHover
 
@@ -88,7 +93,7 @@ azulHover = #0042B6
     border-radius 10px 10px 0px 0px
     padding .5em .5em 3em .5em
     max-width 30em
-    box-shadow .5em .5em 2em black
+    box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
     text-align center
 
 .Section-login
@@ -120,8 +125,8 @@ azulHover = #0042B6
     margin-top 1.4em
     margin-bottom 1em
     margin-left 30px
-    border-radius 10px
-    border 1px solid azulBorde
+    border-radius 5px
+    box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
     &:hover
         background azulHover
 
@@ -146,6 +151,7 @@ azulHover = #0042B6
     margin-left 5em
     margin-top 5em
     vertical-align top
+    box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
 
 .Footer
     color white
@@ -153,6 +159,7 @@ azulHover = #0042B6
     text-align center
     bottom 0
     padding 2em 0
+    box-shadow 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
 
 .Footer-parrafo
     font-size 1em
@@ -183,6 +190,7 @@ azulHover = #0042B6
             right 0
             text-align center
             padding 0.5em
+            box-shadow 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24)
             transition 0.3s         
             &.is-active
                 top 95px                  
@@ -192,6 +200,8 @@ azulHover = #0042B6
         &-parrafo
           display block  
 @media screen and (max-width: 480px)
+    .Section
+        padding 0.5em
     .Header
         &-title
             display block

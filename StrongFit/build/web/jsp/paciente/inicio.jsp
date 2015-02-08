@@ -40,13 +40,13 @@
             <!--Esta es la seccion de la barra de busqueda, el sabias que y el conteo calorico-->
             <article class = "Article-menu">
                 <p class="contenedor-search">
+                    <input type="search" id="search" name="search" class="search">
                     <span class = "span-search"><label class = "icon-search label-search" for = "buscar"></label></span>
-                    <span class = "search"><input type="search" id="search" name="search" class="search"></span>
                 </p>
-                <div class = "div">
-                    <div class = "content-title">
+                <div class = "content-title">
                         Consumo de hoy
-                    </div>
+                </div>
+                <div class = "div">
                     <div class="content-contador" id = "style-4">
                         <p class = "racion">Huevos con jamón<span class = "calorias"><br>Calorias: 100kc</span></p>
                         <p class = "racion">Huevos con jamón<span class = "calorias"><br>Calorias: 100kc</span></p>
