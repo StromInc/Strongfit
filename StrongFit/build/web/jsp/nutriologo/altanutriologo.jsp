@@ -31,33 +31,33 @@
             <article class="Section-article">
             <h1 class="Section-title">Registrate</h1>
             <form action = "/StrongFit/sAltaDeMedico" method="post" class="Section-form">
-                <div class="cuenta is-active" id="cuenta">             
+                <div class="cuenta is-active" id="formu1">             
                     <h2 class = "Article-title">Información de cuenta</h2>
                     <input type = "text" name = "txt-name" class="Section-nombre Section-txt" placeholder = "Nombre" required>
                     <input type = "email" name = "txt-mail" class="Section-mail Section-txt" placeholder = "Correo" required>
                     <input type = "password" name = "txt-pass" class = "Section-pass Section-txt" placeholder="Contraseña" required>
                     <input type = "text" name = "edad" required class = "Section-txt" placeholder = "Edad">
                     <select name = "idSexo" class="Section-txt" required>
-                        <option value="0" >Seleccion de sexo</option>
+                        <option value="" >Seleccion de sexo</option>
                         <option value="1" >Masculino</option>
                         <option value="2" >Femenino</option>
                     </select>
                 </div>
-                <div class="cuenta">        
+                <div class="cuenta" id="formu2">        
                     <h2 class="Article-title">Tu dirección</h2>
                     <input type="text" name="estado" required class="Section-txt" placeholder="Estado">
                     <input type="text" name="municipio" required class="Section-txt" placeholder="Municipio">
                     <input type="text" name="colonia" required class="Section-txt" placeholder="Colonia">
                 </div>
-                <div class="cuenta">                   
+                <div class="cuenta" id="formu3">                   
                     <h2>Informacion Profesional</h2>
                     <input type= "text" name="plicense" required class= "Section-txt" placeholder="Cedula Profesional">
                     <input type= "text" name="school" required class= "Section-txt" placeholder="Escuela">
                     <input type= "text" name="carrier" required class= "Section-txt" placeholder="Carrera">
                 </div>
-                <input type="button" class="Section-submit prev" value="Prev">
-                <input type="button" class="Section-submit" value="Next">
-                <input type= "submit" name="btn-signin" class="Section-submit cuenta" value="Unirse">
+                <input type="button" class="Section-submit prev cuenta" value="Prev" id="prev">
+                <input type="button" class="Section-submit" value="Next" id="next">
+                <input type= "submit" name="btn-signin" class="Section-submit cuenta" value="Unirse" id="envia">
                 <p class="Section-login">¿Ya tienes cuenta? <a href = "../../index.jsp">Ingresa.</a></p>            
             </form>
             </article>          
@@ -66,6 +66,7 @@
             <p class="Footer-parrafo Footer-parrafo1">Strongfit es un proyecto creado por <a href="#" class="Footer-link">Strom</a>.</p>
             <p class="Footer-parrafo"><a href="#" class = "Footer-link">Politicas de privacidad</a></p>
         </footer>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../js/acciones_registro.js"></script>
     </body>
 </html>
