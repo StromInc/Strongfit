@@ -112,155 +112,158 @@
             <!--esta es la informacion de la cuenta del paciente-->
             <article class = "Article-tbl-usr">
                 <form action = "/StrongFit/sPerfilDeUsuario" method = "post">
-                    <hr>
-                    <h2 class = "Article-title">Información de cuenta</h2>
-                    <p class = "personal-p">Nombre</p>
-                    <input type = "text" name = "name" required class = "Section-usr" value = "<%=nombre%>">
-                    <p class = "personal-p">Correo</p>
-                    <input type = "email" name = "email" required class = "Section-usr" value="<%=idUsr%>">
-                    <p class = "personal-p">Contraseña</p>
-                    <input type = "text" name = "contra" required class = "Section-usr" value="<%=pass%>">
-                    <hr>
-                    <h2 class = "Article-title">Información nutrimental</h2>
-                    <%
-                        if(peso != 0)
-                        {
-                            %>
-                                <div class = "div-nutrimental">
-                                    <p class = "m1 medidas-p">Peso</p>
-                                    <input type = "text" name = "peso" required class = "Section-m" value = "<%=peso%>" placeholder="(Kg)">
-                                </div>
-                                <div class = "div-nutrimental estatura">
-                                    <p class = "m2 medidas-p">Estatura</p>
-                                    <input type = "text" name = "estatura" required class = "Section-m" value = "<%=estatura%>" placeholder="cm">
-                                </div>
-                                <div class = "div-nutrimental">
-                                    <p class = "m3 medidas-p">Cintura</p>
-                                    <input type = "text" name = "cintura" required class = "Section-m" value = "<%=cintura%>" placeholder="cm">
-                                </div>
-                                <div class = "div-nutrimental edad">
-                                    <p class = "medidas-p">Edad</p>
-                                    <input type = "text" name = "edad" required class = "Section-m" value = "<%=edad%>" placeholder="años">
-                                </div>
-                            <%
-                        }
-                        else
-                        {
-                            %>
-                                <div class = "div-nutrimental">
-                                    <p class = "m1 medidas-p">Peso</p>
-                                    <input type = "text" name = "peso" required class = "Section-m" value = "" placeholder="(Kg)">
-                                </div>
-                                <div class = "div-nutrimental estatura">
-                                    <p class = "m2 medidas-p">Estatura</p>
-                                    <input type = "text" name = "estatura" required class = "Section-m" value = "" placeholder="cm">
-                                </div>
-                                <div class = "div-nutrimental">
-                                    <p class = "m3 medidas-p">Cintura</p>
-                                    <input type = "text" name = "cintura" required class = "Section-m" value = "" placeholder="cm">
-                                </div>
-                                <div class = "div-nutrimental edad">
-                                    <p class = "medidas-p">Edad</p>
-                                    <input type = "text" name = "edad" required class = "Section-m" value = "" placeholder="años">
-                                </div>
-                            <%
-                        }
-                    %>
-                    <div class = "div-nutrimental sexo">
-                        <p class = "medidas-p">Sexo</p>
-                        <select name = "sexo" class = "select-sexo">
-                            <option value="" <%=v1%>>Seleccionar </option>
-                            <option value="1" <%=v2%>>Masculino </option>
-                            <option value="2" <%=v3%>>Femenino </option>
-                        </select>
-                    </div>
-                    <div class="div-nutrimental actividad">
-                        <p class = "medidas-p">Actividad Física</p>
-                        <select required name ="actividad" class = "select-actividad" id = "select-actividad" onchange = "desplegarDias();">
-                            <option value="">Selcciona actividad</option>
-                            <%
-                            conecta.conectar();
-                            ResultSet rs = conecta.getActividades();
-                            
-                            int idAct = 0;
-                            String nombreAct = "";
-                            String actividadSeleccionada = "";
-                            while(rs.next())
+                    <div id="formu_1">
+                        <h2 class = "Article-title">Información de cuenta</h2>
+                        <p class = "personal-p">Nombre</p>
+                        <input type = "text" name = "name" required class = "Section-usr" value = "<%=nombre%>">
+                        <p class = "personal-p">Correo</p>
+                        <input type = "email" name = "email" required class = "Section-usr" value="<%=idUsr%>">
+                        <p class = "personal-p">Contraseña</p>
+                        <input type = "text" name = "contra" required class = "Section-usr" value="<%=pass%>">
+                    </div>               
+                    <div id="formu_2">
+                        <h2 class = "Article-title">Información nutrimental</h2>
+                        <%
+                            if(peso != 0)
                             {
-                                idAct = rs.getInt("idActividad");
-                                
-                                nombreAct = rs.getString("actividad");
-                                if(idAct == seleccion)
-                                {
-                                    actividadSeleccionada = "selected";
-                                }
-                            %>
-                            <option value="<%=idAct%>" <%=actividadSeleccionada%>><%=nombreAct%></option>
-                            <%
-                                actividadSeleccionada = "";
+                                %>
+                                    <div class = "div-nutrimental">
+                                        <p class = "m1 medidas-p">Peso</p>
+                                        <input type = "text" name = "peso" required class = "Section-m" value = "<%=peso%>" placeholder="(Kg)">
+                                    </div>
+                                    <div class = "div-nutrimental estatura">
+                                        <p class = "m2 medidas-p">Estatura</p>
+                                        <input type = "text" name = "estatura" required class = "Section-m" value = "<%=estatura%>" placeholder="cm">
+                                    </div>
+                                    <div class = "div-nutrimental">
+                                        <p class = "m3 medidas-p">Cintura</p>
+                                        <input type = "text" name = "cintura" required class = "Section-m" value = "<%=cintura%>" placeholder="cm">
+                                    </div>
+                                    <div class = "div-nutrimental edad">
+                                        <p class = "medidas-p">Edad</p>
+                                        <input type = "text" name = "edad" required class = "Section-m" value = "<%=edad%>" placeholder="años">
+                                    </div>
+                                <%
                             }
-                            %>
-                        </select>
-                        <script>desplegarDias();</script>
-                    </div>
-                    <div class = "div-ocupacion">
-                        <p class = "medidas-p">Ocupación</p>
-                        <select required name = "ocupacion" class="select-ocupacion" id="div-ocupacion">
-                            <option value = "">Selecciona una opción</option>
-                            <%
-                                ResultSet rs2 = conecta.getOcupacion();
-                                while(rs2.next())
+                            else
+                            {
+                                %>
+                                    <div class = "div-nutrimental">
+                                        <p class = "m1 medidas-p">Peso</p>
+                                        <input type = "text" name = "peso" required class = "Section-m" value = "" placeholder="(Kg)">
+                                    </div>
+                                    <div class = "div-nutrimental estatura">
+                                        <p class = "m2 medidas-p">Estatura</p>
+                                        <input type = "text" name = "estatura" required class = "Section-m" value = "" placeholder="cm">
+                                    </div>
+                                    <div class = "div-nutrimental">
+                                        <p class = "m3 medidas-p">Cintura</p>
+                                        <input type = "text" name = "cintura" required class = "Section-m" value = "" placeholder="cm">
+                                    </div>
+                                    <div class = "div-nutrimental edad">
+                                        <p class = "medidas-p">Edad</p>
+                                        <input type = "text" name = "edad" required class = "Section-m" value = "" placeholder="años">
+                                    </div>
+                                <%
+                            }
+                        %>                  
+                        <div class = "div-nutrimental sexo">
+                            <p class = "medidas-p">Sexo</p>
+                            <select name = "sexo" class = "select-sexo">
+                                <option value="" <%=v1%>>Seleccionar </option>
+                                <option value="1" <%=v2%>>Masculino </option>
+                                <option value="2" <%=v3%>>Femenino </option>
+                            </select>
+                        </div>
+                        <div class="div-nutrimental actividad">
+                            <p class = "medidas-p">Actividad Física</p>
+                            <select required name ="actividad" class = "select-actividad" id = "select-actividad" onchange = "desplegarDias();">
+                                <option value="">Selcciona actividad</option>
+                                <%
+                                conecta.conectar();
+                                ResultSet rs = conecta.getActividades();
+                                
+                                int idAct = 0;
+                                String nombreAct = "";
+                                String actividadSeleccionada = "";
+                                while(rs.next())
                                 {
-                                    actividadSeleccionada = "";
-                                    if(rs2.getInt("idCatOcupacion") == seleccionOcupacion)
+                                    idAct = rs.getInt("idActividad");
+                                    
+                                    nombreAct = rs.getString("actividad");
+                                    if(idAct == seleccion)
                                     {
                                         actividadSeleccionada = "selected";
                                     }
-                                    %><option value = "<%=rs2.getInt("idCatOcupacion")%>" <%=actividadSeleccionada%>><%=rs2.getString("ocupacion") + ": " + rs2.getString("descripcion")%></option><%
+                                %>
+                                <option value="<%=idAct%>" <%=actividadSeleccionada%>><%=nombreAct%></option>
+                                <%
+                                    actividadSeleccionada = "";
                                 }
-                            %>
-                        </select>
-                    </div>
-                    <div class = "div-actividadTiempo invisible" id = "div-actividadTiempo">
-                        <div id = "contenedor-dias1">
-                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="1" id = "dom" <%=seleccionDias[0]%>><label for = "dom" id="dom-label">Domingo</label><input type="text" name="horas" value ="<%=horas[0]%>" placeholder="(min)" class = "Section-h invisible" id="dom-horas2"></div>
-                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="2" id = "lun" <%=seleccionDias[1]%>><label for = "lun" id="lun-label">Lunes</label><input type="text" name="horas" value ="<%=horas[1]%>" placeholder="(min)" class = "Section-h invisible" id="lun-horas2"></div>
-                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="3" id = "mar" <%=seleccionDias[2]%>><label for = "mar" id="mar-label">Martes</label><input type="text" name="horas" value ="<%=horas[2]%>" placeholder="(min)" class = "Section-h invisible" id="mar-horas2"></div>
-                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="4" id = "mie" <%=seleccionDias[3]%>><label for = "mie" id="mie-label">Miércoles</label><input type="text" name="horas" value ="<%=horas[3]%>" placeholder="(min)" class = "Section-h invisible" id = "mie-horas2"></div>
+                                %>
+                            </select>
+                            <script>desplegarDias();</script>
                         </div>
-                        <div id = "contenedor-dias2">
-                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="5" id = "jue" <%=seleccionDias[4]%>><label for = "jue" id="jue-label">Jueves</label><input type="text" name="horas" value ="<%=horas[4]%>" placeholder="(min)" class = "Section-h invisible" id="jue-horas2"></div>
-                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="6" id = "vie" <%=seleccionDias[5]%>><label for = "vie" id="vie-label">Viernes</label><input type="text" name="horas" value ="<%=horas[5]%>" placeholder="(min)" class = "Section-h invisible" id="vie-horas2"></div>
-                            <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="7" id = "sab" <%=seleccionDias[6]%>><label for = "sab" id="sab-label">Sábado</label><input type="text" name="horas" value ="<%=horas[6]%>" placeholder="(min)" class = "Section-h invisible" id="sab-horas2"></div>
+                        <div class = "div-ocupacion">
+                            <p class = "medidas-p">Ocupación</p>
+                            <select required name = "ocupacion" class="select-ocupacion" id="div-ocupacion">
+                                <option value = "">Selecciona una opción</option>
+                                <%
+                                    ResultSet rs2 = conecta.getOcupacion();
+                                    while(rs2.next())
+                                    {
+                                        actividadSeleccionada = "";
+                                        if(rs2.getInt("idCatOcupacion") == seleccionOcupacion)
+                                        {
+                                            actividadSeleccionada = "selected";
+                                        }
+                                        %><option value = "<%=rs2.getInt("idCatOcupacion")%>" <%=actividadSeleccionada%>><%=rs2.getString("ocupacion") + ": " + rs2.getString("descripcion")%></option><%
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <div class = "div-actividadTiempo invisible" id = "div-actividadTiempo">
+                            <div id = "contenedor-dias1">
+                                <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="1" id = "dom" <%=seleccionDias[0]%>><label for = "dom" id="dom-label">Domingo</label><input type="text" name="horas" value ="<%=horas[0]%>" placeholder="(min)" class = "Section-h invisible" id="dom-horas2"></div>
+                                <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="2" id = "lun" <%=seleccionDias[1]%>><label for = "lun" id="lun-label">Lunes</label><input type="text" name="horas" value ="<%=horas[1]%>" placeholder="(min)" class = "Section-h invisible" id="lun-horas2"></div>
+                                <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="3" id = "mar" <%=seleccionDias[2]%>><label for = "mar" id="mar-label">Martes</label><input type="text" name="horas" value ="<%=horas[2]%>" placeholder="(min)" class = "Section-h invisible" id="mar-horas2"></div>
+                                <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="4" id = "mie" <%=seleccionDias[3]%>><label for = "mie" id="mie-label">Miércoles</label><input type="text" name="horas" value ="<%=horas[3]%>" placeholder="(min)" class = "Section-h invisible" id = "mie-horas2"></div>
+                            </div>
+                            <div id = "contenedor-dias2">
+                                <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="5" id = "jue" <%=seleccionDias[4]%>><label for = "jue" id="jue-label">Jueves</label><input type="text" name="horas" value ="<%=horas[4]%>" placeholder="(min)" class = "Section-h invisible" id="jue-horas2"></div>
+                                <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="6" id = "vie" <%=seleccionDias[5]%>><label for = "vie" id="vie-label">Viernes</label><input type="text" name="horas" value ="<%=horas[5]%>" placeholder="(min)" class = "Section-h invisible" id="vie-horas2"></div>
+                                <div class = "div-Semana"><input type = "checkbox" class = "div-dia" name = "dias" value="7" id = "sab" <%=seleccionDias[6]%>><label for = "sab" id="sab-label">Sábado</label><input type="text" name="horas" value ="<%=horas[6]%>" placeholder="(min)" class = "Section-h invisible" id="sab-horas2"></div>
+                            </div>
                         </div>
                     </div>
-                    <hr>
-                    <%
-                        if(estado != null)
-                        {
-                            %>
-                            <h2 class = "Article-title">Tu dirección</h2>
-                            <p class = "personal-p">Estado</p>
-                            <input type = "text" name = "estado" required class = "Section-usr" value = "<%=estado%>">
-                            <p class = "personal-p">Municipio</p>
-                            <input type = "text" name = "municipio" required class = "Section-usr" value = "<%=municipio%>">
-                            <p class = "personal-p">Colonia</p>
-                            <input type = "text" name = "colonia" required class = "Section-usr" value = "<%=colonia%>">
-                            <%
-                        }
-                        else
-                        {
-                            %>
-                            <h2 class = "Article-title">Tu dirección</h2>
-                            <p class = "personal-p">Estado</p>
-                            <input type = "text" name = "estado" required class = "Section-usr" value = "" placeholder="Estado en el que vives">
-                            <p class = "personal-p">Municipio</p>
-                            <input type = "text" name = "municipio" required class = "Section-usr" value = "" placeholder="Municipio en el que vives">
-                            <p class = "personal-p">Colonia</p>
-                            <input type = "text" name = "colonia" required class = "Section-usr" value = "" placeholder="Colonia en la que vives">
-                            <%
-                        }
-                    %>
+                    <div id="formu_3">
+                        <%
+                            if(estado != null)
+                            {
+                                %>
+                                <h2 class = "Article-title">Tu dirección</h2>
+                                <p class = "personal-p">Estado</p>
+                                <input type = "text" name = "estado" required class = "Section-usr" value = "<%=estado%>">
+                                <p class = "personal-p">Municipio</p>
+                                <input type = "text" name = "municipio" required class = "Section-usr" value = "<%=municipio%>">
+                                <p class = "personal-p">Colonia</p>
+                                <input type = "text" name = "colonia" required class = "Section-usr" value = "<%=colonia%>">
+                                <%
+                            }
+                            else
+                            {
+                                %>
+                                <h2 class = "Article-title">Tu dirección</h2>
+                                <p class = "personal-p">Estado</p>
+                                <input type = "text" name = "estado" required class = "Section-usr" value = "" placeholder="Estado en el que vives">
+                                <p class = "personal-p">Municipio</p>
+                                <input type = "text" name = "municipio" required class = "Section-usr" value = "" placeholder="Municipio en el que vives">
+                                <p class = "personal-p">Colonia</p>
+                                <input type = "text" name = "colonia" required class = "Section-usr" value = "" placeholder="Colonia en la que vives">
+                                <%
+                            }
+                        %>
+                    </div>      
                     <hr>
                     <input type = "submit" value = "Actualizar" name = "act_usr" class = "btn-act-usr">
                 </form>
