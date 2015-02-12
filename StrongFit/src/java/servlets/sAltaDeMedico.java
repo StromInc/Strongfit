@@ -49,45 +49,55 @@ public class sAltaDeMedico extends HttpServlet {
             String cedula = request.getParameter("plicense");
             String escuela = request.getParameter("school");
             String carrera = request.getParameter("carrier");
-            
-            int cedula2 = Integer.parseInt(cedula);
-            int edad2 = Integer.parseInt(edad);
-            
-            // Conectamos la base y damos de alta al usuario 
+            boolean noAvanza= true;
+            int cedula2 = 0;
+            int edad2 = 0;
             try{
-             clases.cConexion objconexion = new clases.cConexion();
-             objconexion.conectar();
-             String verificacion = objconexion.altausuario(idUser, pass, nombre);
-              if (verificacion.equals("valido")){ 
-                  ResultSet rs = objconexion.altamedico(idUser,cedula,escuela,estado,municipio,colonia,sexo,edad, carrera);
-                  int idMedico = 0;
-                  if(rs.next())
-                 {
-                     idMedico = rs.getInt("idMedico");
-                 }
-                 // cargar datos a la sesion
-                 sesion.setAttribute("idUsr",idUser);
-                 sesion.setAttribute("idMedico", idMedico);
-                 sesion.setAttribute("nombre",nombre);
-                 sesion.setAttribute("pass",pass);
-                 sesion.setAttribute("cedula", cedula2);
-                 sesion.setAttribute("escuela", escuela);
-                 sesion.setAttribute("carrera", carrera);
-                 sesion.setAttribute("edad", edad2);
-                 sesion.setAttribute("sexo", sexo);
-                 sesion.setAttribute("estado", estado);
-                 sesion.setAttribute("municipio", municipio);
-                 sesion.setAttribute("colonia", colonia);
-                 // Mandar al usuario a su perfil
-                 response.sendRedirect("jsp/nutriologo/usuario.jsp");
-                 out.print("<script>alert('Alta realizada');</script>");
-              }else{
-             out.print("<script>alert('Actuelmente ya existe una cuenta registrada con ese correo');</script>");    
-             response.sendRedirect("index.jsp");
-             }
-             }catch(SQLException ex){
-             out.print(ex.toString());
-             }
+                cedula2 = Integer.parseInt(cedula);
+                edad2 = Integer.parseInt(edad);
+                noAvanza = false;
+            }catch(NumberFormatException e){
+                System.out.println(e.toString() + " Error de parseo");
+            }
+            if(noAvanza){
+                System.out.println("Mal");
+                sesion.setAttribute("mensaje", "Por favor comprueba tus datos");
+                response.sendRedirect("jsp/nutriologo/altanutriologo.jsp");        
+            }else{
+                try{
+                    clases.cConexion objconexion = new clases.cConexion();
+                    objconexion.conectar();
+                    String verificacion = objconexion.altausuario(idUser, pass, nombre);
+                    if(verificacion.equals("valido")){ 
+                        ResultSet rs = objconexion.altamedico(idUser,cedula,escuela,estado,municipio,colonia,sexo,edad, carrera);
+                        int idMedico = 0;
+                        if(rs.next()){
+                           idMedico = rs.getInt("idMedico");
+                        }
+                        // cargar datos a la sesion
+                        sesion.setAttribute("idUsr",idUser);
+                        sesion.setAttribute("idMedico", idMedico);
+                        sesion.setAttribute("nombre",nombre);
+                        sesion.setAttribute("pass",pass);
+                        sesion.setAttribute("cedula", cedula2);
+                        sesion.setAttribute("escuela", escuela);
+                        sesion.setAttribute("carrera", carrera);
+                        sesion.setAttribute("edad", edad2);
+                        sesion.setAttribute("sexo", sexo);
+                        sesion.setAttribute("estado", estado);
+                        sesion.setAttribute("municipio", municipio);
+                        sesion.setAttribute("colonia", colonia);
+                        // Mandar al usuario a su perfil
+                        response.sendRedirect("jsp/nutriologo/usuario.jsp");
+                        out.print("<script>alert('Alta realizada');</script>");
+                    }else{
+                        out.print("<script>alert('Actuelmente ya existe una cuenta registrada con ese correo');</script>");    
+                        response.sendRedirect("index.jsp");
+                    }
+                }catch(SQLException ex){
+                    out.print(ex.toString());
+                } 
+            }         
         }
     }
 

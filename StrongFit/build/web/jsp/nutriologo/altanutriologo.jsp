@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import = "java.io.*"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -25,8 +26,17 @@
         <link rel="shortcut icon" href="../../Imagenes/logo_s.jpg">
         <title>Registrate</title>
     </head>
+    <%
+        HttpSession sesion = request.getSession();
+        if(sesion.getAttribute("mensaje") != null){
+            String mensaje = (String)sesion.getAttribute("mensaje");
+            System.out.println(mensaje);
+            out.print("<script>alert('"+mensaje+"');</script>");
+            sesion.setAttribute("mensaje", null);
+            sesion.invalidate();
+        }
+    %>
     <body>
-
         <section class="Section">
             <article class="Section-article">
             <h1 class="Section-title">Registrate</h1>
