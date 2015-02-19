@@ -14,6 +14,7 @@ $(function(){
             numCalorias += calorias;
             //hacemos un cron
             var $clon = $item.clone();
+            $clon.removeClass('hidden');
             //cambiamos los datos del cron
             $clon.html(nombre + '<span class="calorias"><br>Calorias: ' + calorias +'kc</span>');
             $clon.hide();

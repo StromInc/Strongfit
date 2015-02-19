@@ -35,8 +35,8 @@
                 <input type = "password" name = "txt-pass" class = "Header-pass Header-txt" placeholder="Contraseña" required>
                 <input type = "submit" name = "btn-signin" class="Header-submit" value="Entrar">
             </form>
-        </header>      
-        <section class="Section">
+        </header>
+        <section class="Section">     
             <article class="Section-article">
                 <h3 class = "Section-login">¿No tienes cuenta?, &nbsp;<strong style="font-size: 1.4em;">Registrate</strong></h3>
                 <form action = "sAltaDeUsuario" method="post" class="Section-form">

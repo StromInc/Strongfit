@@ -27,7 +27,7 @@ $(function() {
             }
             $buttonShow.addEventListener('click', showMenu);
             $buttonHide.addEventListener('click', hideMenu);
-    }
+        }
     }
     
     window.onresize = nuevo;

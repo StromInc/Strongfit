@@ -41,19 +41,14 @@
             <article class = "Article-menu">
                 <p class="contenedor-search">
                     <input type="search" id="search" name="search" class="search">
-                    <span class = "span-search"><label class = "icon-search label-search" for = "buscar"></label></span>
+                    <label class = "icon-search label-search" for = "buscar"></label>
                 </p>
                 <div class = "content-title">
                         Consumo de hoy
                 </div>
                 <div class = "div">
                     <div class="content-contador" id = "style-4">
-                        <p class = "racion">Huevos con jamón<span class = "calorias"><br>Calorias: 100kc</span></p>
-                        <p class = "racion">Huevos con jamón<span class = "calorias"><br>Calorias: 100kc</span></p>
-                        <p class = "racion">Huevos con jamón<span class = "calorias"><br>Calorias: 100kc</span></p>
-                        <p class = "racion">Huevos con jamón<span class = "calorias"><br>Calorias: 100kc</span></p>
-                        <p class = "racion">Huevos con jamón<span class = "calorias"><br>Calorias: 100kc</span></p>
-                        <p class = "racion">Huevos con jamón<span class = "calorias"><br>Calorias: 100kc</span></p>
+                        <p class = "racion hidden"><span class = "calorias"><br></span></p>
                     </div>
                     <div class = "content-total">
                         Kilocalorías consumidas: <span id="noCaloria">0</span>kc
