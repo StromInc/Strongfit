@@ -49,8 +49,7 @@ public class sLogIn extends HttpServlet {
             ResultSet resultado;
             String verificacion = objconexion.busquedadeusuarios(idUser, pass); 
             // identificar al usuario
-            try{
-                          
+            try{                   
             // Logica para permitir o no el acceso
             if (verificacion.equals("si")){
                 sesion.setAttribute("idUsr",idUser);
@@ -126,15 +125,16 @@ public class sLogIn extends HttpServlet {
                     }
                 }
                 }//falta un else, se traba si el usuario no existe 
+
                 }
                 
                 if (verificacion.equals("no")){ 
                     response.sendRedirect("index.jsp");
-                    out.print("<script>alert('Usuario inexistente');</script>");
+                    out.println("<script>alert('Usuario inexistente');</script>");
                 }
                 if (verificacion.equals("nop")){ 
                     response.sendRedirect("index.jsp");
-                    out.print("<script>alert('Contraseña incorrecta');</script>");
+                    out.println("<script>alert('Contraseña incorrecta');</script>");
             }
             
             }

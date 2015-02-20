@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/Estilos/barra_menu.css</file>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/js/acciones_admin.js</file>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/js/acciones_dietasnutriologo.js</file>
@@ -14,6 +15,9 @@
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/admin/barra_menu.jsp</file>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/nutriologo/dietas_nutriologo.jsp</file>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sValidarMedico.java</file>
+=======
+            <file>file:/I:/Strongfit/StrongFit/web/index.jsp</file>
+>>>>>>> 7411c739dc3d9e79acf567079e5c7fa4796892d2
         </group>
     </open-files>
 </project-private>

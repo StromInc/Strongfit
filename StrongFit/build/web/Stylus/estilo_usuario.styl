@@ -5,6 +5,7 @@ verdeHeader = #1B5E20
 azulHover = #01579B
 gris = #F9F9F9
 vendor-prefixes = webkit o ms moz official
+
 a
     text-decoration none
 
@@ -22,6 +23,7 @@ a
     max-width 30em
     margin-left 5em
     margin-top 1.5em
+    border-radius 3px
     box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
     h2
         color #198627
@@ -64,7 +66,7 @@ a
     display inline-block
     a
         padding 0.5em 1.2em
-        border-radius 0.5em
+        border-radius 3px
         color black
         &:hover
             background #016CC0
@@ -76,7 +78,7 @@ a
 .Section-usr
     width 20em
     padding 0.7em
-    border-radius 10px
+    border-radius 3px
     border solid
     border-width thin
     border-color #D2D4D5
@@ -84,7 +86,7 @@ a
 .Section-m
     width 5em
     padding .7em
-    border-radius 10px
+    border-radius 3px
     border solid
     border-width thin
     border-color #D2D4D5
@@ -97,12 +99,15 @@ a
     padding .8em 2em
     border none
     margin-top 1.4em
-    border-radius 5px
+    border-radius 3px
     box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+    &:hover
+        background azulHover
 
 .img-usr
     width 15em
     height 15em
+    border-radius 3px
     border 1px solid #F9F9F9
 
 .btn-imagen
@@ -113,8 +118,10 @@ a
     padding .4em 2em
     border none
     margin-top 1.4em
-    border-radius 5px
+    border-radius 3px
     box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+    &:hover
+        background azulHover
 
 .Article-tbl-usr2
     display inline-block
@@ -122,6 +129,7 @@ a
     padding 2em
     max-width 15em
     vertical-align top
+    border-radius 3px
     margin-top 1.5em
     margin-bottom 1em
     box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
@@ -180,7 +188,7 @@ a
         margin-top .5em
         display inline-block
         width 4.5em
-        border-radius 5px
+        border-radius 3px
         cursor pointer
         text-align center
         &:hover
@@ -208,7 +216,7 @@ a
 .Section-h
     width 3.3em
     padding .45em .2em
-    border-radius 6px
+    border-radius 3px
     border solid
     border-width thin
     border-color #D2D4D5
@@ -239,7 +247,7 @@ a
     display inline-block
     width 5.5em
     text-align center
-    border-radius 5px
+    border-radius 3px
 
 .caloriasPaciente
     background-color white
@@ -248,7 +256,7 @@ a
     display inline-block
     width 6.5em
     text-align center
-    border-radius 5px
+    border-radius 3px
 
 #dom:checked ~ #dom-label,
 #lun:checked ~ #lun-label,

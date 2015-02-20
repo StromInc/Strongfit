@@ -4,27 +4,32 @@
  * and open the template in the editor.
  */
 $(function() {
-    if (window.matchMedia('(max-width: 768px)').matches){
-       var $buttonShow = document.getElementById('show');
-       var $buttonHide = document.getElementById('hide');
-       var $menu = document.getElementById('formu');
+    function nuevo(){
+        console.log('hola');
+        if (window.matchMedia('(max-width: 768px)').matches){
+            var $buttonShow = document.getElementById('show');
+            var $buttonHide = document.getElementById('hide');
+            var $menu = document.getElementById('formu');
 
-       function showMenu(e) {
-          // body...
-          e.preventDefault();
-          $menu.classList.add('is-active');
-          $buttonHide.classList.add('is-active');
-          $buttonShow.classList.remove('is-active');
-       }
-       function hideMenu(e) {
-          // body...
-          e.preventDefault();
-          $buttonShow.classList.add('is-active');
-          $menu.classList.remove('is-active');
-          $buttonHide.classList.remove('is-active');
-       }
-       $buttonShow.addEventListener('click', showMenu);
-       $buttonHide.addEventListener('click', hideMenu);
+            function showMenu(e) {
+              // body...
+               e.preventDefault();
+               $menu.classList.add('is-active');
+               $buttonHide.classList.add('is-active');
+               $buttonShow.classList.remove('is-active');
+            }
+            function hideMenu(e) {
+              // body...
+               e.preventDefault();
+               $buttonShow.classList.add('is-active');
+               $menu.classList.remove('is-active');
+               $buttonHide.classList.remove('is-active');
+            }
+            $buttonShow.addEventListener('click', showMenu);
+            $buttonHide.addEventListener('click', hideMenu);
+        }
     }
+    
+    window.onresize = nuevo;
 });
 

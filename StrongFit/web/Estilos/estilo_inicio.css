@@ -1,10 +1,8 @@
 .Section-todo
 {
     position: relative;
-    height: 100%;
+    margin-bottom: 1em
 }
-
-
 .Article-menu
 {
     position: fixed;
@@ -15,7 +13,9 @@
     max-width: 30em;
     padding: 1em;
     margin-top: 3.5em;
-    background-color: rgba(145, 145, 145, 0.8);
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background-color: white;
 }
 
 .span-search-border
@@ -29,18 +29,6 @@
 {
     position: relative;
     display: inline-block;
-    border-radius: 5px;
-}
-
-.span-search
-{
-    cursor: pointer;
-    background-color: transparent;
-    position: absolute;
-    top: 3px;
-    left: 5px;
-    display: inline-block;
-    margin-top: .15em;
 }
 
 .label-search
@@ -48,7 +36,9 @@
     cursor: pointer;
     padding: 0 .2em 0 .3em;
     background-color: transparent;
-    display: inline-block;
+    position: absolute;
+    top:7px;
+    left:3px;
 }
 
 .search
@@ -59,13 +49,9 @@
     border: 2px solid #1b5e20;
     top: 0;
     border-radius: 5px;
-    font-size: .8em;
-}
-
-.input-search:focus
-{
     outline: none;
 }
+
 
 /*----------------------------------------------------Esta parte es para el contador calorico-----------------------------------------------------*/
 .div
@@ -94,9 +80,8 @@
 {
     border-bottom: solid;
     font-size: 1.2rem;
-    float: left;
-    width: 100%;
     padding-top: 1em;
+    overflow: hidden;
     margin: 0;
 }
 
@@ -156,9 +141,9 @@
     margin-top: 2.5em;
     margin-left: 2em;
     display: inline-block;
-    background-color: rgba(145, 145, 145, 0.8);
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    background-color: white;
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .Article-articulos
@@ -180,7 +165,6 @@
 {
     width: 15em;
     padding: .5em;
-    color: white;
     display: inline-block;
 }
 
@@ -188,6 +172,8 @@
 {
     display: inline-block;
     padding: .5em;
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .Article-platillos p
@@ -197,8 +183,6 @@
 
 .barra
 {
-    overflow-x: auto;
-    overflow-y: hidden;
     width: 30em;
 }
 
@@ -211,6 +195,8 @@
 {
     display: inline-block;
     padding: .4rem;
+    color: white;
+    border-radius: 0.3em;
     background-color: #559752;
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -231,4 +217,7 @@
     top: 0;
     bottom: 0;
     background-color: red;
+}
+.hidden{
+    display: none;
 }

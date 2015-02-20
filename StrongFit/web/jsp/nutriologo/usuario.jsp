@@ -49,44 +49,44 @@
                             <li class="Menu-item"><a href="#" id="link_3">3</a></li>
                         </ul>
                     </nav>      
-                    <div class="prueba is-active" id="formu_1">          
-                    <h2 class = "Article-title">Información de cuenta</h2>
-                    <p class = "personal-p">Nombre</p>
-                    <input type = "text" name = "txt-name" required class = "Section-usr" placeholder="" value="<%=nombre%>">
-                    <p class = "personal-p">Correo</p>
-                    <input type = "email" name = "txt-email" required class = "Section-usr" placeholder="" value="<%=idUsr%>">
-                    <p class = "personal-p">Contraseña</p>
-                    <input type = "text" name = "txt-pass" required class = "Section-usr" placeholder="" value="<%=pass%>">
+                    <div class="prueba is-active" id="formu_1">
+                        <h2 class = "Article-title">Información de cuenta</h2>
+                        <p class = "personal-p">Nombre</p>
+                        <input type = "text" name = "txt-name" required class = "Section-usr" placeholder="" value="<%=nombre%>">
+                        <p class = "personal-p">Correo</p>
+                        <input type = "email" name = "txt-email" required class = "Section-usr" placeholder="" value="<%=idUsr%>">
+                        <p class = "personal-p">Contraseña</p>
+                        <input type = "text" name = "txt-pass" required class = "Section-usr" placeholder="" value="<%=pass%>">
                     </div>
                     <div class="prueba" id="formu_2">
-                    <h2 class = "Article-title">Información pública</h2>
-                    <div class="div-edad">
-                        <p class = "medidas-p">Edad</p>
-                        <input type = "text" name = "edad" required class = "Section-m" placeholder = "" value="<%=edad%>">
-                    </div>
-                    <div class = "div-sexo">
-                        <p class = "personal-p">Sexo</p>
-                        <select name = "sexo" class="select-sexo">
-                        <option value="" <%=v1%>>Seleccionar </option>
-                        <option value="1" <%=v2%>>Masculino </option>
-                        <option value="2" <%=v3%>>femenino </option>
-                    </select>
-                    </div>
-                    <p class = "personal-p">Cédula profesional</p>
-                    <input type = "text" name = "plicense" required class = "Section-usr" placeholder="" value="<%=cedula%>">
-                    <p class = "personal-p">Escuela de procedencia</p>
-                    <input type = "text" name = "school" required class = "Section-usr" placeholder="" value="<%=escuela%>">
-                    <p class = "personal-p">Carrera</p>
-                    <input type = "text" name = "carrier" required class = "Section-usr" placeholder="" value="<%=carrera%>">
+                        <h2 class = "Article-title">Información pública</h2>
+                        <div class="div-edad">
+                            <p class = "medidas-p">Edad</p>
+                            <input type = "text" name = "edad" required class = "Section-m" placeholder = "" value="<%=edad%>">
+                        </div>
+                        <div class = "div-sexo">
+                            <p class = "personal-p">Sexo</p>
+                            <select name = "sexo" class="select-sexo">
+                                <option value="" <%=v1%>>Seleccionar </option>
+                                <option value="1" <%=v2%>>Masculino </option>
+                                <option value="2" <%=v3%>>femenino </option>
+                            </select>
+                        </div>
+                        <p class = "personal-p">Cédula profesional</p>
+                        <input type = "text" name = "plicense" required class = "Section-usr" placeholder="" value="<%=cedula%>">
+                        <p class = "personal-p">Escuela de procedencia</p>
+                        <input type = "text" name = "school" required class = "Section-usr" placeholder="" value="<%=escuela%>">
+                        <p class = "personal-p">Carrera</p>
+                        <input type = "text" name = "carrier" required class = "Section-usr" placeholder="" value="<%=carrera%>">
                     </div>
                     <div class="prueba" id="formu_3">
-                    <h2 class = "Article-title">Tu dirección</h2>
-                    <p class = "personal-p">Estado</p>
-                    <input type = "text" name = "estado" required class = "Section-usr" placeholder = "" value="<%=estado%>">
-                    <p class = "personal-p">Municipio</p>
-                    <input type = "text" name = "municipio" required class = "Section-usr" placeholder = "" value="<%=municipio%>">
-                    <p class = "personal-p">Colonia</p>
-                    <input type = "text" name = "colonia" required class = "Section-usr" placeholder = "" value="<%=colonia%>">
+                        <h2 class = "Article-title">Tu dirección</h2>
+                        <p class = "personal-p">Estado</p>
+                        <input type = "text" name = "estado" required class = "Section-usr" placeholder = "" value="<%=estado%>">
+                        <p class = "personal-p">Municipio</p>
+                        <input type = "text" name = "municipio" required class = "Section-usr" placeholder = "" value="<%=municipio%>">
+                        <p class = "personal-p">Colonia</p>
+                        <input type = "text" name = "colonia" required class = "Section-usr" placeholder = "" value="<%=colonia%>">
                     </div>
                     <hr>
                     <input type = "submit" value = "Actualizar" name = "act_usr" class = "btn-act-usr">

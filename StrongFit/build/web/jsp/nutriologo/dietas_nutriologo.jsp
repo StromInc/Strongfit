@@ -5,7 +5,6 @@
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_dietasusr.css">
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_dietasnutriologo.css">
-        <script src="../../js/acciones_dietasnutriologo.js"></script>
     </head>
     <body>
         <%@include file = "barra_menu.jsp" %>
@@ -409,11 +408,11 @@
                 <div class = "menuFinalizar">
                     <hr>
                     <input type="button" id="finalizarDieta" class="btn-act-usr btnMenuFin" value="Finalizar">
-                    <p id="cancelarDieta" class="btn-act-usr btnCancelar icon-cancel-circle btnMenuFin"></p>
+                    <p id="cancelarDieta" class="btn-act-usr btnCancelar icon-cancel-circle"></p>
                 </div>
             </article>
-            
             <div class = "arrow-left invisible"></div>
         </section>
+        <script src="../../js/acciones_dietasnutriologo.js"></script>
     </body>
 </html>
