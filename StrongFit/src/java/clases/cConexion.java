@@ -261,6 +261,20 @@ public class cConexion {
         return this.st.executeQuery("call spSetAlimentoConsumido("+Paciente+", "+alimento+", "+dia+");");
     }
     
+    //Esto le llevara al administrador
+    public ResultSet spGetSolicitudes() throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetSolicitudes();");
+    }
+    
+    //Esto confirmara al medico como registrado
+    public ResultSet spConfirmarMedico(String idMedico) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spConfirmarMedico('"+idMedico+"');");
+    }
+    
     //Esto busca los alimentos y los agrega a un Array 
     public ArrayList<cAlimento> buscar(String info) throws SQLException{
         int id;

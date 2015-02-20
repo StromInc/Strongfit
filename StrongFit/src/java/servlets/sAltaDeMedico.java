@@ -79,7 +79,7 @@ public class sAltaDeMedico extends HttpServlet {
                  sesion.setAttribute("municipio", municipio);
                  sesion.setAttribute("colonia", colonia);
                  // Mandar al usuario a su perfil
-                 response.sendRedirect("jsp/nutriologo/usuario.jsp");
+                 response.sendRedirect("jsp/nutriologo/RegistroExitoso.jsp");
                  out.print("<script>alert('Alta realizada');</script>");
               }else{
              out.print("<script>alert('Actuelmente ya existe una cuenta registrada con ese correo');</script>");    

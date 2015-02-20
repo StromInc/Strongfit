@@ -84,7 +84,8 @@ public class sLogIn extends HttpServlet {
                     response.sendRedirect("jsp/nutriologo/inicio.jsp");
                 }
                 }else{
-                    tipo = "paciente";
+                    if(tipo.equals("paciente")){
+                    
                     resultado = objconexion.cargadedatos(idUser, tipo);
                     if(resultado.next()){
                         int idPaciente = resultado.getInt("idPaciente");
@@ -115,9 +116,18 @@ public class sLogIn extends HttpServlet {
                         response.sendRedirect("jsp/paciente/inicio.jsp");
                         out.print("<script>alert('Bienveido');</script>");
                     }
-                    
+                    } else
+                {
+                    if(tipo.equals("admin")){
+                        
+                        sesion.setAttribute("idUsr", "supremo");
+                        response.sendRedirect("jsp/admin/inicio.jsp");
+                        
+                    }
+                }
                 }//falta un else, se traba si el usuario no existe 
                 }
+                
                 if (verificacion.equals("no")){ 
                     response.sendRedirect("index.jsp");
                     out.print("<script>alert('Usuario inexistente');</script>");

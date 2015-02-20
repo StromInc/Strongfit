@@ -16,5 +16,6 @@
         <li class="Header-li"><a href= "dietas_nutriologo.jsp" class="icon-food2"></a></li><!--Dieta-->
         <li class="Header-li"><a href = "pacientes.jsp" class="icon-user"></a></li><!--Mi Nutriólogo-->
         <li class="Header-li user-name"><a href = "usuario.jsp"><%=idUsuarioBarra%></a></li>
+        <li class="Header-li"><a href = "#" class = "icon-sign-out"></a></li><!--log out-->
     </ul>
 </header>
