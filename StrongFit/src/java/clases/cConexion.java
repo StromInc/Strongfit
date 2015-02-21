@@ -320,5 +320,14 @@ public class cConexion {
         this.st.executeUpdate("update conteocalorico set caloriasDia = "+calTotal+" where idConteo = "+idCont+";");
         System.out.print("Calorias totales " + calTotal);
     }
+    public String getCorreo(String correo) throws SQLException{
+        this.st = con.createStatement();
+        ResultSet rs = this.st.executeQuery("call spComprobarCorreo('"+correo+"');");
+        String respuesta = "";
+        while(rs.next()){
+            respuesta = rs.getString("respuesta");
+        }
+        return respuesta;
+    }
 }
 
