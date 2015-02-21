@@ -33,8 +33,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ian
  */
-@WebServlet(name = "sValidarMedico", urlPatterns = {"/sValidarMedico"})
-public class sValidarMedico extends HttpServlet {
+@WebServlet(name = "sRechazarMedico", urlPatterns = {"/sRechazarMedico"})
+public class sRechazarMedico extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,8 +49,7 @@ public class sValidarMedico extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            
+
             String id = request.getParameter("idMedico");
             String confirm = "No";
             
@@ -58,19 +57,21 @@ public class sValidarMedico extends HttpServlet {
             
             cConexion conectar = new cConexion();
             conectar.conectar();
-            ResultSet rs = conectar.spConfirmarMedico(id);
+            ResultSet rs = conectar.spRechazarMedico(id);
             if(rs.next()){
                 confirm = rs.getString("respuesta");
             }
             
-            if(confirm.equals("confirmado")){
+            if(confirm.equals("rechazado")){
+                System.out.println("SI PASO EL IF DE RECHAZO");
                 map.put("confirmacion", "valido");
-                enviarConfirmacion(response, id);
+                enviarRechazo(response, id);
             }
             else
                 map.put("confirmacion", "no");
             
             write(response, map);
+            
         }
     }
 
@@ -89,7 +90,7 @@ public class sValidarMedico extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sValidarMedico.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sRechazarMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -107,7 +108,7 @@ public class sValidarMedico extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sValidarMedico.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sRechazarMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -120,7 +121,7 @@ public class sValidarMedico extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
     private void write(HttpServletResponse response, Map<String, Object> map) throws IOException 
     {
         response.setContentType("aplication/json");
@@ -128,7 +129,7 @@ public class sValidarMedico extends HttpServlet {
         response.getWriter().write(new Gson().toJson(map));
     }
     
-    private void enviarConfirmacion(HttpServletResponse response, String id){
+    private void enviarRechazo(HttpServletResponse response, String id){
         
         final String username = "strongfitapp@gmail.com";
         final String password = "toyelcacas";
@@ -154,8 +155,8 @@ public class sValidarMedico extends HttpServlet {
             message.setFrom(new InternetAddress("strongfitapp@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(id));
-            message.setSubject("Bienvenido a StrongFit");
-            message.setText("Nos da mucho gusto poder recivirte en esta gran comunidad. \n" + "Nuestros administradores ya han confirmado tu identidad.\n" + "Ingresa ahora a la aplicación y comienza a disfrutar de este maravilloso sistema totalmente gratis.\n" + urlStrongFit);
+            message.setSubject("Lo sentimos");
+            message.setText("Lo lamentamos, pero parece ser que tus datos no concuerdan con los registros de cédula. \n Si crees que pudo haber ocurrido algun problema por favor vuelve a intentarlo. \n" + urlStrongFit);
 
             Transport.send(message);
 
@@ -166,5 +167,5 @@ public class sValidarMedico extends HttpServlet {
         }
         
     }
-    
+
 }

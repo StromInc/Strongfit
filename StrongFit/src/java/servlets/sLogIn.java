@@ -56,31 +56,38 @@ public class sLogIn extends HttpServlet {
                 sesion.setAttribute("pass",pass);
                 //logica para mandar al usuario a donde deba
                 tipo = objconexion.tipodeusuario(idUser);
+                System.out.println(tipo);
                 if(tipo.equals("medico")){
                     resultado = objconexion.cargadedatos(idUser, tipo);
                 if(resultado.next()){
-                    int idMedico = resultado.getInt("idMedico");
-                    int cedula = resultado.getInt("cedulaProf");
-                    int edad = resultado.getInt("edad");
-                    int sexo = resultado.getInt("idSexo"); //En la base dice idSexo no sexo 
-                    String nombre = resultado.getString("nombre");
-                    String carrera = resultado.getString("carrera");
-                    String escuela = resultado.getString("escuela");
-                    String estado = resultado.getString("estado");
-                    String municipio = resultado.getString("municipio");
-                    String colonia = resultado.getString("colonia");
-                    //variables de sesion
-                    sesion.setAttribute("nombre",nombre);
-                    sesion.setAttribute("idMedico", idMedico);
-                    sesion.setAttribute("cedula", cedula);
-                    sesion.setAttribute("escuela", escuela);
-                    sesion.setAttribute("carrera", carrera);
-                    sesion.setAttribute("edad", edad);
-                    sesion.setAttribute("sexo", sexo);
-                    sesion.setAttribute("estado", estado);
-                    sesion.setAttribute("municipio", municipio);
-                    sesion.setAttribute("colonia", colonia);
-                    response.sendRedirect("jsp/nutriologo/inicio.jsp");
+                    if(resultado.getInt("estatus") == 1)
+                    {
+                        int idMedico = resultado.getInt("idMedico");
+                        int cedula = resultado.getInt("cedulaProf");
+                        int edad = resultado.getInt("edad");
+                        int sexo = resultado.getInt("idSexo"); //En la base dice idSexo no sexo 
+                        String nombre = resultado.getString("nombre");
+                        String carrera = resultado.getString("carrera");
+                        String escuela = resultado.getString("escuela");
+                        String estado = resultado.getString("estado");
+                        String municipio = resultado.getString("municipio");
+                        String colonia = resultado.getString("colonia");
+                        //variables de sesion
+                        sesion.setAttribute("nombre",nombre);
+                        sesion.setAttribute("idMedico", idMedico);
+                        sesion.setAttribute("cedula", cedula);
+                        sesion.setAttribute("escuela", escuela);
+                        sesion.setAttribute("carrera", carrera);
+                        sesion.setAttribute("edad", edad);
+                        sesion.setAttribute("sexo", sexo);
+                        sesion.setAttribute("estado", estado);
+                        sesion.setAttribute("municipio", municipio);
+                        sesion.setAttribute("colonia", colonia);
+                        response.sendRedirect("jsp/nutriologo/inicio.jsp");
+                    }
+                    else{
+                        out.println("<script>alert('Lo sentimos parece que no has sido confirmado.');</script>");
+                    }
                 }
                 }else{
                     if(tipo.equals("paciente")){
@@ -116,14 +123,14 @@ public class sLogIn extends HttpServlet {
                         out.print("<script>alert('Bienveido');</script>");
                     }
                     } else
-                {
-                    if(tipo.equals("admin")){
-                        
-                        sesion.setAttribute("idUsr", "supremo");
-                        response.sendRedirect("jsp/admin/inicio.jsp");
-                        
-                    }
-                }
+                        {
+                            if(tipo.equals("admin")){
+
+                                sesion.setAttribute("idUsr", "supremo");
+                                response.sendRedirect("jsp/admin/inicio.jsp");
+
+                            }
+                        }
                 }//falta un else, se traba si el usuario no existe 
 
                 }

@@ -275,6 +275,13 @@ public class cConexion {
         return this.st.executeQuery("call spConfirmarMedico('"+idMedico+"');");
     }
     
+    //Esto rechaza al medico como registrado
+    public ResultSet spRechazarMedico(String idMedico) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spRechazarMedico('"+idMedico+"');");
+    }
+    
     //Esto busca los alimentos y los agrega a un Array 
     public ArrayList<cAlimento> buscar(String info) throws SQLException{
         int id;

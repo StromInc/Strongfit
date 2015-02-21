@@ -70,23 +70,6 @@ public class sAltaDeMedico extends HttpServlet {
                     String verificacion = objconexion.altausuario(idUser, pass, nombre);
                     if(verificacion.equals("valido")){ 
                         ResultSet rs = objconexion.altamedico(idUser,cedula,escuela,estado,municipio,colonia,sexo,edad, carrera);
-                        int idMedico = 0;
-                        if(rs.next()){
-                           idMedico = rs.getInt("idMedico");
-                        }
-                        // cargar datos a la sesion
-                        sesion.setAttribute("idUsr",idUser);
-                        sesion.setAttribute("idMedico", idMedico);
-                        sesion.setAttribute("nombre",nombre);
-                        sesion.setAttribute("pass",pass);
-                        sesion.setAttribute("cedula", cedula2);
-                        sesion.setAttribute("escuela", escuela);
-                        sesion.setAttribute("carrera", carrera);
-                        sesion.setAttribute("edad", edad2);
-                        sesion.setAttribute("sexo", sexo);
-                        sesion.setAttribute("estado", estado);
-                        sesion.setAttribute("municipio", municipio);
-                        sesion.setAttribute("colonia", colonia);
                         // Mandar al usuario a su perfil
                         response.sendRedirect("jsp/nutriologo/RegistroExitoso.jsp");
                         out.print("<script>alert('Alta realizada');</script>");

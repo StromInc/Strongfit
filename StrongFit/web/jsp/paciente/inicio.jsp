@@ -40,7 +40,7 @@
             <!--Esta es la seccion de la barra de busqueda, el sabias que y el conteo calorico-->
             <article class = "Article-menu">
                 <p class="contenedor-search">
-                    <input type="search" id="search" name="search" class="search">
+                    <input type="search" id="search" name="search" class="search" placeholder="Buscar alimentos...">
                     <label class = "icon-search label-search" for = "buscar"></label>
                 </p>
                 <div class = "content-title">
