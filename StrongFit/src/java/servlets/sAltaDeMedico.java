@@ -72,10 +72,9 @@ public class sAltaDeMedico extends HttpServlet {
                         ResultSet rs = objconexion.altamedico(idUser,cedula,escuela,estado,municipio,colonia,sexo,edad, carrera);
                         // Mandar al usuario a su perfil
                         response.sendRedirect("jsp/nutriologo/RegistroExitoso.jsp");
-                        out.print("<script>alert('Alta realizada');</script>");
                     }else{
-                        out.print("<script>alert('Actuelmente ya existe una cuenta registrada con ese correo');</script>");    
-                        response.sendRedirect("index.jsp");
+                        sesion.setAttribute("mensaje", "Ya exte una cuenta con ese correo");    
+                        response.sendRedirect("jsp/nutriologo/altanutriologo.jsp"); 
                     }
                 }catch(SQLException ex){
                     out.print(ex.toString());

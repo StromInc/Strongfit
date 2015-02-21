@@ -74,11 +74,11 @@ public class sAltaDeUsuario extends HttpServlet {
                     sesion.setAttribute("estado", "");
                     sesion.setAttribute("municipio", "");
                     sesion.setAttribute("colonia", "");
+                    sesion.setAttribute("mensaje", "Bienvenidoa Strongfit!");
                     // Mandar al usuario a su perfil
                     response.sendRedirect("jsp/paciente/usuario.jsp");
-                    out.print("<script>alert('Alta realizada');</script>");
                 }else{
-                    out.print("<script>alert('Actuelmente ya existe una cuenta registrada con ese correo');</script>");    
+                    sesion.setAttribute("mensaje", "Comprueba tus datos");
                     response.sendRedirect("index.jsp");
                 }
             }catch(SQLException ex){

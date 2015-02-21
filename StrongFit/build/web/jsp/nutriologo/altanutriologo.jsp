@@ -26,16 +26,6 @@
         <link rel="shortcut icon" href="../../Imagenes/logo_s.jpg">
         <title>Registrate</title>
     </head>
-    <%
-        HttpSession sesion = request.getSession();
-        if(sesion.getAttribute("mensaje") != null){
-            String mensaje = (String)sesion.getAttribute("mensaje");
-            System.out.println(mensaje);
-            out.print("<script>alert('"+mensaje+"');</script>");
-            sesion.setAttribute("mensaje", null);
-            sesion.invalidate();
-        }
-    %>
     <body>
         <section class="Section">
             <article class="Section-article">
@@ -74,6 +64,16 @@
             <p class="Footer-parrafo Footer-parrafo1">Strongfit es un proyecto creado por <a href="#" class="Footer-link">Strom</a>.</p>
             <p class="Footer-parrafo"><a href="#" class = "Footer-link">Politicas de privacidad</a></p>
         </footer>
+        <%
+            HttpSession sesion = request.getSession();
+            if(sesion.getAttribute("mensaje") != null){
+                String mensaje = (String)sesion.getAttribute("mensaje");
+                System.out.println(mensaje);
+                out.print("<script>alert('"+mensaje+"');</script>");
+                sesion.removeAttribute("mensaje");
+                sesion.invalidate();
+            }
+        %>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript" src="../../js/acciones_registro.js"></script>
     </body>
