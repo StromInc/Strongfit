@@ -4,6 +4,33 @@
  * and open the template in the editor.
  */
 $(function() {
+    var $email = $('#email');
+    var $arrow = $('.arrow');
+
+    var ajaxBuscar = (function() {
+        var correo = $email.val();
+        var DIRECCION = 'http://localhost:8080/StrongFit/sAjaxCorreo';
+        if(correo !== ''){
+            $.ajax({
+                url: DIRECCION,
+                type: 'post',
+                dataType: 'text',
+                data: {
+                    email: correo
+                },
+                success: function(datos){        
+                    console.log('Resultado ' + datos);
+                    if(datos != 'El correo es valido'){
+                        $arrow.removeClass('hidden');
+                        $arrow.html(datos);
+                    }          
+                }
+            }); 
+        }else{
+           console.log('Nada');
+        }
+         
+    });
     function nuevo(){
         console.log('hola');
         if (window.matchMedia('(max-width: 768px)').matches){
@@ -29,7 +56,10 @@ $(function() {
             $buttonHide.addEventListener('click', hideMenu);
         }
     }
-    
+    $email.on('focus', function(){
+        $arrow.addClass('hidden')
+    }).on('blur', ajaxBuscar);
+
     window.onresize = nuevo;
 });
 

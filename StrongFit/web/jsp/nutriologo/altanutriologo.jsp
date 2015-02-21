@@ -26,16 +26,6 @@
         <link rel="shortcut icon" href="../../Imagenes/logo_s.jpg">
         <title>Registrate</title>
     </head>
-    <%
-        HttpSession sesion = request.getSession();
-        if(sesion.getAttribute("mensaje") != null){
-            String mensaje = (String)sesion.getAttribute("mensaje");
-            System.out.println(mensaje);
-            out.print("<script>alert('"+mensaje+"');</script>");
-            sesion.setAttribute("mensaje", null);
-            sesion.invalidate();
-        }
-    %>
     <body>
         <section class="Section">
             <article class="Section-article">
@@ -44,7 +34,7 @@
                 <div class="" id="formu1">             
                     <h2 class = "Article-title">Información de cuenta</h2>
                     <input type="text" name="txt-name" class="Section-nombre Section-txt" placeholder="Nombre" id="inputNo1" required>
-                    <input type="email" name = "txt-mail" class="Section-mail Section-txt" placeholder="Correo" id="inputNo2" required>
+                    <p class="Section-form container"><input type = "email" id="email" name = "txt-mail" class="Section-mail Section-txt" placeholder = "Correo" required><span class="arrow hidden"></span></p>
                     <input type= "password" name = "txt-pass" class = "Section-pass Section-txt" placeholder="Contraseña" id="inputNo3" required>
                     <input type="text" name="edad" required onkeypress="return justNumbers(event);" class = "Section-txt" id="inputNo4" placeholder = "Edad">
                     <select name = "idSexo" class="Section-txt" id="inputNo5" required>
@@ -74,6 +64,16 @@
             <p class="Footer-parrafo Footer-parrafo1">Strongfit es un proyecto creado por <a href="#" class="Footer-link">Strom</a>.</p>
             <p class="Footer-parrafo"><a href="#" class = "Footer-link">Politicas de privacidad</a></p>
         </footer>
+        <%
+            HttpSession sesion = request.getSession();
+            if(sesion.getAttribute("mensaje") != null){
+                String mensaje = (String)sesion.getAttribute("mensaje");
+                System.out.println(mensaje);
+                out.print("<script>alert('"+mensaje+"');</script>");
+                sesion.removeAttribute("mensaje");
+                sesion.invalidate();
+            }
+        %>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript" src="../../js/acciones_registro.js"></script>
     </body>

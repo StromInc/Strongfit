@@ -59,102 +59,92 @@ public class sLogIn extends HttpServlet {
                 System.out.println(tipo);
                 if(tipo.equals("medico")){
                     resultado = objconexion.cargadedatos(idUser, tipo);
-                if(resultado.next()){
-                    if(resultado.getInt("estatus") == 1)
-                    {
-                        int idMedico = resultado.getInt("idMedico");
-                        int cedula = resultado.getInt("cedulaProf");
-                        int edad = resultado.getInt("edad");
-                        int sexo = resultado.getInt("idSexo"); //En la base dice idSexo no sexo 
-                        String nombre = resultado.getString("nombre");
-                        String carrera = resultado.getString("carrera");
-                        String escuela = resultado.getString("escuela");
-                        String estado = resultado.getString("estado");
-                        String municipio = resultado.getString("municipio");
-                        String colonia = resultado.getString("colonia");
-                        //variables de sesion
-                        sesion.setAttribute("nombre",nombre);
-                        sesion.setAttribute("idMedico", idMedico);
-                        sesion.setAttribute("cedula", cedula);
-                        sesion.setAttribute("escuela", escuela);
-                        sesion.setAttribute("carrera", carrera);
-                        sesion.setAttribute("edad", edad);
-                        sesion.setAttribute("sexo", sexo);
-                        sesion.setAttribute("estado", estado);
-                        sesion.setAttribute("municipio", municipio);
-                        sesion.setAttribute("colonia", colonia);
-                        response.sendRedirect("jsp/nutriologo/inicio.jsp");
-                    }
-                    else{
-                        out.println("<script>alert('Lo sentimos parece que no has sido confirmado.');</script>");
-                    }
-                }
-                }else{
-                    if(tipo.equals("paciente")){
-                    
-                    resultado = objconexion.cargadedatos(idUser, tipo);
                     if(resultado.next()){
-                        int idPaciente = resultado.getInt("idPaciente");
-                        int peso = resultado.getInt("peso");
-                        int edad = resultado.getInt("edad");
-                        int sexo = resultado.getInt("idSexo"); //en la base es idSexousuario
-                        int salud = resultado.getInt("idSalud");
-                        int idCont = resultado.getInt("idConteo");
-                        String nombre = resultado.getString("nombre");
-                        int estatura = resultado.getInt("estatura");
-                        int cintura = resultado.getInt("medidaCintura");
-                        String estado = resultado.getString("estado");
-                        String municipio = resultado.getString("municipio");
-                        String colonia = resultado.getString("colonia");
-                        //variables de sesion
-                        sesion.setAttribute("idPaciente", idPaciente);
-                        sesion.setAttribute("nombre",nombre); 
-                        sesion.setAttribute("idcont", idCont); //el id del conteo calorico
-                        sesion.setAttribute("salud", salud);
-                        sesion.setAttribute("peso", peso);
-                        sesion.setAttribute("estatura", estatura);
-                        sesion.setAttribute("cintura", cintura);
-                        sesion.setAttribute("edad", edad);
-                        sesion.setAttribute("sexo", sexo);
-                        sesion.setAttribute("estado", estado);
-                        sesion.setAttribute("municipio", municipio);
-                        sesion.setAttribute("colonia", colonia);
-                        response.sendRedirect("jsp/paciente/inicio.jsp");
-                        out.print("<script>alert('Bienveido');</script>");
-                    }
-                    } else
+                        if(resultado.getInt("estatus") == 1)
                         {
-                            if(tipo.equals("admin")){
-
-                                sesion.setAttribute("idUsr", "supremo");
-                                response.sendRedirect("jsp/admin/inicio.jsp");
-
-                            }
+                            int idMedico = resultado.getInt("idMedico");
+                            int cedula = resultado.getInt("cedulaProf");
+                            int edad = resultado.getInt("edad");
+                            int sexo = resultado.getInt("idSexo"); //En la base dice idSexo no sexo 
+                            String nombre = resultado.getString("nombre");
+                            String carrera = resultado.getString("carrera");
+                            String escuela = resultado.getString("escuela");
+                            String estado = resultado.getString("estado");
+                            String municipio = resultado.getString("municipio");
+                            String colonia = resultado.getString("colonia");
+                            //variables de sesion
+                            sesion.setAttribute("nombre",nombre);
+                            sesion.setAttribute("idMedico", idMedico);
+                            sesion.setAttribute("cedula", cedula);
+                            sesion.setAttribute("escuela", escuela);
+                            sesion.setAttribute("carrera", carrera);
+                            sesion.setAttribute("edad", edad);
+                            sesion.setAttribute("sexo", sexo);
+                            sesion.setAttribute("estado", estado);
+                            sesion.setAttribute("municipio", municipio);
+                            sesion.setAttribute("colonia", colonia);
+                            response.sendRedirect("jsp/nutriologo/inicio.jsp");
                         }
-                }//falta un else, se traba si el usuario no existe 
+                        else{
+                            sesion.setAttribute("mensaje", "Lo sentimos parece que no has sido verificado aun");
+                            response.sendRedirect("index.jsp");
+                        }
+                    }
+                }else{
+                    if(tipo.equals("paciente")){  
+                        resultado = objconexion.cargadedatos(idUser, tipo);
+                        if(resultado.next()){
+                            int idPaciente = resultado.getInt("idPaciente");
+                            int peso = resultado.getInt("peso");
+                            int edad = resultado.getInt("edad");
+                            int sexo = resultado.getInt("idSexo"); //en la base es idSexousuario
+                            int salud = resultado.getInt("idSalud");
+                            int idCont = resultado.getInt("idConteo");
+                            String nombre = resultado.getString("nombre");
+                            int estatura = resultado.getInt("estatura");
+                            int cintura = resultado.getInt("medidaCintura");
+                            String estado = resultado.getString("estado");
+                            String municipio = resultado.getString("municipio");
+                            String colonia = resultado.getString("colonia");
+                            //variables de sesion
+                            sesion.setAttribute("idPaciente", idPaciente);
+                            sesion.setAttribute("nombre",nombre); 
+                            sesion.setAttribute("idcont", idCont); //el id del conteo calorico
+                            sesion.setAttribute("salud", salud);
+                            sesion.setAttribute("peso", peso);
+                            sesion.setAttribute("estatura", estatura);
+                            sesion.setAttribute("cintura", cintura);
+                            sesion.setAttribute("edad", edad);
+                            sesion.setAttribute("sexo", sexo);
+                            sesion.setAttribute("estado", estado);
+                            sesion.setAttribute("municipio", municipio);
+                            sesion.setAttribute("colonia", colonia);
+                            response.sendRedirect("jsp/paciente/inicio.jsp");
+                        }
+                    }else{
+                        if(tipo.equals("admin")){
+                            sesion.setAttribute("idUsr", "supremo");
+                            response.sendRedirect("jsp/admin/inicio.jsp");
 
-                }
-                
-                if (verificacion.equals("no")){ 
-                    response.sendRedirect("index.jsp");
-                    out.println("<script>alert('Usuario inexistente');</script>");
-                }
-                if (verificacion.equals("nop")){ 
-                    response.sendRedirect("index.jsp");
-                    out.println("<script>alert('Contraseña incorrecta');</script>");
+                        }
+                    }
+                }//falta un else, se traba si el usuario no existe 
             }
-            
+            if (verificacion.equals("no")){ 
+                sesion.setAttribute("mensaje", "El usuario no existe");
+                response.sendRedirect("index.jsp");
             }
-            catch(SQLException ex){
+            if (verificacion.equals("nop")){ 
+                sesion.setAttribute("mensaje", "Los datos no son correctos");
+                response.sendRedirect("index.jsp");;
+            } 
+            }catch(SQLException ex){
                 out.print(ex.toString());
             }
-            }
-            catch(SQLException ex){
-                out.print(ex.toString());
-            }
-            
-            
-        }
+        }catch(SQLException ex){
+            out.print(ex.toString());
+        }               
+    }
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

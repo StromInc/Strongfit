@@ -269,5 +269,13 @@
                 </form>
             </article>
         </section>
+        <%
+            if(sesion.getAttribute("mensaje") != null){
+                String mensaje = (String)sesion.getAttribute("mensaje");
+                System.out.println(mensaje);
+                out.print("<script>alert('"+mensaje+"');</script>");
+                sesion.removeAttribute("mensaje");
+            }
+        %>
     </body>
 </html>
