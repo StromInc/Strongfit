@@ -22,6 +22,7 @@
             Calendar c2 = new GregorianCalendar();
             
             int dia = c2.get(Calendar.DAY_OF_WEEK);
+            int diaA = c2.get(Calendar.DAY_OF_YEAR);
             int caloriasdia = 0;
             
             cConexion conecta = new cConexion();
