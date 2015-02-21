@@ -38,7 +38,7 @@
     <body>
         <header class = "Header">
             <h1 class="Header-title"><a href = "index.jsp">Strongfit</a></h1>
-            <button class="Header-button is-active" id="show">Iniciar sesión</button>
+            <button class="Header-button is-active" id="show">Login</button>
             <button class="Header-button" id="hide">Ocultar</button>
             <form action = "sLogIn" method="post" class="Header-form" id="formu">
                 <input type = "email" name = "txt-mail" class="Header-mail Header-txt" placeholder = "Correo" required>
@@ -51,10 +51,10 @@
                 <h3 class = "Section-login">¿No tienes cuenta?, &nbsp;<strong style="font-size: 1.4em;">Registrate</strong></h3>
                 <form action = "sAltaDeUsuario" method="post" class="Section-form">
                     <input type = "text" name = "txt-name" class="Section-nombre Section-txt" placeholder = "Nombre" required>
-                    <input type = "email" id="email" name = "txt-mail" class="Section-mail Section-txt" placeholder = "Correo" required>
+                    <p class="Section-form container"><input type = "email" id="email" name = "txt-mail" class="Section-mail Section-txt" placeholder = "Correo" required><span class="arrow hidden"></span></p>
                     <input type = "password" name = "txt-pass" class = "Section-pass Section-txt" placeholder="Contraseña" required>
                     <input type = "submit" name = "btn-signin" class="Section-submit" value="Unirse">
-                    <p>¿Eres un nutriólogo?<a href = "jsp/nutriologo/altanutriologo.jsp">Registrate como médico.</a></p>
+                    <p class="Section-form item">¿Eres un nutriólogo?<a href = "jsp/nutriologo/altanutriologo.jsp">Registrate como médico.</a></p>
                 </form>
             </article>
             <article class="Section-signup">
