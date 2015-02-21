@@ -44,7 +44,7 @@
                 <div class="" id="formu1">             
                     <h2 class = "Article-title">Información de cuenta</h2>
                     <input type="text" name="txt-name" class="Section-nombre Section-txt" placeholder="Nombre" id="inputNo1" required>
-                    <input type="email" name = "txt-mail" class="Section-mail Section-txt" placeholder="Correo" id="inputNo2" required>
+                    <p class="Section-form container"><input type = "email" id="email" name = "txt-mail" class="Section-mail Section-txt" placeholder = "Correo" required><span class="arrow hidden"></span></p>
                     <input type= "password" name = "txt-pass" class = "Section-pass Section-txt" placeholder="Contraseña" id="inputNo3" required>
                     <input type="text" name="edad" required onkeypress="return justNumbers(event);" class = "Section-txt" id="inputNo4" placeholder = "Edad">
                     <select name = "idSexo" class="Section-txt" id="inputNo5" required>

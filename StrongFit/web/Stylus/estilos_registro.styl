@@ -7,6 +7,7 @@ verdeHeader = #1B5E20
 azulHover = #01579B
 gris = #F9F9F9
 vendor-prefixes = webkit o ms moz official
+rojo = #FF2115
 body
 	background-color verdeHeader
 
@@ -29,7 +30,7 @@ body
 	padding 3em
 	color black
 	margin 0 auto
-	max-width 50em
+	max-width 40em
 	&-login
 		display inline-block
 		margin-left 1.5em
@@ -64,17 +65,39 @@ body
 	border-color #D2D4D5
 	border-radius 3px
 	margin 0 auto
-	width 50%
+	width 80%
 	margin-bottom 1.6em
 	&:focus
 		outline none
 		box-shadow 0px 0px 10px #0C98A2
-        
+
+.Section-form
+	.container
+		position relative
+		.arrow
+			background rojo
+			border-radius 3px
+			bottom -2.8em
+			color white
+			left 2em
+			padding 0.5em 1em
+			position absolute
+			font-size 12px
+			&:after
+				border-bottom 9px solid rojo
+				border-left 7px solid transparent
+				border-right 7px solid transparent
+				content ""
+				left 1em         
+				position absolute
+				top -9px
+.hidden
+	display none
+	   
 .Section-article
 	background-color white
 	box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
 	padding .5em .5em 2em .5em
-	max-width 65em
 	text-align center
 	border-radius 0.5em
 .cuenta
