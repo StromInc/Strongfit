@@ -24,7 +24,17 @@
         <link rel = "stylesheet" type ="text/css" href="Estilos/estilos_login.css">
         <link rel="shortcut icon" href="Imagenes/logo_s.jpg">
         <title>StrongFit</title>
-    </head> 
+    </head>
+    <%
+        HttpSession sesion = request.getSession();
+        if(sesion.getAttribute("mensaje") != null){
+            String mensaje = (String)sesion.getAttribute("mensaje");
+            System.out.println(mensaje);
+            out.print("<script>alert('"+mensaje+"');</script>");
+            sesion.setAttribute("mensaje", null);
+            sesion.invalidate();
+        }
+    %>
     <body>
         <header class = "Header">
             <h1 class="Header-title"><a href = "index.jsp">Strongfit</a></h1>

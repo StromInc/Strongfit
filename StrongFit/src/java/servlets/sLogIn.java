@@ -136,12 +136,12 @@ public class sLogIn extends HttpServlet {
                 }
                 
                 if (verificacion.equals("no")){ 
+                    sesion.setAttribute("mensaje", "El usuario no existe");
                     response.sendRedirect("index.jsp");
-                    out.println("<script>alert('Usuario inexistente');</script>");
                 }
                 if (verificacion.equals("nop")){ 
-                    response.sendRedirect("index.jsp");
-                    out.println("<script>alert('Contraseña incorrecta');</script>");
+                    sesion.setAttribute("mensaje", "Los datos no son correctos");
+                    response.sendRedirect("index.jsp");;
             }
             
             }
