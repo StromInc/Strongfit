@@ -9,7 +9,7 @@ $(function() {
         var correo = $email.val();
         console.log(correo == 0);
         console.log(correo == false);
-        if(correo != '' && correo != 0 && correo){
+        if(correo != '' && correo != 0 && correo != null && correo != undefined){
             $.ajax({
                 url: 'http://localhost:8080/StrongFit/sAjaxCorreo',
                 type: 'post',
