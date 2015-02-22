@@ -8,6 +8,7 @@
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
         <script src = "../../js/acciones_usuarioPaciente.js"></script>
+        <script src="../../js/salir.js"></script>
     </head>
     <body>
         <%@include file="barra_menu.jsp"%> 
@@ -80,16 +81,37 @@
         }   
         con++;
     }
-    
+    clases.CImagen objimg = new clases.CImagen();
+    int verificacionimg = objimg.devuelveexistencia(idUsr);
+    String ruta = "";
+    String ruta2 = "../../Imagenes/Usuarios/";
+    switch(verificacionimg){
+        case 1: 
+            ruta = ruta2 + idUsr + ".jpg";
+            break;
+        case 2: 
+            ruta = ruta2 + idUsr + ".png";
+            break;
+        case 3: 
+            ruta = ruta2 + idUsr + ".gif";
+            break;
+        default: 
+            ruta = "../../Imagenes/usr_sin_imagen.jpg";
+            break;              
+    }
     
     %>
     <section class = "Section-tbl-usr">
             <div class="div-informacion">
                 <!--esta es la imagen que el usuario elija-->
-                <article class = "Article-tbl-usr2" style = "margin-left: 0">
-                    <img src = "../../Imagenes/usr-sin-img.jpg" class ="img-usr" alt = "foto de usuario">
-                    <input type = "button" value="cambiar" class="btn-imagen">
-                </article>
+                <article class = "Article-tbl-usr2" style = "margin-left: 0" id="Imagen">
+                <img src = "<%=ruta%>" class ="img-usr" alt = "foto de usuario">
+                </article>    
+                    
+                    <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagen.jsp" name="img_frm">
+                    <input type = "file"  name="uploadFile" id="ImgUsuario" required/>
+                    <input type = "submit" value="cambiar" class="btn-imagen"/>
+                    </form>
 
                 <!--esta es informacion nutrimental como si esta gordo y cuantas calorias debe de consumir-->
                 <article class = "Article-tbl-usr2" style = "margin-left: 0">

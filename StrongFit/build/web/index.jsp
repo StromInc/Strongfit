@@ -25,14 +25,15 @@
         <link rel="shortcut icon" href="Imagenes/logo_s.jpg">
         <title>StrongFit</title>
     </head>
-    <body>
+    <body onload="mandar()">
         <header class = "Header">
             <h1 class="Header-title"><a href = "index.jsp">Strongfit</a></h1>
             <button class="Header-button is-active" id="show">Login</button>
             <button class="Header-button" id="hide">Ocultar</button>
-            <form action = "sLogIn" method="post" class="Header-form" id="formu">
-                <input type = "email" name = "txt-mail" class="Header-mail Header-txt" placeholder = "Correo" required>
-                <input type = "password" name = "txt-pass" class = "Header-pass Header-txt" placeholder="Contraseña" required>
+            <form action = "sLogIn" method="post" class="Header-form" id="formu" onsubmit="guardarsesion()">
+                <input type = "email" name = "txt-mail" class="Header-mail Header-txt" placeholder = "Correo" required id="email1">
+                <input type = "password" name = "txt-pass" class = "Header-pass Header-txt" placeholder="Contraseña" required id="psw1">
+                <input type="checkbox" id="chek1">Mantener sesión iniciada.
                 <input type = "submit" name = "btn-signin" class="Header-submit" value="Entrar">
             </form>
         </header>

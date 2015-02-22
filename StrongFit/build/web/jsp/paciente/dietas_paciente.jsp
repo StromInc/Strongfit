@@ -14,7 +14,7 @@
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_dietasusr.css">
         <script src = "../../js/acciones_dietasPaciente.js"></script>
-        
+        <script src="../../js/salir.js"></script>
         <style>
             .invisible
             {

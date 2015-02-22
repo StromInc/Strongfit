@@ -5,6 +5,7 @@
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio2.css">
         <script src = "../../js/acciones_inicio.js"></script>
+         <script src="../../js/salir.js"></script>
     </head>
     <body>
         <%@include file = "barra_menu.jsp" %>
