@@ -282,6 +282,35 @@ public class cConexion {
         return this.st.executeQuery("call spRechazarMedico('"+idMedico+"');");
     }
     
+    //Esto  agrega que alimento a consumido al dia
+    public ResultSet spRegistraAlimentoDiario(int idPaciente, int idAlimento, int dia) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spRegistraAlimentoDiario("+idPaciente+","+idAlimento+","+dia+");");
+    }
+    
+    //Esto borra un alimento que este en un dia que no es el actual
+    public ResultSet spBorrarAlimentos(int dia) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spBorrarAlimentos("+dia+");");
+    }
+    
+    //Esto consulta todos los alimento que el usuario haya consumido en el dia
+    public ResultSet spConsultarAlimentosDiarios(int idPaciente, int dia) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spConsultarAlimentosDiarios("+idPaciente+", "+dia+");");
+    }
+    
+    //Esto cambia el conteocalorico del usuario
+    public ResultSet spSetCalorias(int idC, int diaA, int mesA, int semA, int cDia, int cMes, int cSem) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spSetCalorias("+idC+", "+diaA+", "+mesA+", "+semA+", "+cDia+", "+cMes+", "+cSem+");");
+    }
+    
+    
     //Esto busca los alimentos y los agrega a un Array 
     public ArrayList<cAlimento> buscar(String info) throws SQLException{
         int id;

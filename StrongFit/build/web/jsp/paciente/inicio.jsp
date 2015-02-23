@@ -49,8 +49,26 @@
                 </div>
                 <div class = "div">
                     <div class="content-contador" id = "style-4">
+                    <%
+                        ResultSet rs2 = conecta.spConsultarAlimentosDiarios(idPaciente, diaA);
+                        String nombre = "";
+                        int calorias = 0, con = 0;
+                        while(rs2.next()){
+                            
+                            nombre = rs2.getString("nombre");
+                            calorias = rs2.getInt("calorias");
+                            %>
+
+                                    <p class = "racion"><%=nombre%><span class = "calorias"><br>Calorias: <%=calorias%>kc</span></p>
+                            
+                            <%
+                            con++;
+                            
+                        }
+                    %>
                         <p class = "racion hidden"><span class = "calorias"><br></span></p>
                     </div>
+                    
                     <div class = "content-total">
                         Kilocalorías consumidas: <span id="noCaloria">0</span>kc
                     </div>

@@ -10,7 +10,13 @@
     String idUsuarioBarra = (String)sesion2.getAttribute("idUsr"); 
 %>
 <!--Su hoja de estilos esta definida en la pagina meta.jsp, que debe de ser incluida en todas las paginas de este proyecto-->
+<script src = "../../js/acciones_dietasusr.js"></script>
 <header class = "Header">
+    <script>
+        cargarDia();
+        cambiarMetas();
+        cargarDiaCiclico();
+    </script>
     <p class="Header-title"><a href = "../../index.jsp">Strongfit</a></p>
     <ul class="Header-lista">
         <li class="Header-li"><a href="inicio.jsp" class="icon-house"></a></li><!--Inicio-->
