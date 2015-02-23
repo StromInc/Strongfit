@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
         <script src="../../js/buscar-alimento.js"></script>
         <script src="../../js/acciones_cambiarMetas.js"></script>
+        <script src="../../js/salir.js"></script>
     </head>
  <body onload="cambiarMetas();">
         <%

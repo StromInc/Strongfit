@@ -358,5 +358,8 @@ public class cConexion {
         }
         return respuesta;
     }
+    public String ruta(){
+    return  "C://Users//jorge pastrana//Proyectos//s5//Strongfit//StrongFit//web//Imagenes//Usuarios//";
+    }
 }
 

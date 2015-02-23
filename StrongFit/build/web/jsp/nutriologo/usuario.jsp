@@ -32,14 +32,36 @@
     if(sexo == 0){
     v1 = "selected";
     }
+    clases.CImagen objimg = new clases.CImagen();
+    int verificacionimg = objimg.devuelveexistencia(idUsr);
+    String ruta = "";
+    String ruta2 = "../../Imagenes/Usuarios/";
+    switch(verificacionimg){
+        case 1: 
+            ruta = ruta2 + idUsr + ".jpg";
+            break;
+        case 2: 
+            ruta = ruta2 + idUsr + ".png";
+            break;
+        case 3: 
+            ruta = ruta2 + idUsr + ".gif";
+            break;
+        default: 
+            ruta = "../../Imagenes/usr_sin_imagen.jpg";
+            break;              
+    }
     %>
     <body>
         <%@include file="barra_menu.jsp"%>       
         <section class = "Section-tbl-usr">
-            <article class = "Article-tbl-usr2" style = "margin-left: 0">
-                <img src = "../../Imagenes/usr-sin-img.jpg" class ="img-usr" alt = "foto de usuario">
-                <input type = "button" value="cambiar" class="btn-imagen">
-            </article> 
+            <article class = "Article-tbl-usr2" style = "margin-left: 0" id="Imagen">
+                <img src = "<%=ruta%>" class ="img-usr" alt = "foto de usuario">
+                </article>    
+                    
+                    <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagen.jsp" name="img_frm">
+                    <input type = "file"  name="uploadFile" id="ImgUsuario" required/>
+                    <input type = "submit" value="cambiar" class="btn-imagen"/>
+                    </form>
             <article class = "Article-tbl-usr">
                 <form action = "/StrongFit/sPerfilDeMedico" method = "post">
                     <nav class="Menu">
@@ -94,5 +116,6 @@
             </article>
         </section>
         <script src="../../js/acciones_perfil.js"></script>
+         <script src="../../js/salir.js"></script>
     </body>
 </html>

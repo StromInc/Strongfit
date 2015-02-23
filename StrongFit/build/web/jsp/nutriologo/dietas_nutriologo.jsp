@@ -414,5 +414,6 @@
             <div class = "arrow-left invisible"></div>
         </section>
         <script src="../../js/acciones_dietasnutriologo.js"></script>
+         <script src="../../js/salir.js"></script>
     </body>
 </html>

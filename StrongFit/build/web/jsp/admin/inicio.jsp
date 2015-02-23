@@ -6,7 +6,7 @@
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio2.css">
         <script src = "../../js/acciones_admin.js"></script>
-        
+        <script src="../../js/salir.js"></script>
         <style>
             .btnAdmin{
                 

@@ -8,9 +8,10 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author jorge pastrana
  */
-@WebServlet(name = "sLogIn", urlPatterns = {"/sLogIn"})
-public class sLogIn extends HttpServlet {
+@WebServlet(name = "SCheca", urlPatterns = {"/SCheca"})
+public class SCheca extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +36,7 @@ public class sLogIn extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -43,20 +44,19 @@ public class sLogIn extends HttpServlet {
             objconexion.conectar();
             HttpSession sesion = request.getSession();
             sesion.setMaxInactiveInterval(-1);
-            String idUser = request.getParameter("txt-mail");
-            String pass = request.getParameter("txt-pass");
+            String idUser = request.getParameter("nombre");
+            String pass = request.getParameter("contra");
             String tipo = "";
             ResultSet resultado;
-            String verificacion = objconexion.busquedadeusuarios(idUser, pass); 
-            // identificar al usuario
-            try{                   
+            String verificacion = objconexion.busquedadeusuarios(idUser, pass);
+             try{                   
             // Logica para permitir o no el acceso
             if (verificacion.equals("si")){
                 sesion.setAttribute("idUsr",idUser);
                 sesion.setAttribute("pass",pass);
                 //logica para mandar al usuario a donde deba
                 tipo = objconexion.tipodeusuario(idUser);
-                System.out.println(tipo);
+                
                 if(tipo.equals("medico")){
                     resultado = objconexion.cargadedatos(idUser, tipo);
                     if(resultado.next()){
@@ -83,12 +83,11 @@ public class sLogIn extends HttpServlet {
                             sesion.setAttribute("estado", estado);
                             sesion.setAttribute("municipio", municipio);
                             sesion.setAttribute("colonia", colonia);
-                            sesion.setAttribute("tipodeus","2");
-                            response.sendRedirect("jsp/nutriologo/inicio.jsp");
+                            out.print("si1");
                         }
                         else{
                             sesion.setAttribute("mensaje", "Lo sentimos parece que no has sido verificado aun");
-                            response.sendRedirect("index.jsp");
+                            
                         }
                     }
                 }else{
@@ -120,13 +119,12 @@ public class sLogIn extends HttpServlet {
                             sesion.setAttribute("estado", estado);
                             sesion.setAttribute("municipio", municipio);
                             sesion.setAttribute("colonia", colonia);
-                            sesion.setAttribute("tipodeus","1");
-                            response.sendRedirect("jsp/paciente/inicio.jsp");
+                            out.print("si2");
                         }
                     }else{
                         if(tipo.equals("admin")){
                             sesion.setAttribute("idUsr", "supremo");
-                            response.sendRedirect("jsp/admin/inicio.jsp");
+                            out.print("si3");
 
                         }
                     }
@@ -134,20 +132,17 @@ public class sLogIn extends HttpServlet {
             }
             if (verificacion.equals("no")){ 
                 sesion.setAttribute("mensaje", "El usuario no existe");
-                response.sendRedirect("index.jsp");
+               
             }
             if (verificacion.equals("nop")){ 
                 sesion.setAttribute("mensaje", "Los datos no son correctos");
-                response.sendRedirect("index.jsp");
+                
             } 
             }catch(SQLException ex){
                 out.print(ex.toString());
             }
-        }catch(SQLException ex){
-            out.print(ex.toString());
-        }               
+        }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -161,7 +156,11 @@ public class sLogIn extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(SCheca.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -175,7 +174,11 @@ public class sLogIn extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(SCheca.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

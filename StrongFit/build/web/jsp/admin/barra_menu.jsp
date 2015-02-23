@@ -13,6 +13,6 @@
     <p class="Header-title"><a href = "../../index.jsp">Strongfit</a></p>
     <ul class="Header-lista">
         <li class="Header-li user-name"><a href = "inicio.jsp">Administrador</a></li>
-        <li class="Header-li"><a href = "#" class = "icon-sign-out"></a></li><!--log out-->
+        <li class="Header-li"><a href = "../../index.jsp" class = "icon-sign-out" onclick="cerrarsesion()"></a></li><!--log out-->
     </ul>
 </header>

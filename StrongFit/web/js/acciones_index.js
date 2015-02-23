@@ -62,4 +62,58 @@ $(function() {
 
     window.onresize = nuevo;
 });
+function guardarsesion() {
+		
+        var correoVar = $('#email1').val();
+        var contraVar = $('#psw1').val();
+        // Si en vez de por post lo queremos hacer por get, cambiamos el $.post por $.get
+        if($("#chek1").is(':checked')){
+            console.log("vamos bien");
+            $.post('SCheca', {
+                nombre : correoVar,
+                contra: contraVar
+        }, function(responseText) {
+            var validacion = responseText;
+            console.log(validacion);
+            if(validacion == "si1"){               
+                localStorage.setItem("id", correoVar);
+                localStorage.setItem("contra", contraVar);
+                localStorage.setItem("sesioniniciada", "si");
+            }
+            if(validacion == "si2"){               
+                localStorage.setItem("id", correoVar);
+                localStorage.setItem("contra", contraVar);
+                localStorage.setItem("sesioniniciada", "si");
+            }
+            if(validacion == "si3"){               
+                localStorage.setItem("id", correoVar);
+                localStorage.setItem("contra", contraVar);
+                localStorage.setItem("sesioniniciada", "si");
+            }
+        });
+    }
+   }
+   function mandar(){
+      var sesion = localStorage.getItem("sesioniniciada");
+      if(sesion == "si"){
+      var id = localStorage.getItem("id");
+      var contra = localStorage.getItem("contra");
+      $.post('SCheca', {
+                nombre : id,
+                contra: contra
+        }, function(responseText) {
+            var validacion = responseText;
+            console.log(validacion);
+            if(validacion == "si1"){
+                location.href="jsp/nutriologo/inicio.jsp"
+            }
+             if(validacion == "si2"){
+                location.href="jsp/paciente/inicio.jsp"
+            }
+             if(validacion == "si3"){
+                location.href="jsp/admin/inicio.jsp"
+            }
+        });
+     }
+   }
 
