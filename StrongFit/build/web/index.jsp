@@ -33,8 +33,8 @@
             <form action = "sLogIn" method="post" class="Header-form" id="formu" onsubmit="guardarsesion()">
                 <input type = "email" name = "txt-mail" class="Header-mail Header-txt" placeholder = "Correo" required id="email1">
                 <input type = "password" name = "txt-pass" class = "Header-pass Header-txt" placeholder="Contraseña" required id="psw1">
-                <input type="checkbox" id="chek1">Mantener sesión iniciada.
                 <input type = "submit" name = "btn-signin" class="Header-submit" value="Entrar">
+                <p class="Header-content"><input type="checkbox" id="chek1" style="vertical-align:middle"><label for="chek1" class="Header-label">Mantener sesión iniciada.</label></p>
             </form>
         </header>
         <section class="Section">     
