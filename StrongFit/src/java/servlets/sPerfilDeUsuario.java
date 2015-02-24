@@ -6,6 +6,7 @@
 
 package servlets;
 
+import clases.cCifrado;
 import clases.cSugerirDietas;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +39,7 @@ public class sPerfilDeUsuario extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -46,11 +47,22 @@ public class sPerfilDeUsuario extends HttpServlet {
             // recuperamos los valores
             clases.cConexion objconexion = new clases.cConexion();
             objconexion.conectar();
-            String idUser = (String)sesion.getAttribute("idUsr");
-            int idPaciente = (Integer)sesion.getAttribute("idPaciente");
-            String nombre = request.getParameter("name");
-            String idUsr = request.getParameter("email");
+            
+            cCifrado seguro = new cCifrado();
             String pass = request.getParameter("contra");
+            seguro.AlgoritmoAES();
+            pass = seguro.cifrarSHA1(pass);
+            
+            String idUser = (String)sesion.getAttribute("idUsr");
+            String idUserS = seguro.encriptar(idUser);
+            
+            int idPaciente = (Integer)sesion.getAttribute("idPaciente");
+            
+            String nombre = request.getParameter("name");
+            String nombreS = seguro.encriptar(nombre);
+            String idUsr = request.getParameter("email");
+            String idUsrS = seguro.encriptar(idUsr);
+            
             String peso = request.getParameter("peso");
             String estatura = request.getParameter("estatura");
             String cintura = request.getParameter("cintura");
@@ -100,15 +112,18 @@ public class sPerfilDeUsuario extends HttpServlet {
                 {
                     horasR[i] = horas.get(i);
                 }
-                sugerir = new cSugerirDietas(idUser, edad2, peso2, cintura2, estatura2, sexo, actividad, dias, horasR, ocupacion);
+                sugerir = new cSugerirDietas(idUserS, edad2, peso2, cintura2, estatura2, sexo, actividad, dias, horasR, ocupacion);
             }
             else
-                sugerir = new cSugerirDietas(idUser, edad2, peso2, cintura2, estatura2, sexo, actividad, ocupacion);
+                sugerir = new cSugerirDietas(idUserS, edad2, peso2, cintura2, estatura2, sexo, actividad, ocupacion);
             
             
             String estado = request.getParameter("estado");
+            String estadoS = seguro.encriptar(estado);
             String municipio = request.getParameter("municipio");
+            String municipioS = seguro.encriptar(municipio);
             String colonia = request.getParameter("colonia");
+            String coloniaS = seguro.encriptar(colonia);
             String verificacion = "";
             
             //Calculamos el estado de salud del paciente y las calorias que debe de consumir para estar saludable
@@ -131,7 +146,7 @@ public class sPerfilDeUsuario extends HttpServlet {
             try{
              // verificar si el nuevo correo esta disponible
              if(idUser.equals(idUsr)){
-             objconexion.cambioUsuario(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, estadoSalud, estado, municipio, colonia, idPaciente);
+             objconexion.cambioUsuario(idUserS, nombreS, pass, peso, estatura, cintura, edad, sexo, estadoSalud, estadoS, municipioS, coloniaS, idPaciente);
              sesion.setAttribute("idUsr",idUser);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
@@ -146,9 +161,9 @@ public class sPerfilDeUsuario extends HttpServlet {
                  sesion.setAttribute("salud", estadoSalud);
                  response.sendRedirect("jsp/paciente/usuario.jsp");
              }else{
-             verificacion = objconexion.cambiarcorreo(idUser);
+             verificacion = objconexion.cambiarcorreo(idUsrS);
              if(verificacion.equals("libre")){
-             objconexion.cambioUsuarioConCorreo(idUser, nombre, pass, peso, estatura, cintura, edad, sexo, estado, municipio, colonia, idUsr, estadoSalud, idPaciente);
+             objconexion.cambioUsuarioConCorreo(idUserS, nombreS, pass, peso, estatura, cintura, edad, sexo, estadoS, municipioS, coloniaS, idUsrS, estadoSalud, idPaciente);
              sesion.setAttribute("idUsr",idUsr);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
@@ -187,6 +202,8 @@ public class sPerfilDeUsuario extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(sPerfilDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(sPerfilDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -204,6 +221,8 @@ public class sPerfilDeUsuario extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(sPerfilDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(sPerfilDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

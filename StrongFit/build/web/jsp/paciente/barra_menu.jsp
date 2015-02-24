@@ -14,7 +14,6 @@
 <header class = "Header">
     <script>
         cargarDia();
-        cambiarMetas();
         cargarDiaCiclico();
     </script>
     <p class="Header-title"><a href = "../../index.jsp">Strongfit</a></p>

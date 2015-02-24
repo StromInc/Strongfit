@@ -6,11 +6,14 @@
 
 package servlets;
 
+import clases.cCifrado;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +38,7 @@ public class sLogIn extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -45,9 +48,15 @@ public class sLogIn extends HttpServlet {
             sesion.setMaxInactiveInterval(-1);
             String idUser = request.getParameter("txt-mail");
             String pass = request.getParameter("txt-pass");
+            
+            cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
+            String idUS = seguro.encriptar(idUser);
+            String passS = seguro.cifrarSHA1(pass);
+            
             String tipo = "";
             ResultSet resultado;
-            String verificacion = objconexion.busquedadeusuarios(idUser, pass); 
+            String verificacion = objconexion.busquedadeusuarios(idUS, passS); 
             // identificar al usuario
             try{                   
             // Logica para permitir o no el acceso
@@ -66,12 +75,12 @@ public class sLogIn extends HttpServlet {
                             int cedula = resultado.getInt("cedulaProf");
                             int edad = resultado.getInt("edad");
                             int sexo = resultado.getInt("idSexo"); //En la base dice idSexo no sexo 
-                            String nombre = resultado.getString("nombre");
-                            String carrera = resultado.getString("carrera");
-                            String escuela = resultado.getString("escuela");
-                            String estado = resultado.getString("estado");
-                            String municipio = resultado.getString("municipio");
-                            String colonia = resultado.getString("colonia");
+                            String nombre = seguro.desencriptar(resultado.getString("nombre"));
+                            String carrera = seguro.desencriptar(resultado.getString("carrera"));
+                            String escuela = seguro.desencriptar(resultado.getString("escuela"));
+                            String estado = seguro.desencriptar(resultado.getString("estado"));
+                            String municipio = seguro.desencriptar(resultado.getString("municipio"));
+                            String colonia = seguro.desencriptar(resultado.getString("colonia"));
                             //variables de sesion
                             sesion.setAttribute("nombre",nombre);
                             sesion.setAttribute("idMedico", idMedico);
@@ -109,6 +118,7 @@ public class sLogIn extends HttpServlet {
                             String colonia = resultado.getString("colonia");
                             //variables de sesion
                             sesion.setAttribute("idPaciente", idPaciente);
+                            sesion.setAttribute("UsrS", idUS);
                             sesion.setAttribute("nombre",nombre); 
                             sesion.setAttribute("idcont", idCont); //el id del conteo calorico
                             sesion.setAttribute("salud", salud);
@@ -161,7 +171,11 @@ public class sLogIn extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(sLogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -175,7 +189,11 @@ public class sLogIn extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(sLogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

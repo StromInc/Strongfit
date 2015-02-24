@@ -6,10 +6,14 @@
 
 package servlets;
 
+import clases.cCifrado;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,25 +38,30 @@ public class sAltaDeUsuario extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, NoSuchAlgorithmException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession sesion = request.getSession();
+            cCifrado seguro = new cCifrado();            
             //Recuperando Valores
             String idUser = request.getParameter("txt-mail");
             String pass = request.getParameter("txt-pass");
             String nombre = request.getParameter("txt-name");
              // conectar a la base de datos                                     
             try{
+                seguro.AlgoritmoAES();
+                String pwdS = seguro.cifrarSHA1(pass);
+                String idS = seguro.encriptar(idUser);
+                String nomS = seguro.encriptar(nombre);
                 clases.cConexion objconexion = new clases.cConexion();
                 objconexion.conectar();
                 // verificar usuario
-                String verificacion = objconexion.altausuario(idUser, pass, nombre);
+                String verificacion = objconexion.altausuario(idS, pwdS, nomS);
                 if (verificacion.equals("valido")){
                     int idConteo = 0;
                     int idPaciente = 0;
-                    ResultSet rs = objconexion.altapaciente(idUser);
+                    ResultSet rs = objconexion.altapaciente(idS);
                     if(rs.next())
                     {
                         idConteo = rs.getInt("idConteo");
@@ -99,7 +108,11 @@ public class sAltaDeUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(sAltaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -113,7 +126,11 @@ public class sAltaDeUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(sAltaDeUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

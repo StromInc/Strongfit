@@ -6,10 +6,14 @@
 
 package servlets;
 
+import clases.cCifrado;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,22 +37,25 @@ public class sAltaDeMedico extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, NoSuchAlgorithmException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession sesion = request.getSession();
+            cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
             /* TODO output your page here. You may use following sample code. */
-            String nombre = request.getParameter("txt-name");
-            String idUser = request.getParameter("txt-mail");
-            String pass = request.getParameter("txt-pass");
+            String pass = seguro.encriptar(request.getParameter("txt-pass"));
+            String nombre = seguro.encriptar(request.getParameter("txt-name"));
+            String idUser = seguro.encriptar(request.getParameter("txt-mail"));
+            
             String edad = request.getParameter("edad");
             int sexo = Integer.parseInt(request.getParameter("idSexo"));
-            String estado = request.getParameter("estado");
-            String municipio = request.getParameter("municipio");
-            String colonia = request.getParameter("colonia");
+            String estado = seguro.encriptar(request.getParameter("estado"));
+            String municipio = seguro.encriptar(request.getParameter("municipio"));
+            String colonia = seguro.encriptar(request.getParameter("colonia"));
             String cedula = request.getParameter("plicense");
-            String escuela = request.getParameter("school");
-            String carrera = request.getParameter("carrier");
+            String escuela = seguro.encriptar(request.getParameter("school"));
+            String carrera = seguro.encriptar(request.getParameter("carrier"));
             boolean noAvanza= true;
             int cedula2 = 0;
             int edad2 = 0;
@@ -95,7 +102,11 @@ public class sAltaDeMedico extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(sAltaDeMedico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -109,7 +120,11 @@ public class sAltaDeMedico extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(sAltaDeMedico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

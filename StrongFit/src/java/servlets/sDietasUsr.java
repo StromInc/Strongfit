@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import clases.cCifrado;
 import clases.cConexion;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -40,12 +41,14 @@ public class sDietasUsr extends HttpServlet {
      */
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
             HttpSession sesion = request.getSession(false);
-            String idUser = (String)sesion.getAttribute("idUsr");
+            cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
+            String idUser = seguro.encriptar((String)sesion.getAttribute("idUsr"));
             int idDieta = Integer.parseInt(request.getParameter("idDieta"));
             String quit = request.getParameter("quitar");
             System.out.println(idDieta);
@@ -75,6 +78,8 @@ public class sDietasUsr extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(sDietasUsr.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(sDietasUsr.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -92,6 +97,8 @@ public class sDietasUsr extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(sDietasUsr.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(sDietasUsr.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -105,14 +105,12 @@
             <div class="div-informacion">
                 <!--esta es la imagen que el usuario elija-->
                 <article class = "Article-tbl-usr2" style = "margin-left: 0" id="Imagen">
-                <img src = "<%=ruta%>" class ="img-usr" alt = "foto de usuario">
-                </article>    
-                    
+                    <img src = "<%=ruta%>" class ="img-usr" alt = "foto de usuario">
                     <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagen.jsp" name="img_frm">
-                    <input type = "file"  name="uploadFile" id="ImgUsuario" required/>
-                    <input type = "submit" value="cambiar" class="btn-imagen"/>
+                        <input type = "file"  name="uploadFile" id="ImgUsuario" class="input-subir" required/>
+                        <input type = "submit" value="cambiar" class="btn-imagen"/>
                     </form>
-
+                </article>    
                 <!--esta es informacion nutrimental como si esta gordo y cuantas calorias debe de consumir-->
                 <article class = "Article-tbl-usr2" style = "margin-left: 0">
                     <h2 class = "Article-title">Calorias a consumir diariamente</h2>
@@ -153,7 +151,7 @@
                                         <p class = "m1 medidas-p">Peso</p>
                                         <input type = "text" name = "peso" required class = "Section-m" value = "<%=peso%>" placeholder="(Kg)">
                                     </div>
-                                    <div class = "div-nutrimental estatura">
+                                    <div class = "div-nutrimental">
                                         <p class = "m2 medidas-p">Estatura</p>
                                         <input type = "text" name = "estatura" required class = "Section-m" value = "<%=estatura%>" placeholder="cm">
                                     </div>
@@ -161,7 +159,7 @@
                                         <p class = "m3 medidas-p">Cintura</p>
                                         <input type = "text" name = "cintura" required class = "Section-m" value = "<%=cintura%>" placeholder="cm">
                                     </div>
-                                    <div class = "div-nutrimental edad">
+                                    <div class = "div-nutrimental">
                                         <p class = "medidas-p">Edad</p>
                                         <input type = "text" name = "edad" required class = "Section-m" value = "<%=edad%>" placeholder="años">
                                     </div>

@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import clases.cCifrado;
 import clases.cConexion;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,13 +35,16 @@ public class sAjaxCorreo extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String correo = request.getParameter("email");
+            cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
             cConexion conexion = new cConexion();
             conexion.conectar();
+            correo = seguro.encriptar(correo);
             String resultado = conexion.getCorreo(correo);
             response.getWriter().write(resultado);
         }
@@ -62,6 +66,8 @@ public class sAjaxCorreo extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(sAjaxCorreo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(sAjaxCorreo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -79,6 +85,8 @@ public class sAjaxCorreo extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(sAjaxCorreo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(sAjaxCorreo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

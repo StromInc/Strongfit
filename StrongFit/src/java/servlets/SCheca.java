@@ -6,6 +6,7 @@
 
 package servlets;
 
+import clases.cCifrado;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -36,7 +37,7 @@ public class SCheca extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -44,21 +45,27 @@ public class SCheca extends HttpServlet {
             objconexion.conectar();
             HttpSession sesion = request.getSession();
             sesion.setMaxInactiveInterval(-1);
+            
+            cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
+            
             String idUser = request.getParameter("nombre");
+            String idUserS = seguro.encriptar(idUser);
             String pass = request.getParameter("contra");
+            String passS = seguro.cifrarSHA1(pass);
             String tipo = "";
             ResultSet resultado;
-            String verificacion = objconexion.busquedadeusuarios(idUser, pass);
+            String verificacion = objconexion.busquedadeusuarios(idUserS, passS);
              try{                   
             // Logica para permitir o no el acceso
             if (verificacion.equals("si")){
                 sesion.setAttribute("idUsr",idUser);
                 sesion.setAttribute("pass",pass);
                 //logica para mandar al usuario a donde deba
-                tipo = objconexion.tipodeusuario(idUser);
+                tipo = objconexion.tipodeusuario(idUserS);
                 
                 if(tipo.equals("medico")){
-                    resultado = objconexion.cargadedatos(idUser, tipo);
+                    resultado = objconexion.cargadedatos(idUserS, tipo);
                     if(resultado.next()){
                         if(resultado.getInt("estatus") == 1)
                         {
@@ -160,6 +167,8 @@ public class SCheca extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(SCheca.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(SCheca.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -177,6 +186,8 @@ public class SCheca extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(SCheca.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(SCheca.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -1,3 +1,4 @@
+<%@page import="clases.cCifrado"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.*" %>
 <%@page import="java.sql.ResultSet"%>
@@ -8,7 +9,9 @@
     <%
         /*esto es temporal debido a que las variables de sesion como usrid y usrname se deben obtener en el momento del login*/
         HttpSession sesion = request.getSession();
-        String usrid = (String)sesion.getAttribute("idUsr");
+        cCifrado seguro = new cCifrado();
+        seguro.AlgoritmoAES();
+        String usrid = seguro.encriptar((String)sesion.getAttribute("idUsr"));
     %>
     <head>
         <%@include file = "../meta.jsp" %>

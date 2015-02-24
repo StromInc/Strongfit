@@ -359,7 +359,7 @@ public class cConexion {
         return respuesta;
     }
     public String ruta(){
-    return  "C://Users//jorge pastrana//Proyectos//s5//Strongfit//StrongFit//web//Imagenes//Usuarios//";
+    return  "/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/Imagenes/Usuarios/";
     }
 }
 

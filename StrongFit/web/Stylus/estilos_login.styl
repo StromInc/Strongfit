@@ -18,6 +18,10 @@ rojo = #FF2115
     right 0
     top 0
     z-index 100
+    &-content
+        display inline-block
+    &-label
+        margin-left 5px  
 
 .Header-button
     background azul
@@ -97,6 +101,7 @@ rojo = #FF2115
     max-width 30em
     padding .5em .5em 3em .5em
     text-align center
+    margin 2em 0
 
 .Section-login
     border-bottom 1px solid white
@@ -197,8 +202,11 @@ rojo = #FF2115
         &-signup
             display none
             
-@media screen and (max-width: 767px)
+@media screen and (max-width: 1000px)
     .Header
+        &-content
+            display block
+            margin-bottom 0.5em
         &-title
             font-size 2em
         &-submit
@@ -210,10 +218,9 @@ rojo = #FF2115
             box-shadow 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24)
             height auto
             left 0
-            padding 0.5em
             right 0
             text-align center
-            top -125px
+            top -150px
             transition 0.3s         
             &.is-active
                 top 95px                  

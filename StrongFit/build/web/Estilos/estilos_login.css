@@ -211,6 +211,12 @@ th {
   top: 0;
   z-index: 100;
 }
+.Header-content {
+  display: inline-block;
+}
+.Header-label {
+  margin-left: 5px;
+}
 .Header-button {
   background: #0070c8;
   border: none;
@@ -304,6 +310,7 @@ th {
   max-width: 30em;
   padding: 0.5em 0.5em 3em 0.5em;
   text-align: center;
+  margin: 2em 0;
 }
 .Section-login {
   border-bottom: 1px solid #fff;
@@ -418,7 +425,11 @@ th {
     display: none;
   }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1000px) {
+  .Header-content {
+    display: block;
+    margin-bottom: 0.5em;
+  }
   .Header-title {
     font-size: 2em;
   }
@@ -433,10 +444,9 @@ th {
     box-shadow: 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
     height: auto;
     left: 0;
-    padding: 0.5em;
     right: 0;
     text-align: center;
-    top: -125px;
+    top: -150px;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     -ms-transition: 0.3s;

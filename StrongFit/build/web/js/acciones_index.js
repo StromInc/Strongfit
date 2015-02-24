@@ -31,9 +31,16 @@ $(function() {
         }
          
     });
-    function nuevo(){
+
+    $email.on('focus', function(){
+        $arrow.addClass('hidden')
+    }).on('blur', ajaxBuscar);
+});
+
+function nuevo(){
         console.log('hola');
         if (window.matchMedia('(max-width: 768px)').matches){
+            console.log("Pantalla")
             var $buttonShow = document.getElementById('show');
             var $buttonHide = document.getElementById('hide');
             var $menu = document.getElementById('formu');
@@ -56,12 +63,7 @@ $(function() {
             $buttonHide.addEventListener('click', hideMenu);
         }
     }
-    $email.on('focus', function(){
-        $arrow.addClass('hidden')
-    }).on('blur', ajaxBuscar);
-
     window.onresize = nuevo;
-});
 function guardarsesion() {
 		
         var correoVar = $('#email1').val();
@@ -94,6 +96,7 @@ function guardarsesion() {
     }
    }
    function mandar(){
+        nuevo();
       var sesion = localStorage.getItem("sesioniniciada");
       if(sesion == "si"){
       var id = localStorage.getItem("id");
