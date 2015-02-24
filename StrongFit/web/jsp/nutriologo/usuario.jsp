@@ -57,7 +57,7 @@
             <article class = "Article-tbl-usr2" style = "margin-left: 0" id="Imagen">
                 <img src = "<%=ruta%>" class ="img-usr" alt = "foto de usuario">
                 <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagen.jsp" name="img_frm">
-                    <input type = "file"  name="uploadFile" id="ImgUsuario" required/>
+                    <input type = "file"  name="uploadFile" id="ImgUsuario" class="input-subir" required/>
                     <input type = "submit" value="cambiar" class="btn-imagen"/>
                 </form>
             </article>              
