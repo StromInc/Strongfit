@@ -145,3 +145,8 @@
     padding: 0;
   }
 }
+@media screen and (max-width: 480px) {
+  .Header-lista {
+    font-size: 0.9em;
+  }
+}
