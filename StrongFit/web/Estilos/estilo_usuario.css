@@ -1,1 +1,327 @@
-a{text-decoration:none}.Section-tbl-usr{margin:0 .5em;margin-top:4em;margin-bottom:1em;text-align:center}.Article-tbl-usr{display:inline-block;background-color:#fff;padding:0 1em 2em 1em;margin-bottom:1.5em;max-width:30em;margin-left:5em;margin-top:1.5em;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);box-shadow:0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);}.Article-tbl-usr h2{color:#198627}.Article-tbl-usr hr{margin-top:3em}.prueba{display:none;max-width:30em}.is-active{display:inline-block;width:100%}.personal-p{margin:2em 0 0 1em;color:#000;text-align:left;display:block}.medidas-p{display:inline-block;float:left;margin:1em 0 0 0;padding-left:1em;color:#000;text-align:center;display:block}.Article-title{font-size:1.3em;border-top:1px solid #cbcbcb;padding-top:1em}.Menu-list{list-style:none;padding:0}.Menu-item{display:inline-block;}.Menu-item a{padding:.5em 1.2em;-webkit-border-radius:3px;border-radius:3px;color:#000;}.Menu-item a:hover{background:#016cc0;color:#fff}.Menu-item a.activo{background:#0070c8;color:#fff}.Section-usr{width:20em;padding:.7em;-webkit-border-radius:3px;border-radius:3px;border:solid;border-width:thin;border-color:#d2d4d5}.Section-m{width:5em;padding:.7em;-webkit-border-radius:3px;border-radius:3px;border:solid;border-width:thin;border-color:#d2d4d5}.btn-act-usr{background-color:#0070c8;color:#fff;font-size:1.3em;display:inline-block;padding:.8em 2em;border:none;margin-top:1.4em;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);}.btn-act-usr:hover{background:#01579b}.img-usr{width:15em;height:15em;-webkit-border-radius:3px;border-radius:3px;border:1px solid #f9f9f9}.btn-imagen{background-color:#0070c8;color:#fff;font-size:1.3em;display:inline-block;padding:.4em 2em;border:none;margin-top:1.4em;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);}.btn-imagen:hover{background:#01579b}.Article-tbl-usr2{display:inline-block;background-color:#fff;padding:2em;max-width:15em;vertical-align:top;-webkit-border-radius:3px;border-radius:3px;margin-top:1.5em;margin-bottom:1em;-webkit-box-shadow:0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);box-shadow:0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23)}.Section-usr:focus,.Section-m:focus,.Section-h:focus{outline:none;-webkit-box-shadow:0 0 10px #0c98a2;box-shadow:0 0 10px #0c98a2}.div-edad{display:inline-block;width:6.6em}.div-sexo{display:inline-block;width:13em}.div-informacion{width:15em;display:inline-block;vertical-align:top}.div-nutrimental{display:inline-block;width:6.5em}.select-sexo{padding:.59em 2.9em}.estatura{margin:0 1em}.sexo{width:13.2em}.edad{margin-right:2em}.select-actividad{padding:.59em 0}.horas{width:6em}.input-horas{width:7.5em;margin-left:3.2em}.div-actividadTiempo{text-align:center;margin-top:1em;}.div-actividadTiempo label{padding:.5em .2em;background-color:rgba(23,113,40,0.4);margin-top:.5em;display:inline-block;width:4.5em;-webkit-border-radius:3px;border-radius:3px;cursor:pointer;text-align:center;}.div-actividadTiempo label:hover{background-color:rgba(23,113,40,0.9)}.div-Semana,#contenedor-dias1,#contenedor-dias2{display:inline-block;width:9em}#contenedor-dias1,#contenedor-dias2{text-align:left}#contenedor-dias1{margin-right:1em}#contenedor-dias2{vertical-align:top}.div-dia{display:none}.Section-h{width:3.3em;padding:.45em .2em;-webkit-border-radius:3px;border-radius:3px;border:solid;border-width:thin;border-color:#d2d4d5;margin-left:.2em}.div-ocupacion{width:10em;display:inline-block;margin-left:1em}.select-ocupacion{width:9.45em;display:inline-block;padding:.59em 0;}.select-ocupacion option{width:10em;max-width:10em}.micha{width:50%;display:inline-block;font-size:1.1rem}.diaCalorias{background-color:rgba(23,113,40,0.9);padding:.5em 0;margin-top:1em;display:inline-block;width:5.5em;text-align:center;-webkit-border-radius:3px;border-radius:3px}.caloriasPaciente{background-color:#fff;padding:.5em 0;margin-top:1em;display:inline-block;width:6.5em;text-align:center;-webkit-border-radius:3px;border-radius:3px}#dom:checked ~ #dom-label,#lun:checked ~ #lun-label,#mar:checked ~ #mar-label,#mie:checked ~ #mie-label,#jue:checked ~ #jue-label,#vie:checked ~ #vie-label,#sab:checked ~ #sab-label{background-color:rgba(23,113,40,0.9)}#dom:checked ~ #dom-horas2,#lun:checked ~ #lun-horas2,#mar:checked ~ #mar-horas2,#mie:checked ~ #mie-horas2,#jue:checked ~ #jue-horas2,#vie:checked ~ #vie-horas2,#sab:checked ~ #sab-horas2{display:inline-block}.invisible{display:none}@media screen and (max-width:767px){.Section-usr{width:90%}.Section-tbl-usr{margin-top:6em}.Article-tbl-usr{margin:0 auto;padding-top:1em;display:block}}@media screen and (max-width:480px){.Section-tbl-usr{margin-top:9em}}
+a {
+  text-decoration: none;
+}
+.Section-tbl-usr {
+  margin-top: 4em;
+  margin-bottom: 1em;
+  padding: 0 0.5em;
+  text-align: center;
+}
+.Article-tbl-usr {
+  display: inline-block;
+  background-color: #fff;
+  padding: 0 1em 2em 1em;
+  margin-bottom: 1.5em;
+  max-width: 30em;
+  margin-left: 5em;
+  margin-top: 1.5em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.Article-tbl-usr h2 {
+  color: #198627;
+}
+.Article-tbl-usr hr {
+  margin-top: 3em;
+}
+.prueba {
+  display: none;
+  max-width: 30em;
+}
+.is-active {
+  display: inline-block;
+  width: 100%;
+}
+.personal-p {
+  margin: 2em 0 0 1em;
+  color: #000;
+  text-align: left;
+  display: block;
+}
+.medidas-p {
+  display: inline-block;
+  float: left;
+  margin: 1em 0 0 0;
+  padding-left: 1em;
+  color: #000;
+  text-align: center;
+  display: block;
+}
+.Article-title {
+  font-size: 1.3em;
+  border-top: 1px solid #cbcbcb;
+  padding-top: 1em;
+}
+.Menu-list {
+  list-style: none;
+  padding: 0;
+}
+.Menu-item {
+  display: inline-block;
+}
+.Menu-item a {
+  padding: 0.5em 1.2em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #000;
+}
+.Menu-item a:hover {
+  background: #016cc0;
+  color: #fff;
+}
+.Menu-item a.activo {
+  background: #0070c8;
+  color: #fff;
+}
+.Section-usr {
+  width: 20em;
+  padding: 0.7em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: solid;
+  border-width: thin;
+  border-color: #d2d4d5;
+}
+.Section-m {
+  width: 5em;
+  padding: 0.7em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: solid;
+  border-width: thin;
+  border-color: #d2d4d5;
+}
+.btn-act-usr {
+  background-color: #0070c8;
+  color: #fff;
+  font-size: 1.3em;
+  display: inline-block;
+  padding: 0.8em 2em;
+  border: none;
+  margin-top: 1.4em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.btn-act-usr:hover {
+  background: #01579b;
+}
+.img-usr {
+  width: 15em;
+  height: 15em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #f9f9f9;
+}
+.input-subir {
+  width: 100%;
+  display: block;
+}
+.btn-imagen {
+  background-color: #0070c8;
+  color: #fff;
+  font-size: 1.3em;
+  display: inline-block;
+  padding: 0.4em 2em;
+  border: none;
+  margin-top: 1.4em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.btn-imagen:hover {
+  background: #01579b;
+}
+.Article-tbl-usr2 {
+  display: inline-block;
+  background-color: #fff;
+  padding: 2em;
+  vertical-align: top;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.Section-usr:focus,
+.Section-m:focus,
+.Section-h:focus {
+  outline: none;
+  -webkit-box-shadow: 0px 0px 10px #0c98a2;
+  box-shadow: 0px 0px 10px #0c98a2;
+}
+.div-edad {
+  display: inline-block;
+  width: 6.6em;
+}
+.div-sexo {
+  display: inline-block;
+  width: 13em;
+}
+.div-informacion {
+  width: 20em;
+  display: inline-block;
+  vertical-align: top;
+}
+.div-nutrimental {
+  display: inline-block;
+  width: 6.5em;
+}
+.div-nutrimental.actividad {
+  width: 11em;
+}
+.select-sexo {
+  padding: 0.5em 1em;
+  width: 100%;
+}
+.estatura {
+  margin: 0 1em;
+}
+.sexo {
+  width: 10em;
+}
+.edad {
+  margin-right: 2em;
+}
+.select-actividad {
+  width: 100%;
+  padding: 0.5em 0;
+}
+.horas {
+  width: 6em;
+}
+.input-horas {
+  width: 7.5em;
+  margin-left: 3.2em;
+}
+.div-actividadTiempo {
+  text-align: center;
+  margin-top: 1em;
+}
+.div-actividadTiempo label {
+  padding: 0.5em 0.2em;
+  background-color: rgba(23,113,40,0.4);
+  margin-top: 0.5em;
+  display: inline-block;
+  width: 4.5em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+}
+.div-actividadTiempo label:hover {
+  background-color: rgba(23,113,40,0.9);
+}
+.div-Semana,
+#contenedor-dias1,
+#contenedor-dias2 {
+  display: inline-block;
+  width: 9em;
+}
+#contenedor-dias1,
+#contenedor-dias2 {
+  text-align: left;
+}
+#contenedor-dias1 {
+  margin-right: 1em;
+}
+#contenedor-dias2 {
+  vertical-align: top;
+}
+.div-dia {
+  display: none;
+}
+.Section-h {
+  width: 3.3em;
+  padding: 0.45em 0.2em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: solid;
+  border-width: thin;
+  border-color: #d2d4d5;
+  margin-left: 0.2em;
+}
+.div-ocupacion {
+  width: 100%;
+  display: block;
+  margin-left: 0;
+  padding: 0;
+}
+.select-ocupacion {
+  width: 100%;
+  display: inline-block;
+  padding: 0.5em 0;
+}
+.select-ocupacion option {
+  width: 10em;
+  max-width: 10em;
+}
+.micha {
+  width: 50%;
+  display: inline-block;
+  font-size: 1.1rem;
+}
+.diaCalorias {
+  background-color: rgba(23,113,40,0.9);
+  padding: 0.5em 0;
+  margin-top: 1em;
+  display: inline-block;
+  width: 5.5em;
+  text-align: center;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.caloriasPaciente {
+  background-color: #fff;
+  padding: 0.5em 0;
+  margin-top: 1em;
+  display: inline-block;
+  width: 6.5em;
+  text-align: center;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+#dom:checked ~ #dom-label,
+#lun:checked ~ #lun-label,
+#mar:checked ~ #mar-label,
+#mie:checked ~ #mie-label,
+#jue:checked ~ #jue-label,
+#vie:checked ~ #vie-label,
+#sab:checked ~ #sab-label {
+  background-color: rgba(23,113,40,0.9);
+}
+#dom:checked ~ #dom-horas2,
+#lun:checked ~ #lun-horas2,
+#mar:checked ~ #mar-horas2,
+#mie:checked ~ #mie-horas2,
+#jue:checked ~ #jue-horas2,
+#vie:checked ~ #vie-horas2,
+#sab:checked ~ #sab-horas2 {
+  display: inline-block;
+}
+.invisible {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .Section-usr {
+    width: 90%;
+  }
+  .Section-tbl-usr {
+    margin-top: 6em;
+  }
+  .Article-tbl-usr {
+    margin: 0 auto;
+    padding-top: 1em;
+    display: block;
+  }
+}
+@media screen and (max-width: 480px) {
+  .Section-tbl-usr {
+    margin-top: 9em;
+  }
+}

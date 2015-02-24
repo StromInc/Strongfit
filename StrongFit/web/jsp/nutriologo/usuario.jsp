@@ -56,12 +56,11 @@
         <section class = "Section-tbl-usr">
             <article class = "Article-tbl-usr2" style = "margin-left: 0" id="Imagen">
                 <img src = "<%=ruta%>" class ="img-usr" alt = "foto de usuario">
-                </article>    
-                    
-                    <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagen.jsp" name="img_frm">
+                <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagen.jsp" name="img_frm">
                     <input type = "file"  name="uploadFile" id="ImgUsuario" required/>
                     <input type = "submit" value="cambiar" class="btn-imagen"/>
-                    </form>
+                </form>
+            </article>              
             <article class = "Article-tbl-usr">
                 <form action = "/StrongFit/sPerfilDeMedico" method = "post">
                     <nav class="Menu">
