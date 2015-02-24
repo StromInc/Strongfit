@@ -21,3 +21,8 @@ body {
   background: #fff;
   color: #000;
 }
+@media screen and (max-width: 480px) {
+  .Section-todo {
+    margin-top: 145px;
+  }
+}

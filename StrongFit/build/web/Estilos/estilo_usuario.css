@@ -13,7 +13,7 @@ a {
   padding: 0 1em 2em 1em;
   margin-bottom: 1.5em;
   max-width: 30em;
-  margin-left: 5em;
+  margin-left: 3.5em;
   margin-top: 1.5em;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -139,7 +139,7 @@ a {
 .Article-tbl-usr2 {
   display: inline-block;
   background-color: #fff;
-  padding: 2em;
+  padding: 1em;
   vertical-align: top;
   -webkit-border-radius: 3px;
   border-radius: 3px;

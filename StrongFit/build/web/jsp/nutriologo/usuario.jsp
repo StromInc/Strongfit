@@ -54,13 +54,15 @@
     <body>
         <%@include file="barra_menu.jsp"%>       
         <section class = "Section-tbl-usr">
+        <div class="div-informacion">
             <article class = "Article-tbl-usr2" style = "margin-left: 0" id="Imagen">
                 <img src = "<%=ruta%>" class ="img-usr" alt = "foto de usuario">
                 <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagen.jsp" name="img_frm">
                     <input type = "file"  name="uploadFile" id="ImgUsuario" class="input-subir" required/>
                     <input type = "submit" value="cambiar" class="btn-imagen"/>
                 </form>
-            </article>              
+            </article>
+            </div>             
             <article class = "Article-tbl-usr">
                 <form action = "/StrongFit/sPerfilDeMedico" method = "post">
                     <nav class="Menu">
