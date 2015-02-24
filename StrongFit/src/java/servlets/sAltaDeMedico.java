@@ -44,7 +44,7 @@ public class sAltaDeMedico extends HttpServlet {
             cCifrado seguro = new cCifrado();
             seguro.AlgoritmoAES();
             /* TODO output your page here. You may use following sample code. */
-            String pass = seguro.encriptar(request.getParameter("txt-pass"));
+            String pass = seguro.cifrarSHA1(request.getParameter("txt-pass"));
             String nombre = seguro.encriptar(request.getParameter("txt-name"));
             String idUser = seguro.encriptar(request.getParameter("txt-mail"));
             
