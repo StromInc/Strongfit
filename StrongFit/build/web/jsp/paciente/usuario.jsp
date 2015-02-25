@@ -139,7 +139,7 @@
                         <p class = "personal-p">Correo</p>
                         <input type = "email" name = "email" required class = "Section-usr" value="<%=idUsr%>">
                         <p class = "personal-p">Contraseña</p>
-                        <input type = "text" name = "contra" required class = "Section-usr" value="<%=pass%>">
+                        <input type = "password" name = "contra" required class = "Section-usr" value="<%=pass%>">
                     </div>               
                     <div id="formu_2">
                         <h2 class = "Article-title">Información nutrimental</h2>

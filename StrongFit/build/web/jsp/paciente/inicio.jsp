@@ -1,3 +1,4 @@
+<%@page import="clases.cCifrado"%>
 <%@page import="clases.cConexion"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.GregorianCalendar"%>
@@ -28,6 +29,7 @@
             
             cConexion conecta = new cConexion();
             conecta.conectar();
+            
             ResultSet rs = conecta.spGetCaloriasPacienteEspecifico(idPaciente, dia);
             if(rs.next())
             {

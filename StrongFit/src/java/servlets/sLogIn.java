@@ -112,12 +112,21 @@ public class sLogIn extends HttpServlet {
                             int sexo = resultado.getInt("idSexo"); //en la base es idSexousuario
                             int salud = resultado.getInt("idSalud");
                             int idCont = resultado.getInt("idConteo");
-                            String nombre = resultado.getString("nombre");
+                            String nombre = seguro.desencriptar(resultado.getString("nombre"));
                             int estatura = resultado.getInt("estatura");
                             int cintura = resultado.getInt("medidaCintura");
                             String estado = resultado.getString("estado");
                             String municipio = resultado.getString("municipio");
                             String colonia = resultado.getString("colonia");
+                            if(estado != null && !estado.equals("")){
+                                estado = seguro.desencriptar(estado);
+                            }
+                            if(municipio != null && !municipio.equals("")){
+                                municipio = seguro.desencriptar(municipio);
+                            }
+                            if(colonia != null && !colonia.equals("")){
+                                colonia = seguro.desencriptar(colonia);
+                            }
                             //variables de sesion
                             sesion.setAttribute("idPaciente", idPaciente);
                             sesion.setAttribute("UsrS", idUS);
