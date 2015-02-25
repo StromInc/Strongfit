@@ -64,10 +64,11 @@ public class sLogIn extends HttpServlet {
                 sesion.setAttribute("idUsr",idUser);
                 sesion.setAttribute("pass",pass);
                 //logica para mandar al usuario a donde deba
-                tipo = objconexion.tipodeusuario(idUser);
+                tipo = objconexion.tipodeusuario(idUS);
                 System.out.println(tipo);
                 if(tipo.equals("medico")){
-                    resultado = objconexion.cargadedatos(idUser, tipo);
+                    System.out.println("Entro a medico");
+                    resultado = objconexion.cargadedatos(idUS, tipo);
                     if(resultado.next()){
                         if(resultado.getInt("estatus") == 1)
                         {
@@ -101,8 +102,9 @@ public class sLogIn extends HttpServlet {
                         }
                     }
                 }else{
-                    if(tipo.equals("paciente")){  
-                        resultado = objconexion.cargadedatos(idUser, tipo);
+                    if(tipo.equals("paciente")){
+                        System.out.println("Entro a paciente");
+                        resultado = objconexion.cargadedatos(idUS, tipo);
                         if(resultado.next()){
                             int idPaciente = resultado.getInt("idPaciente");
                             int peso = resultado.getInt("peso");
@@ -135,6 +137,7 @@ public class sLogIn extends HttpServlet {
                         }
                     }else{
                         if(tipo.equals("admin")){
+                            System.out.println("Entro a admin");
                             sesion.setAttribute("idUsr", "supremo");
                             response.sendRedirect("jsp/admin/inicio.jsp");
 

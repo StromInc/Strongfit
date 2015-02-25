@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import clases.cCifrado;
 import clases.cConexion;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -46,12 +47,18 @@ public class sValidarMedico extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
             String id = request.getParameter("idMedico");
+            
+            cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
+            
+            id = seguro.desencriptar(id);
+            
             String confirm = "No";
             
             Map<String, Object> map = new HashMap<>();
@@ -90,6 +97,8 @@ public class sValidarMedico extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(sValidarMedico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(sValidarMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -107,6 +116,8 @@ public class sValidarMedico extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(sValidarMedico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(sValidarMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

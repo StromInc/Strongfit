@@ -51,7 +51,7 @@ public class cCifrado {
     //Inicia la clave para cifrar con el correo
     public void AlgoritmoAES()
     {
-        keyValue = "92AE31A79FEEB2A1".getBytes();
+        keyValue = "92HE81A79AEXB7A9".getBytes();
     }
     
     
