@@ -79,9 +79,9 @@
             </article>
 
             <!--Esta es la parte en la que te sugiere el platillo que te toca segun tu dieta-->
-            <div style = "width: 62%; ">
+            <div class="Content-platillos">
                 <article class = "Article-sugerir margen-estadisticas">
-                    <div class = "Article-platillos">
+                    <div class = "Article-platillos" style="display:block">
                         <div class = "meta estadisticas">
                             Meta
                             <hr>
