@@ -91,6 +91,7 @@
                     }
                 %>
             </article>
+            <script>cargaSes();</script>
         </section>
     </body>
 </html>

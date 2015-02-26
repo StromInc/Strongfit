@@ -76,17 +76,14 @@ public class StrongfitEndPoint {
         else{
             //remitente, destinatario, mensaje, sesion
             String Nuevo[] = mensaje.split(",");
-            for(int i = 0; i < Nuevo.length; i++){
-                System.out.println("WHOLOHOLO" + Nuevo[i]);
-            }
+            conecta.spSetMensajes(seguro.encriptar(Nuevo[0]), seguro.encriptar(Nuevo[1]), Nuevo[2]);
             for(Session sesion : conexiones){
                 System.out.println("============================================");
                 System.out.println("ESTA ES LA DE NUEVO: " + Nuevo[3]);
                 System.out.println("ESTA ES LA DE SES: " + sesion.getId());
                 if(Nuevo[3].equals(sesion.getId())){
                     RemoteEndpoint.Basic remote = sesion.getBasicRemote();
-                    remote.sendText(Nuevo[2]);
-                    conecta.spSetMensajes("Recibido: " + seguro.encriptar(Nuevo[0]), seguro.encriptar(Nuevo[1]), Nuevo[2]);
+                    remote.sendText(Nuevo[2]); 
                 }
             }
         }
