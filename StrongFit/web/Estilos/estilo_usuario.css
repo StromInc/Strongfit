@@ -26,6 +26,11 @@ a {
 .Article-tbl-usr hr {
   margin-top: 3em;
 }
+.Article-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 .prueba {
   display: none;
   max-width: 30em;
@@ -176,17 +181,11 @@ a {
   width: 11em;
 }
 .select-sexo {
-  padding: 0.5em 1em;
+  padding: 0.5em 0;
   width: 100%;
 }
-.estatura {
-  margin: 0 1em;
-}
 .sexo {
-  width: 10em;
-}
-.edad {
-  margin-right: 2em;
+  width: 8em;
 }
 .select-actividad {
   width: 100%;
@@ -247,10 +246,8 @@ a {
   margin-left: 0.2em;
 }
 .div-ocupacion {
-  width: 100%;
+  width: 13em;
   display: block;
-  margin-left: 0;
-  padding: 0;
 }
 .select-ocupacion {
   width: 100%;
