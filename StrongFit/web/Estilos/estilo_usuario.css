@@ -176,9 +176,11 @@ a {
 .div-nutrimental {
   display: inline-block;
   width: 6.5em;
+  margin-right: 0.5em;
 }
 .div-nutrimental.actividad {
   width: 11em;
+  margin: 0;
 }
 .select-sexo {
   padding: 0.5em 0;
@@ -186,6 +188,7 @@ a {
 }
 .sexo {
   width: 8em;
+  margin: 0;
 }
 .select-actividad {
   width: 100%;
