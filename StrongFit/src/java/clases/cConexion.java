@@ -311,6 +311,34 @@ public class cConexion {
     }
     
     
+    //Esto registra o cambia el usuario en el chat
+    public ResultSet spNuevaConexion(String idUsr, String idCon) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spNuevaConexion('"+idUsr+"', '"+idCon+"');");
+    }
+ 
+    //Busca el usuario
+    public ResultSet spBuscarUsuario(String idUsr) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spBuscarUsuario('"+idUsr+"');");
+    }
+    
+    //Registra el mensaje
+    public ResultSet spSetMensajes(String idUsr, String idRemi, String msj) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spSetMensajes('"+idUsr+"', '"+idRemi+"', '"+msj+"');");
+    }
+            
+    //Busca usuarios
+    public ResultSet spGetConectados() throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetConectados();");
+    }
+            
     //Esto busca los alimentos y los agrega a un Array 
     public ArrayList<cAlimento> buscar(String info) throws SQLException{
         int id;
