@@ -132,7 +132,14 @@
             <!--esta es la informacion de la cuenta del paciente-->
             <article class = "Article-tbl-usr">
                 <form action = "/StrongFit/sPerfilDeUsuario" method = "post">
-                    <div id="formu_1">
+                    <nav class="Menu">
+                        <ul class="Menu-list">
+                            <li class="Menu-item"><a href="#" id="link_1" class="activo">1</a></li>
+                            <li class="Menu-item"><a href="#" id="link_2">2</a></li>
+                            <li class="Menu-item"><a href="#" id="link_3">3</a></li>
+                        </ul>
+                    </nav>
+                    <div class="prueba is-active" id="formu_1">
                         <h2 class = "Article-title">Información de cuenta</h2>
                         <p class = "personal-p">Nombre</p>
                         <input type = "text" name = "name" required class = "Section-usr" value = "<%=nombre%>">
@@ -141,7 +148,7 @@
                         <p class = "personal-p">Contraseña</p>
                         <input type = "password" name = "contra" required class = "Section-usr" value="<%=pass%>">
                     </div>               
-                    <div id="formu_2">
+                    <div class="prueba" id="formu_2">
                         <h2 class = "Article-title">Información nutrimental</h2>
                         <div class="Article-flex">
                             <%
@@ -259,7 +266,7 @@
                         </div>
                         </div>
                     </div>
-                    <div id="formu_3">
+                    <div class="prueba" id="formu_3">
                         <%
                             if(estado != null)
                             {
@@ -300,5 +307,6 @@
                 sesion.removeAttribute("mensaje");
             }
         %>
+        <script src="../../js/acciones_perfil.js"></script>
     </body>
 </html>
