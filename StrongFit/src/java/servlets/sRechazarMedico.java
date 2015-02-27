@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import clases.cCifrado;
 import clases.cConexion;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -46,7 +47,7 @@ public class sRechazarMedico extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
@@ -57,7 +58,12 @@ public class sRechazarMedico extends HttpServlet {
             
             cConexion conectar = new cConexion();
             conectar.conectar();
-            ResultSet rs = conectar.spRechazarMedico(id);
+            
+            cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
+            String idS = seguro.encriptar(id);
+            
+            ResultSet rs = conectar.spRechazarMedico(idS);
             if(rs.next()){
                 confirm = rs.getString("respuesta");
             }
@@ -91,6 +97,8 @@ public class sRechazarMedico extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(sRechazarMedico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(sRechazarMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -108,6 +116,8 @@ public class sRechazarMedico extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(sRechazarMedico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(sRechazarMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

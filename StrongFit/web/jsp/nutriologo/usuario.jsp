@@ -4,7 +4,27 @@
     <head>
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
+        <script>
+                function numerossolo(e) {
+			var keynum;
+			if (window.event) {
+				/*IE*/
+				keynum=e.keyCode;
+			}
+			if (e.which) {
+				//Netscape Firefox Opera
+				keynum=e.which;
+			}
+			if ((keynum>=48&&keynum<=57)||keynum==8) {
+				return true;
+			} 
+			else{
+				return false;
+			}
+		}
+        </script>
     </head>
+    
     <%
     HttpSession sesion = request.getSession();
     String nombre = (String)sesion.getAttribute("nombre");
@@ -79,13 +99,13 @@
                         <p class = "personal-p">Correo</p>
                         <input type = "email" name = "txt-email" required class = "Section-usr" placeholder="" value="<%=idUsr%>">
                         <p class = "personal-p">Contraseña</p>
-                        <input type = "text" name = "txt-pass" required class = "Section-usr" placeholder="" value="<%=pass%>">
+                        <input type = "password" name = "txt-pass" required class = "Section-usr" placeholder="" value="<%=pass%>">
                     </div>
                     <div class="prueba" id="formu_2">
                         <h2 class = "Article-title">Información pública</h2>
                         <div class="div-edad">
                             <p class = "medidas-p">Edad</p>
-                            <input type = "text" name = "edad" required class = "Section-m" placeholder = "" value="<%=edad%>">
+                            <input type = "text" name = "edad" onkeypress="return numerossolo(event);" required class = "Section-m" placeholder = "" value="<%=edad%>">
                         </div>
                         <div class = "div-sexo">
                             <p class = "personal-p">Sexo</p>
@@ -96,7 +116,7 @@
                             </select>
                         </div>
                         <p class = "personal-p">Cédula profesional</p>
-                        <input type = "text" name = "plicense" required class = "Section-usr" placeholder="" value="<%=cedula%>">
+                        <input type = "text" name = "plicense" onkeypress="return numerossolo(event);" required class = "Section-usr" placeholder="" value="<%=cedula%>">
                         <p class = "personal-p">Escuela de procedencia</p>
                         <input type = "text" name = "school" required class = "Section-usr" placeholder="" value="<%=escuela%>">
                         <p class = "personal-p">Carrera</p>

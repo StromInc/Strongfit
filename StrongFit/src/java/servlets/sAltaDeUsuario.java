@@ -84,6 +84,7 @@ public class sAltaDeUsuario extends HttpServlet {
                     sesion.setAttribute("estado", "");
                     sesion.setAttribute("municipio", "");
                     sesion.setAttribute("colonia", "");
+                    sesion.setAttribute("tipodeus","1");
                     sesion.setAttribute("mensaje", "Bienvenido a Strongfit!");
                     // Mandar al usuario a su perfil
                     response.sendRedirect("jsp/paciente/usuario.jsp");

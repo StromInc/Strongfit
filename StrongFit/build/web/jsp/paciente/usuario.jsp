@@ -9,6 +9,25 @@
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
         <script src = "../../js/acciones_usuarioPaciente.js"></script>
         <script src="../../js/salir.js"></script>
+        <script>
+                function numerossolo(e) {
+			var keynum;
+			if (window.event) {
+				/*IE*/
+				keynum=e.keyCode;
+			}
+			if (e.which) {
+				//Netscape Firefox Opera
+				keynum=e.which;
+			}
+			if ((keynum>=48&&keynum<=57)||keynum==8) {
+				return true;
+			} 
+			else{
+				return false;
+			}
+		}
+        </script>
     </head>
     <body>
         <%@include file="barra_menu.jsp"%> 
@@ -157,19 +176,19 @@
                                 %>
                                     <div class = "div-nutrimental">
                                         <p class = "m1 medidas-p">Peso</p>
-                                        <input type = "text" name = "peso" required class = "Section-m" value = "<%=peso%>" placeholder="(Kg)">
+                                        <input type = "text" name = "peso" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=peso%>" placeholder="(Kg)">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "m2 medidas-p">Estatura</p>
-                                        <input type = "text" name = "estatura" required class = "Section-m" value = "<%=estatura%>" placeholder="cm">
+                                        <input type = "text" name = "estatura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=estatura%>" placeholder="cm">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "m3 medidas-p">Cintura</p>
-                                        <input type = "text" name = "cintura" required class = "Section-m" value = "<%=cintura%>" placeholder="cm">
+                                        <input type = "text" name = "cintura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=cintura%>" placeholder="cm">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "medidas-p">Edad</p>
-                                        <input type = "text" name = "edad" required class = "Section-m" value = "<%=edad%>" placeholder="años">
+                                        <input type = "text" name = "edad" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=edad%>" placeholder="años">
                                     </div>
                                 <%
                             }
@@ -178,19 +197,19 @@
                                 %>
                                     <div class = "div-nutrimental">
                                         <p class = "m1 medidas-p">Peso</p>
-                                        <input type = "text" name = "peso" required class = "Section-m" value = "" placeholder="(Kg)">
+                                        <input type = "text" name = "peso" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="(Kg)">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "m2 medidas-p">Estatura</p>
-                                        <input type = "text" name = "estatura" required class = "Section-m" value = "" placeholder="cm">
+                                        <input type = "text" name = "estatura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="cm">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "m3 medidas-p">Cintura</p>
-                                        <input type = "text" name = "cintura" required class = "Section-m" value = "" placeholder="cm">
+                                        <input type = "text" name = "cintura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="cm">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "medidas-p">Edad</p>
-                                        <input type = "text" name = "edad" required class = "Section-m" value = "" placeholder="años">
+                                        <input type = "text" name = "edad" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="años">
                                     </div>
                                 <%
                             }

@@ -53,19 +53,16 @@ public class sValidarMedico extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
             String id = request.getParameter("idMedico");
-            
             cCifrado seguro = new cCifrado();
             seguro.AlgoritmoAES();
-            
-            id = seguro.desencriptar(id);
-            
+            String idS = seguro.encriptar(id);
             String confirm = "No";
             
             Map<String, Object> map = new HashMap<>();
             
             cConexion conectar = new cConexion();
             conectar.conectar();
-            ResultSet rs = conectar.spConfirmarMedico(id);
+            ResultSet rs = conectar.spConfirmarMedico(idS);
             if(rs.next()){
                 confirm = rs.getString("respuesta");
             }

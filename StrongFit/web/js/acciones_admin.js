@@ -10,7 +10,7 @@ function aceptaNutriologo(con){
             success: function(datos){
                 if(datos.confirmacion === "valido"){
                     $('#article'+con).remove();
-                    alert("Nutriologo aceptado.");
+                    alert("Nutriólogo aceptado.");
                 }
                 else
                     alert("Parece que hubo un problema.");
@@ -35,7 +35,7 @@ function rechazaNutriologo(con){
             success: function(datos){
                 if(datos.confirmacion === "valido"){
                     $('#article'+con).remove();
-                    alert("Nutriologo rechazado.");
+                    alert("Nutriólogo rechazado.");
                 }
                 else
                     alert("Parece que hubo un problema.");

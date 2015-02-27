@@ -1,3 +1,4 @@
+<%@page import="clases.cCifrado"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -75,16 +76,18 @@
                 <%
                     cConexion conecta = new cConexion();
                     conecta.conectar();
+                    cCifrado seguro = new cCifrado();
+                    seguro.AlgoritmoAES();
                     ResultSet rs = conecta.spGetSolicitudes();
                     int con = 0;
                     String nombre = "", correo = "", cedula = "", escuela = "", carrera = "";
                     while(rs.next())
                     {
-                        nombre = rs.getString("nombre") + " " + rs.getString("apellidos");
-                        correo = rs.getString("idUsuario");
+                        nombre = seguro.desencriptar(rs.getString("nombre"));
+                        correo = seguro.desencriptar(rs.getString("idUsuario"));
                         cedula = rs.getString("cedulaProf");
-                        escuela = rs.getString("escuela");
-                        carrera = rs.getString("carrera");
+                        escuela = seguro.desencriptar(rs.getString("escuela"));
+                        carrera = seguro.desencriptar(rs.getString("carrera"));
                         %>
                         <article id="article<%=con%>" class = "Article-articulos Article-articulo alineame">
                             <form method="post" id = "formulario<%=con%>">
