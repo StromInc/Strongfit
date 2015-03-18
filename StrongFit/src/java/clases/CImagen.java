@@ -17,7 +17,7 @@ public int devuelveexistencia(String IdUser){
         String ruta = objruta.ruta();
         File file2 = new File(ruta, IdUser + ".jpg");
          File file3 = new File(ruta, IdUser + ".png");
-          File file4 = new File(ruta, IdUser + ".gif");
+          File file4 = new File(ruta, IdUser + ".gif");         
         if(file2.exists()){
          verificacion = 1;
        }
@@ -27,6 +27,26 @@ public int devuelveexistencia(String IdUser){
         if(file4.exists()){
          verificacion = 3;
        }
+        
       return verificacion;  
-}     
+}
+public void cambianombreimagen(String iduser, String iduser2){
+            cConexion objruta = new cConexion();
+            String ruta = objruta.ruta();
+            File file2 = new File(ruta, iduser + ".jpg");
+            File file3 = new File(ruta, iduser + ".png");
+            File file4 = new File(ruta, iduser + ".gif");
+            File file5 = new File(ruta, iduser2 + ".jpg");
+            File file6 = new File(ruta, iduser2 + ".png");
+            File file7 = new File(ruta, iduser2 + ".gif");
+             if(file2.exists()){
+               file2.renameTo(file5);
+               }
+             if(file3.exists()){
+               file3.renameTo(file6);
+              }
+             if(file4.exists()){
+               file4.renameTo(file7);
+              }
+       }
 }

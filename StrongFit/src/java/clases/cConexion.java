@@ -386,8 +386,139 @@ public class cConexion {
         }
         return respuesta;
     }
+    
     public String ruta(){
-    return  "/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/Imagenes/Usuarios/";
+    return  "C:\\Users\\jorge pastrana\\Proyectos\\s5\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\";
+    }
+    
+    public String[] getArticulosNom() throws SQLException{
+    this.st = con.createStatement();
+    ResultSet rs = this.st.executeQuery("call sp_SeleccionarArticulos();");
+    String[] articulos = null;
+    int contador = 0;
+    if(rs.next()){
+    while(rs.next()){
+    contador++;
+    }
+    contador++;
+    ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
+    articulos = new String[contador];
+     int contador2 = 0;
+     while(rs2.next()){
+     articulos[contador2] = rs2.getString("nombre");
+     
+     contador2++;
+     }
+    }
+    return articulos;
+    }
+    
+    public String[] getArticulosAut() throws SQLException{
+    this.st = con.createStatement();
+    ResultSet rs = this.st.executeQuery("call sp_SeleccionarArticulos();");
+    String[] articulos = null;
+    int contador = 0;
+    if(rs.next()){
+    while(rs.next()){
+    contador++;
+    }
+    contador++;
+    ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
+    articulos = new String[contador];
+     int contador2 = 0;
+     while(rs2.next()){
+     articulos[contador2] = rs2.getString("idmedico");
+     
+     contador2++;
+     }
+    }
+    return articulos;
+    }
+    
+    public String[] getArticulosTex() throws SQLException{
+    this.st = con.createStatement();
+    ResultSet rs = this.st.executeQuery("call sp_SeleccionarArticulos();");
+    String[] articulos = null;
+    int contador = 0;
+    if(rs.next()){
+    while(rs.next()){
+    contador++;
+    }
+    contador++;
+    ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
+    articulos = new String[contador];
+     int contador2 = 0;
+     while(rs2.next()){
+     articulos[contador2] = rs2.getString("texto");
+     
+     contador2++;
+     }
+    }
+    return articulos;
+    }
+    
+    public int regresavoto(String idusr, String nPost) throws SQLException{
+    this.st = con.createStatement();
+    ResultSet rs = this.st.executeQuery("call sp_buscavoto('"+idusr+"','"+nPost+"');");
+    int confirmacion = 0;
+    if(rs.next()){
+    if(rs.getInt("Existencia") > 0){
+    if(rs.getInt("puntuacion") == 1){
+    confirmacion = 1;
+    }
+    if(rs.getInt("puntuacion") == 0){
+    confirmacion = 2;
+    }
+    }
+    else{
+    confirmacion = 0;
+    }
+    }
+    return confirmacion;
+    }
+    
+    public void altavoto(String idusr, String nPost, int voto) throws SQLException{
+    this.st = con.createStatement();
+    this.st.executeQuery("call sp_altavoto('"+idusr+"','"+nPost+"', "+voto+");");
+    }
+    
+    public void cambiavoto(String idusr, String nPost, int voto) throws SQLException{
+    this.st = con.createStatement();
+    this.st.executeQuery("call sp_cambiovoto('"+idusr+"','"+nPost+"', "+voto+");");
+    }
+    
+    public void borravoto(String idusr, String nPost) throws SQLException{
+    this.st = con.createStatement();
+    this.st.executeQuery("call sp_borravoto('"+idusr+"','"+nPost+"');");
+    }
+    
+    public void altacomentario(String idusr, String nPost, String ncomentario)throws SQLException{
+    this.st = con.createStatement();
+    this.st.executeQuery("call sp_altacomentario('"+idusr+"','"+nPost+"', '"+ncomentario+"');");
+    }
+    
+    public String[][] regresacomentarios(String nPost) throws SQLException{
+    this.st = con.createStatement();
+    ResultSet rs = this.st.executeQuery("call sp_buscacomentarios('"+nPost+"');");
+    String[][] arreglodecomentarios = null; 
+    int contador = 0;        
+    if(rs.next()){
+    while(rs.next()){
+    contador++;
+    }
+    System.out.print(contador);
+    arreglodecomentarios = new String[contador + 1][3];
+    ResultSet rs2 = this.st.executeQuery("call sp_buscacomentarios('"+nPost+"');");
+    int contador2 = 0;
+    while(rs2.next()){
+    arreglodecomentarios[contador2][0] = rs2.getString("idUsuario");
+    arreglodecomentarios[contador2][1] = rs2.getString("comentario");
+    arreglodecomentarios[contador2][2] = Integer.toString(rs2.getInt("ncomentario"));
+    contador2++;        
+    }
+   
+    }
+    return arreglodecomentarios;
     }
 }
 

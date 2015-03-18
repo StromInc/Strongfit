@@ -115,6 +115,8 @@ public class sPerfilDeMedico extends HttpServlet {
                  sesion.setAttribute("estado", estado);
                  sesion.setAttribute("municipio", municipio);
                  sesion.setAttribute("colonia", colonia);
+                 clases.CImagen objimagen = new clases.CImagen();
+                 objimagen.cambianombreimagen(idUser, idUsr);
                  response.sendRedirect("jsp/nutriologo/usuario.jsp");
              }else{
              response.sendRedirect("index.jsp");
