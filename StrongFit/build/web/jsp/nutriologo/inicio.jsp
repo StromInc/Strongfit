@@ -6,7 +6,7 @@
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio2.css">
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src = "../../js/acciones_inicio.js"></script>
-        <script src = "../../js/acciones_votar.js"></script>
+        <script src = "../../js/acciones_articulo.js"></script>
          <script src="../../js/salir.js"></script>
     </head>
     <body>
