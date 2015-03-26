@@ -73,12 +73,12 @@ public class SCheca extends HttpServlet {
                             int cedula = resultado.getInt("cedulaProf");
                             int edad = resultado.getInt("edad");
                             int sexo = resultado.getInt("idSexo"); //En la base dice idSexo no sexo 
-                            String nombre = resultado.getString("nombre");
-                            String carrera = resultado.getString("carrera");
-                            String escuela = resultado.getString("escuela");
-                            String estado = resultado.getString("estado");
-                            String municipio = resultado.getString("municipio");
-                            String colonia = resultado.getString("colonia");
+                            String nombre = seguro.desencriptar(resultado.getString("nombre"));
+                            String carrera = seguro.desencriptar(resultado.getString("carrera"));
+                            String escuela = seguro.desencriptar(resultado.getString("escuela"));
+                            String estado = seguro.desencriptar(resultado.getString("estado"));
+                            String municipio = seguro.desencriptar(resultado.getString("municipio"));
+                            String colonia = seguro.desencriptar(resultado.getString("colonia"));
                             //variables de sesion
                             sesion.setAttribute("nombre",nombre);
                             sesion.setAttribute("idMedico", idMedico);
