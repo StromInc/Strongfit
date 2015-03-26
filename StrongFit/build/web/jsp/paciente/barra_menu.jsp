@@ -7,7 +7,12 @@
     HttpSession sesion2 = request.getSession();
     conecta.conectar();
     String dom = conecta.getDominio();
-    String idUsuarioBarra = (String)sesion2.getAttribute("idUsr"); 
+    String idUsuarioBarra = (String)sesion2.getAttribute("idUsr");
+    String tipo = (String) sesion2.getAttribute("tipodeus");
+    if(!tipo.equals("1")){
+        %><script>alert('Upps, parece que no tienes permiso para acceder a esta parte');</script>");<%
+        response.sendRedirect("../../index.jsp");
+    }
 %>
 <!--Su hoja de estilos esta definida en la pagina meta.jsp, que debe de ser incluida en todas las paginas de este proyecto-->
 <script src = "../../js/acciones_dietasusr.js"></script>

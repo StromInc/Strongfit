@@ -56,10 +56,12 @@
                         ResultSet rs2 = conecta.spConsultarAlimentosDiarios(idPaciente, diaA);
                         String nombre = "";
                         int calorias = 0, con = 0;
+                        int kcalorias = 0;
                         while(rs2.next()){
                             
                             nombre = rs2.getString("nombre");
                             calorias = rs2.getInt("calorias");
+                            kcalorias += calorias;
                             %>
 
                                     <p class = "racion"><%=nombre%><span class = "calorias"><br>Calorias: <%=calorias%>kc</span></p>
@@ -73,7 +75,7 @@
                     </div>
                     
                     <div class = "content-total">
-                        Kilocalorías consumidas: <span id="noCaloria">0</span>kc
+                        Kilocalorías consumidas: <span id="noCaloria"><%=kcalorias%></span>kc
                     </div>
                 </div>
             </article>

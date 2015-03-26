@@ -88,7 +88,7 @@ public class cConexion {
         this.st = con.createStatement();
         ResultSet resultado = this.st.executeQuery("select * from usuario where usuario.idUsuario = '"+idUser+"';");
         String existente = "libre";
-        if(resultado.isLast()){
+        if(resultado.next()){
              existente = "existente";
         }
         return existente;
@@ -113,8 +113,10 @@ public class cConexion {
      int estatura1 = Integer.parseInt(estatura);
      int cintura1 = Integer.parseInt(cintura);
      int edad1 = Integer.parseInt(edad);
+     if(!idUser.equals(correo)){
      this.st.executeQuery("call sp_CambioUsuarioPacienteConCorreo('"+idUser+"','"+pass+"','"+nombre+"', "+peso1+" , "+estatura1+" , "+cintura1+" , "+edad1+" ,"+sexo+",'"+estado+"','"+municipio+"' ,'"+colonia+"','"+correo+"', "+idSalud+", "+idPa+");");
-    }
+     }
+     }
     
     //Esto agregara o quitara las calorias de un usuario
     public ResultSet modificarCalorias(int idUser, int cal, int dia, int hrs, int actividad, int ocupacion) throws SQLException

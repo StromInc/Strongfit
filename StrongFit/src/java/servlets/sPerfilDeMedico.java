@@ -117,7 +117,7 @@ public class sPerfilDeMedico extends HttpServlet {
                  sesion.setAttribute("colonia", colonia);
                  response.sendRedirect("jsp/nutriologo/usuario.jsp");
              }else{
-             response.sendRedirect("index.jsp");
+             response.sendRedirect("jsp/nutriologo/usuario.jsp");
              }
              }
         }catch(SQLException ex){

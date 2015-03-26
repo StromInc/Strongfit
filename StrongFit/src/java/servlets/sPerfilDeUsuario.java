@@ -177,7 +177,7 @@ public class sPerfilDeUsuario extends HttpServlet {
                  sesion.setAttribute("colonia", colonia);
                  response.sendRedirect("jsp/paciente/usuario.jsp");
              }else{
-             response.sendRedirect("index.jsp");
+             response.sendRedirect("jsp/paciente/usuario.jsp");
              }
              }
         }catch(SQLException ex){
