@@ -520,5 +520,33 @@ public class cConexion {
     }
     return arreglodecomentarios;
     }
+    public String altaarticulo(String idusr, String nPost, String nTexto) throws SQLException{
+    this.st = con.createStatement();
+    ResultSet rs = this.st.executeQuery("call sp_altaarticulo('"+idusr+"','"+nPost+"','"+nTexto+"');");
+    String validacion = "";
+    if(rs.next()){
+     validacion = rs.getString("proceso");
+    }
+    return validacion;
+    }
+    public String[] buscamisarticulos(String idUsr) throws SQLException{
+    String[] misarticulos = null;
+    this.st = con.createStatement();
+    ResultSet rs = this.st.executeQuery("call sp_buscamisarticulos('"+idUsr+"');");
+    int contador = 0;
+    if(rs.next()){
+     while(rs.next()){
+    contador++;
+    }
+    misarticulos = new String[contador + 1];
+    ResultSet rs2 = this.st.executeQuery("call sp_buscamisarticulos('"+idUsr+"');");
+    int contador2 = 0;
+    while(rs2.next()){
+    misarticulos[contador2] = rs2.getString("nombre");
+    contador2++;        
+    } 
+    }
+    return misarticulos;
+    }
 }
 

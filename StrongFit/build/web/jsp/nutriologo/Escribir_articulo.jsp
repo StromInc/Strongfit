@@ -8,10 +8,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+       <head>
+        <%@include file = "../meta.jsp" %>
+        <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio2.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src = "../../js/acciones_inicio.js"></script>
+        <script src = "../../js/acciones_articulo.js"></script>
+         <script src="../../js/salir.js"></script>
     </head>
+    <%@include file = "barra_menu.jsp" %>
     <body>
-        <h1>Hello World!</h1>
+        <section class="Section-todo">
+            <form action="" method="post">
+            <span>
+                Nombre:<br><input type="text" id="txtnombre"><br><br>
+                Texto:<br><textarea rows="30" cols="100" id="txtarticulo"></textarea><br>
+                <input type="button" value="Enviar" onclick=escribearticulo('escribe')>                
+            </span>
+                <span id="misarticulos" onload="buscamisarticulos()">  
+                </span>   
+            </form>    
+        </section> 
     </body>
 </html>

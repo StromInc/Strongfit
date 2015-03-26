@@ -82,7 +82,19 @@ public class cArticulos {
        }
     return articulos;
     }
-
-    
-    
+   public String buscamisarticulos(String idUsr) throws SQLException{
+   String articulos = "";
+   articulos += "<span>Nuevo articulo</span><br>";
+   cConexion objconexion = new cConexion();
+   objconexion.conectar();
+   String[] misarticulos = objconexion.buscamisarticulos(idUsr);
+   if(misarticulos != null){
+   for(int i = 0; i < misarticulos.length;i++){
+     articulos += "<span>" + misarticulos[i] + "</span>" + "</br>";
+   }
+   }else{
+   articulos += "<span>Todavia no has escrito ningun articulo</span><br>";
+   }
+   return articulos;
+   }   
 }
