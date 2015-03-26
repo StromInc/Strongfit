@@ -54,7 +54,7 @@ public class sConectarSes extends HttpServlet {
             while(rs.next()){
                 xml += "<usuario>";
                 xml += "<idU>" + seguro.desencriptar(rs.getString("idUsuario")) + "</idU>";
-                xml += "<ses>" + rs.getString("idConexion") + "</ses>";
+                xml += "<ses>" + rs.getString("sesion") + "</ses>";
                 xml += "</usuario>";
             }
             xml += "</sesiones>";

@@ -25,7 +25,7 @@
         <%@include file="barra_menu.jsp"%>
         <script>
             //notar el protocolo.. es 'ws' y no 'http'
-            var wsUri = "ws://192.168.1.71:8080/StrongFit/endpoint";
+            var wsUri = "ws://192.168.1.70:8080/StrongFit/endpoint";
             var websocket = new WebSocket(wsUri); //creamos el socket
             
             websocket.onopen = function(evt) { //manejamos los eventos...
@@ -78,7 +78,7 @@
                     int con = 0;
                     while(rs.next()){
                         usr = seguro.desencriptar(rs.getString("idUsuario"));
-                        ses = rs.getString("idConexion");
+                        ses = rs.getString("sesion");
                         if(!usr.equals(idUsr)){
                         %>
                         <div style="cursor:pointer;" onclick="activarMensajes('<%=usr%>', '<%=ses%>');">
