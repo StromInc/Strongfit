@@ -20,10 +20,11 @@
         <!--<link rel="stylesheet" href="Estilos/estilo.css">-->
         <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+        <title>StrongFit</title>
         <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
         <link rel = "stylesheet" type ="text/css" href="Estilos/estilos_login.css">
-        <link rel="shortcut icon" href="Imagenes/logo_s.jpg">
-        <title>StrongFit</title>
+        <link rel="shortcut icon" href="Imagenes/logo_s.jpg"> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     </head>
     <body onload="mandar()">
         <header class = "Header">
@@ -37,6 +38,16 @@
                 <!--<p class="Header-content">--><input type="checkbox" id="chek1"><label for="chek1" class="Header-label">Mantener sesión iniciada.</label><!--</p>-->
             </form>
         </header>
+        <div class="Background" id="background">
+            <script type="text/javascript">
+                $('#background').hide();
+            </script>
+            <div class="active" id="back1"></div>
+            <div id="back2"></div>
+            <div id="back3"></div>
+            <div id="back4"></div>
+            <div id="back5"></div>
+        </div>
         <section class="Section">     
             <article class="Section-article">
                 <h3 class = "Section-login">¿No tienes cuenta?, &nbsp;<strong style="font-size: 1.4em;">Registrate</strong></h3>
@@ -66,7 +77,6 @@
                 sesion.invalidate();
             }
         %>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="js/acciones_index.js"></script>
     </body>
 </html>

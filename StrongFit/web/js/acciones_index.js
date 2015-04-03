@@ -18,7 +18,8 @@ $(function() {
                 data: {
                     email: correo
                 },
-                success: function(datos){        
+                success: function(datos){
+                    //Si hay respuesta      
                     console.log('Resultado ' + datos);
                     if(datos != 'El correo es valido'){
                         $arrow.removeClass('hidden');
@@ -31,15 +32,15 @@ $(function() {
         }
          
     });
-
+    //ocultamos el mensaje cuando se da click en el input
     $email.on('focus', function(){
         $arrow.addClass('hidden')
-    }).on('blur', ajaxBuscar);
+    }).on('blur', ajaxBuscar); //se ejecuta despues de quitar el mouse
 });
 
 function nuevo(){
         console.log('hola');
-        if (window.matchMedia('(max-width: 768px)').matches){
+        if (window.matchMedia('(max-width: 850px)').matches){
             console.log("Pantalla")
             var $buttonShow = document.getElementById('show');
             var $buttonHide = document.getElementById('hide');
@@ -64,6 +65,7 @@ function nuevo(){
         }
     }
     window.onresize = nuevo;
+
 function guardarsesion() {
 		
         var correoVar = $('#email1').val();
@@ -95,6 +97,7 @@ function guardarsesion() {
         });
     }
    }
+
    function mandar(){
         nuevo();
       var sesion = localStorage.getItem("sesioniniciada");
@@ -119,4 +122,18 @@ function guardarsesion() {
         });
      }
    }
+//Esta funcion es la que cambia el fondo
+function cycleImages(){
+    var $active = $('#background .active'); //fondo actual
+    var $next = ($('#background .active').next().length > 0) ? $('#background .active').next() : $('#background div:first'); //este operador terneario es un un if
+    $next.css('z-index', 2);
+    $active.fadeOut(1500, function(){ 
+        $active.css('z-index', 1).show().removeClass('active'); //ocualtamos y lo mandamos atras
+        $next.css('z-index', 3).addClass('active'); //lo ponemos adelante
+    });
+}   
 
+$(window).load(function(){
+    $('#background').fadeIn(1500);//Muestra el background oculto cuando carga todo
+    setInterval('cycleImages()', 4000); //se ejecuta cada 4s
+});
