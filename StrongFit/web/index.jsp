@@ -26,7 +26,7 @@
         <link rel="shortcut icon" href="Imagenes/logo_s.jpg"> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     </head>
-    <body onload="mandar()">
+    <body class="fondo" onload="mandar()">
         <header class = "Header">
             <h1 class="Header-title"><a href = "index.jsp">Strongfit</a></h1>
             <button class="Header-button is-active" id="show">Login</button>

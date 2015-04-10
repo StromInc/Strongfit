@@ -1,0 +1,99 @@
+@import "normalize.styl"
+@import "nib/vendor"
+vendor-prefixes = webkit o ms moz official
+a
+	text-decoration none
+h1
+h2
+h3
+	font-weight normal
+	margin 0
+.Content
+	&-title
+		margin-bottom 1em	
+.Header
+	background red
+	color white
+	text-align center
+	padding 4px 0
+	&-title
+		margin-top 0
+	&-list
+		list-style none
+		padding 0
+		margin 0
+	&-item	
+		display inline-block
+		a
+			padding 0.5em	
+.Figure
+	&-image
+		border-radius 4px
+.Section
+	text-align center
+	margin 1em auto
+.Datos
+	&-especial
+		display flex
+		flex-wrap wrap
+		justify-content space-around
+		input
+		select
+			width initial
+		
+	&-title
+		border-bottom 1px solid black
+		padding-bottom 4px
+		width 95%
+		margin 0 auto
+	&-label
+		display
+		block
+	&-input
+		width 90%
+		border-radius 3px
+		border solid
+		border-width thin
+		border-color #D2D4D5
+		padding 0.7em
+		display block
+		margin 0 auto
+		margin-top 4px
+	&-wrapper
+		margin 1.2em 0
+@media screen and (min-width: 480px)
+	.Datos
+		&-input
+			width 70%
+		&-especial
+			width 70%
+			margin 0 auto
+			input, select
+				display inline-block
+@media screen and (min-width: 768px)
+	.Section
+		&.large
+			width 768px
+	.Content
+		display flex
+		flex-wrap wrap
+		justify-content space-around
+		align-items baseline
+		background white
+		padding 1em
+		border 1px solid
+		&-image	
+			margin-bottom 1em
+	.Datos
+		width 31em
+		max-width 31em
+		&-title
+			width 100%
+		&-input
+			width 90%
+		&-especial
+			width auto
+@media screen and (min-width: 1000px)
+	.Section
+		&.x-large
+			width 62.5em

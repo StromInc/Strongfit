@@ -1,0 +1,104 @@
+@import "nib/vendor"
+vendor-prefixes = webkit o ms moz official
+azulHover = #01579B
+azul = #0070c8
+h1
+h2
+h3
+	font-weight normal
+	margin 0
+.Content
+	padding 1em 0
+	border-radius 4px
+	box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+	&-title
+		margin-bottom 1em	
+.Figure
+	&-image
+		border-radius 4px
+		border 1px solid #F9F9F9
+.Section
+	text-align center
+	margin 1em auto
+	margin-top 10em
+	
+.Datos
+	&-especial
+		display flex
+		flex-wrap wrap
+		justify-content space-around
+		input
+		select
+			width initial
+		
+	&-title
+		border-bottom 1px solid black
+		padding-bottom 4px
+		width 95%
+		margin 0 auto
+	&-label
+		display
+		block
+	&-input
+		width 90%
+		border-radius 3px
+		border solid
+		border-width thin
+		border-color #D2D4D5
+		padding 0.7em
+		display block
+		margin 0 auto
+		margin-top 4px
+	&-wrapper
+		margin 1.2em 0
+		
+.btn-profile
+	background-color azul
+	color white
+	font-size 1.3em
+	display inline-block
+	padding .8em 2em
+	border none
+	margin-top 1.4em
+	border-radius 3px
+	box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+	&:hover
+		background azulHover
+	
+@media screen and (min-width: 480px)
+	.Section
+		margin-top 8em
+	.Datos
+		&-input
+			width 70%
+		&-especial
+			width 70%
+			margin 0 auto
+			input, select
+				display inline-block
+@media screen and (min-width: 768px)
+	.Section
+		margin-top 4em
+		&.large
+			width 768px
+	.Content
+		display flex
+		flex-wrap wrap
+		justify-content space-around
+		background white
+		padding 1.5em 1em
+		&-image	
+			margin-bottom 1em
+	.Datos
+		width 31em
+		max-width 31em
+		&-title
+			width 100%
+		&-input
+			width 90%
+		&-especial
+			width auto
+@media screen and (min-width: 1000px)
+	.Section
+		&.x-large
+			width 62.5em
