@@ -2,10 +2,11 @@
 vendor-prefixes = webkit o ms moz official
 azulHover = #01579B
 azul = #0070c8
+verdeTitulos = #198627
+grisBorde = #d2d4d5
 h1
 h2
 h3
-	font-weight normal
 	margin 0
 .Content
 	padding 1em 0
@@ -32,25 +33,27 @@ h3
 			width initial
 		
 	&-title
-		border-bottom 1px solid black
+		border-bottom 1px solid grisBorde
 		padding-bottom 4px
 		width 95%
 		margin 0 auto
+		color verdeTitulos
 	&-label
-		display
-		block
+		display block
+		margin-left 2em
 	&-input
 		width 90%
 		border-radius 3px
 		border solid
 		border-width thin
-		border-color #D2D4D5
+		border-color grisBorde
 		padding 0.7em
 		display block
 		margin 0 auto
 		margin-top 4px
 	&-wrapper
 		margin 1.2em 0
+		text-align left
 		
 .btn-profile
 	background-color azul
@@ -64,7 +67,8 @@ h3
 	box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 	&:hover
 		background azulHover
-	
+.centrar-texto
+	text-align center	
 @media screen and (min-width: 480px)
 	.Section
 		margin-top 8em

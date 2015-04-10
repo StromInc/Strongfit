@@ -1,7 +1,6 @@
 h1,
 h2,
 h3 {
-  font-weight: normal;
   margin: 0;
 }
 .Content {
@@ -34,10 +33,15 @@ h3 {
   width: initial;
 }
 .Datos-title {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #d2d4d5;
   padding-bottom: 4px;
   width: 95%;
   margin: 0 auto;
+  color: #198627;
+}
+.Datos-label {
+  display: block;
+  margin-left: 2em;
 }
 .Datos-input {
   width: 90%;
@@ -53,6 +57,7 @@ h3 {
 }
 .Datos-wrapper {
   margin: 1.2em 0;
+  text-align: left;
 }
 .btn-profile {
   background-color: #0070c8;
@@ -69,6 +74,9 @@ h3 {
 }
 .btn-profile:hover {
   background: #01579b;
+}
+.centrar-texto {
+  text-align: center;
 }
 @media screen and (min-width: 480px) {
   .Section {

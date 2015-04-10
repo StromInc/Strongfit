@@ -390,7 +390,10 @@ public class cConexion {
     }
     
     public String ruta(){
-    return  "C:\\Users\\jorge pastrana\\Proyectos\\s5\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\";
+        String ruta = "";
+        //ruta = "C:\\Users\\jorge pastrana\\Proyectos\\s5\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
+        ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
+        return  ruta;
     }
     
     public String[] getArticulosNom() throws SQLException{

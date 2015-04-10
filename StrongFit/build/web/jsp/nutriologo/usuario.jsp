@@ -75,6 +75,7 @@
         <section class = "Section large x-large">
             <div class="Content"> 
                 <div class="Content-image">
+                    <h2 class="Datos-title">Mi perfil</h2>
                     <figure >                   
                     <img src = "<%=ruta%>" width="250" height="250" class="Figure-image" alt = "foto de usuario">
                     </figure>
@@ -97,46 +98,46 @@
                             </ul>
                         </nav>-->    
                         <div class="prueba is-active" id="formu_1">
-                            <h3 class="Datos-title">Información de cuenta</h3>
+                            <h3 class="Datos-title">Información de la cuenta</h3>
                             <p class="Datos-wrapper">
-                                <label class="Datos-label">Nombre:</label>
-                                <input type = "text" name = "txt-name" required class="Datos-input" placeholder="" value="<%=nombre%>"></p>
+                                <label class="Datos-label" for="nombre">Nombre:</label>
+                                <input type = "text" name = "txt-name" required class="Datos-input" placeholder="" value="<%=nombre%>" id="nombre"></p>
                             <p class="Datos-wrapper">
-                                <label class="Datos-label">Correo:</label>
-                                <input type = "email" name = "txt-email" required class="Datos-input" placeholder="" value="<%=idUsr%>">
+                                <label class="Datos-label" for="correo">Correo:</label>
+                                <input type = "email" id="correo" name = "txt-email" required class="Datos-input" placeholder="" value="<%=idUsr%>">
                             </p>
                             <p class="Datos-wrapper">
-                                <label class="Datos-label">Contraseña:</label>
-                                <input type = "password" name = "txt-pass" required class="Datos-input" placeholder="" value="<%=pass%>">
+                                <label class="Datos-label" for="contra">Contraseña:</label>
+                                <input type = "password" name = "txt-pass" required class="Datos-input" placeholder="" value="<%=pass%>" id="for">
                             </p>
                         </div>
                         <div class="prueba" id="formu_2">
                             <h3 class="Datos-title">Información pública</h3>
                             <div class="Datos-especial">
-                                <p class="Datos-wrapper">
-                                    <label class = "medidas-p">Edad:</label>
-                                    <input type = "text" name = "edad" onkeypress="return numerossolo(event);" required class="Datos-input" placeholder = "" value="<%=edad%>">
+                                <p class="Datos-wrapper centrar-texto">
+                                    <label class = "medidas-p" for="edad">Edad:</label>
+                                    <input type = "number" name = "edad" onkeypress="return numerossolo(event);" required class="Datos-input" placeholder = "" value="<%=edad%>" id="edad">
                                 </p>
-                                <p class="Datos-wrapper">
-                                    <label class="Datos-label">Sexo:</label>
-                                    <select name = "sexo" class="Datos-input">
+                                <p class="Datos-wrapper centrar-texto">
+                                    <label for="genero">Genero:</label>
+                                    <select name = "sexo" class="Datos-input" id="genero">
                                         <option value="" <%=v1%>>Seleccionar </option>
                                         <option value="1" <%=v2%>>Masculino </option>
-                                        <option value="2" <%=v3%>>femenino </option>
+                                        <option value="2" <%=v3%>>Femenino </option>
                                     </select>
                                 </p>
                             </div>
                             <p class="Datos-wrapper">
-                                <label class="Datos-label">Cédula profesional</label>
-                                <input type = "text" name = "plicense" onkeypress="return numerossolo(event);" required class="Datos-input" placeholder="" value="<%=cedula%>">
+                                <label class="Datos-label" for="cedula">Cédula profesional:</label>
+                                <input type = "text" name = "plicense" onkeypress="return numerossolo(event);" required class="Datos-input" placeholder="" value="<%=cedula%>" id="cedula">
                             </p>
                             <p class="Datos-wrapper">
-                                <label class="Datos-label">Escuela de procedencia:</label>
-                                <input type = "text" name = "school" required class="Datos-input" placeholder="" value="<%=escuela%>">
+                                <label class="Datos-label" id="escula">Escuela de procedencia:</label>
+                                <input type = "text" name = "school" required class="Datos-input" placeholder="" value="<%=escuela%>" id="escuela">
                             </p>
                             <p class="Datos-wrapper">
-                                <label class="Datos-label">Carrera:</label>
-                                <input type = "text" name = "carrier" required class="Datos-input" placeholder="" value="<%=carrera%>">
+                                <label class="Datos-label" id="carrera">Carrera:</label>
+                                <input type = "text" name = "carrier" required class="Datos-input" placeholder="" value="<%=carrera%>" id="carrera">
                             </p>
                         </div>
                         <div class="prueba" id="formu_3">
