@@ -7,6 +7,11 @@ azulHover = #01579B
 gris = #F9F9F9
 vendor-prefixes = webkit o ms moz official
 rojo = #FF2115
+.fondo
+    background url(../Imagenes/fondo1.jpg) no-repeat center center fixed;
+    background-repeat no-repeat
+    background-size cover
+    background-position center
 body
     background black
 .Background
@@ -52,10 +57,7 @@ body
     position fixed
     right 0
     top 0
-    z-index 100
-    &-button
-        &.is-active
-            display block
+    z-index 100       
     &-content
         display block
         margin-bottom 0.5em
@@ -73,6 +75,8 @@ body
         position absolute
         right 20px
         top 1em
+        &.is-active
+            display block
         &:hover
             background azulHover  
     &-title
@@ -127,12 +131,15 @@ body
         color black
 
 .Section
-    margin-top 60px
+    margin 110px auto
+    width 90%
     background-color rgba(145, 145, 145, 0.6)
+    padding 1em
+    position relative
     &-article      
-        display inline-block         
+        display block         
         text-align center
-        margin-bottom 4em
+        margin-bottom 5em
     &-login
         border-bottom 1px solid white
         color white
@@ -161,6 +168,8 @@ body
         font-size 1.3em
         margin-top 1.4em
         padding .5em 2em
+        width 10em
+        max-width 15em
         &:hover
             background azulHover
 
@@ -192,16 +201,16 @@ body
         font-size 1.1rem
 
 .Section-signup
-    background-color rgba(145, 145, 145, 0.8)
+    background-color rgba(145, 145, 145, 0.6)
     border-radius 10px
     box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
     color white
-    display inline-block
+    display none
     font-size 1.2rem
-    margin-left 5em
+    float right
     margin-top 5em
-    max-width 18em
-    padding .7em
+    max-width 10em
+    padding 2em 1em
     vertical-align top
 
 .Footer
@@ -224,23 +233,44 @@ body
 .hidden
     display none                            
 //mobile-first
-@media screen and (min-width: 480px)
-    body
-        background red
-        
-                                      
-/*@media screen and (max-width: 480px)
-@media screen and (max-width: 767px)
+@media screen and (min-width: 768px)
+   .Background
+       height 100%
     .Section
-        padding 0.5em
+        margin 100px auto
+        width 80%
+        background none
+        &-article
+            background-color rgba(145, 145, 145, 0.6)
+            padding 3em 2em
+            margin-bottom 0
+@media screen and (min-width: 850px)
     .Header
+        height 80px
         &-title
-            display block
-        &-txt
-            width 90%
-        &-submit
-            display block
-            width 90%
+            line-height 80px
+        &-button
+            display none
+            &.is-active
+                display none
+        &-form
+            display inline-block
+            right 1em
+            top 1em
+            left initial
+            text-align right
+            box-shadow none
+        &-content
+            display inline-block
     .Section
-        &-submit
-            margin-left 0 */  
+        width 95%    
+        &-signup
+            display inline-block
+            position absolute
+            right 0
+            top 0
+            float left
+        &-article
+            display inline-block
+            width 500px
+            max-width 600px

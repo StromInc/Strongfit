@@ -23,8 +23,7 @@
 			}
 		}
         </script>
-    </head>
-    
+    </head>   
     <%
     HttpSession sesion = request.getSession();
     String nombre = (String)sesion.getAttribute("nombre");
@@ -94,21 +93,21 @@
                     </nav>      
                     <div class="prueba is-active" id="formu_1">
                         <h2 class = "Article-title">Información de cuenta</h2>
-                        <p class = "personal-p">Nombre</p>
+                        <p class = "personal-p">Nombre:</p>
                         <input type = "text" name = "txt-name" required class = "Section-usr" placeholder="" value="<%=nombre%>">
-                        <p class = "personal-p">Correo</p>
+                        <p class = "personal-p">Correo:</p>
                         <input type = "email" name = "txt-email" required class = "Section-usr" placeholder="" value="<%=idUsr%>">
-                        <p class = "personal-p">Contraseña</p>
+                        <p class = "personal-p">Contraseña:</p>
                         <input type = "password" name = "txt-pass" required class = "Section-usr" placeholder="" value="<%=pass%>">
                     </div>
                     <div class="prueba" id="formu_2">
                         <h2 class = "Article-title">Información pública</h2>
                         <div class="div-edad">
-                            <p class = "medidas-p">Edad</p>
+                            <p class = "medidas-p">Edad:</p>
                             <input type = "text" name = "edad" onkeypress="return numerossolo(event);" required class = "Section-m" placeholder = "" value="<%=edad%>">
                         </div>
                         <div class = "div-sexo">
-                            <p class = "personal-p">Sexo</p>
+                            <p class = "personal-p">Sexo:</p>
                             <select name = "sexo" class="select-sexo">
                                 <option value="" <%=v1%>>Seleccionar </option>
                                 <option value="1" <%=v2%>>Masculino </option>
@@ -117,18 +116,18 @@
                         </div>
                         <p class = "personal-p">Cédula profesional</p>
                         <input type = "text" name = "plicense" onkeypress="return numerossolo(event);" required class = "Section-usr" placeholder="" value="<%=cedula%>">
-                        <p class = "personal-p">Escuela de procedencia</p>
+                        <p class = "personal-p">Escuela de procedencia:</p>
                         <input type = "text" name = "school" required class = "Section-usr" placeholder="" value="<%=escuela%>">
-                        <p class = "personal-p">Carrera</p>
+                        <p class = "personal-p">Carrera:</p>
                         <input type = "text" name = "carrier" required class = "Section-usr" placeholder="" value="<%=carrera%>">
                     </div>
                     <div class="prueba" id="formu_3">
                         <h2 class = "Article-title">Tu dirección</h2>
-                        <p class = "personal-p">Estado</p>
+                        <p class = "personal-p">Estado:</p>
                         <input type = "text" name = "estado" required class = "Section-usr" placeholder = "" value="<%=estado%>">
-                        <p class = "personal-p">Municipio</p>
+                        <p class = "personal-p">Municipio:</p>
                         <input type = "text" name = "municipio" required class = "Section-usr" placeholder = "" value="<%=municipio%>">
-                        <p class = "personal-p">Colonia</p>
+                        <p class = "personal-p">Colonia:</p>
                         <input type = "text" name = "colonia" required class = "Section-usr" placeholder = "" value="<%=colonia%>">
                     </div>
                     <hr>

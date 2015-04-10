@@ -3,10 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+function cambiarFondo(){
+    var $fondo = $('#background');
+    var $body = $('body');
+    if (window.matchMedia('(max-width: 767px)').matches){
+        console.log('tableta');   
+        $fondo.css('display', 'none');
+        $body.addClass('fondo');
+        
+    }else{
+        $fondo.css('display', 'block');
+        $body.removeClass('fondo');
+        $(window).load(function(){
+        $('#background').fadeIn(1500);//Muestra el background oculto cuando carga todo
+        setInterval('cycleImages()', 4000); //se ejecuta cada 4s
+    });
+    }
+}
+
 $(function() {
     var $email = $('#email');
     var $arrow = $('.arrow');
-
+    cambiarFondo();
     var ajaxBuscar = (function() {
         var correo = $email.val();
         var DIRECCION = 'http://localhost:8080/StrongFit/sAjaxCorreo';
@@ -39,9 +57,8 @@ $(function() {
 });
 
 function nuevo(){
-        console.log('hola');
+        cambiarFondo();
         if (window.matchMedia('(max-width: 850px)').matches){
-            console.log("Pantalla")
             var $buttonShow = document.getElementById('show');
             var $buttonHide = document.getElementById('hide');
             var $menu = document.getElementById('formu');
@@ -132,8 +149,3 @@ function cycleImages(){
         $next.css('z-index', 3).addClass('active'); //lo ponemos adelante
     });
 }   
-
-$(window).load(function(){
-    $('#background').fadeIn(1500);//Muestra el background oculto cuando carga todo
-    setInterval('cycleImages()', 4000); //se ejecuta cada 4s
-});
