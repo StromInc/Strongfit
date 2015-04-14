@@ -7,139 +7,177 @@ azulHover = #01579B
 gris = #F9F9F9
 vendor-prefixes = webkit o ms moz official
 rojo = #FF2115
+.fondo
+    background url(../Imagenes/fondo1.jpg) no-repeat center center fixed;
+    background-repeat no-repeat
+    background-size cover
+    background-position center
+body
+    background black
+.Background
+    padding 0
+    margin 0
+    width 100%
+    height 150%
+    position absolute
+    top 0
+    left 0
+    display block
+    z-index -1
+    div
+        position absolute
+        left 0
+        top 0
+        width 100%
+        height 100%
+        z-index 1
+        background black
+        background-size cover
+        background-position center center
+        &.active
+            z-index 3
+    #back1
+        background-image url(../Imagenes/fondo1.jpg)
+    #back2
+        background-image url(../Imagenes/fondo2.jpg)
+    #back3
+        background-image url(../Imagenes/fondo3.jpg)
+    #back4
+        background-image url(../Imagenes/fondo4.jpg)
+    #back5
+        background-image url(../Imagenes/fondo5.jpg)
+        
 .Header
     background-color verdeHeader
     box-shadow 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
     color white
-    height 96px
+    height 60px
     left 0
     padding-left 1em
     position fixed
     right 0
     top 0
-    z-index 100
+    z-index 100       
     &-content
-        display inline-block
+        display block
+        margin-bottom 0.5em
     &-label
         margin-left 5px  
-
-.Header-button
-    background azul
-    border none
-    border-radius 3px
-    box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-    color white
-    display none
-    font-size 16px
-    padding 0.3rem 1rem
-    position absolute
-    right 20px
-    top 2em
-    &:hover
-        background azulHover
-    
-.Header-title
-    font-size 3em
-    font-weight normal
-    line-height 96px
-    margin 0
-    a
+    &-button
+        background azul
+        border none
+        border-radius 3px
+        box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
         color white
-        text-decoration none
-
-.Header-form
-    background verdeHeader
-    display inline-block
-    position absolute
-    right 1em
-    top 2em
-
-.Header-txt
-    border solid
-    border-color #D2D4D5
-    border-radius 3px
-    border-width thin
-    color black
-    font-size .9rem
-    margin-bottom 0.5em
-    padding .3rem
-    width 13rem
-    &:focus
-        box-shadow 0px 0px 10px #0C98A2
-        outline none
-
-.Header-submit
-    background-color azul
-    border none
-    border-radius 3px
-    box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-    color white
-    display inline-block
-    font-size .9rem
-    margin 0 auto
-    padding .3rem 1.5rem
-    &:hover
-        background azulHover
-
-.Header-mail, .Header-pass
-    color black
+        display none
+        font-size 16px
+        padding 0.3rem 1rem
+        position absolute
+        right 20px
+        top 1em
+        &.is-active
+            display block
+        &:hover
+            background azulHover  
+    &-title
+        font-size 2em
+        font-weight normal
+        line-height 60px
+        margin 0
+        a
+            color white
+            text-decoration none
+    &-form
+        background verdeHeader
+        display inline-block
+        box-shadow 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24)
+        position absolute
+        height auto
+        left 0
+        text-align center
+        right 0
+        top -150px
+        transition 0.3s
+        padding-bottom 0.5em        
+        &.is-active
+            top 60px 
+    &-txt
+        border solid
+        border-color #D2D4D5
+        border-radius 3px
+        border-width thin
+        color black
+        font-size .9rem
+        margin-bottom 0.5em
+        padding .3rem
+        width 13rem
+        &:focus
+            box-shadow 0px 0px 10px #0C98A2
+            outline none
+    &-submit
+        background-color azul
+        border none
+        border-radius 3px
+        box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+        color white
+        display inline-block
+        font-size .9rem
+        margin 0 auto
+        padding .3rem 1.5rem
+        width 13em
+        &:hover
+            background azulHover
+    &-mail, &-pass
+        color black
 
 .Section
-    background-image url('../Imagenes/fondo4.jpg')
-    background-repeat no-repeat
-    background-size cover
-    background-position center
-    margin-top 96px
-    padding 2em
-    text-align center
-
-.Section-article
-    background-color rgba(145, 145, 145, 0.8)
-    border-radius 10px 10px 0px 0px
-    box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-    display inline-block
-    max-width 30em
-    padding .5em .5em 3em .5em
-    text-align center
-    margin 2em 0
-
-.Section-login
-    border-bottom 1px solid white
-    color white
-    font-size 1em
-    padding-bottom 1em
-
-.Section-txt
-    border solid
-    border-color #D2D4D5
-    border-radius 3px
-    border-width thin
-    font-size 1em
-    margin-top 1.6em
-    padding .7em
+    margin 110px auto
     width 90%
-    &:focus
-        outline none
-        box-shadow 0px 0px 10px #0C98A2
-
-.Section-submit
-    background-color azul
-    border none
-    border-radius 3px
-    box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
-    color white
-    display inline-block
-    font-size 1.3em
-    margin-bottom 1em
-    margin-left 30px
-    margin-top 1.4em
-    padding .5em 2em
-    &:hover
-        background azulHover
+    background-color rgba(145, 145, 145, 0.6)
+    padding 1em
+    position relative
+    &-article      
+        display block         
+        text-align center
+        border-radius 4px
+        margin-bottom 5em
+    &-login
+        border-bottom 1px solid white
+        color white
+        font-size 1em
+        margin-top 1em
+        padding-bottom 0.5em
+    &-txt
+        border solid
+        border-color #D2D4D5
+        border-radius 3px
+        border-width thin
+        font-size 1em
+        margin-top 0.5em
+        padding 0.7em
+        width 90%
+        &:focus
+            outline none
+            box-shadow 0px 0px 10px #0C98A2
+    &-submit
+        background-color azul
+        border none
+        border-radius 3px
+        box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+        color white
+        display inline-block
+        font-size 1.3em
+        margin-top 1.4em
+        padding .5em 2em
+        width 10em
+        max-width 15em
+        &:hover
+            background azulHover
 
 .Section-form
     .container
         position relative
+        margin 0.5em 0
         .arrow
             background rojo
             border-radius 3px
@@ -159,24 +197,21 @@ rojo = #FF2115
                 top -9px
     .item
         display inline-block
-        margin 0
-        margin-left 2rem
-        margin-right 2rem
         width 14rem
     a
         font-size 1.1rem
 
 .Section-signup
-    background-color rgba(145, 145, 145, 0.8)
-    border-radius 10px
+    background-color rgba(145, 145, 145, 0.6)
+    border-radius 4px
     box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
     color white
-    display inline-block
+    display none
     font-size 1.2rem
-    margin-left 5em
+    float right
     margin-top 5em
-    max-width 18em
-    padding .7em
+    max-width 10em
+    padding 2em 1em
     vertical-align top
 
 .Footer
@@ -184,62 +219,59 @@ rojo = #FF2115
     bottom 0
     box-shadow 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
     color white
-    padding 2em 0
+    padding 1em 0
     text-align center
-
-.Footer-parrafo
-    display inline-block
-    font-size 1em
-    margin 0
-
-.Footer-parrafo1
-    margin-right 7em
+    position fixed
+    right 0
+    left 0
+    &-parrafo
+        display block
+        font-size 1em
+        margin 0
+    &-parrafo1
+        margin 0
+        
 .hidden
-    display none 
-      
-@media screen and (max-width: 1050px)
+    display none                            
+//mobile-first
+@media screen and (min-width: 768px)
+   .Background
+       height 100%
     .Section
-        &-signup
-            display none
-            
-@media screen and (max-width: 1000px)
+        margin 100px auto
+        width 80%
+        background none
+        &-article
+            background-color rgba(145, 145, 145, 0.6)
+            padding 3em 2em
+            margin-bottom 0
+@media screen and (min-width: 850px)
     .Header
-        &-content
-            display block
-            margin-bottom 0.5em
+        height 80px
         &-title
-            font-size 2em
-        &-submit
-            width 13em
+            line-height 80px
         &-button
+            display none
             &.is-active
-                display block
+                display none
         &-form
-            box-shadow 0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24)
-            height auto
-            left 0
+            display inline-block
+            right 1em
+            top 1em
+            left initial
+            text-align right
+            box-shadow none
+        &-content
+            display inline-block
+    .Section
+        width 95%    
+        &-signup
+            display inline-block
+            position absolute
             right 0
-            text-align center
-            top -150px
-            transition 0.3s         
-            &.is-active
-                top 95px                  
-    .Footer
-        &-parrafo1
-            margin 0
-        &-parrafo
-          display block  
-@media screen and (max-width: 480px)
-    .Section
-        padding 0.5em
-    .Header
-        &-title
-            display block
-        &-txt
-            width 90%
-        &-submit
-            display block
-            width 90%
-    .Section
-        &-submit
-            margin-left 0   
+            top 0
+            float left
+        &-article
+            display inline-block
+            width 500px
+            max-width 600px

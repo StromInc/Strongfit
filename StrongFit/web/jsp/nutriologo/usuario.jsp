@@ -3,7 +3,7 @@
 <html>
     <head>
         <%@include file = "../meta.jsp" %>
-        <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
+        <link rel="stylesheet" type="text/css" href="../../Estilos/estilos_perfil.css">
         <script>
                 function numerossolo(e) {
 			var keynum;
@@ -23,8 +23,7 @@
 			}
 		}
         </script>
-    </head>
-    
+    </head>   
     <%
     HttpSession sesion = request.getSession();
     String nombre = (String)sesion.getAttribute("nombre");
@@ -73,68 +72,93 @@
     %>
     <body>
         <%@include file="barra_menu.jsp"%>       
-        <section class = "Section-tbl-usr">
-        <div class="div-informacion">
-            <article class = "Article-tbl-usr2" style = "margin-left: 0" id="Imagen">
-                <img src = "<%=ruta%>" class ="img-usr" alt = "foto de usuario">
-                <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagen.jsp" name="img_frm">
-                    <input type = "file"  name="uploadFile" id="ImgUsuario" class="input-subir" required/>
-                    <input type = "submit" value="cambiar" class="btn-imagen"/>
-                </form>
-            </article>
-            </div>             
-            <article class = "Article-tbl-usr">
-                <form action = "/StrongFit/sPerfilDeMedico" method = "post">
-                    <nav class="Menu">
-                        <ul class="Menu-list">
-                            <li class="Menu-item"><a href="#" id="link_1" class="activo">1</a></li>
-                            <li class="Menu-item"><a href="#" id="link_2">2</a></li>
-                            <li class="Menu-item"><a href="#" id="link_3">3</a></li>
-                        </ul>
-                    </nav>      
-                    <div class="prueba is-active" id="formu_1">
-                        <h2 class = "Article-title">Información de cuenta</h2>
-                        <p class = "personal-p">Nombre</p>
-                        <input type = "text" name = "txt-name" required class = "Section-usr" placeholder="" value="<%=nombre%>">
-                        <p class = "personal-p">Correo</p>
-                        <input type = "email" name = "txt-email" required class = "Section-usr" placeholder="" value="<%=idUsr%>">
-                        <p class = "personal-p">Contraseña</p>
-                        <input type = "password" name = "txt-pass" required class = "Section-usr" placeholder="" value="<%=pass%>">
-                    </div>
-                    <div class="prueba" id="formu_2">
-                        <h2 class = "Article-title">Información pública</h2>
-                        <div class="div-edad">
-                            <p class = "medidas-p">Edad</p>
-                            <input type = "text" name = "edad" onkeypress="return numerossolo(event);" required class = "Section-m" placeholder = "" value="<%=edad%>">
+        <section class = "Section large x-large">
+            <div class="Content"> 
+                <div class="Content-image">
+                    <h2 class="Datos-title">Mi perfil</h2>
+                    <figure >                   
+                    <img src = "<%=ruta%>" width="250" height="250" class="Figure-image" alt = "foto de usuario">
+                    </figure>
+                    <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagen.jsp" name="img_frm">
+                    <p>
+                        <input type = "file"  name="uploadFile" id="ImgUsuario" class="input-subir" required/>
+                    </p>
+                    <p>
+                        <input type = "submit" value="cambiar" class="btn-profile"/>
+                    </p>
+                    </form>
+                </div>             
+                <div class="Datos">
+                    <form action = "/StrongFit/sPerfilDeMedico" method = "post">
+                        <!--<nav class="Menu">
+                            <ul class="Menu-list">
+                                <li class="Menu-item"><a href="#" id="link_1" class="activo">1</a></li>
+                                <li class="Menu-item"><a href="#" id="link_2">2</a></li>
+                                <li class="Menu-item"><a href="#" id="link_3">3</a></li>
+                            </ul>
+                        </nav>-->    
+                        <div class="prueba is-active" id="formu_1">
+                            <h3 class="Datos-title">Información de la cuenta</h3>
+                            <p class="Datos-wrapper">
+                                <label class="Datos-label" for="nombre">Nombre:</label>
+                                <input type = "text" name = "txt-name" required class="Datos-input" placeholder="" value="<%=nombre%>" id="nombre"></p>
+                            <p class="Datos-wrapper">
+                                <label class="Datos-label" for="correo">Correo:</label>
+                                <input type = "email" id="correo" name = "txt-email" required class="Datos-input" placeholder="" value="<%=idUsr%>">
+                            </p>
+                            <p class="Datos-wrapper">
+                                <label class="Datos-label" for="contra">Contraseña:</label>
+                                <input type = "password" name = "txt-pass" required class="Datos-input" placeholder="" value="<%=pass%>" id="for">
+                            </p>
                         </div>
-                        <div class = "div-sexo">
-                            <p class = "personal-p">Sexo</p>
-                            <select name = "sexo" class="select-sexo">
-                                <option value="" <%=v1%>>Seleccionar </option>
-                                <option value="1" <%=v2%>>Masculino </option>
-                                <option value="2" <%=v3%>>femenino </option>
-                            </select>
+                        <div class="prueba" id="formu_2">
+                            <h3 class="Datos-title">Información pública</h3>
+                            <div class="Datos-especial">
+                                <p class="Datos-wrapper centrar-texto">
+                                    <label class = "medidas-p" for="edad">Edad:</label>
+                                    <input type = "number" name = "edad" onkeypress="return numerossolo(event);" required class="Datos-input" placeholder = "" value="<%=edad%>" id="edad">
+                                </p>
+                                <p class="Datos-wrapper centrar-texto">
+                                    <label for="genero">Genero:</label>
+                                    <select name = "sexo" class="Datos-input" id="genero">
+                                        <option value="" <%=v1%>>Seleccionar </option>
+                                        <option value="1" <%=v2%>>Masculino </option>
+                                        <option value="2" <%=v3%>>Femenino </option>
+                                    </select>
+                                </p>
+                            </div>
+                            <p class="Datos-wrapper">
+                                <label class="Datos-label" for="cedula">Cédula profesional:</label>
+                                <input type = "text" name = "plicense" onkeypress="return numerossolo(event);" required class="Datos-input" placeholder="" value="<%=cedula%>" id="cedula">
+                            </p>
+                            <p class="Datos-wrapper">
+                                <label class="Datos-label" id="escula">Escuela de procedencia:</label>
+                                <input type = "text" name = "school" required class="Datos-input" placeholder="" value="<%=escuela%>" id="escuela">
+                            </p>
+                            <p class="Datos-wrapper">
+                                <label class="Datos-label" id="carrera">Carrera:</label>
+                                <input type = "text" name = "carrier" required class="Datos-input" placeholder="" value="<%=carrera%>" id="carrera">
+                            </p>
                         </div>
-                        <p class = "personal-p">Cédula profesional</p>
-                        <input type = "text" name = "plicense" onkeypress="return numerossolo(event);" required class = "Section-usr" placeholder="" value="<%=cedula%>">
-                        <p class = "personal-p">Escuela de procedencia</p>
-                        <input type = "text" name = "school" required class = "Section-usr" placeholder="" value="<%=escuela%>">
-                        <p class = "personal-p">Carrera</p>
-                        <input type = "text" name = "carrier" required class = "Section-usr" placeholder="" value="<%=carrera%>">
-                    </div>
-                    <div class="prueba" id="formu_3">
-                        <h2 class = "Article-title">Tu dirección</h2>
-                        <p class = "personal-p">Estado</p>
-                        <input type = "text" name = "estado" required class = "Section-usr" placeholder = "" value="<%=estado%>">
-                        <p class = "personal-p">Municipio</p>
-                        <input type = "text" name = "municipio" required class = "Section-usr" placeholder = "" value="<%=municipio%>">
-                        <p class = "personal-p">Colonia</p>
-                        <input type = "text" name = "colonia" required class = "Section-usr" placeholder = "" value="<%=colonia%>">
-                    </div>
-                    <hr>
-                    <input type = "submit" value = "Actualizar" name = "act_usr" class = "btn-act-usr">
-                </form>
-            </article>
+                        <div class="prueba" id="formu_3">
+                            <h3 class="Datos-title">Tu dirección</h3>
+                            <p class="Datos-wrapper">
+                                <label class="Datos-label" for="estado">Estado:</label>
+                                <input type = "text" name = "estado" id="estado" required class="Datos-input" placeholder = "" value="<%=estado%>">
+                            </p>
+                            <p class="Datos-wrapper">
+                                <label class="Datos-label" for="municipio">Municipio:</label>
+                                <input type = "text" name = "municipio" id="municipio" required class="Datos-input" placeholder = "" value="<%=municipio%>">
+                            </p>
+                            <p class="Datos-wrapper">
+                                <label class="Datos-label" for="colonia">Colonia:</label>
+                                <input type = "text" name = "colonia" id="colonia" required class="Datos-input" placeholder = "" value="<%=colonia%>">
+                            </p>
+                        </div>
+                        <input type = "submit" value = "Actualizar" name = "act_usr" class = "btn-profile">
+                    </form>
+                </div>
+            </div>
         </section>
         <script src="../../js/acciones_perfil.js"></script>
          <script src="../../js/salir.js"></script>
