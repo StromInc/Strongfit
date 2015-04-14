@@ -71,6 +71,9 @@ public class StrongfitEndPoint {
         }
         
         if(res.equals("si")){
+            System.out.println("###############################################");
+            System.out.println(usrS);
+            System.out.println("###############################################");
             conecta.spNuevaConexion(usrS, session.getId());
         }
         else{

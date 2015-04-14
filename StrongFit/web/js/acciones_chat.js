@@ -1,18 +1,93 @@
-function activarMensajes(remi, ses){
-    
+var evitarRepeticion = "";
+
+function activarMensajes(desti, ses, idS){    
     $(function(){
-        
-        alert("hola");
-        $('#destinatario').val(remi);
+        $('#destinatario').val(desti);
         $('#ses').val(ses);
         
+        if(evitarRepeticion !== desti){
+            evitarRepeticion = desti;
+            $('#log').html("");
+            $('#log').html('<div class="mensaje" ></div>');
+            $.ajax({
+                url:'http://localhost:8080/StrongFit/sGetConversaciones',
+                type: 'post',
+                dataType: 'json',
+                data:{
+                    otroUsuario: desti
+                },
+                success: function(respuesta){
+                    var $item = $('.mensaje').first();
+                    var $clone;
+                    var remitentes = [];
+                    var mensajes = [];
+                    for(var valor in respuesta){
+                        remitentes.push(respuesta[valor].remitente);
+                        mensajes.push(respuesta[valor].mensaje);
+                    }
+
+                    var idM =0;
+                    for(var i = remitentes.length - 1; i >= 0; --i){
+                        $clone = $item.clone();
+                        idM = 'm' + i;
+
+                        if(remitentes[i] === idS){
+                            $clone.addClass('remitenteDiv');
+                            $clone.html("<div class='remitente msj' id='"+idM+"'  >" + mensajes[i] + "</div>");
+                            $clone.appendTo('#log'); 
+                        }
+                        else{
+                            $clone.addClass('destinatarioDiv');
+                            $clone.html("<div class='destinatario msj' id='"+idM+"' >" + mensajes[i] + "</div>");
+                            $clone.appendTo('#log');
+                        }
+                    }
+                    $('#log').animate({
+                        scrollTop: $('#m0').height() * remitentes.length * 2
+                    }, 200, function(){
+                        traerDatos();
+                        //$("html, body").animate({ scrollTop: $("#myID").scrollTop() }, 1000);
+                    });
+                }
+            });
+        }
+        
+        function traerDatos(){
+            $.ajax({
+                url: 'http://localhost:8080/StrongFit/sGetInfoUsuario',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    desti: desti
+                },
+                success: function(respuesta){
+                    document.getElementById("imagenDesti").src = respuesta.imagen;
+                    
+                    $('#nombreChat').html("Nombre: "+respuesta.nombre);
+                    $('#correoChat').html("Correo: "+respuesta.correo);
+                    
+                    if(respuesta.tipo === "medico"){
+                        $('#cedulaChat').html("Cédula Profesional: "+respuesta.cedula);
+                        $('#carreraChat').html("Carrera: "+respuesta.carrera);
+                        $('#escuelaChat').html("Escuela: "+respuesta.escuela);
+                        if(respuesta.amistad === "no"){
+                            $('#botonSolicitud').val("Enviar solicitud de Nutriólogo").removeClass('invisible');
+                        }
+                    }
+                    else{
+                        if(respuesta.amistad === "no"){
+                            $('#botonSolicitud').val("Enviar solicitud de Amistad").removeClass('invisible');
+                        }
+                    }
+                }
+            });
+        }
     });
-    
 }
 
 function cargaSes(){
     
-    setInterval(cSes, 2000);
+    setInterval(cSes, 60000);
     
 }
 
@@ -56,3 +131,34 @@ function cSes(){
     });
     
 }
+
+function enviarEnter(evento){
+    $(function(){
+        var keyCode;
+        if (evento.which || evento.charCode) {
+            keyCode = evento.which ? evento.which : evento.charCode;
+            //return (keyCode != 13);
+        }
+        else if (window.event)
+        {
+            keyCode = event.keyCode;
+            if (keyCode === 13)
+            {
+                if (event.keyCode)
+                    event.keyCode = 9;
+            }
+        }
+
+        if (keyCode === 13)
+        {
+            var enter = document.getElementById("enter");
+            if(enter.checked){
+                log($('#mensajeTXT').html());
+                $('#mensajeTXT').val("");
+                return false;
+            }
+        }
+        return true;
+    });
+}
+

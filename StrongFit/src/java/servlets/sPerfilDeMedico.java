@@ -46,6 +46,7 @@ public class sPerfilDeMedico extends HttpServlet {
             // recuperamos los valores
            String pass = request.getParameter("txt-pass");
             seguro.AlgoritmoAES();
+            seguro.iniciarBuscador();
             String passS = seguro.cifrarSHA1(pass);
             String idUser = (String)sesion.getAttribute("idUsr");
             String idUserS = seguro.encriptar(idUser);
@@ -55,6 +56,7 @@ public class sPerfilDeMedico extends HttpServlet {
             
             String nombre = request.getParameter("txt-name");
             String nombreS = seguro.encriptar(nombre);
+            String nombre2 = seguro.cifrarBuscador(nombre);
             String idUsr = request.getParameter("txt-email");
             String idUsrS = seguro.encriptar(idUsr);
             
@@ -86,7 +88,7 @@ public class sPerfilDeMedico extends HttpServlet {
              objconexion.conectar();
              // verificar si el nuevo correo esta disponible
              if(idUser.equals(idUsr)){
-             objconexion.cambioUsuariomedico(idUserS, nombreS, passS, cedula, escuelaS, carreraS, edad, sexo, estadoS, municipioS, coloniaS, idMedico);
+             objconexion.cambioUsuariomedico(idUserS, nombreS, passS, cedula, escuelaS, carreraS, edad, sexo, estadoS, municipioS, coloniaS, idMedico, nombre2);
              sesion.setAttribute("idUsr",idUser);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
@@ -102,7 +104,7 @@ public class sPerfilDeMedico extends HttpServlet {
              }else{
              verificacion = objconexion.cambiarcorreo(idUserS);
              if(verificacion.equals("libre")){
-             objconexion.cambioUsuariomedicoConCorreo(idUserS, nombreS, passS, cedula, escuelaS, carreraS, edad, sexo, estadoS, municipioS, coloniaS, idUsrS, idMedico);
+             objconexion.cambioUsuariomedicoConCorreo(idUserS, nombreS, passS, cedula, escuelaS, carreraS, edad, sexo, estadoS, municipioS, coloniaS, idUsrS, idMedico, nombre2);
              sesion.setAttribute("idUsr",idUsr);
                  sesion.setAttribute("idUsr",idUsr);
                  sesion.setAttribute("nombre",nombre);

@@ -51,6 +51,7 @@ public class sPerfilDeUsuario extends HttpServlet {
             cCifrado seguro = new cCifrado();
             String pass = request.getParameter("contra");
             seguro.AlgoritmoAES();
+            seguro.iniciarBuscador();
             String pass2 = seguro.cifrarSHA1(pass);
             
             String idUser = (String)sesion.getAttribute("idUsr");
@@ -60,6 +61,7 @@ public class sPerfilDeUsuario extends HttpServlet {
             
             String nombre = request.getParameter("name");
             String nombreS = seguro.encriptar(nombre);
+            String nombre2 = seguro.cifrarBuscador(nombre);
             String idUsr = request.getParameter("email");
             String idUsrS = seguro.encriptar(idUsr);
             
@@ -146,7 +148,7 @@ public class sPerfilDeUsuario extends HttpServlet {
             try{
              // verificar si el nuevo correo esta disponible
              if(idUser.equals(idUsr)){
-             objconexion.cambioUsuario(idUserS, nombreS, pass2, peso, estatura, cintura, edad, sexo, estadoSalud, estadoS, municipioS, coloniaS, idPaciente);
+             objconexion.cambioUsuario(idUserS, nombreS, pass2, peso, estatura, cintura, edad, sexo, estadoSalud, estadoS, municipioS, coloniaS, idPaciente, nombre2);
              sesion.setAttribute("idUsr",idUser);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);
@@ -163,7 +165,7 @@ public class sPerfilDeUsuario extends HttpServlet {
              }else{
              verificacion = objconexion.cambiarcorreo(idUsrS);
              if(verificacion.equals("libre")){
-             objconexion.cambioUsuarioConCorreo(idUserS, nombreS, pass2, peso, estatura, cintura, edad, sexo, estadoS, municipioS, coloniaS, idUsrS, estadoSalud, idPaciente);
+             objconexion.cambioUsuarioConCorreo(idUserS, nombreS, pass2, peso, estatura, cintura, edad, sexo, estadoS, municipioS, coloniaS, idUsrS, estadoSalud, idPaciente, nombre2);
              sesion.setAttribute("idUsr",idUsr);
                  sesion.setAttribute("nombre",nombre);
                  sesion.setAttribute("pass",pass);

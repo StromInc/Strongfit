@@ -1,0 +1,94 @@
+.contactos{
+    position: fixed;
+    right: 0;
+    width: 20%;
+    height: 70%;
+}
+
+.issues{
+    position: fixed;
+    left: 0;
+    width: 25%;
+    height: 70%;
+}
+
+.cajachat{
+    width: 45%;
+    position: fixed;
+    left: 28.5%;
+    height: 70%;
+}
+
+.formularioChat{
+    height: 35%;
+}
+
+.mensajes{
+    height: 65%;
+    max-height: 65%;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+}
+
+#contenedor{
+    position: absolute;
+}
+
+#mensajeTXT{
+    width: 100%;
+    max-width: 100%;
+    resize: none;
+    height: 80%;
+}
+
+.remitenteDiv{
+    text-align: right;
+}
+
+.destinatarioDiv{
+    text-align: left;
+}
+
+.remitente{
+    border-radius: 5px;
+    padding: .4em;
+    margin-right: 1em;
+    max-width: 10em;
+    border: solid;
+    border-width: thin;
+    background-color: green;
+    box-shadow: 1px 1px 10px black;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.destinatario{
+    border-radius: 5px;
+    padding: .4em;
+    margin-left: 1em;
+    max-width: 10em;
+    border: solid;
+    border-width: thin;
+    background-color: white;
+    box-shadow: 1px 1px 10px black;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.imagenChat{
+    width: 50%;
+    height: 50%;
+}
+
+.div-solicitud{
+    padding: 2em 0;
+    text-align: left;
+}
+
+.invisible{
+    display: none;
+}

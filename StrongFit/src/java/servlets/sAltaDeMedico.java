@@ -43,9 +43,11 @@ public class sAltaDeMedico extends HttpServlet {
             HttpSession sesion = request.getSession();
             cCifrado seguro = new cCifrado();
             seguro.AlgoritmoAES();
+            seguro.iniciarBuscador();
             /* TODO output your page here. You may use following sample code. */
             String pass = seguro.cifrarSHA1(request.getParameter("txt-pass"));
             String nombre = seguro.encriptar(request.getParameter("txt-name"));
+            String nombre2 = seguro.cifrarBuscador(request.getParameter("txt-name"));
             String idUser = seguro.encriptar(request.getParameter("txt-mail"));
             
             String edad = request.getParameter("edad");
@@ -74,7 +76,7 @@ public class sAltaDeMedico extends HttpServlet {
                 try{
                     clases.cConexion objconexion = new clases.cConexion();
                     objconexion.conectar();
-                    String verificacion = objconexion.altausuario(idUser, pass, nombre);
+                    String verificacion = objconexion.altausuario(idUser, pass, nombre, nombre2);
                     if(verificacion.equals("valido")){ 
                         ResultSet rs = objconexion.altamedico(idUser,cedula,escuela,estado,municipio,colonia,sexo,edad, carrera);
                         // Mandar al usuario a su perfil

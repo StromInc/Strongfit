@@ -51,13 +51,15 @@ public class sAltaDeUsuario extends HttpServlet {
              // conectar a la base de datos                                     
             try{
                 seguro.AlgoritmoAES();
+                seguro.iniciarBuscador();
                 String pwdS = seguro.cifrarSHA1(pass);
                 String idS = seguro.encriptar(idUser);
                 String nomS = seguro.encriptar(nombre);
+                String nomS2 = seguro.cifrarBuscador(nombre);
                 clases.cConexion objconexion = new clases.cConexion();
                 objconexion.conectar();
                 // verificar usuario
-                String verificacion = objconexion.altausuario(idS, pwdS, nomS);
+                String verificacion = objconexion.altausuario(idS, pwdS, nomS, nomS2);
                 if (verificacion.equals("valido")){
                     int idConteo = 0;
                     int idPaciente = 0;
