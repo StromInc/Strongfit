@@ -378,6 +378,34 @@ public class cConexion {
         this.st = con.createStatement();
         return this.st.executeQuery("call spGetInfoUsuario('"+idUsr+"');");
     }
+    
+    //envia una solicitud de amistad de un usuario a otro
+    public ResultSet spSolicitudAmistad(String idUsr, String idOtro) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spSolicitudAmistad('"+idUsr+"', '"+idOtro+"');");
+    }
+    
+    //Trae todos los datos de dos usuarios que tienen activa una solicitud de amistad
+    public ResultSet spSeleccionarAmistad(String idUsr, String idOtro) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spSeleccionarAmistad('"+idUsr+"', '"+idOtro+"');");
+    }
+    
+    //Trae todas las solicitudes del usuario, tanto enviadas como recividas
+    public ResultSet spSeleccionarSolicitudes(String idUsr) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spSeleccionarSolicitudes('"+idUsr+"');");
+    }
+    
+    //Acepta o rechaza la solicitud de amistad, depende del valor de acepta, 1 es si, 2 es no
+    public ResultSet spAceptaSolicitud(String idUsr, String idOtro, int acepta, int idAmigo) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spAceptaSolicitud('"+idUsr+"', '"+idOtro+"', "+acepta+", "+idAmigo+");");
+    }
             
     //Esto busca los alimentos y los agrega a un Array 
     public ArrayList<cAlimento> buscar(String info) throws SQLException{

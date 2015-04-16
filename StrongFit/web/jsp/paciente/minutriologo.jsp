@@ -16,7 +16,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_chat.css" >
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-        <script src="../../js/acciones_chatBuscar.js"></script>
+        <!--<script src="../../js/acciones_chatBuscar.js"></script>-->
         <!--<script src = "../../js/acciones_chat.js"></script>-->
         <script src="../../js/salir.js"></script>
         
@@ -33,6 +33,7 @@
                 box-shadow:0 1px 3px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.24);
                 text-decoration: none;
             }
+            
         </style>
     </head>
     <body>
@@ -48,6 +49,8 @@
             var wsUri = "ws://192.168.1.73:8080/StrongFit/endpoint";
             var websocket = new WebSocket(wsUri); //creamos el socket
             
+            var solicitud = '';
+            
             websocket.onopen = function(evt) { //manejamos los eventos...
                 websocket.send('<%=idUsr%>');//... y aparecerá en la pantalla
             };
@@ -60,6 +63,9 @@
             function enviarMensaje() {
                 
                 $(function(){
+                    $('#log').animate({
+                        scrollTop: $('.mensaje').last().height() * 200
+                    });
                     websocket.send('<%=idUsr%>,' + $('#destinatario').val() + ',' + mensajeTXT.value + ',' + $('#ses').val());
                     log("<div class = 'remitenteDiv'><div class = 'remitente msj'>" + mensajeTXT.value + "</div></div>");
                 });
@@ -140,14 +146,17 @@
                                 $('#correoChat').html("Correo: "+respuesta.correo);
 
                                 if(respuesta.tipo === "medico"){
-                                    $('#cedulaChat').html("Cédula Profesional: "+respuesta.cedula);
-                                    $('#carreraChat').html("Carrera: "+respuesta.carrera);
-                                    $('#escuelaChat').html("Escuela: "+respuesta.escuela);
+                                    $('#cedulaChat').html("Cédula Profesional: "+respuesta.cedula).removeClass('invisible');
+                                    $('#carreraChat').html("Carrera: "+respuesta.carrera).removeClass('invisible');
+                                    $('#escuelaChat').html("Escuela: "+respuesta.escuela).removeClass('invisible');
                                     if(respuesta.amistad === "no"){
                                         $('#botonSolicitud').val("Enviar solicitud de Nutriólogo").removeClass('invisible');
                                     }
                                 }
                                 else{
+                                    $('#cedulaChat').addClass('invisible');
+                                    $('#carreraChat').addClass('invisible');
+                                    $('#escuelaChat').addClass('invisible');
                                     if(respuesta.amistad === "no"){
                                         $('#botonSolicitud').val("Enviar solicitud de Amistad").removeClass('invisible');
                                     }
@@ -204,51 +213,221 @@
                 });
 
             }
+            
+            function enviarEnter(e) {
+                        var keynum;
+			if (window.event) {
+				/*IE*/
+				keynum=e.keyCode;
+			}
+			if (e.which) {
+				//Netscape Firefox Opera
+				keynum=e.which;
+			}
+			if (keynum===13) {
+                            var enter = document.getElementById("enter");
+                            if(enter.checked){
+                                var txtarea = document.getElementById("mensajeTXT");
+                                enviarMensaje();
+                                txtarea.value="";
+                                return false;
+                            }
+			} 
+			else{
+				return true;
+			}
+		}
+            
+            /*function str_replace($cambia_esto, $por_esto, $cadena) {
+                return $cadena.split($cambia_esto).join($por_esto);
+             }
 
-            function enviarEnter(evento){
-                $(function(){
-                    var keyCode;
-                    if (evento.which || evento.charCode) {
-                        keyCode = evento.which ? evento.which : evento.charCode;
-                        //return (keyCode != 13);
-                    }
-                    else if (window.event)
-                    {
-                        keyCode = event.keyCode;
-                        if (keyCode === 13)
-                        {
-                            if (event.keyCode)
-                                event.keyCode = 9;
-                        }
-                    }
+             //Valida que no sean ingresado ENTER dentro del textarea
+             function Textarea_Sin_Enter($char, $id){
+                //alert ($char);
+                $textarea = document.getElementById($id);
 
-                    if (keyCode === 13)
-                    {
-                        var enter = document.getElementById("enter");
-                        if(enter.checked){
-                            enviarMensaje();
-                            log($('#mensajeTXT').html());
-                            $('#mensajeTXT').val("");
-                            return false;
+                if($char === 13){
+                    var enter = document.getElementById("enter");
+                    if(enter.checked || $textarea.value === ""){
+                        $texto_escapado = escape($textarea.value);
+                        if(navigator.appName === "Opera" || navigator.appName === "Microsoft Internet Explorer"){
+                            $texto_sin_enter = str_replace("%0D%0A", "", $texto_escapado);
                         }
+                        else {
+                            $texto_sin_enter = str_replace("%0A", "", $texto_escapado);
+                        }
+                        $textarea.value = unescape($texto_sin_enter);
+                        
                     }
-                    return true;
-                });
+                }
+             }*/
+
+        function buscarUsuario(){
+            $(function(){
+                $('#search').autocomplete({
+        //busqueda del alimento
+        source: function(request, response){
+            $.ajax({
+                url: 'http://localhost:8080/StrongFit/sBusquedaUsuario',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    info : request.term
+                },
+                //respuesta del servidor
+                success: function(respuesta){
+                    response(respuesta);
+                }
+            });
+        },
+        //esta funcion se ejecuta al seleccionar
+        select: ver
+    });
+            });
+        }
+
+    function ver(e, res){
+        evitarRepeticion = "";
+        solicitud = res.item.correo;
+        $.ajax({
+            url: 'http://localhost:8080/StrongFit/sGetInfoUsuario',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                desti: res.item.correo
+            },
+            success: function(respuesta){
+                document.getElementById("imagenDesti").src = respuesta.imagen;
+
+                $('#nombreChat').html("Nombre: "+respuesta.nombre);
+                $('#correoChat').html("Correo: "+respuesta.correo);
+
+                if(respuesta.tipo === "medico"){
+                    $('#cedulaChat').html("Cédula Profesional: "+respuesta.cedula).removeClass('invisible');
+                    $('#carreraChat').html("Carrera: "+respuesta.carrera).removeClass('invisible');
+                    $('#escuelaChat').html("Escuela: "+respuesta.escuela).removeClass('invisible');
+                    if(respuesta.amistad === "no"){
+                        $('#botonSolicitud').val("Enviar solicitud de Nutriólogo").removeClass('invisible');
+                    }
+                }
+                else{
+                    $('#cedulaChat').addClass('invisible');
+                    $('#carreraChat').addClass('invisible');
+                    $('#escuelaChat').addClass('invisible');
+                    if(respuesta.amistad === "no"){
+                        $('#botonSolicitud').val("Enviar solicitud de Amistad").removeClass('invisible');
+                    }
+                }
             }
-
-
-        </script>
+        });
+    }
+    
+    function enviarSolicitud(){
+        $(function(){
+            $.ajax({
+                url: 'http://localhost:8080/StrongFit/sEnviarSolicitud',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    idOtro: solicitud
+                },
+                success: function(respuesta){
+                    $('#botonSolicitud').addClass('invisible');
+                }
+            });
+        });
+    }
+    
+    function responderSolicitud(respuesta, idOtro, idEtiqueta){
+        $(function(){
+            $.ajax({
+                url: 'http://localhost:8080/StrongFit/sAceptaRechazaSolicitud',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    idOtro: idOtro,
+                    respuesta: respuesta
+                },
+                success: function(res){
+                    console.log(idEtiqueta);
+                    $('#solicitud'+idEtiqueta).addClass('invisible');
+                }
+            });
+        });
+    }
+             
+         </script>
         
         <section class = "Section-tbl-usr">
             <article class="Article-tbl-usr2 issues">
-                <div class="div-solicitud">Solicitudes</div>
+                <div class="div-solicitud">
+                    Solicitudes
+                    <%
+                        cCifrado seguro = new cCifrado();
+                        seguro.AlgoritmoAES();
+                        
+                        String usrS = seguro.encriptar(idUsr);
+                        ResultSet rs2 = conecta.spSeleccionarSolicitudes(usrS);
+                        String correoSolicitud = "";
+                        String tipoUs = "Paciente";
+                        int contador = 0;
+                        
+                        while(rs2.next()){
+                            if(usrS.equals(rs2.getString("amigo2")) && rs2.getInt("estado") == 1){
+                                correoSolicitud = rs2.getString("amigo1");
+                                ResultSet rs3 = conecta.spGetInfoUsuario(correoSolicitud);
+                                if(rs3.next()){
+                                    clases.CImagen objimg = new clases.CImagen();
+                                    int verificacionimg = objimg.devuelveexistencia(seguro.desencriptar(rs3.getString("idUsuario")));
+                                    String ruta = "lel";
+                                    String ruta2 = "../../Imagenes/Usuarios/";
+                                    String nom = seguro.desencriptar(rs3.getString("idUsuario"));
+                                    String nombre = seguro.desencriptar(rs3.getString("nombre"));
+                                    if(rs3.getInt("idMedico") > 0){
+                                        tipoUs = "Médico";
+                                    }
+                                    switch(verificacionimg){
+                                        case 1: 
+                                            ruta = ruta2 + nom + ".jpg";
+                                            break;
+                                        case 2: 
+                                            ruta = ruta2 + nom + ".png";
+                                            break;
+                                        case 3: 
+                                            ruta = ruta2 + nom + ".gif";
+                                            break;
+                                        default: 
+                                            ruta = "../../Imagenes/usr_sin_imagen.jpg";
+                                            break;              
+                                    }
+                                    %>
+                                    <div class="divSolicitud" id="solicitud<%=contador%>" >
+                                        <div class="divImagenSolicitud"><img src="<%=ruta%>" class="imagenSolicitud" ></div>
+                                        <div class="generalSolicitud">
+                                            <div class="correoSolicitud"><%=nom%></div><br>
+                                            <div class="nombreSolicitud"><%=nombre%></div><br>
+                                            <div class="tipoSolicitud"><%=tipoUs%></div>
+                                        </div>
+                                        <div>
+                                            <input type="button" id="acepta<%=contador%>" onclick="responderSolicitud(1, '<%=nom%>', <%=contador%>);" value="Aceptar" name="aceptar" id="aceptar" >
+                                            <input type="button" id="rechaza<%=contador%>" onclick="responderSolicitud(2, '<%=nom%>', <%=contador%>);" value="Rechazar" name="rechazar" id="rechazar" >
+                                        </div>
+                                    </div>
+                                    <%
+                                }
+                                contador++;
+                            }
+                        }
+                    %>
+                </div>
                 <hr>
                 <div>
                     <div>
                         <img src="../../Imagenes/usr_sin_imagen.jpg" id="imagenDesti" class="imagenChat" >
                     </div>
                     <div>
-                        <input type="submit" name="solicitud" id="botonSolicitud" class="invisible" >
+                        <input type="submit" name="solicitud" id="botonSolicitud" onclick="enviarSolicitud();" class="invisible" >
                         <p id="nombreChat">Aun no has seleccionado a nadie</p>
                         <p id="correoChat"></p>
                         <p id="cedulaChat"></p>
@@ -267,7 +446,8 @@
                     <input type="hidden" name="desti" id="destinatario" value="">
                     <input type="hidden" name="ses" id="ses" value="">
                     <!--<textarea placeholder="Escribe un mensaje" id='mensajeTXT' name='mensajeTXT' onkeypress="return enviarEnter(this, event);" /></textarea>-->
-                    <div contenteditable="true" placeholder="Escribe un mensaje" id='mensajeTXT' name='mensajeTXT' onkeypress="return enviarEnter(this, event);" /></div>
+                    <!--<textarea contenteditable="true" placeholder="Escribe un mensaje" id='mensajeTXT' name='mensajeTXT' onkeyup="Textarea_Sin_Enter(event.keyCode, this.id);" onkeydown="Textarea_Sin_Enter(event.keyCode, this.id);" onkeypress="Textarea_Sin_Enter(event.keyCode, this.id);" /></textarea>-->
+                    <textarea contenteditable="true" placeholder="Escribe un mensaje" id='mensajeTXT' name='mensajeTXT' onkeypress="return enviarEnter(event);" /></textarea>
                     <div class="">
                         <span><input type="checkbox" name="enter" value="si" id="enter" ><label for="enter">Enviar mensaje al presionar Enter</label></span>&nbsp;&nbsp;&nbsp;
                               <button type="button" onclick="enviarMensaje()">Enviar</button>
@@ -278,14 +458,13 @@
             <article class = "Article-tbl-usr2 contactos">
                 <div>
                     <p class="contenedor-search">
-                        <input type="search" id="search" name="search" class="search" style="width:10em;"  placeholder="Buscar personas...">
+                        <input type="search" id="search" name="search" onkeypress="buscarUsuario();" class="search" style="width:10em;"  placeholder="Buscar personas...">
                         <label class = "icon-search label-search" for = "buscar"></label>
                     </p>
                 </div>
                 <%
                     ResultSet rs = conecta.spGetConectados();
-                    cCifrado seguro = new cCifrado();
-                    seguro.AlgoritmoAES();
+                    
                     String usr = "";
                     String ses = ""; 
                     

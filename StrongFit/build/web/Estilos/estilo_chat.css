@@ -37,10 +37,16 @@
 }
 
 #mensajeTXT{
-    width: 100%;
+    width: 94%;
     max-width: 100%;
+    background-color: #A4C2A3;
+    text-align: left;
+    display: inline-block;
     resize: none;
-    height: 80%;
+    height: 1.5em;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    padding: .5em 1em .3em 1em;
 }
 
 .remitenteDiv{
@@ -91,4 +97,39 @@
 
 .invisible{
     display: none;
+}
+
+.imagenSolicitud{
+    width: 3em;
+    height: 3em;
+}
+
+.divImagenSolicitud{
+    display: inline-block;
+}
+
+.correoSolicitud,
+.nombreSolicitud,
+.generalSolicitud{
+    display: inline-block;
+}
+
+.tipoSolicitud{
+    font-size: .8em;
+    color: rgba(102, 99, 99, 8);
+}
+
+#aceptar,
+#rechazar{
+    width: 35%;
+    padding: .1em;
+    cursor: pointer;
+}
+
+.divSolicitud{
+    padding: .5em;
+}
+
+.divSolicitud:hover{
+    background-color: #e3e4e2;
 }

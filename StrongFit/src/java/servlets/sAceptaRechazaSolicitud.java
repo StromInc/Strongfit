@@ -7,15 +7,10 @@ package servlets;
 
 import clases.cCifrado;
 import clases.cConexion;
-import clases.cMensajes;
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -29,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ian
  */
-@WebServlet(name = "sGetInfoUsuario", urlPatterns = {"/sGetInfoUsuario"})
-public class sGetInfoUsuario extends HttpServlet {
+@WebServlet(name = "sAceptaRechazaSolicitud", urlPatterns = {"/sAceptaRechazaSolicitud"})
+public class sAceptaRechazaSolicitud extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,65 +41,27 @@ public class sGetInfoUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            cCifrado seguro = new cCifrado();
-            seguro.AlgoritmoAES();
+            
+            HttpSession sesion = request.getSession();
             
             cConexion conecta = new cConexion();
             conecta.conectar();
             
-            HttpSession sesion = request.getSession();
+            cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
+            
             String idUsr = (String)sesion.getAttribute("idUsr");
                    idUsr = seguro.encriptar(idUsr);
+            String idOtro = request.getParameter("idOtro");
+                   idOtro = seguro.encriptar(idOtro);
+            int respuesta = Integer.parseInt(request.getParameter("respuesta"));
+            int idAmigo = 0;
             
-            String desti = request.getParameter("desti");
-            desti = seguro.encriptar(desti);
-            
-            clases.CImagen objimg = new clases.CImagen();
-            int verificacionimg = objimg.devuelveexistencia(desti);
-            String ruta = "lel";
-            String ruta2 = "../../Imagenes/Usuarios/";
-            switch(verificacionimg){
-                case 1: 
-                    ruta = ruta2 + desti + ".jpg";
-                    break;
-                case 2: 
-                    ruta = ruta2 + desti + ".png";
-                    break;
-                case 3: 
-                    ruta = ruta2 + desti + ".gif";
-                    break;
-                default: 
-                    ruta = "../../Imagenes/usr_sin_imagen.jpg";
-                    break;              
+            ResultSet rs = conecta.spSeleccionarAmistad(idUsr, idOtro);
+            if(rs.next()){
+                idAmigo = rs.getInt("idRelAmigosChat");
             }
-            
-            ResultSet rs = conecta.spGetInfoUsuario(desti);
-            ResultSet rs2 = conecta.spGetRelUsr(idUsr, desti);
-
-            Map<String, Object> lista = new HashMap<>();
-            while(rs.next()){
-                lista.put("nombre", seguro.desencriptar(rs.getString("nombre")));
-                lista.put("correo", seguro.desencriptar(rs.getString("idUsuario")));
-                lista.put("imagen", ruta);
-                if(rs.getInt("idMedico") > 0){
-                    lista.put("cedula", rs.getString("cedulaProf"));
-                    lista.put("escuela", seguro.desencriptar(rs.getString("escuela")));
-                    lista.put("carrera", seguro.desencriptar(rs.getString("carrera")));
-                    lista.put("tipo", "medico");
-                }
-                else{
-                    lista.put("tipo", "paciente");
-                }
-            }
-            
-            if(rs2.next()){
-                lista.put("amistad", "si");
-            }
-            else{
-                lista.put("amistad", "no");
-            }
-            
-            write(response, lista);
+            conecta.spAceptaSolicitud(idUsr, idOtro, respuesta, idAmigo);
         }
     }
 
@@ -123,7 +80,7 @@ public class sGetInfoUsuario extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(sGetInfoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sAceptaRechazaSolicitud.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -141,7 +98,7 @@ public class sGetInfoUsuario extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(sGetInfoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sAceptaRechazaSolicitud.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -154,12 +111,5 @@ public class sGetInfoUsuario extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    private void write(HttpServletResponse response, Map<String, Object> map) throws IOException 
-    {
-        response.setContentType("aplication/json");
-        response.setCharacterEncoding("charset=UTF-8");
-        response.getWriter().write(new Gson().toJson(map));
-    }
 
 }
