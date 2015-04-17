@@ -341,6 +341,18 @@ public class cConexion {
         return this.st.executeQuery("call spGetRelUsr('"+idUsr+"', '"+idOtro+"');");
     }
     
+    public ResultSet spGetConectadosGeneral() throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetConectadosGeneral();");
+    }
+    
+    public ResultSet spSetDesconexion(String idUsr) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spSetDesconexion('"+idUsr+"');");
+    }
+    
     
     public ArrayList<cUsuarioChat> spBuscarUsuarioChat(String busca) throws SQLException, Exception
     {
@@ -366,10 +378,10 @@ public class cConexion {
     }
             
     //Busca usuarios
-    public ResultSet spGetConectados() throws SQLException
+    public ResultSet spGetConectados(String idUsr) throws SQLException
     {
         this.st = con.createStatement();
-        return this.st.executeQuery("call spGetConectados();");
+        return this.st.executeQuery("call spGetConectados('"+idUsr+"');");
     }
     
     //esto retorna, toda la informacion del usuario al que seleccionemos, lo usamos en la parte del chat
@@ -398,6 +410,13 @@ public class cConexion {
     {
         this.st = con.createStatement();
         return this.st.executeQuery("call spSeleccionarSolicitudes('"+idUsr+"');");
+    }
+    
+    //trae a todos tus amigos y su estatus
+    public ResultSet spGetAmigos(String idUsr) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetAmigos('"+idUsr+"');");
     }
     
     //Acepta o rechaza la solicitud de amistad, depende del valor de acepta, 1 es si, 2 es no

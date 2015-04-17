@@ -7,6 +7,7 @@ package webSockets;
 
 import clases.cCifrado;
 import clases.cConexion;
+import clases.cSesion;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,6 +32,8 @@ public class StrongfitEndPoint {
 
     static final Logger LOGGER = Logger.getLogger(StrongfitEndPoint.class.getName());
      static final List<Session> conexiones = new ArrayList<>();
+     
+    private ArrayList<cSesion> listaSesiones = new ArrayList<>();
  
     @OnOpen
     public void iniciaConexion(Session session) throws SQLException {
@@ -44,8 +47,8 @@ public class StrongfitEndPoint {
         if (conexiones.contains(session)) { // se averigua si está en la colección
             try {
                 LOGGER.log(Level.INFO, "Terminando la conexion de {0}", session.getId());
-                session.close(); //se cierra la conexión
                 conexiones.remove(session); // se retira de la lista
+                session.close(); //se cierra la conexión
             } catch (IOException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
             }
@@ -74,6 +77,59 @@ public class StrongfitEndPoint {
             System.out.println("###############################################");
             System.out.println(usrS);
             System.out.println("###############################################");
+            int contador = -1;
+            cSesion ses = new cSesion();
+            for(int i = 0; i < listaSesiones.size(); i++){
+                ses = listaSesiones.get(i);
+                if(ses.getIdAmigo().equals(usrS)){
+                    contador = i;
+                    break;
+                }
+            }
+            if(contador > -1){
+                cSesion s = listaSesiones.get(contador);
+                s.setSesionAmigo(session.getId());
+                listaSesiones.set(contador, ses);
+            }
+            else{
+                cSesion s = new cSesion(usrS, session.getId());
+                listaSesiones.add(s);
+            }
+            ResultSet amigos = conecta.spGetAmigos(usrS);
+            String amigo = "";
+            int conSes = 0;
+            
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            for(Session sesion: conexiones){
+                System.out.println(sesion.getId());
+            }
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            System.out.println("");
+            
+            while(amigos.next()){
+                if(amigos.getString("amigo1").equals(usrS)){
+                    amigo = amigos.getString("amigo2");
+                }
+                else{
+                    amigo = amigos.getString("amigo1");
+                }
+                for(int i = 0; i < conexiones.size(); ++i){
+                    ResultSet rSes = conecta.spGetConectados(amigo);
+                    if(rSes.next()){
+                        for(Session conexion: conexiones){
+                            if(rSes.getString("sesion").equals(conexion.getId())){
+                                RemoteEndpoint.Basic remote = conexion.getBasicRemote();
+                                remote.sendText("s3sI0NamIgO9321djzlqoicnzskaak1795edsklvsnd,"+session.getId()+","+mensaje);
+                            }
+                            conSes++;
+                        }
+                    }
+                }
+                conSes = 0;
+            }
+            
             conecta.spNuevaConexion(usrS, session.getId());
         }
         else{

@@ -66,6 +66,7 @@ function activarMensajes(desti, ses, idS){
                     $('#nombreChat').html("Nombre: "+respuesta.nombre);
                     $('#correoChat').html("Correo: "+respuesta.correo);
                     
+                    console.log(respuesta.amistad);
                     if(respuesta.tipo === "medico"){
                         $('#cedulaChat').html("Cédula Profesional: "+respuesta.cedula);
                         $('#carreraChat').html("Carrera: "+respuesta.carrera);
@@ -73,10 +74,21 @@ function activarMensajes(desti, ses, idS){
                         if(respuesta.amistad === "no"){
                             $('#botonSolicitud').val("Enviar solicitud de Nutriólogo").removeClass('invisible');
                         }
+                        else{
+                            if(!$('#botonSolicitud').hasClass('invisible')){
+                                $('#botonSolicitud').addClass('invisible');
+                            }
+                        }
                     }
                     else{
                         if(respuesta.amistad === "no"){
                             $('#botonSolicitud').val("Enviar solicitud de Amistad").removeClass('invisible');
+                        }
+                        else{
+                            alert('hola');
+                            if(!$('#botonSolicitud').hasClass('invisible')){
+                                $('#botonSolicitud').addClass('invisible');
+                            }
                         }
                     }
                 }

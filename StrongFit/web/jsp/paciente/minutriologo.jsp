@@ -50,12 +50,23 @@
             var websocket = new WebSocket(wsUri); //creamos el socket
             
             var solicitud = '';
+            var sesionDestinatario = '';
             
             websocket.onopen = function(evt) { //manejamos los eventos...
                 websocket.send('<%=idUsr%>');//... y aparecerá en la pantalla
             };
             websocket.onmessage = function(evt) { // cuando se recibe un mensaje
-                log("<div class = 'destinatarioDiv'><div class = 'destinatario msj'>" + mensajeTXT.value + "</div></div>");
+                var diferenciar = evt.data.split(',');
+                if(diferenciar[0] === 's3sI0NamIgO9321djzlqoicnzskaak1795edsklvsnd'){
+                    var amigos = document.getElementsByClassName(diferenciar[2])[0];
+                    amigos.value = diferenciar[1];
+                    if($('#destinatario').val() === diferenciar[2]){
+                        sesionDestinatario = diferenciar[1];
+                    }
+                }
+                else{
+                    log("<div class = 'destinatarioDiv'><div class = 'destinatario msj'>" + evt.data + "</div></div>");
+                }
             };
             websocket.onerror = function(evt) {
                 log("oho!.. error:" + evt.data);
@@ -66,7 +77,7 @@
                     $('#log').animate({
                         scrollTop: $('.mensaje').last().height() * 200
                     });
-                    websocket.send('<%=idUsr%>,' + $('#destinatario').val() + ',' + mensajeTXT.value + ',' + $('#ses').val());
+                    websocket.send('<%=idUsr%>,' + $('#destinatario').val() + ',' + mensajeTXT.value + ',' + sesionDestinatario);
                     log("<div class = 'remitenteDiv'><div class = 'remitente msj'>" + mensajeTXT.value + "</div></div>");
                 });
                 
@@ -79,10 +90,10 @@
             
             var evitarRepeticion = "";
 
-            function activarMensajes(desti, ses, idS){    
+            function activarMensajes(desti, cont, idS){    
                 $(function(){
                     $('#destinatario').val(desti);
-                    $('#ses').val(ses);
+                    sesionDestinatario = $('#ses'+cont).val();
 
                     if(evitarRepeticion !== desti){
                         evitarRepeticion = desti;
@@ -152,6 +163,11 @@
                                     if(respuesta.amistad === "no"){
                                         $('#botonSolicitud').val("Enviar solicitud de Nutriólogo").removeClass('invisible');
                                     }
+                                    else{
+                                        if(!$('#botonSolicitud').hasClass('invisible')){
+                                            $('#botonSolicitud').addClass('invisible');
+                                        }
+                                    }
                                 }
                                 else{
                                     $('#cedulaChat').addClass('invisible');
@@ -160,13 +176,18 @@
                                     if(respuesta.amistad === "no"){
                                         $('#botonSolicitud').val("Enviar solicitud de Amistad").removeClass('invisible');
                                     }
+                                    else{
+                                        if(!$('#botonSolicitud').hasClass('invisible')){
+                                            $('#botonSolicitud').addClass('invisible');
+                                        }
+                                    }
                                 }
                             }
                         });
                     }
                 });
             }
-
+        /*
             function cargaSes(){
 
                 setInterval(cSes, 60000);
@@ -212,7 +233,7 @@
 
                 });
 
-            }
+            }*/
             
             function enviarEnter(e) {
                         var keynum;
@@ -463,28 +484,38 @@
                     </p>
                 </div>
                 <%
-                    ResultSet rs = conecta.spGetConectados();
+                    ResultSet amigos = conecta.spGetAmigos(usrS);
                     
                     String usr = "";
-                    String ses = ""; 
-                    
+                    String ses = "";
+                    String idAmigo = "";
                     int con = 0;
-                    while(rs.next()){
-                        usr = seguro.desencriptar(rs.getString("idUsuario"));
-                        ses = rs.getString("sesion");
-                        if(!usr.equals(idUsr)){
+                    while(amigos.next()){
+                        if(amigos.getString("amigo1").equals(usrS)){
+                            idAmigo = amigos.getString("amigo2");
+                        }
+                        else{
+                            idAmigo = amigos.getString("amigo1");
+                        }
+                        
+                        ResultSet rs = conecta.spGetConectados(idAmigo);
+
+                        if(rs.next()){
+                            usr = seguro.desencriptar(rs.getString("idUsuario"));
+                            ses = rs.getString("sesion");
+                            if(!usr.equals(idUsr)){
                         %>
-                        <div style="cursor:pointer;" onclick="activarMensajes('<%=usr%>', '<%=ses%>', '<%=idUsr%>');">
-                            <input type="hidden" id="ses<%=con%>" value="<%=ses%>" >
+                        <div style="cursor:pointer;" onclick="activarMensajes('<%=usr%>', '<%=con%>', '<%=idUsr%>');">
+                            <input type="hidden" id="ses<%=con%>" class="<%=usr%>" value="<%=ses%>" >
                             <p id="usr<%=con%>"><%=usr%></p>
                         </div>
                         <%
-                        con++;
+                            con++;
+                            }
                         }
                     }
                 %>
             </article>
-            <script>cargaSes();</script>
         </section>
     </body>
 </html>
