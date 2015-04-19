@@ -43,7 +43,7 @@ public class sConectarSes extends HttpServlet {
             
             cConexion conecta = new cConexion();
             conecta.conectar();
-            ResultSet rs = conecta.spGetConectados();
+            ResultSet rs = conecta.spGetConectadosGeneral();
             
             cCifrado seguro = new cCifrado();
             seguro.AlgoritmoAES();
