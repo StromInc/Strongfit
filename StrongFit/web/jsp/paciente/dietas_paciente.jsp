@@ -27,7 +27,7 @@
     </head>
     <body>      
         <%@include file = "barra_menu.jsp" %>
-        
+        <script>setPosicion('dietas');</script>
         <section class = "Section-dietas">
             <article class = "Article-dietas"  id = "Article-dietas" ondrop="dropDiv(event)" ondragover="allowDrop(event)" >
                 <h2>Dietas sugeridas</h2>

@@ -90,11 +90,6 @@
     height: 50%;
 }
 
-.div-solicitud{
-    padding: 2em 0;
-    text-align: left;
-}
-
 .invisible{
     display: none;
 }
@@ -132,4 +127,35 @@
 
 .divSolicitud:hover{
     background-color: #e3e4e2;
+}
+
+.menuMS div{
+    display: inline-block;
+    width: 40%;
+    text-align: center;
+}
+
+.conMjsSol{
+    position: relative;
+}
+
+.div-msjPendientes,
+.div-solicitud{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.div-solicitud p{
+    padding: 0;
+    margin: 0;
+}
+
+.divPerfilOtro{
+    z-index: 3;
+    margin-top: 3em;
+}
+
+.divGeneralSolMsj{
+    z-index: 2;
 }

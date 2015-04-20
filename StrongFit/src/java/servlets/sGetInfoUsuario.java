@@ -57,21 +57,22 @@ public class sGetInfoUsuario extends HttpServlet {
                    idUsr = seguro.encriptar(idUsr);
             
             String desti = request.getParameter("desti");
+            String destiS = desti;
             desti = seguro.encriptar(desti);
             
             clases.CImagen objimg = new clases.CImagen();
-            int verificacionimg = objimg.devuelveexistencia(desti);
+            int verificacionimg = objimg.devuelveexistencia(destiS);
             String ruta = "lel";
             String ruta2 = "../../Imagenes/Usuarios/";
             switch(verificacionimg){
                 case 1: 
-                    ruta = ruta2 + desti + ".jpg";
+                    ruta = ruta2 + destiS + ".jpg";
                     break;
                 case 2: 
-                    ruta = ruta2 + desti + ".png";
+                    ruta = ruta2 + destiS + ".png";
                     break;
                 case 3: 
-                    ruta = ruta2 + desti + ".gif";
+                    ruta = ruta2 + destiS + ".gif";
                     break;
                 default: 
                     ruta = "../../Imagenes/usr_sin_imagen.jpg";

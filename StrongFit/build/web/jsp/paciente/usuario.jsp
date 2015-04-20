@@ -30,7 +30,8 @@
         </script>
     </head>
     <body>
-        <%@include file="barra_menu.jsp"%> 
+        <%@include file="barra_menu.jsp"%>
+        <script>setPosicion('usuario');</script>
         <%
     HttpSession sesion = request.getSession();
     String nombre = (String)sesion.getAttribute("nombre");

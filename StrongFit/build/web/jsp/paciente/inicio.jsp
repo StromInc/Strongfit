@@ -37,6 +37,7 @@
             }
         %>
         <%@include file = "barra_menu.jsp" %>
+        <script>setPosicion('inicio');</script>
         <form id = "formularioOculto">
             <input type="hidden" name="idCon" value="<%=idCon%>">
         </form>
