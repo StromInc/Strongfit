@@ -25,12 +25,16 @@
             </article>
             <!--Esta es la seccion donde se pueden ver cosas publicadas por los medicos-->
             <article class = "Article-articulos Article-articulo">
-                <% 
+                <%
+                try{
                 clases.cArticulos objarticulos = new clases.cArticulos();
                  HttpSession sesion = request.getSession();
                  String idUsr = (String)sesion.getAttribute("idUsr");
                 String articulos = objarticulos.construirlista(idUsr);
                 out.println(articulos);
+                }catch(NullPointerException e){
+               
+                }
                 %>
                 Aqui van los articulos que los medicos escriben para hacerse mas populares y asi tener mas clientes
             </article>

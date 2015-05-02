@@ -5,7 +5,7 @@
  */
 function cerrarsesion(){
       localStorage.setItem("sesioniniciada", "no");
-      $.post('SSalida');
+      $.post('../../SSalida');
       console.log("sí sirvo");
    }
 
