@@ -4,13 +4,14 @@ azul = #0070c8
 verdeHeader = #1B5E20
 azulHover = #01579B
 gris = #F2F2F2
+grisBorde = #d2d4d5
 vendor-prefixes = webkit o ms moz official
 .Alimentos
 	list-style none
 	padding 0
 	margin 0
 	&-item
-		border-bottom 1px solid gris
+		border-bottom 1px solid grisBorde
 		padding 4px
 	&-name
 		margin 0	
@@ -19,10 +20,11 @@ vendor-prefixes = webkit o ms moz official
 	display none
 	width 24em
 	border-radius 4px
-	border 1px solid black
+	background white
+	box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
 	&-aviso
 		background gris
-		font-size 1em
+		font-size 0.8em
 		padding 0.5em
 		margin 0
 		font-weight normal
@@ -49,19 +51,28 @@ vendor-prefixes = webkit o ms moz official
 			width 2px
 		&::-webkit-scrollbar-thumb
 			background-color verdeHeader
+	&-search
+		border-radius 3px
+		border 1px solid grisBorde
+		padding 4px 0.5em
 	&-title
 		background verdeHeader
 		padding 0.5em
+		border-radius 4px 4px 0 0
 		color white
 	
 .Content
 	border-radius 4px
-	border 1px solid black
+	background white
+	box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+	&-informacion
+		padding 0.5em
 	&-title
 		background verdeHeader
 		padding 0.5em
 		color white
-			
+		border-radius 4px 4px 0 0
+				
 .FloatButton
 	position fixed
 	bottom 1em
@@ -77,7 +88,6 @@ vendor-prefixes = webkit o ms moz official
 	width 20em
 	margin 0 auto
 	margin-top 6em
-	background white
 
 @media screen and (min-width:1000px)
 	.Buscador.x-large

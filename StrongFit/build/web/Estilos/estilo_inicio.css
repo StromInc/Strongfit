@@ -4,7 +4,7 @@
   margin: 0;
 }
 .Alimentos-item {
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid #d2d4d5;
   padding: 4px;
 }
 .Alimentos-name {
@@ -21,7 +21,7 @@
 }
 .Buscador-aviso {
   background: #f2f2f2;
-  font-size: 1em;
+  font-size: 0.8em;
   padding: 0.5em;
   margin: 0;
   font-weight: normal;
@@ -77,6 +77,9 @@
   background: #fff;
   -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.Content-informacion {
+  padding: 0.5em;
 }
 .Content-title {
   background: #1b5e20;
