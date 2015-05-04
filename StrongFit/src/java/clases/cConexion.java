@@ -427,7 +427,7 @@ public class cConexion {
     }
             
     //Esto busca los alimentos y los agrega a un Array 
-    public ArrayList<cAlimento> buscar(String info) throws SQLException{
+    public ArrayList<cAlimento> buscarAlimento(String info) throws SQLException{
         int id;
         float calorias;
         String nombre;

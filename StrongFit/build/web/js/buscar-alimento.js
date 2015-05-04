@@ -1,4 +1,54 @@
 $(function(){
+    $("#buscadorBoton").on("click", function() {
+        var alimento = $("#input-alimento").val().trim();
+        if(alimento.length  > 0){
+            console.log(alimento);
+            $.ajax({
+                url: 'http://localhost:8080/StrongFit/sBusqueda',
+                type: 'get',
+                dataType: 'json',
+                data: {'nombre-alimento': alimento},
+                success: function(datos){
+                    var nombre = [];
+                    var calorias = [];
+                    for(var i in datos){
+                        nombre[i] = datos[i].nombre;
+                        calorias[i] = datos[i].calorias;      
+                    }
+                    alimentoAdapter(nombre, calorias);
+                }
+        });
+        }
+    });
+    function alimentoAdapter(nombre, calorias){
+        var $alimentoItem = $('.Alimentos-item').first();;
+        var $contenedor = $('.Alimentos');
+        var $buscadorAviso = $('.Buscador-aviso');
+        var aviso = $buscadorAviso.val();
+        if(nombre.length > 0){
+            $contenedor.empty();
+            for(i in nombre){
+                var $clon = $alimentoItem.clone();
+                $buscadorAviso.hide();
+                console.log($clon);
+                $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p><span>'+calorias[i]+' cal</span><button class="Alimentos-agregar">+</button>');
+                $clon.hide();
+                $contenedor.prepend($clon);
+                $clon.slideDown();
+                $buscadorAviso.text("Resultados Encontrados").removeClass("color-rojo");
+                $buscadorAviso.slideDown();
+            }    
+        }else{
+            $buscadorAviso.hide();
+            $buscadorAviso.text("No se encontraron resultados").addClass("color-rojo");
+            $contenedor.empty();
+            var $clon = $alimentoItem.clone();
+            $clon.html('<p class="Alimentos-name"></p><span></span>');
+            $clon.hide();
+            $contenedor.prepend($clon);
+            $buscadorAviso.slideDown();
+        }       
+    }
     //obtenemos los elementos a modificar
     var $elemento = $('#noCaloria'); 
     var numCalorias = parseFloat($elemento.html());
@@ -26,20 +76,9 @@ $(function(){
                 {dataType: 'json', valor: idAlimento}, function(){
                     cambiarMetas();
                 });
-            /*
-             * Esto es lo de arriba
-            $.ajax({
-               url: 'http://localhost:8080/StrongFit/sAgregarAlimento',
-               type: 'post',
-               dataType: 'json',
-               data: {
-                   valor: idAlimento
-               }
-            });*/
         }
-        
-        function cambiarMetas()
-        {
+});
+function cambiarMetas(){
             $.ajax({
                 url: 'http://localhost:8080/StrongFit/sCambiarMetas',
                 type: 'post',
@@ -51,28 +90,4 @@ $(function(){
                     $('#falta').html($('#metaCalorias').html() - $('#consumido').html());
                 }
             });
-        }
-        
-    //utilizamos autocomplete (Funcion de jquery-ui)
-    $('#search').autocomplete({
-        //busqueda del alimento
-        source: function(request, response){
-            $.ajax({
-                url: 'http://localhost:8080/StrongFit/sBusqueda',
-                type: 'post',
-                dataType: 'json',
-                data: {
-                    info : request.term
-                },
-                //respuesta del servidor
-                success: function(respuesta){
-                    console.log(respuesta);
-                    response(respuesta);
-                }
-            });
-        },
-        //esta funcion se ejecuta al seleccionar
-        select: agregar
-    });
-});
-
+}

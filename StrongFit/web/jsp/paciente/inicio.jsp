@@ -10,7 +10,6 @@
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio.css">
         <script src="../../js/buscar-alimento.js"></script>
-        <script src="../../js/acciones_cambiarMetas.js"></script>
         <script src="../../js/salir.js"></script>
     </head>
  <body onload="cambiarMetas();">
@@ -64,10 +63,10 @@
                 Alimentos
             </div>
             <div class="Buscador-form">
-                <input type="search" class="Buscador-search" placeholder="buscar">
-                <button class="Buscador-btn">
+                <input type="search" name="nombre-alimento" class="Buscador-search" id="input-alimento" placeholder="buscar" required> 
+                <button class="Buscador-btn" id="buscadorBoton">
                     <span class="icon-search"></span>
-                    </button>
+                </button>
             </div>
             <div class="Buscador-contenedor">
                 <h3 class="Buscador-aviso">Alimentos por defecto</h3>
@@ -76,22 +75,27 @@
                         <li class="Alimentos-item">
                             <p class="Alimentos-name">Taco</p>
                             <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
                         </li>
                         <li class="Alimentos-item">
                             <p class="Alimentos-name">Taco</p>
                             <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
                         </li>
                         <li class="Alimentos-item">
                             <p class="Alimentos-name">Taco</p>
                             <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
                         </li>
                         <li class="Alimentos-item">
                             <p class="Alimentos-name">Taco</p>
                             <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
                         </li>
                         <li class="Alimentos-item">
                             <p class="Alimentos-name">Taco</p>
                             <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
                         </li>
                     </ul>
                 </div>      
