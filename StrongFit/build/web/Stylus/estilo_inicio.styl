@@ -5,16 +5,31 @@ verdeHeader = #1B5E20
 azulHover = #01579B
 gris = #F2F2F2
 grisBorde = #d2d4d5
+rojo-chido = #FF4F4F
 vendor-prefixes = webkit o ms moz official
+a
+	text-decoration none
 .Alimentos
 	list-style none
 	padding 0
 	margin 0
+	&-agregar
+		position absolute
+		right 10px
+		background-color white
+		color azul
+		top 10px
+		border-radius 3px
+		box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+		border 1px solid azul
+		&:hover
+			background gris
 	&-item
 		border-bottom 1px solid grisBorde
 		padding 4px
+		position relative
 	&-name
-		margin 0	
+		margin 0
 
 .Buscador
 	display none
@@ -88,7 +103,9 @@ vendor-prefixes = webkit o ms moz official
 	width 20em
 	margin 0 auto
 	margin-top 6em
-
+.color-rojo
+	color white
+	background rojo-chido
 @media screen and (min-width:1000px)
 	.Buscador.x-large
 		display block

@@ -26,7 +26,7 @@ $(function() {
     var $arrow = $('.arrow');
     cambiarFondo();
     var ajaxBuscar = (function() {
-        var correo = $email.val();
+        var correo = $email.val().trim();
         var DIRECCION = 'http://localhost:8080/StrongFit/sAjaxCorreo';
         if(correo !== ''){
             $.ajax({
@@ -39,20 +39,22 @@ $(function() {
                 success: function(datos){
                     //Si hay respuesta      
                     console.log('Resultado ' + datos);
-                    if(datos != 'El correo es valido'){
+                    if(datos !== 'El correo es valido'){
                         $arrow.removeClass('hidden');
                         $arrow.html(datos);
+                    }else{
+                        $email.css('border', '2px solid rgba(0, 139, 0, 0.8)');
                     }          
                 }
             }); 
         }else{
            console.log('Nada');
-        }
-         
+        }     
     });
     //ocultamos el mensaje cuando se da click en el input
     $email.on('focus', function(){
-        $arrow.addClass('hidden')
+        $arrow.addClass('hidden');
+        $email.css('border', 'none');
     }).on('blur', ajaxBuscar); //se ejecuta despues de quitar el mouse
 });
 

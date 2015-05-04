@@ -67,6 +67,7 @@
             <p class="Footer-parrafo Footer-parrafo1">Strongfit es un proyecto creado por <a href="#" class="Footer-link">Strom</a>.</p>
             <p class="Footer-parrafo"><a href="#" class = "Footer-link">Politicas de privacidad</a></p>
         </footer>
+        <script src="js/acciones_index.js"></script>
         <%
             HttpSession sesion = request.getSession();
             if(sesion.getAttribute("mensaje") != null){
@@ -77,6 +78,5 @@
                 sesion.invalidate();
             }
         %>
-        <script src="js/acciones_index.js"></script>
     </body>
 </html>

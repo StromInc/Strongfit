@@ -43,11 +43,7 @@
             <div class="Content-title">
                 Informacion nutrimental
             </div>
-            <div class="Content-informacion">
-                <div>
-                    <h2>Aqui vamos a poner informacion</h2>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima magni consequuntur expedita ex quasi. Incidunt dolore iste, non quia quod animi aliquam sed alias, facere dignissimos ratione labore magni beatae!
-                </div>
+            <div class="Content-informacion">      
                 <div>
                     <h2>Div de contenido</h2>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima magni consequuntur expedita ex quasi. Incidunt dolore iste, non quia quod animi aliquam sed alias, facere dignissimos ratione labore magni beatae!
@@ -55,7 +51,59 @@
                 <div>
                     <h2>Otro div</h2>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima magni consequuntur expedita ex quasi. Incidunt dolore iste, non quia quod animi aliquam sed alias, facere dignissimos ratione labore magni beatae!
-                </div>      
+                </div>
+                <div class="Registrados">
+                    <p>Alimentos Registrados</p>
+                    <div class="Registrados-list">
+                        <ul class="Consumidos">
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                        </ul>
+                    </div> 
+                </div>     
             </div>                 
         </article>
         <aside class="Buscador x-large">
@@ -72,6 +120,46 @@
                 <h3 class="Buscador-aviso">Alimentos por defecto</h3>
                 <div class="Buscador-list">
                     <ul class="Alimentos">
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
                         <li class="Alimentos-item">
                             <p class="Alimentos-name">Taco</p>
                             <span>5 cal</span>

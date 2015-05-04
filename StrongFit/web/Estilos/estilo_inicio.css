@@ -1,12 +1,14 @@
 a {
   text-decoration: none;
 }
-.Alimentos {
+.Alimentos,
+.Consumidos {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.Alimentos-agregar {
+.Alimentos-agregar,
+.Consumidos-agregar {
   position: absolute;
   right: 10px;
   background-color: #fff;
@@ -18,16 +20,34 @@ a {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   border: 1px solid #0070c8;
 }
-.Alimentos-agregar:hover {
+.Alimentos-agregar:hover,
+.Consumidos-agregar:hover {
   background: #f2f2f2;
 }
-.Alimentos-item {
+.Alimentos-item,
+.Consumidos-item {
   border-bottom: 1px solid #d2d4d5;
   padding: 4px;
   position: relative;
 }
-.Alimentos-name {
+.Alimentos-name,
+.Consumidos-name {
   margin: 0;
+}
+.Consumidos-borrar {
+  position: absolute;
+  right: 10px;
+  background-color: #fff;
+  color: #ff4f4f;
+  top: 10px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border: 1px solid #ff4f4f;
+}
+.Consumidos-borrar:hover {
+  background: #f2f2f2;
 }
 .Buscador {
   display: none;
@@ -69,7 +89,7 @@ a {
 }
 .Buscador-list {
   overflow-y: auto;
-  max-height: 450px;
+  max-height: 400px;
 }
 .Buscador-list::-webkit-scrollbar {
   width: 2px;
@@ -89,6 +109,16 @@ a {
   -webkit-border-radius: 4px 4px 0 0;
   border-radius: 4px 4px 0 0;
   color: #fff;
+}
+.Registrados-list {
+  overflow-y: auto;
+  max-height: 200px;
+}
+.Registrados-list::-webkit-scrollbar {
+  width: 2px;
+}
+.Registrados-list::-webkit-scrollbar-thumb {
+  background-color: #1b5e20;
 }
 .Content {
   -webkit-border-radius: 4px;
