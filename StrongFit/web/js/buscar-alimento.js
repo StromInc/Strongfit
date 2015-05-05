@@ -20,6 +20,7 @@ $(function(){
         });
         }
     });
+    
     function alimentoAdapter(nombre, calorias){
         var $alimentoItem = $('.Alimentos-item').first();;
         var $contenedor = $('.Alimentos');
@@ -49,45 +50,40 @@ $(function(){
             $buscadorAviso.slideDown();
         }       
     }
-    //obtenemos los elementos a modificar
-    var $elemento = $('#noCaloria'); 
-    var numCalorias = parseFloat($elemento.html());
-    var $contenido = $('.content-contador'),
-        $item = $('.racion').first();
-        function agregar(e, res){
-            //obtenemos lo que queremos del JSON
-            e.preventDefault();
-            var nombre = res.item.label,
-                calorias = res.item.calorias,
-                idAlimento = res.item.id;
-        
-            numCalorias += calorias;
-            //hacemos un cron
-            var $clon = $item.clone();
-            $clon.removeClass('hidden');
-            //cambiamos los datos del cron
-            $clon.html(nombre + '<span class="calorias"><br>Calorias: ' + calorias +'kc</span>');
-            $clon.hide();
-            //insertamos cron
-            $contenido.prepend($clon);
-            $clon.slideDown();
-            $elemento.html(numCalorias);
-            $.post('http://localhost:8080/StrongFit/sAgregarAlimento', 
-                {dataType: 'json', valor: idAlimento}, function(){
-                    cambiarMetas();
-                });
+    var circulo = new ProgressBar.Circle('#container', {
+        color: '#0070C8',
+        strokeWidth: 2,
+        trailColor: "#f4f4f4",
+        text: {
+            color: 'black',
+            className: 'progressbar__label'
         }
+    });
+
+    function setValores(consumidas, meta){
+        var valor = consumidas / meta;
+        var restantes = meta - consumidas;
+        circulo.animate(valor, {
+            duration: 500
+        }, function(){
+            console.log("Cargado");
+            circulo.setText(restantes + ' cal. restantes');
+        }); 
+    }
+
+    setValores(consumidas, meta);
 });
+
 function cambiarMetas(){
-            $.ajax({
-                url: 'http://localhost:8080/StrongFit/sCambiarMetas',
-                type: 'post',
-                dataType: 'json',
-                data: $('#formularioOculto').serialize(),
-                success: function(datos)
-                {
-                    $('#consumido').html(datos.calDia);
-                    $('#falta').html($('#metaCalorias').html() - $('#consumido').html());
-                }
-            });
+    $.ajax({
+        url: 'http://localhost:8080/StrongFit/sCambiarMetas',
+        type: 'post',
+        dataType: 'json',
+        data: $('#formularioOculto').serialize(),
+        success: function(datos)
+        {
+            $('#consumido').html(datos.calDia);
+            $('#falta').html($('#metaCalorias').html() - $('#consumido').html());
+        }
+    });
 }

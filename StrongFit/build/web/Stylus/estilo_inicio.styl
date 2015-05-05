@@ -7,6 +7,33 @@ gris = #F2F2F2
 grisBorde = #d2d4d5
 rojo-chido = #FF4F4F
 vendor-prefixes = webkit o ms moz official
+
+miDysplay(valor1, valor2, valor3, valor4)
+	-webkit-display valor1
+	-webkit-flex-wrap valor2
+	-webkit-justify-content valor3
+	-webkit-align-items valor4
+	
+	-o-display valor1
+	-o-flex-wrap valor2
+	-o-justify-content valor3
+	-o-align-items valor4
+	
+	-moz-display valor1
+	-moz-flex-wrap valor2
+	-moz-justify-content valor3
+	-moz-align-items valor4
+	
+	-ms-display valor1
+	-ms-flex-wrap valor2
+	-ms-justify-content valor3
+	-ms-align-items valor4
+	
+	display valor1
+	flex-wrap valor2
+	justify-content valor3
+	align-items valor4
+
 a
 	text-decoration none
 .Alimentos, .Consumidos
@@ -30,13 +57,14 @@ a
 		position relative
 	&-name
 		margin 0
+		
 .Consumidos
 	&-borrar
 		position absolute
 		right 10px
 		background-color white
 		color rojo-chido
-		top 10px
+		top 12px
 		border-radius 50%
 		box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 		border 1px solid rojo-chido
@@ -96,7 +124,15 @@ a
 			width 2px
 		&::-webkit-scrollbar-thumb
 			background-color verdeHeader
-		
+.Estadisticas
+	background red
+	text-align center
+	padding 0.5em 0
+	&-titulo
+		display inline-block
+		margin 0 0.5em
+	&-atras, &-adelante
+		padding 0.5em	
 .Content
 	border-radius 4px
 	background white
@@ -120,29 +156,33 @@ a
 	height 50px
 	line-height 50px
 	text-align center
+	
 .Section.small
 	width 20em
 	margin 0 auto
 	margin-top 6em
+	
 .color-rojo
 	color white
 	background rojo-chido
+	
 @media screen and (min-width:1000px)
 	.Buscador.x-large
 		display block
 		min-height 450px
+		max-height 600px
+		
 	.Content.x-large
 		width 37em
+		min-height 450px
+		max-height 600px
 		
 	.FloatButton
 		display none
 		
 	.Section.x-large
 		width 62.5em
+		min-height 450px
+		max-height 600px
 		margin-bottom 1em
-		//max-height 550px
-		display flex
-		//overflow hidden
-		flex-wrap wrap
-		justify-content space-between
-		align-items stretch
+		miDysplay(flex, wrap, space-between, stretch)

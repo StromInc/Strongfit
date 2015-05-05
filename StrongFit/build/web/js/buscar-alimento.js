@@ -77,17 +77,37 @@ $(function(){
                     cambiarMetas();
                 });
         }
+    var circulo = new ProgressBar.Circle('#container', {
+    color: '#0070C8',
+    strokeWidth: 2,
+    trailColor: "#f4f4f4",
+    text: {
+        color: 'black',
+        className: 'progressbar__label'
+    }
+    });
+    function setValores(consumidas, meta){
+        var valor = consumidas / meta;
+        var restantes = meta - consumidas;
+        circulo.animate(valor, {
+            duration: 500
+        }, function(){
+            console.log("Cargado");
+            circulo.setText(restantes + ' cal. restantes');
+        }); 
+    }
+    setValores(consumidas, meta);
 });
 function cambiarMetas(){
-            $.ajax({
-                url: 'http://localhost:8080/StrongFit/sCambiarMetas',
-                type: 'post',
-                dataType: 'json',
-                data: $('#formularioOculto').serialize(),
-                success: function(datos)
-                {
-                    $('#consumido').html(datos.calDia);
-                    $('#falta').html($('#metaCalorias').html() - $('#consumido').html());
-                }
-            });
+    $.ajax({
+        url: 'http://localhost:8080/StrongFit/sCambiarMetas',
+        type: 'post',
+        dataType: 'json',
+        data: $('#formularioOculto').serialize(),
+        success: function(datos)
+        {
+            $('#consumido').html(datos.calDia);
+            $('#falta').html($('#metaCalorias').html() - $('#consumido').html());
+        }
+    });
 }

@@ -9,6 +9,7 @@
     <head>
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio.css">
+        <script src="../../js/progressbar.min.js"></script>
         <script src="../../js/buscar-alimento.js"></script>
         <script src="../../js/salir.js"></script>
     </head>
@@ -17,7 +18,6 @@
             HttpSession sesion = request.getSession();
             int idPaciente = (Integer)sesion.getAttribute("idPaciente");
             int idCon = (Integer)sesion.getAttribute("idcont");
-            
             Calendar c2 = new GregorianCalendar();
             
             int dia = c2.get(Calendar.DAY_OF_WEEK);
@@ -41,12 +41,32 @@
         <section class="Section small x-large">
         <article class="Content small x-large">
             <div class="Content-title">
-                Informacion nutrimental
+                Consumo Clalorico
             </div>
             <div class="Content-informacion">      
-                <div>
-                    <h3>Consumo Clalorico ¿Graficas?</h3>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima magni consequuntur expedita ex quasi. Incidunt dolore iste, non quia quod animi aliquam sed alias, facere dignissimos ratione labore magni beatae!
+                <div class="Estadisticas">
+                    <div class="Estadisticas-header">
+                        <span class="Estadisticas-atras"><</span>
+                        <h3 class="Estadisticas-titulo">Hoy</h3> 
+                        <span class="Estadisticas-adelante">></span>
+                    </div>
+                    <div class="Estadisticas-section">
+                        <div class="Estadisticas-wrapper">
+                            <p>Meta <%=caloriasdia%> cal</p>
+                            <%
+                                ResultSet rs2 = conecta.spConsultarAlimentosDiarios(idPaciente, diaA);         
+                                int calorias = 0, con = 0;
+                                int kcalorias = 0;
+                                while(rs2.next()){
+                                    calorias = rs2.getInt("calorias");
+                                    kcalorias += calorias;
+                                    con++;
+                                }
+                            %>
+                        <p>Consumido <%=kcalorias%> cal</p>
+                        </div>
+                        <div id="container"></div> 
+                    </div>      
                 </div>
                 <div>
                     <h3>Otro div que no recuerdo que va a tener</h3>
@@ -56,36 +76,20 @@
                     <p>Alimentos Registrados</p>
                     <div class="Registrados-list">
                         <ul class="Consumidos">
+                            <%
+                                String nombre = "";
+                                while(rs2.next()){
+                                    nombre = rs2.getString("nombre");
+                                    calorias = rs2.getInt("calorias");
+                            %>
                             <li class="Consumidos-item">
-                                <p class="Consumidos-name">Taco</p>
-                                <span>5 cal</span>
+                                <p class="Consumidos-name"><%=nombre%></p>
+                                <span><%=calorias%> cal</span>
                                 <button class="Consumidos-borrar">X</button>
                             </li>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name">Taco</p>
-                                <span>5 cal</span>
-                                <button class="Consumidos-borrar">X</button>
-                            </li>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name">Taco</p>
-                                <span>5 cal</span>
-                                <button class="Consumidos-borrar">X</button>
-                            </li>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name">Taco</p>
-                                <span>5 cal</span>
-                                <button class="Consumidos-borrar">X</button>
-                            </li>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name">Taco</p>
-                                <span>5 cal</span>
-                                <button class="Consumidos-borrar">X</button>
-                            </li>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name">Taco</p>
-                                <span>5 cal</span>
-                                <button class="Consumidos-borrar">X</button>
-                            </li>
+                            <%
+                                }
+                            %>
                             <li class="Consumidos-item">
                                 <p class="Consumidos-name">Taco</p>
                                 <span>5 cal</span>
@@ -145,46 +149,6 @@
                             <span>5 cal</span>
                             <button class="Alimentos-agregar">+</button>
                         </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
                     </ul>
                 </div>      
             </div>
@@ -193,5 +157,9 @@
     <div class="FloatButton">
         <a href="#">+</a>
     </div>
+    <script>
+        var meta = <%=caloriasdia%>;
+        var consumidas = <%=kcalorias%>;
+    </script> 
     </body>
 </html>
