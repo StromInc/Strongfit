@@ -207,5 +207,25 @@ public class cCifrado {
         }
         return msjDescifrado;
     }
+     public String sustituye(String texto, int checador){
+    String cadena = "";
+    for(int i = 0; i < texto.length();i++){
+        if(checador == 1){
+        if(texto.charAt(i) == ' '){
+            cadena += '_'; 
+        }else{
+        cadena += texto.charAt(i);
+        }
+        }
+        else{
+        if(texto.charAt(i) == '_'){
+            cadena += ' '; 
+        }else{
+        cadena += texto.charAt(i);
+        }
+        }
+    }
+    return cadena;
+    }
     
 }

@@ -42,10 +42,12 @@ public class sBusqueda extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             cConexion con = new cConexion();
             con.conectar();
-            String valor = request.getParameter("info");
+            System.out.println("SBusqueda");
+            String valor = request.getParameter("nombre-alimento");
+            System.out.println(valor);
             //Array de objetos
-            ArrayList<cAlimento> lista=con.buscar(valor);
-            buscar(response, lista);
+            ArrayList<cAlimento> lista=con.buscarAlimento(valor);
+            buscarRespuesta(response, lista);
         }
     }
 
@@ -96,7 +98,7 @@ public class sBusqueda extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     //Esto convierte el array en un Json y lo regresa al html
-    private void buscar(HttpServletResponse response, ArrayList<cAlimento> lista) throws IOException 
+    private void buscarRespuesta(HttpServletResponse response, ArrayList<cAlimento> lista) throws IOException 
     {
         response.setContentType("aplication/json");
         response.setCharacterEncoding("charset=UTF-8");

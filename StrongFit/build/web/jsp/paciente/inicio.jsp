@@ -9,10 +9,7 @@
     <head>
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio.css">
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
         <script src="../../js/buscar-alimento.js"></script>
-        <script src="../../js/acciones_cambiarMetas.js"></script>
         <script src="../../js/salir.js"></script>
     </head>
  <body onload="cambiarMetas();">
@@ -41,89 +38,160 @@
         <form id = "formularioOculto">
             <input type="hidden" name="idCon" value="<%=idCon%>">
         </form>
-        <section class="Section-todo">
-            <!--Esta es la seccion de la barra de busqueda, el sabias que y el conteo calorico-->
-            <article class = "Article-menu">
-                <p class="contenedor-search">
-                    <input type="search" id="search" name="search" class="search" placeholder="Buscar alimentos...">
-                    <label class = "icon-search label-search" for = "buscar"></label>
-                </p>
-                <div class = "content-title">
-                        Consumo de hoy
-                </div>
-                <div class = "div">
-                    <div class="content-contador" id = "style-4">
-                    <%
-                        ResultSet rs2 = conecta.spConsultarAlimentosDiarios(idPaciente, diaA);
-                        String nombre = "";
-                        int calorias = 0, con = 0;
-                        int kcalorias = 0;
-                        while(rs2.next()){
-                            
-                            nombre = rs2.getString("nombre");
-                            calorias = rs2.getInt("calorias");
-                            kcalorias += calorias;
-                            %>
-
-                                    <p class = "racion"><%=nombre%><span class = "calorias"><br>Calorias: <%=calorias%>kc</span></p>
-                            
-                            <%
-                            con++;
-                            
-                        }
-                    %>
-                        <p class = "racion hidden"><span class = "calorias"><br></span></p>
-                    </div>
-                    
-                    <div class = "content-total">
-                        Kilocalorías consumidas: <span id="noCaloria"><%=kcalorias%></span>kc
-                    </div>
-                </div>
-            </article>
-
-            <!--Esta es la parte en la que te sugiere el platillo que te toca segun tu dieta-->
-            <div class="Content-platillos">
-                <article class = "Article-sugerir margen-estadisticas">
-                    <div class = "Article-platillos" style="display:block">
-                        <div class = "meta estadisticas">
-                            Meta
-                            <hr>
-                            <p id="metaCalorias"><%=caloriasdia%></p>
-                        </div>
-                        <div class = "consumido estadisticas">
-                            Consumido
-                            <hr>
-                            <p id="consumido"></p>
-                        </div>
-                        <div class = "faltante estadisticas">
-                            Falta
-                            <hr>
-                            <p id="falta"></p>
-                        </div>
-                    </div>
-                </article>
-                <article class = "Article-sugerir">
-                    <div class="Article-sabias">
-                        Esta parte es la de los sabias que?, y sera dinamica, las frases estaran guardadas en la base de datos
-                    </div>
-                    <div class = "Article-platillos">
-                        <p>Platillos sugeridos para (D,Co,Ce)</p>
-                        <hr>
-                        <div class = "barra">
-                            <div class = "comida-sugerida"><!--Maximo tres comidas sugeridas-->
-                                <span class = "platillo">Huevos con tocino</span>
-                                <span class = "platillo">Huevos con jamon</span>
-                                <span class = "platillo">Cereal con leche</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+        <section class="Section small x-large">
+        <article class="Content small x-large">
+            <div class="Content-title">
+                Informacion nutrimental
             </div>
-            <!--Esta es la seccion donde se pueden ver cosas publicadas por los medicos-->
-            <article class = "Article-articulos">
-                Aqui van los articulos que los medicos escriben para hacerse mas populares y asi tener mas clientes
-            </article>
-        </section>
-        
+            <div class="Content-informacion">      
+                <div>
+                    <h3>Consumo Clalorico ¿Graficas?</h3>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima magni consequuntur expedita ex quasi. Incidunt dolore iste, non quia quod animi aliquam sed alias, facere dignissimos ratione labore magni beatae!
+                </div>
+                <div>
+                    <h3>Otro div que no recuerdo que va a tener</h3>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima magni consequuntur expedita ex quasi. Incidunt dolore iste, non quia quod animi aliquam sed alias, facere dignissimos ratione labore magni beatae!
+                </div>
+                <div class="Registrados">
+                    <p>Alimentos Registrados</p>
+                    <div class="Registrados-list">
+                        <ul class="Consumidos">
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name">Taco</p>
+                                <span>5 cal</span>
+                                <button class="Consumidos-borrar">X</button>
+                            </li>
+                        </ul>
+                    </div> 
+                </div>     
+            </div>                 
+        </article>
+        <aside class="Buscador x-large">
+            <div class="Buscador-title">
+                Alimentos
+            </div>
+            <div class="Buscador-form">
+                <input type="search" name="nombre-alimento" class="Buscador-search" id="input-alimento" placeholder="buscar" required> 
+                <button class="Buscador-btn" id="buscadorBoton">
+                    <span class="icon-search"></span>
+                </button>
+            </div>
+            <div class="Buscador-contenedor">
+                <h3 class="Buscador-aviso">Alimentos por defecto</h3>
+                <div class="Buscador-list">
+                    <ul class="Alimentos">
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                        <li class="Alimentos-item">
+                            <p class="Alimentos-name">Taco</p>
+                            <span>5 cal</span>
+                            <button class="Alimentos-agregar">+</button>
+                        </li>
+                    </ul>
+                </div>      
+            </div>
+        </aside>
+    </section>
+    <div class="FloatButton">
+        <a href="#">+</a>
+    </div>
     </body>
 </html>

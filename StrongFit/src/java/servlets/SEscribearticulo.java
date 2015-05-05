@@ -39,11 +39,12 @@ public class SEscribearticulo extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             clases.cConexion objconexion= new clases.cConexion();
+            clases.cCifrado objcifrado = new clases.cCifrado();
             objconexion.conectar();
             HttpSession sesion = request.getSession();
             String idUsr = (String)sesion.getAttribute("idUsr");
             if(request.getParameter("operacion").equals("escribe")){
-            String validacion = objconexion.altaarticulo(idUsr, request.getParameter("nombre"), request.getParameter("texto"));
+            String validacion = objconexion.altaarticulo(idUsr, objcifrado.sustituye(request.getParameter("nombre"),1), request.getParameter("texto"));
             clases.cArticulos objarticulo = new clases.cArticulos();
             String texto = objarticulo.buscamisarticulos(idUsr);
             out.print(texto);

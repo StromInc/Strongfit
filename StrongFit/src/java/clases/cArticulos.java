@@ -13,8 +13,9 @@ import java.sql.SQLException;
  * @author jorge pastrana
  */
 public class cArticulos {
-    public String construirlista(String idusr) throws SQLException{    
+     public String construirlista(String idusr) throws SQLException{    
         cConexion objconexion = new cConexion();
+        cCifrado objcifrado = new cCifrado();
         objconexion.conectar();
         String[] articulosNom = objconexion.getArticulosNom();
         String[] articulosAut = objconexion.getArticulosAut();
@@ -22,12 +23,12 @@ public class cArticulos {
         String articulos = "";
         
         for(int i = articulosNom.length-1; i >= 0 ;i--){
-            articulos+= "<h2>" + articulosNom[i] +"<h2> <br>";
+            articulos+= "<h2>" + objcifrado.sustituye(articulosNom[i],2) +"<h2> <br>";
             articulos+= "por: " + articulosAut[i] + " <br>";
             articulos+= articulosTex[i] + "<br><br>";
              articulos+= "Comentarios: " + "<hr>";
              articulos+= "<div id='P"+i+"'>";
-             String[][] arreglodecomentarios = objconexion.regresacomentarios(articulosNom[i]);
+             String[][] arreglodecomentarios = objconexion.regresacomentarios(objcifrado.sustituye(articulosNom[i],1));
            
             
             if(arreglodecomentarios != null){
@@ -60,25 +61,25 @@ public class cArticulos {
             int estado = objconexion.regresavoto(idusr, articulosNom[i]);
             switch (estado){
                 case 0:
-                        articulos+= "<span id='u"+i+"' onclick=votar('"+articulosNom[i]+"',"+i+",1)>";
+                        articulos+= "<span id='u"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",1)>";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote.png'></span>";
-                        articulos+= "<span id='d"+i+"' onclick=votar('"+articulosNom[i]+"',"+i+",0)>";
+                        articulos+= "<span id='d"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",0)>";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote2.png'>";                       
                 break;
                 case 1:
-                        articulos+= "<span id='u"+i+"' onclick=votar('"+articulosNom[i]+"',"+i+",1)>";
+                        articulos+= "<span id='u"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",1)>";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote3.png'></span>";
-                        articulos+= "<span id='d"+i+"' onclick=votar('"+articulosNom[i]+"',"+i+",0)>";
+                        articulos+= "<span id='d"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",0)>";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote2.png'>";                        
                 break;
                 case 2:
-                        articulos+= "<span id='u"+i+"' onclick=votar('"+articulosNom[i]+"',"+i+",1)>";
+                        articulos+= "<span id='u"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",1)>";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote.png'></span>";
-                        articulos+= "<span id='d"+i+"' onclick=votar('"+articulosNom[i]+"',"+i+",0)>";
+                        articulos+= "<span id='d"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",0)>";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote4.png'>";                       
                 break;                                  
             }
-            articulos+= "</span><input type='text' id='t"+i+"'><button id='botoncoment' onclick=comentar('"+articulosNom[i]+"',"+i+")>comentar</button><hr>";   
+            articulos+= "</span><input type='text' id='t"+i+"'><button id='botoncoment' onclick=comentar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+")>comentar</button><hr>";   
        }
     return articulos;
     }
@@ -96,5 +97,5 @@ public class cArticulos {
    articulos += "<span>Todavia no has escrito ningun articulo</span><br>";
    }
    return articulos;
-   }   
+   }      
 }

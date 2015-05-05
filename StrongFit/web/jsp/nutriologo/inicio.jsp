@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true" errorPage="error500.jsp" import="org.apache.jasper.JasperException"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,12 +25,12 @@
             </article>
             <!--Esta es la seccion donde se pueden ver cosas publicadas por los medicos-->
             <article class = "Article-articulos Article-articulo">
-                <% 
+                <%                                                         
                 clases.cArticulos objarticulos = new clases.cArticulos();
-                 HttpSession sesion = request.getSession();
+                 HttpSession sesion = request.getSession();               
                  String idUsr = (String)sesion.getAttribute("idUsr");
                 String articulos = objarticulos.construirlista(idUsr);
-                out.println(articulos);
+                out.println(articulos);              
                 %>
                 Aqui van los articulos que los medicos escriben para hacerse mas populares y asi tener mas clientes
             </article>
