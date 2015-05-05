@@ -45,11 +45,11 @@
             </div>
             <div class="Content-informacion">      
                 <div>
-                    <h2>Div de contenido</h2>
+                    <h3>Consumo Clalorico ¿Graficas?</h3>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima magni consequuntur expedita ex quasi. Incidunt dolore iste, non quia quod animi aliquam sed alias, facere dignissimos ratione labore magni beatae!
                 </div>
                 <div>
-                    <h2>Otro div</h2>
+                    <h3>Otro div que no recuerdo que va a tener</h3>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima magni consequuntur expedita ex quasi. Incidunt dolore iste, non quia quod animi aliquam sed alias, facere dignissimos ratione labore magni beatae!
                 </div>
                 <div class="Registrados">
