@@ -101,6 +101,17 @@
 
 .divImagenSolicitud{
     display: inline-block;
+    margin-right: .3em;
+    vertical-align: top;
+}
+
+.pendiente{
+    cursor: pointer;
+    padding: .4em;
+}
+
+.pendiente:hover{
+    background-color: #E9E9E9;
 }
 
 .correoSolicitud,
@@ -137,13 +148,19 @@
 
 .conMjsSol{
     position: relative;
+    margin-top: .4em;
 }
 
 .div-msjPendientes,
 .div-solicitud{
     position: absolute;
-    text-align: center;
+    text-align: left;
     width: 100%;
+}
+
+.msjP{
+    color: rgba(0, 0, 0, .5);
+    font-style: italic;
 }
 
 .div-solicitud p{
@@ -154,8 +171,20 @@
 .divPerfilOtro{
     z-index: 3;
     margin-top: 3em;
+    border-top: solid;
+    border-top-width: thin;
 }
 
 .divGeneralSolMsj{
-    z-index: 2;
+    position: relative;
+    z-index: 5;
+}
+
+.btnSubir{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #A4C2A3;
+    cursor: pointer;
 }

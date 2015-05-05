@@ -68,9 +68,14 @@ public class StrongfitEndPoint {
         
         String usrS = seguro.encriptar(mensaje);
         String res = "no";
-        ResultSet rs = conecta.spBuscarUsuario(usrS);
-        if(rs.next()){
-            res = rs.getString("respuesta");
+        System.out.println("###############################################");
+        System.out.println(usrS.length());
+        System.out.println("###############################################");
+        if(usrS.length() < 255){
+            ResultSet rs = conecta.spBuscarUsuario(usrS);
+            if(rs.next()){
+                res = rs.getString("respuesta");
+            }
         }
         
         if(res.equals("si")){
@@ -142,7 +147,9 @@ public class StrongfitEndPoint {
                 System.out.println("ESTA ES LA DE SES: " + sesion.getId());
                 if(Nuevo[3].equals(sesion.getId())){
                     RemoteEndpoint.Basic remote = sesion.getBasicRemote();
-                    remote.sendText(Nuevo[2]); 
+                    String msj = Nuevo[0] + "," + Nuevo[2];
+                    System.out.println(msj);
+                    remote.sendText(msj); 
                 }
             }
         }
