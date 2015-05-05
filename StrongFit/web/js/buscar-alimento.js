@@ -1,8 +1,8 @@
 $(function(){
+    //Se ejecuta cuando se busca un alimento
     $("#buscadorBoton").on("click", function() {
         var alimento = $("#input-alimento").val().trim();
         if(alimento.length  > 0){
-            console.log(alimento);
             $.ajax({
                 url: 'http://localhost:8080/StrongFit/sBusqueda',
                 type: 'get',
@@ -20,7 +20,7 @@ $(function(){
         });
         }
     });
-    
+    //Esto despliega todos los alimentos
     function alimentoAdapter(nombre, calorias){
         var $alimentoItem = $('.Alimentos-item').first();;
         var $contenedor = $('.Alimentos');
@@ -50,6 +50,7 @@ $(function(){
             $buscadorAviso.slideDown();
         }       
     }
+    //Esto crea un circulo
     var circulo = new ProgressBar.Circle('#container', {
         color: '#0070C8',
         strokeWidth: 2,
@@ -59,7 +60,7 @@ $(function(){
             className: 'progressbar__label'
         }
     });
-
+    //La funcion que modifica los valores de la grafica
     function setValores(consumidas, meta){
         var valor = consumidas / meta;
         var restantes = meta - consumidas;
@@ -70,8 +71,8 @@ $(function(){
             circulo.setText(restantes + ' cal. restantes');
         }); 
     }
-
-    setValores(consumidas, meta);
+    
+    setValores(consumidas, meta); //Esto establece los valores iniciales
 });
 
 function cambiarMetas(){

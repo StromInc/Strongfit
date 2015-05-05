@@ -54,6 +54,7 @@
                         <div class="Estadisticas-wrapper">
                             <p>Meta <%=caloriasdia%> cal</p>
                             <%
+                                //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
                                 ResultSet rs2 = conecta.spConsultarAlimentosDiarios(idPaciente, diaA);         
                                 int calorias = 0, con = 0;
                                 int kcalorias = 0;
@@ -77,6 +78,7 @@
                     <div class="Registrados-list">
                         <ul class="Consumidos">
                             <%
+                                //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
                                 String nombre = "";
                                 while(rs2.next()){
                                     nombre = rs2.getString("nombre");
@@ -158,6 +160,8 @@
         <a href="#">+</a>
     </div>
     <script>
+        //mando los datos para la vista inicial de la grafica
+        //Estan harcodeados porque estoy bien loco a la verga
         var meta = <%=caloriasdia%>;
         var consumidas = <%=kcalorias%>;
     </script> 
