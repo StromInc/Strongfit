@@ -1,5 +1,4 @@
 var circulo;
-var otra;
 $(function(){
     //Se ejecuta cuando se busca un alimento
     $("#buscadorBoton").on("click", function() {
@@ -78,7 +77,6 @@ function setValores(){
                 valor = datos.calDia;
                 meta = $('#metaCalorias').html();
                 restantes = meta - valor;
-                otra = meta;
                 circulo.animate(valor, {
                     duration: 500
                 }, function(){
@@ -87,4 +85,7 @@ function setValores(){
                 }); 
             }
     });   
+}
+function agregar(){
+    
 }
