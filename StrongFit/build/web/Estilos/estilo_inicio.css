@@ -1,6 +1,18 @@
 a {
   text-decoration: none;
 }
+#container {
+  width: 200px;
+  height: 200px;
+}
+#container > svg {
+  width: 100%;
+  display: block;
+}
+.progressbar__label {
+  text-align: center;
+  color: #000;
+}
 .Alimentos,
 .Consumidos {
   list-style: none;
@@ -39,7 +51,7 @@ a {
   right: 10px;
   background-color: #fff;
   color: #ff4f4f;
-  top: 10px;
+  top: 12px;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -120,15 +132,51 @@ a {
 .Registrados-list::-webkit-scrollbar-thumb {
   background-color: #1b5e20;
 }
+.Estadisticas-header {
+  background: #9c6;
+  text-align: center;
+  padding: 0.5em 0;
+  color: #fff;
+}
+.Estadisticas-titulo {
+  display: inline-block;
+  margin: 0 0.5em;
+  font-weight: normal;
+}
+.Estadisticas-atras,
+.Estadisticas-adelante {
+  padding: 0.5em;
+  cursor: pointer;
+}
+.Estadisticas-section {
+  margin-top: 0.5em;
+  -webkit-display: flex;
+  -webkit-flex-wrap: wrap;
+  -webkit-justify-content: space-around;
+  -webkit-align-items: center;
+  -o-display: flex;
+  -o-flex-wrap: wrap;
+  -o-justify-content: space-around;
+  -o-align-items: center;
+  -moz-display: flex;
+  -moz-flex-wrap: wrap;
+  -moz-justify-content: space-around;
+  -moz-align-items: center;
+  -ms-display: flex;
+  -ms-flex-wrap: wrap;
+  -ms-justify-content: space-around;
+  -ms-align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
 .Content {
   -webkit-border-radius: 4px;
   border-radius: 4px;
   background: #fff;
   -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-.Content-informacion {
-  padding: 0.5em;
 }
 .Content-title {
   background: #1b5e20;
@@ -166,13 +214,31 @@ a {
   }
   .Content.x-large {
     width: 37em;
+    min-height: 450px;
   }
   .FloatButton {
     display: none;
   }
   .Section.x-large {
     width: 62.5em;
+    min-height: 450px;
     margin-bottom: 1em;
+    -webkit-display: flex;
+    -webkit-flex-wrap: wrap;
+    -webkit-justify-content: space-between;
+    -webkit-align-items: stretch;
+    -o-display: flex;
+    -o-flex-wrap: wrap;
+    -o-justify-content: space-between;
+    -o-align-items: stretch;
+    -moz-display: flex;
+    -moz-flex-wrap: wrap;
+    -moz-justify-content: space-between;
+    -moz-align-items: stretch;
+    -ms-display: flex;
+    -ms-flex-wrap: wrap;
+    -ms-justify-content: space-between;
+    -ms-align-items: stretch;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

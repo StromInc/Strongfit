@@ -6,9 +6,49 @@ azulHover = #01579B
 gris = #F2F2F2
 grisBorde = #d2d4d5
 rojo-chido = #FF4F4F
+verde-claro = #99CC66
 vendor-prefixes = webkit o ms moz official
+
+miDysplay(valor1, valor2, valor3, valor4)
+	-webkit-display valor1
+	-webkit-flex-wrap valor2
+	-webkit-justify-content valor3
+	-webkit-align-items valor4
+	
+	-o-display valor1
+	-o-flex-wrap valor2
+	-o-justify-content valor3
+	-o-align-items valor4
+	
+	-moz-display valor1
+	-moz-flex-wrap valor2
+	-moz-justify-content valor3
+	-moz-align-items valor4
+	
+	-ms-display valor1
+	-ms-flex-wrap valor2
+	-ms-justify-content valor3
+	-ms-align-items valor4
+	
+	display valor1
+	flex-wrap valor2
+	justify-content valor3
+	align-items valor4
+
 a
 	text-decoration none
+	
+#container
+	width 200px
+	height 200px
+	& > svg
+		width 100%
+		display block
+
+.progressbar__label
+	text-align center
+	color black
+
 .Alimentos, .Consumidos
 	list-style none
 	padding 0
@@ -30,13 +70,14 @@ a
 		position relative
 	&-name
 		margin 0
+		
 .Consumidos
 	&-borrar
 		position absolute
 		right 10px
 		background-color white
 		color rojo-chido
-		top 10px
+		top 12px
 		border-radius 50%
 		box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 		border 1px solid rojo-chido
@@ -96,13 +137,26 @@ a
 			width 2px
 		&::-webkit-scrollbar-thumb
 			background-color verdeHeader
-		
+.Estadisticas
+	&-header
+		background verde-claro
+		text-align center
+		padding 0.5em 0
+		color white
+	&-titulo
+		display inline-block
+		margin 0 0.5em
+		font-weight normal
+	&-atras, &-adelante
+		padding 0.5em
+		cursor pointer
+	&-section
+		margin-top 0.5em
+		miDysplay(flex, wrap, space-around, center)
 .Content
 	border-radius 4px
 	background white
 	box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
-	&-informacion
-		padding 0.5em
 	&-title
 		background verdeHeader
 		padding 0.5em
@@ -120,29 +174,30 @@ a
 	height 50px
 	line-height 50px
 	text-align center
+	
 .Section.small
 	width 20em
 	margin 0 auto
 	margin-top 6em
+	
 .color-rojo
 	color white
 	background rojo-chido
+		
 @media screen and (min-width:1000px)
 	.Buscador.x-large
 		display block
 		min-height 450px
+		
 	.Content.x-large
 		width 37em
+		min-height 450px
 		
 	.FloatButton
 		display none
 		
 	.Section.x-large
 		width 62.5em
+		min-height 450px
 		margin-bottom 1em
-		//max-height 550px
-		display flex
-		//overflow hidden
-		flex-wrap wrap
-		justify-content space-between
-		align-items stretch
+		miDysplay(flex, wrap, space-between, stretch)
