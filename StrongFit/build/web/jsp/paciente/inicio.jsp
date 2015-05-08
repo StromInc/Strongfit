@@ -13,7 +13,7 @@
         <script src="../../js/buscar-alimento.js"></script>
         <script src="../../js/salir.js"></script>
     </head>
- <body onload="cambiarMetas();">
+ <body onload="setValores();">
         <%
             HttpSession sesion = request.getSession();
             int idPaciente = (Integer)sesion.getAttribute("idPaciente");
@@ -52,7 +52,7 @@
                     </div>
                     <div class="Estadisticas-section">
                         <div class="Estadisticas-wrapper">
-                            <p>Meta <%=caloriasdia%> cal</p>
+                            <p>Meta <span id="metaCalorias"><%=caloriasdia%></span> cal</p>
                             <%
                                 //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
                                 ResultSet rs2 = conecta.spConsultarAlimentosDiarios(idPaciente, diaA);         
@@ -136,21 +136,6 @@
                             <span>5 cal</span>
                             <button class="Alimentos-agregar">+</button>
                         </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
                     </ul>
                 </div>      
             </div>
@@ -159,11 +144,5 @@
     <div class="FloatButton">
         <a href="#">+</a>
     </div>
-    <script>
-        //mando los datos para la vista inicial de la grafica
-        //Estan harcodeados porque estoy bien loco a la verga
-        var meta = <%=caloriasdia%>;
-        var consumidas = <%=kcalorias%>;
-    </script> 
     </body>
 </html>

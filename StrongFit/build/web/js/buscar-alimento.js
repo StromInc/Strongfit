@@ -1,3 +1,5 @@
+var circulo;
+var otra;
 $(function(){
     //Se ejecuta cuando se busca un alimento
     $("#buscadorBoton").on("click", function() {
@@ -51,7 +53,7 @@ $(function(){
         }       
     }
     //Esto crea un circulo
-    var circulo = new ProgressBar.Circle('#container', {
+    circulo = new ProgressBar.Circle('#container', {
         color: '#0070C8',
         strokeWidth: 2,
         trailColor: "#f4f4f4",
@@ -61,30 +63,28 @@ $(function(){
         }
     });
     //La funcion que modifica los valores de la grafica
-    function setValores(consumidas, meta){
-        var valor = consumidas / meta;
-        var restantes = meta - consumidas;
-        circulo.animate(valor, {
-            duration: 500
-        }, function(){
-            console.log("Cargado");
-            circulo.setText(restantes + ' cal. restantes');
-        }); 
-    }
     
-    setValores(consumidas, meta); //Esto establece los valores iniciales
 });
-
-function cambiarMetas(){
+function setValores(){
+    var valor;
+    var restantes;
+    var meta;
     $.ajax({
         url: 'http://localhost:8080/StrongFit/sCambiarMetas',
-        type: 'post',
+        type: 'get',
         dataType: 'json',
         data: $('#formularioOculto').serialize(),
-        success: function(datos)
-        {
-            $('#consumido').html(datos.calDia);
-            $('#falta').html($('#metaCalorias').html() - $('#consumido').html());
-        }
-    });
+            success: function(datos){
+                valor = datos.calDia;
+                meta = $('#metaCalorias').html();
+                restantes = meta - valor;
+                otra = meta;
+                circulo.animate(valor, {
+                    duration: 500
+                }, function(){
+                    console.log("Cargado");
+                    circulo.setText(restantes + ' cal. restantes');
+                }); 
+            }
+    });   
 }
