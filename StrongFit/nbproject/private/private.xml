@@ -2,16 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/Estilos/estilo_dietasnutriologo.css</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/clases/cConexion.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/Estilos/estilo_chat.css</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/barra_menu.jsp</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/minutriologo.jsp</file>
+            <file>file:/D:/Strom/Strongfit/StrongFit/web/js/buscar-alimento.js</file>
+            <file>file:/D:/Strom/Strongfit/StrongFit/web/jsp/paciente/inicio.jsp</file>
+            <file>file:/D:/Strom/Strongfit/StrongFit/web/Estilos/estilo_inicio.css</file>
         </group>
-=======
-        <group/>
->>>>>>> 87cd0b58e8071fbe5c322ae157e74c20a369c72e
     </open-files>
 </project-private>
