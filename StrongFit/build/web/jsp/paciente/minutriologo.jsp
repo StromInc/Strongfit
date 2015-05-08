@@ -57,16 +57,69 @@
                 <div class="conMjsSol">
                 <div class="div-msjPendientes invisible" id="divMsj" >
                     <div class="pendiente invisible"></div>
-                    <div class="pendiente">
-                        <div class="divImagenSolicitud"><img src="#" class="imagenSolicitud" ></div>
-                        <div class="generalSolicitud">
-                            <div class="correoSolicitud">Nombre</div><br>
-                            <div class="msjP">Parte del mensaje</div>
+                    <%
+                        cCifrado seguridad = new cCifrado();
+                        seguridad.AlgoritmoAES();
+                        String idS = seguridad.encriptar(idUsr);
+                        ResultSet msjNo = conecta.spGetMsjNoLeidos(idS);
+                        
+                        String clase="", idOtro = "", msj ="", nomb = "";
+                        int sitiene = 0;
+                        
+                        while(msjNo.next()){
+                            
+                            clases.CImagen objimg = new clases.CImagen();
+                            
+                            idOtro = seguridad.desencriptar(msjNo.getString("idUsuario"));
+                            msj = msjNo.getString("mensaje");
+                            nomb = seguridad.desencriptar(msjNo.getString("nombre"));
+                            clase = idOtro + 1;
+                            
+                            if(msj.length() > 20){
+                                String temp = "";
+                                for(int i = 0; i < 17; ++i){
+                                    temp += msj.charAt(i);
+                                }
+                                msj = temp;
+                                msj += "...";
+                            }
+                            
+                            int verificacionimg = objimg.devuelveexistencia(idOtro);
+                            String ruta = "lel";
+                            String ruta2 = "../../Imagenes/Usuarios/";
+                            
+                            switch(verificacionimg){
+                                case 1: 
+                                    ruta = ruta2 + idOtro + ".jpg";
+                                    break;
+                                case 2: 
+                                    ruta = ruta2 + idOtro + ".png";
+                                    break;
+                                case 3: 
+                                    ruta = ruta2 + idOtro + ".gif";
+                                    break;
+                                default: 
+                                    ruta = "../../Imagenes/usr_sin_imagen.jpg";
+                                    break;              
+                            }
+                    %>
+                    <div class="pendiente <%=clase%>" onclick="activarMensajes('<%=idOtro%>', '<%=idS%>', 'si');">
+                        <div>
+                            <div class="divImagenSolicitud"><input type='hidden' value="" class='msjOculto'><img src="<%=ruta%>" class="imagenSolicitud" ></div>
+                            <div class="generalSolicitud">
+                                <div class="correoSolicitud"><%=nomb%></div><br>
+                                <div class="msjP"><%=msj%></div>
+                            </div>
                         </div>
                     </div>
+                    <%
+                        }
+                        if(sitiene == 0){
+                            %><p id="noMsj" class="sinPendientes">No tienes mensajes pendientes.</p><% 
+                        }
+                    %>
                 </div>
                 <div class="div-solicitud invisible" id="divSol" >
-                    <p>Aqui van las solicitudes</p>
                         <%
                         cCifrado seguro = new cCifrado();
                         seguro.AlgoritmoAES();
@@ -75,7 +128,7 @@
                         ResultSet rs2 = conecta.spSeleccionarSolicitudes(usrS);
                         String correoSolicitud = "";
                         String tipoUs = "Paciente";
-                        int contador = 0;
+                        int contador = 0, si=0;
                         
                         while(rs2.next()){
                             if(usrS.equals(rs2.getString("amigo2")) && rs2.getInt("estado") == 1){
@@ -123,6 +176,9 @@
                                 }
                                 contador++;
                             }
+                        }
+                        if(si == 0){
+                            %><p id="noSol" class="sinPendientes">No tienes solicitudes pendientes.</p><%
                         }
                     %>
                 </div>
@@ -191,7 +247,7 @@
                             ses = rs.getString("sesion");
                             if(!usr.equals(idUsr)){
                         %>
-                        <div style="cursor:pointer;" onclick="activarMensajes('<%=usr%>', '<%=con%>', '<%=idUsr%>');">
+                        <div style="cursor:pointer;" onclick="activarMensajes('<%=usr%>', '<%=idUsr%>', 'no');">
                             <input type="hidden" id="ses<%=con%>" class="<%=usr%>" value="<%=ses%>" >
                             <p id="usr<%=con%>"><%=usr%></p>
                         </div>

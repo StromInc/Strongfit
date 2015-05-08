@@ -140,6 +140,7 @@ public class StrongfitEndPoint {
         else{
             //remitente, destinatario, mensaje, sesion
             String Nuevo[] = mensaje.split(",");
+            conecta.spLeido(seguro.encriptar(Nuevo[1]), seguro.encriptar(Nuevo[0]));
             conecta.spSetMensajes(seguro.encriptar(Nuevo[0]), seguro.encriptar(Nuevo[1]), Nuevo[2]);
             for(Session sesion : conexiones){
                 System.out.println("============================================");

@@ -593,6 +593,18 @@ public class cConexion {
         return this.st.executeQuery("call spGetMensajes('"+idusr+"', '"+idOtro+"', '"+fecha+"');");
     }
     
+    //esto obtiene los mensajes no leidos por el usuario
+    public ResultSet spGetMsjNoLeidos(String idusr)throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetMsjNoLeidos('"+idusr+"');");
+    }
+    
+    //esto marca como leido todos los mensajes entre un remitente y un destinatario
+    public ResultSet spLeido(String idusr, String idOtro)throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spLeido('"+idusr+"', '"+idOtro+"');");
+    }
+    
     public String[][] regresacomentarios(String nPost) throws SQLException{
     this.st = con.createStatement();
     ResultSet rs = this.st.executeQuery("call sp_buscacomentarios('"+nPost+"');");
