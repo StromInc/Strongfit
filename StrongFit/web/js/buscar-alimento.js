@@ -12,17 +12,19 @@ $(function(){
                 success: function(datos){
                     var nombre = [];
                     var calorias = [];
+                    var ids = [];
                     for(var i in datos){
                         nombre[i] = datos[i].nombre;
-                        calorias[i] = datos[i].calorias;      
+                        calorias[i] = datos[i].calorias; 
+                        ids[i] = datos[i].id;
                     }
-                    alimentoAdapter(nombre, calorias);
+                    alimentoAdapter(nombre, calorias, ids);
                 }
         });
         }
     });
     //Esto despliega todos los alimentos
-    function alimentoAdapter(nombre, calorias){
+    function alimentoAdapter(nombre, calorias, ids){
         var $alimentoItem = $('.Alimentos-item').first();;
         var $contenedor = $('.Alimentos');
         var $buscadorAviso = $('.Buscador-aviso');
@@ -32,8 +34,7 @@ $(function(){
             for(i in nombre){
                 var $clon = $alimentoItem.clone();
                 $buscadorAviso.hide();
-                console.log($clon);
-                $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p><span>'+calorias[i]+' cal</span><button class="Alimentos-agregar">+</button>');
+                $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p><span>'+calorias[i]+' cal</span><button class="Alimentos-agregar">+<input type="hidden" id="alimento" value="'+ids[i]+'"></button>');
                 $clon.hide();
                 $contenedor.prepend($clon);
                 $clon.slideDown();
@@ -49,7 +50,8 @@ $(function(){
             $clon.hide();
             $contenedor.prepend($clon);
             $buscadorAviso.slideDown();
-        }       
+        }
+        $('.Alimentos-agregar').on('click', agregar);
     }
     //Esto crea un circulo
     circulo = new ProgressBar.Circle('#container', {
@@ -61,13 +63,14 @@ $(function(){
             className: 'progressbar__label'
         }
     });
-    //La funcion que modifica los valores de la grafica
-    
+    $('.Alimentos-agregar').on('click', agregar);   
 });
 function setValores(){
     var valor;
     var restantes;
     var meta;
+    var porcentaje;
+    var duracion = 500;
     $.ajax({
         url: 'http://localhost:8080/StrongFit/sCambiarMetas',
         type: 'get',
@@ -77,8 +80,13 @@ function setValores(){
                 valor = datos.calDia;
                 meta = $('#metaCalorias').html();
                 restantes = meta - valor;
-                circulo.animate(valor, {
-                    duration: 500
+                porcentaje = valor / meta;
+                $('#consumido').html('Consumido: '+valor+' cal');
+                if(restantes < meta){
+                    circulo.path.setAttribute('stroke', 'red');
+                }
+                circulo.animate(porcentaje, {
+                    duration: duracion
                 }, function(){
                     console.log("Cargado");
                     circulo.setText(restantes + ' cal. restantes');
@@ -86,6 +94,16 @@ function setValores(){
             }
     });   
 }
-function agregar(){
-    
+function agregar(e){
+    e.preventDefault();
+    var idAlimento;
+    idAlimento = this.children[0].value;
+    console.log(this + " " + idAlimento);
+    $.post('http://localhost:8080/StrongFit/sAgregarAlimento', {
+        dataType: 'json', 
+        valor: idAlimento}, 
+        function(){
+            setValores();
+        }
+    );
 }

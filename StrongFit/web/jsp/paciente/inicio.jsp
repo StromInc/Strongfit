@@ -64,7 +64,7 @@
                                     con++;
                                 }
                             %>
-                        <p>Consumido <%=kcalorias%> cal</p>
+                        <p id="consumido">Consumido <%=kcalorias%> cal</p>
                         </div>
                         <div id="container"></div> 
                     </div>      
@@ -128,13 +128,9 @@
                     <ul class="Alimentos">
                         <li class="Alimentos-item">
                             <p class="Alimentos-name">Taco</p>
+                            
                             <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
-                        </li>
-                        <li class="Alimentos-item">
-                            <p class="Alimentos-name">Taco</p>
-                            <span>5 cal</span>
-                            <button class="Alimentos-agregar">+</button>
+                            <button class="Alimentos-agregar">+<input type="hidden"></button>
                         </li>
                     </ul>
                 </div>      
