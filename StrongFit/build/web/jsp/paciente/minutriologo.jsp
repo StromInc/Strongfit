@@ -120,6 +120,7 @@
                     %>
                 </div>
                 <div class="div-solicitud invisible" id="divSol" >
+                    <div class="divSolicitud"></div>
                         <%
                         cCifrado seguro = new cCifrado();
                         seguro.AlgoritmoAES();
@@ -159,7 +160,7 @@
                                             break;              
                                     }
                                     %>
-                    
+                                    
                                     <div class="divSolicitud" id="solicitud<%=contador%>" >
                                         <div class="divImagenSolicitud"><img src="<%=ruta%>" class="imagenSolicitud" ></div>
                                         <div class="generalSolicitud">
@@ -196,6 +197,7 @@
                         <p id="cedulaChat"></p>
                         <p id="escuelaChat"></p>
                         <p id="carreraChat"></p>
+                        <input type="hidden" value="sinSesion" id="sesionProximoAmigo" >
                         <input type="submit" value="Enviar Solicitud" class="Section-button invisible" >
                     </div>
                 </div>

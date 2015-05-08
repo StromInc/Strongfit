@@ -353,6 +353,12 @@ public class cConexion {
         return this.st.executeQuery("call spSetDesconexion('"+idUsr+"');");
     }
     
+    //este metodo retorna la sesion propia del usuario
+    public ResultSet spGetSesion(String idUsr) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetSesion('"+idUsr+"');");
+    }
     
     public ArrayList<cUsuarioChat> spBuscarUsuarioChat(String busca) throws SQLException, Exception
     {

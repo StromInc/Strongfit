@@ -62,6 +62,7 @@ public class sGetInfoUsuario extends HttpServlet {
             
             clases.CImagen objimg = new clases.CImagen();
             int verificacionimg = objimg.devuelveexistencia(destiS);
+            String sesUsr = "";
             String ruta = "lel";
             String ruta2 = "../../Imagenes/Usuarios/";
             switch(verificacionimg){
@@ -81,11 +82,17 @@ public class sGetInfoUsuario extends HttpServlet {
             
             ResultSet rs = conecta.spGetInfoUsuario(desti);
             ResultSet rs2 = conecta.spGetRelUsr(idUsr, desti);
+            ResultSet rs3 = conecta.spGetSesion(desti);
+            
+            if(rs3.next()){
+                sesUsr = rs3.getString("sesion");
+            }
 
             Map<String, Object> lista = new HashMap<>();
             while(rs.next()){
                 lista.put("nombre", seguro.desencriptar(rs.getString("nombre")));
                 lista.put("correo", seguro.desencriptar(rs.getString("idUsuario")));
+                lista.put("sesion", sesUsr);
                 lista.put("imagen", ruta);
                 if(rs.getInt("idMedico") > 0){
                     lista.put("cedula", rs.getString("cedulaProf"));

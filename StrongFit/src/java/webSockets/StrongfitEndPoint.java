@@ -31,7 +31,7 @@ import javax.websocket.server.ServerEndpoint;
 public class StrongfitEndPoint {
 
     static final Logger LOGGER = Logger.getLogger(StrongfitEndPoint.class.getName());
-     static final List<Session> conexiones = new ArrayList<>();
+    static final List<Session> conexiones = new ArrayList<>();
      
     private ArrayList<cSesion> listaSesiones = new ArrayList<>();
  
@@ -138,19 +138,34 @@ public class StrongfitEndPoint {
             conecta.spNuevaConexion(usrS, session.getId());
         }
         else{
-            //remitente, destinatario, mensaje, sesion
             String Nuevo[] = mensaje.split(",");
-            conecta.spLeido(seguro.encriptar(Nuevo[1]), seguro.encriptar(Nuevo[0]));
-            conecta.spSetMensajes(seguro.encriptar(Nuevo[0]), seguro.encriptar(Nuevo[1]), Nuevo[2]);
-            for(Session sesion : conexiones){
-                System.out.println("============================================");
-                System.out.println("ESTA ES LA DE NUEVO: " + Nuevo[3]);
-                System.out.println("ESTA ES LA DE SES: " + sesion.getId());
-                if(Nuevo[3].equals(sesion.getId())){
-                    RemoteEndpoint.Basic remote = sesion.getBasicRemote();
-                    String msj = Nuevo[0] + "," + Nuevo[2];
-                    System.out.println(msj);
-                    remote.sendText(msj); 
+            if(Nuevo.length == 3){
+                for(Session sesion : conexiones){
+                    if(Nuevo[2].equals(sesion.getId())){
+                        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+                        System.out.println("SI ENTRO AL IF");
+                        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+                        RemoteEndpoint.Basic remote = sesion.getBasicRemote();
+                        String msj = "j34546HRghTWEfs0978ñwEWHgdOIRifiue49854T5T40rdkglndf3" + "," + Nuevo[0];
+                        remote.sendText(msj); 
+                    }
+                }
+            }
+            else{
+                //remitente, destinatario, mensaje, sesion
+                //String Nuevo[] = mensaje.split(",");
+                conecta.spLeido(seguro.encriptar(Nuevo[1]), seguro.encriptar(Nuevo[0]));
+                conecta.spSetMensajes(seguro.encriptar(Nuevo[0]), seguro.encriptar(Nuevo[1]), Nuevo[2]);
+                for(Session sesion : conexiones){
+                    System.out.println("============================================");
+                    System.out.println("ESTA ES LA DE NUEVO: " + Nuevo[3]);
+                    System.out.println("ESTA ES LA DE SES: " + sesion.getId());
+                    if(Nuevo[3].equals(sesion.getId())){
+                        RemoteEndpoint.Basic remote = sesion.getBasicRemote();
+                        String msj = Nuevo[0] + "," + Nuevo[2];
+                        System.out.println(msj);
+                        remote.sendText(msj); 
+                    }
                 }
             }
         }
