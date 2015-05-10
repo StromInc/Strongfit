@@ -93,7 +93,7 @@ function guardarsesion() {
         if($("#chek1").is(':checked')){
             console.log("vamos bien");
             $.post('SCheca', {
-                nombre : correoVar,
+                id : correoVar,
                 contra: contraVar
         }, function(responseText) {
             var validacion = responseText;
@@ -123,20 +123,21 @@ function guardarsesion() {
       if(sesion == "si"){
       var id = localStorage.getItem("id");
       var contra = localStorage.getItem("contra");
+      console.log(id);
       $.post('SCheca', {
-                nombre : id,
+                id : id,
                 contra: contra
         }, function(responseText) {
             var validacion = responseText;
             console.log(validacion);
             if(validacion == "si1"){
-                location.href="jsp/nutriologo/inicio.jsp"
+                location.href="jsp/nutriologo/inicio.jsp";
             }
              if(validacion == "si2"){
-                location.href="jsp/paciente/inicio.jsp"
+                location.href="jsp/paciente/inicio.jsp";
             }
              if(validacion == "si3"){
-                location.href="jsp/admin/inicio.jsp"
+                location.href="jsp/admin/inicio.jsp";
             }
         });
      }

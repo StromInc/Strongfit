@@ -43,13 +43,19 @@ public class SEscribearticulo extends HttpServlet {
             objconexion.conectar();
             HttpSession sesion = request.getSession();
             String idUsr = (String)sesion.getAttribute("idUsr");
+            String idArt = request.getParameter("idArt");
             if(request.getParameter("operacion").equals("escribe")){
-            String validacion = objconexion.altaarticulo(idUsr, objcifrado.sustituye(request.getParameter("nombre"),1), request.getParameter("texto"));
+            String validacion = objconexion.altaarticulo(idUsr, objcifrado.sustituye(request.getParameter("nombre"),1), request.getParameter("texto"));           
+            }
+            if(request.getParameter("operacion").equals("llamadatos")){
+            clases.cArticulos objarticulo = new clases.cArticulos();
+            String texto = objarticulo.buscadatos(idArt);
+            out.print(texto);
+            }else{
             clases.cArticulos objarticulo = new clases.cArticulos();
             String texto = objarticulo.buscamisarticulos(idUsr);
             out.print(texto);
-            }           
-            
+            }
         }
     }
 

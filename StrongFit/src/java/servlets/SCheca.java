@@ -49,7 +49,7 @@ public class SCheca extends HttpServlet {
             cCifrado seguro = new cCifrado();
             seguro.AlgoritmoAES();
             
-            String idUser = request.getParameter("nombre");
+            String idUser = request.getParameter("id");
             String idUserS = seguro.encriptar(idUser);
             String pass = request.getParameter("contra");
             String passS = seguro.cifrarSHA1(pass);
@@ -90,6 +90,7 @@ public class SCheca extends HttpServlet {
                             sesion.setAttribute("estado", estado);
                             sesion.setAttribute("municipio", municipio);
                             sesion.setAttribute("colonia", colonia);
+                            sesion.setAttribute("tipodeus","2");
                             out.print("si1");
                         }
                         else{
@@ -126,6 +127,7 @@ public class SCheca extends HttpServlet {
                             sesion.setAttribute("estado", estado);
                             sesion.setAttribute("municipio", municipio);
                             sesion.setAttribute("colonia", colonia);
+                            sesion.setAttribute("tipodeus","1");
                             out.print("si2");
                         }
                     }else{
