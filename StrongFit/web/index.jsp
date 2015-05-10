@@ -4,7 +4,7 @@
     Author     : Ian
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="/jsp/nutriologo/error500.jsp" import="org.apache.jasper.JasperException"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>

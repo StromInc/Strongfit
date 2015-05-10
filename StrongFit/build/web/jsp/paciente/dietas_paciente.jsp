@@ -3,7 +3,7 @@
 <%@page import="java.util.*" %>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page session="true" %>
+<%@page session="true" errorPage="../nutriologo/error500.jsp" import="org.apache.jasper.JasperException"%>
 <!DOCTYPE html>
 <html>
     <%
