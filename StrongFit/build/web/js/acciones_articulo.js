@@ -41,7 +41,24 @@ function votar(Npost, numero,nvoto) {
     });
    }
    
-   function buscamisarticulos(){
-        
+   function buscamisarticulos(operacion){
+     $.post('../../SEscribearticulo', {
+                nombre : $('#txtnombre').val(),
+                texto: $('#txtarticulo').val(),
+                operacion: operacion
+        }, function(responseText) {          
+           $('#misarticulos').html(responseText);          
+    });   
         
     }
+    function cambiaarticulo(nombre){
+     $.post('../../SEscribearticulo', {
+                idArt : nombre,
+                operacion: "llamadatos"
+        }, function(responseText) {
+            console.log(":DD");
+           $('#edicion').html(responseText);                  
+    });   
+        
+    }
+    

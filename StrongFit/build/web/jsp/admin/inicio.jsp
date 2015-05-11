@@ -1,6 +1,6 @@
 <%@page import="clases.cCifrado"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error500.jsp" import="org.apache.jasper.JasperException"%>
 <!DOCTYPE html>
 <html>
     <head>

@@ -1,4 +1,4 @@
-<%@page import="clases.cConexion"%>
+<%@page import="clases.cConexion" errorPage="error500.jsp" import="org.apache.jasper.JasperException"%>
 <%!
     cConexion conecta = new cConexion();
 %>

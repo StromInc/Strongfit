@@ -91,11 +91,25 @@ public class cArticulos {
    String[] misarticulos = objconexion.buscamisarticulos(idUsr);
    if(misarticulos != null){
    for(int i = 0; i < misarticulos.length;i++){
-     articulos += "<span>" + misarticulos[i] + "</span>" + "</br>";
+     articulos += "<span onClick=cambiaarticulo('"+misarticulos[i]+"')>" + misarticulos[i] + "</span>" + "</br>";
    }
    }else{
    articulos += "<span>Todavia no has escrito ningun articulo</span><br>";
    }
    return articulos;
-   }      
+   }
+   public String buscadatos(String idArticulo) throws SQLException{
+   cConexion objconexion = new cConexion();
+   objconexion.conectar();
+   String misarticulos = objconexion.buscamiarticulo(idArticulo);
+   String articulo = "Nombre:<br><input type=\"text\" id=\"txtnombre\" value = '"+idArticulo+"'><br>\n" +
+"                 <img src = \"\" class =\"img-usr\" alt = \"foto de usuario\">\n" +
+"                <form  enctype=\"multipart/form-data\" id=\"img_frm\" method=\"post\" action=\"../Ssubirimagen.jsp\" name=\"img_frm\">\n" +
+"                        <input type = \"file\"  name=\"uploadFile\" id=\"ImgUsuario\" class=\"input-subir\" required/>\n" +
+"                        <input type = \"submit\" value=\"cambiar\" class=\"btn-imagen\"/>\n" +
+"                </form><br>\n" +
+"                Texto:<br><textarea rows=\"30\" cols=\"100\" id=\"txtarticulo\" value='"+misarticulos+"'></textarea><br>\n" +
+"                <input type=\"button\" value=\"Enviar\" onclick=escribearticulo('escribe')>";
+   return articulo;
+   }
 }

@@ -12,7 +12,7 @@
 <%@ page import="org.apache.commons.fileupload.servlet.*" %> 
 <%@ page import="org.apache.commons.io.*" %> 
 <%@ page import="java.io.*" %> 
-<%@ page session="true" %>
+<%@ page session="true" errorPage="error500.jsp" import="org.apache.jasper.JasperException"%>
 
 <%
  clases.cConexion objruta = new clases.cConexion();

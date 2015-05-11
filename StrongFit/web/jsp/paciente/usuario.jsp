@@ -1,7 +1,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="clases.cSugerirDietas"%>
 <%@page import="javax.validation.constraints.Null"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" session='true'%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session='true' errorPage="../nutriologo/error500.jsp" import="org.apache.jasper.JasperException"%>
 <!DOCTYPE html>
 <html>
     <head>

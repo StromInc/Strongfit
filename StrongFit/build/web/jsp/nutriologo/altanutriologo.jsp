@@ -4,7 +4,7 @@
     Author     : jorge pastrana
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error500.jsp" import="org.apache.jasper.JasperException"%>
 <%@page import = "java.io.*"%>
 <!DOCTYPE html>
 <html lang="es">
