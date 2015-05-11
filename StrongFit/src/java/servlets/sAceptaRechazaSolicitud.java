@@ -7,10 +7,13 @@ package servlets;
 
 import clases.cCifrado;
 import clases.cConexion;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -61,8 +64,22 @@ public class sAceptaRechazaSolicitud extends HttpServlet {
             if(rs.next()){
                 idAmigo = rs.getInt("idRelAmigosChat");
             }
-            conecta.spAceptaSolicitud(idUsr, idOtro, respuesta, idAmigo);
+            ResultSet rs2 = conecta.spAceptaSolicitud(idUsr, idOtro, respuesta, idAmigo);
+            
+            Map<String, Object> mapa = new HashMap();
+            if(rs2.next()){
+                mapa.put("res", rs2.getString("respuesta")); 
+            }
+            
+            write(response, mapa);
         }
+    }
+    
+    private void write(HttpServletResponse response, Map<String, Object> map) throws IOException 
+    {
+        response.setContentType("aplication/json");
+        response.setCharacterEncoding("charset=UTF-8");
+        response.getWriter().write(new Gson().toJson(map));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

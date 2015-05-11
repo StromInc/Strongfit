@@ -102,6 +102,7 @@
                                     ruta = "../../Imagenes/usr_sin_imagen.jpg";
                                     break;              
                             }
+                            sitiene++;
                     %>
                     <div class="pendiente <%=clase%>" onclick="activarMensajes('<%=idOtro%>', '<%=idS%>', 'si');">
                         <div>
@@ -120,7 +121,7 @@
                     %>
                 </div>
                 <div class="div-solicitud invisible" id="divSol" >
-                    <div class="divSolicitud"></div>
+                    <div class="divSolicitud invisible"></div>
                         <%
                         cCifrado seguro = new cCifrado();
                         seguro.AlgoritmoAES();
@@ -176,6 +177,7 @@
                                     <%
                                 }
                                 contador++;
+                                si++;
                             }
                         }
                         if(si == 0){

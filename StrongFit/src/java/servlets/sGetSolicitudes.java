@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -55,11 +56,12 @@ public class sGetSolicitudes extends HttpServlet {
             seguro.AlgoritmoAES();
             
             Map<String, Object> mapa = new HashMap();
+            
+            ArrayList<cSolicitud> lista = new ArrayList<>();
 
             String usrS = seguro.encriptar(idUsr);
             ResultSet rs2 = conecta.spSeleccionarSolicitudes(usrS);
             String correoSolicitud = "";
-            String solicitud = "";
             String tipoUs = "Paciente";
             int contador = 0, si=0;
 
@@ -96,12 +98,13 @@ public class sGetSolicitudes extends HttpServlet {
                                 ruta = "../../Imagenes/usr_sin_imagen.jpg";
                                 break;              
                         }
-                        solicitud = "solicitud" + contador;
-                        mapa.put(solicitud, new cSolicitud(nombre, nom, ruta, ses, tipoUs, contador));
+                        lista.add(new cSolicitud(nombre, nom, ruta, ses, tipoUs, contador));
                         contador++;
                     }
                 }
             }
+            
+            mapa.put("solicitudes", lista);
             write(response, mapa);
         }
     }
