@@ -56,7 +56,7 @@
                     <p class="Section-form container"><input type = "email" id="email" name = "txt-mail" class="Section-mail Section-txt" placeholder = "Correo" required><span class="arrow hidden"></span></p>
                     <input type = "password" name = "txt-pass" class = "Section-pass Section-txt" placeholder="Contraseña" required>
                     <input type = "submit" name = "btn-signin" class="Section-submit" value="Unirse">
-                    <p class="Section-form item">¿Eres un nutriólogo?<a href = "jsp/nutriologo/altanutriologo.jsp">Registrate como médico.</a></p>
+                    <p class="Section-form item">¿Eres un nutriólogo?<a href = "jsp/nutriologo/altanutriologo.jsp">Registrate como uno.</a></p>
                 </form>
             </article>
             <article class="Section-signup">

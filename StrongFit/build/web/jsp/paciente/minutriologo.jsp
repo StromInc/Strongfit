@@ -6,7 +6,7 @@
 
 <%@page import="clases.cCifrado"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="../nutriologo/error500.jsp" import="org.apache.jasper.JasperException"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -144,7 +144,7 @@
                                     String nom = seguro.desencriptar(rs3.getString("idUsuario"));
                                     String nombre = seguro.desencriptar(rs3.getString("nombre"));
                                     if(rs3.getInt("idMedico") > 0){
-                                        tipoUs = "MÃ©dico";
+                                        tipoUs = "Médico";
                                     }
                                     switch(verificacionimg){
                                         case 1: 

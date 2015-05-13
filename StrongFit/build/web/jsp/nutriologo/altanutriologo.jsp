@@ -38,7 +38,7 @@
                     <input type= "password" name = "txt-pass" class = "Section-pass Section-txt" placeholder="Contraseña" id="inputNo3" required>
                     <input type="text" name="edad" required onkeypress="return justNumbers(event);" class = "Section-txt" id="inputNo4" placeholder = "Edad">
                     <select name = "idSexo" class="Section-txt" id="inputNo5" required>
-                        <option value="" >Seleccion de sexo</option>
+                        <option value="" >Selección de sexo</option>
                         <option value="1" >Masculino</option>
                         <option value="2" >Femenino</option>
                     </select>
@@ -50,8 +50,8 @@
                     <input type="text" name="colonia" required class="Section-txt" id="inputNo8" placeholder="Colonia">
                 </div>
                 <div class="" id="formu3">                   
-                    <h2>Informacion Profesional</h2>
-                    <input type= "text" name="plicense" required class= "Section-txt" id="inputNo9" placeholder="Cedula Profesional" onkeypress="return justNumbers(event);">
+                    <h2>Información Profesional</h2>
+                    <input type= "text" name="plicense" required class= "Section-txt" id="inputNo9" maxlength="7" placeholder="Cédula Profesional" onkeypress="return justNumbers(event);">
                     <input type= "text" name="school" required class= "Section-txt" id="inputNo10" placeholder="Escuela">
                     <input type= "text" name="carrier" required class= "Section-txt" id="inputNo11" placeholder="Carrera">
                 </div>

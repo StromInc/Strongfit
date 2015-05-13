@@ -1,9 +1,10 @@
-<%-- 
+<%--
     Document   : minutriologo
     Created on : 25/02/2015, 06:32:11 PM
     Author     : ian
 --%>
 
+<%@page import="clases.cConexion"%>
 <%@page import="clases.cCifrado"%>
 <%@page import="java.sql.ResultSet"%>
 
@@ -16,6 +17,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_chat.css" >
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_pacientes.css" >
         <!--<script src="../../js/acciones_chatBuscar.js"></script>-->
         <script src = "../../js/acciones_chat.js"></script>
         <script src="../../js/salir.js"></script>
@@ -38,7 +40,8 @@
     </head>
     <body>
         <%
-            
+            cConexion conecta = new cConexion();
+            conecta.conectar();
             conecta.conectar();
             
             HttpSession sesion = request.getSession();
@@ -162,7 +165,8 @@
                                     }
                                     %>
                                     
-                                    <div class="divSolicitud" id="solicitud<%=contador%>" >
+                                   
+                                    <div class="divSolicitud" id="solicitud<%=contador%>" > 
                                         <div class="divImagenSolicitud"><img src="<%=ruta%>" class="imagenSolicitud" ></div>
                                         <div class="generalSolicitud">
                                             <div class="correoSolicitud"><%=nom%></div><br>
@@ -205,22 +209,110 @@
                 </div>
             </article>
             
-            <article class = "Article-tbl-usr2 cajachat">
-                <div class="mensajes" id = "log">
-                    <div class="mensaje" ></div>
-                </div>
-                <form class="formularioChat">
-                    <input type="hidden" name="desti" id="destinatario" value="">
-                    <input type="hidden" name="ses" id="ses" value="">
-                    <!--<textarea placeholder="Escribe un mensaje" id='mensajeTXT' name='mensajeTXT' onkeypress="return enviarEnter(this, event);" /></textarea>-->
-                    <!--<textarea contenteditable="true" placeholder="Escribe un mensaje" id='mensajeTXT' name='mensajeTXT' onkeyup="Textarea_Sin_Enter(event.keyCode, this.id);" onkeydown="Textarea_Sin_Enter(event.keyCode, this.id);" onkeypress="Textarea_Sin_Enter(event.keyCode, this.id);" /></textarea>-->
-                    <textarea contenteditable="true" placeholder="Escribe un mensaje" id='mensajeTXT' name='mensajeTXT' onkeypress="return enviarEnter(event);" /></textarea>
-                    <div class="">
-                        <span><input type="checkbox" name="enter" value="si" id="enter" ><label for="enter">Enviar mensaje al presionar Enter</label></span>&nbsp;&nbsp;&nbsp;
-                              <button type="button" onclick="enviarMensaje()">Enviar</button>
+<!--===========================================================================================-->
+            <article class = "Article-tbl-usr2 cajachat">               
+                <ul class="menuChatNutriologo">
+                    <li onclick="mostrarMenu('contenedorChatNutriologo');"><input type="radio" name="menuChat" id="chatN"><label id="cN" for="chatN">Chat</label></li>
+                    <li onclick="mostrarMenu('contenedorInfoPaciente');"><input type="radio" onclick="getInfoNutricional();" name="menuChat" id="infoN"><label id="iN" for="infoN">Información</label></li>
+                    <li onclick="mostrarMenu('contenedorEstaPaciente');"><input type="radio" name="menuChat" id="estaN"><label id="eN" for="estaN">Estadísticas</label></li>
+                    <li onclick="mostrarMenu('contenedorDietPaciente');"><input type="radio" name="menuChat" id="dietN"><label id="dN" for="dietN">Dietas</label></li>
+                </ul>
+                <div id="contenedorChatNutriologo" class="ventanasChat invisible" >
+                    <div class="mensajes" id = "log">
+                        <div class="mensaje" ></div>
                     </div>
-                </form>
+                    <form class="formularioChat">
+                        <input type="hidden" name="desti" id="destinatario" value="">
+                        <input type="hidden" name="ses" id="ses" value="">
+                        <!--<textarea placeholder="Escribe un mensaje" id='mensajeTXT' name='mensajeTXT' onkeypress="return enviarEnter(this, event);" /></textarea>-->
+                        <!--<textarea contenteditable="true" placeholder="Escribe un mensaje" id='mensajeTXT' name='mensajeTXT' onkeyup="Textarea_Sin_Enter(event.keyCode, this.id);" onkeydown="Textarea_Sin_Enter(event.keyCode, this.id);" onkeypress="Textarea_Sin_Enter(event.keyCode, this.id);" /></textarea>-->
+                        <textarea contenteditable="true" placeholder="Escribe un mensaje" id='mensajeTXT' name='mensajeTXT' onkeypress="return enviarEnter(event);" /></textarea>
+                        <div class="">
+                            <span><input type="checkbox" name="enter" value="si" id="enter" ><label for="enter">Enviar mensaje al presionar Enter</label></span>&nbsp;&nbsp;&nbsp;
+                                  <button type="button" onclick="enviarMensaje()">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="contenedorInfoPaciente" class="ventanasChat invisible">
+                    <div id="divI">
+                        <p id="idPeso"></p>
+                        <p id="idEstatura"></p>
+                        <p id="idCintura"></p>
+                        <p id="idEdad"></p>
+                        <p id="idSexo2"></p>
+                        <p id="idOcupacion"></p>
+                    </div>
+                    <div id="divA">
+                        <p id="idActividad"></p>
+                        <table id="tablaA">
+                            <tr>
+                                <td>Dias</td>
+                                <td>Horas</td>
+                            </tr>
+                            <tr id="tupla0" class="tupla">
+                                <td>Domingo</td>
+                                <td class="diasTable"></td>
+                            </tr>
+                            <tr id="tupla1" class="tupla">
+                                <td>Lunes</td>
+                                <td class="diasTable"></td>
+                            </tr>
+                            <tr id="tupla2" class="tupla">
+                                <td>Martes</td>
+                                <td class="diasTable"></td>
+                            </tr>
+                            <tr id="tupla3" class="tupla">
+                                <td>Miércoles</td>
+                                <td class="diasTable"></td>
+                            </tr>
+                            <tr id="tupla4" class="tupla">
+                                <td>Jueves</td>
+                                <td class="diasTable"></td>
+                            </tr>
+                            <tr id="tupla5" class="tupla">
+                                <td>Viernes</td>
+                                <td class="diasTable"></td>
+                            </tr>
+                            <tr id="tupla6" class="tupla">
+                                <td>Sábado</td>
+                                <td class="diasTable"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <p class="titulo">Calorías diarias</p>
+                        <table class="tableCal">
+                            <tr>
+                                <td></td>
+                                <td>Domingo</td>
+                                <td>Lunes</td>
+                                <td>Martes</td>
+                                <td>Miércoles</td>
+                                <td>Jueves</td>
+                                <td>Viernes</td>
+                                <td>Sábado</td>
+                            </tr>
+                            <tr>
+                                <td>Calorías</td>
+                                <td class="tuplaCal"></td>
+                                <td class="tuplaCal"></td>
+                                <td class="tuplaCal"></td>
+                                <td class="tuplaCal"></td>
+                                <td class="tuplaCal"></td>
+                                <td class="tuplaCal"></td>
+                                <td class="tuplaCal"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="contenedorEstaPaciente" class="ventanasChat invisible">
+                    Aqui va la parte de las estadisticas
+                </div>
+                <div id="contenedorDietPaciente" class="ventanasChat invisible">
+                    Aqui va la parte de las dietas
+                </div>
             </article>
+<!--===========================================================================================-->
             
             <article class = "Article-tbl-usr2 contactos">
                 <div>

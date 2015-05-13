@@ -42,8 +42,10 @@ public class sPerfilDeUsuario extends HttpServlet {
             throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             HttpSession sesion = request.getSession();
+            try{
+            /* TODO output your page here. You may use following sample code. */
+            
             // recuperamos los valores
             clases.cConexion objconexion = new clases.cConexion();
             objconexion.conectar();
@@ -185,6 +187,14 @@ public class sPerfilDeUsuario extends HttpServlet {
         }catch(SQLException ex){
              out.print(ex.toString());
              }
+        }
+        catch(NumberFormatException e){
+            sesion.setAttribute("mensaje", "No es posible escribir letras en los campos: Peso, Estatura, Cintura y Edad");
+            response.sendRedirect("jsp/paciente/usuario.jsp");
+        }
+        catch(Exception e){
+            response.sendRedirect("jsp/paciente/usuario.jsp");
+        }
         }
     }
 

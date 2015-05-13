@@ -216,7 +216,7 @@
                             }
                         %>                  
                         <div class = "div-nutrimental sexo">
-                            <p class = "medidas-p">Sexo</p>
+                            <p class = "medidas-p">Género</p>
                             <select name = "sexo" class = "select-sexo">
                                 <option value="" <%=v1%>>Seleccionar </option>
                                 <option value="1" <%=v2%>>Masculino </option>
@@ -319,6 +319,8 @@
                 </form>
             </article>
         </section>
+        
+        <script src="../../js/acciones_perfil.js"></script>
         <%
             if(sesion.getAttribute("mensaje") != null){
                 String mensaje = (String)sesion.getAttribute("mensaje");
@@ -327,6 +329,5 @@
                 sesion.removeAttribute("mensaje");
             }
         %>
-        <script src="../../js/acciones_perfil.js"></script>
     </body>
 </html>

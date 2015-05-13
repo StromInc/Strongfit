@@ -5,6 +5,7 @@
         <%@include file = "../meta.jsp" %>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_dietasusr.css">
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_dietasnutriologo.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     </head>
     <body>
         <%@include file = "barra_menu.jsp" %>
@@ -18,21 +19,21 @@
                     <input type="hidden" value="" name="<%%>" id = "dieta" >
                 </form>
                 <!--Esto es de prueba-->
-                <div class = "dietaCreada" id = "1" onmouseover = "mostrarOpciones(id)" onmouseout="ocultarOpciones(id)">
+                <div class = "dietaCreada" id = "dieta1" onmouseover = "mostrarOpciones(id)" onmouseout="ocultarOpciones(id)">
                     Nombre de la dieta
                     <div id = "opc1" class="opciones invisible">
                         <span class = "arrow-left"></span>
                         <div class = "opcionesDiv"><p onclick = "editarDieta()">Editar</p><p onclick = "borrarDieta()">Eliminar</p></div>
                     </div>
                 </div>
-                <div class = "dietaCreada" id = "2" onmouseover = "mostrarOpciones(id)" onmouseout="ocultarOpciones(id)">
+                <div class = "dietaCreada" id = "dieta2" onmouseover = "mostrarOpciones(id)" onmouseout="ocultarOpciones(id)">
                     Nombre de la dieta
                     <div id = "opc2" class="opciones invisible">
                         <span class = "arrow-left"></span>
                         <div class = "opcionesDiv"><p onclick = "editarDieta()">Editar</p><p onclick = "borrarDieta()">Eliminar</p></div>
                     </div>
                 </div>
-                <div class = "dietaCreada" id = "3" onmouseover = "mostrarOpciones(id)" onmouseout="ocultarOpciones(id)">
+                <div class = "dietaCreada" id = "dieta3" onmouseover = "mostrarOpciones(id)" onmouseout="ocultarOpciones(id)">
                     Nombre de la dieta
                     <div id = "opc3" class="opciones invisible">
                         <span class = "arrow-left"></span>
@@ -47,27 +48,10 @@
             <article class="Article-dietas invisible tamano" id = "buscarAlimentos">
                 <p class="contenedor-search">
                     <span class = "span-search"><label class = "icon-search label-search" for = "buscar"></label></span>
-                    <input type="search" placeholder = "buscar alimentos ..." class = "input-search" id = "buscar">
+                    <input type="search" onkeypress="buscarAlimento();" placeholder = "buscar alimentos ..." class = "input-search" id = "buscar">
                 </p>
-                <div class = "contenedor-resultados">
-                    <div class = "resultado" id = "resultado1" draggable = "true" ondragstart="drag(event)">
-                        <input type = "hidden" id = "alimento1" name = "ids" value="iddelalimento">
-                        <input type = "hidden" id = "calorias1" name = "calorias" value="calorias">
-                        <input type = "hidden" id = "lipidos1" name = "lipidos" value="lipidos">
-                        <input type = "hidden" id = "proteinas1" name = "proteinas" value="proteinas">
-                        <input type = "hidden" id = "carbohidratos1" name = "carbohidratos" value="carbohidratos">
-                        huevo 10kc
-                        <span id = "tache1" class = "icon-cancel-circle invisible" onclick = "remover(id)"></span>
-                    </div>
-                    <div class = "resultado" id = "resultado2" draggable = "true" ondragstart="drag(event)">
-                        <input type = "hidden" id = "alimento2" name = "ids" value="iddelalimento">
-                        <input type = "hidden" id = "calorias2" name = "calorias" value="calorias">
-                        <input type = "hidden" id = "lipidos2" name = "lipidos" value="lipidos">
-                        <input type = "hidden" id = "proteinas2" name = "proteinas" value="proteinas">
-                        <input type = "hidden" id = "carbohidratos2" name = "carbohidratos" value="carbohidratos">
-                        bistec 14kc
-                        <span id = "tache2" class = "icon-cancel-circle invisible" onclick = "remover(id)"></span>
-                    </div>
+                <div class = "contenedor-resultados" id="idcontenedor-resultados">
+                    <div class = "resultado invisible" id = "resultadoClon" draggable = "true" ondragstart="drag(event, id)"></div>
                 </div>
             </article>
             
@@ -142,7 +126,7 @@
                         <div class = "diasDieta invisible" id="lunesDieta">
                             <div class="desalluno">
                                 <h2>
-                                    Desalluno
+                                    Desayuno
                                 </h2>
                                 <div class="espacioDieta" id ="DesallunoLunes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
@@ -180,7 +164,7 @@
                         <div class = "diasDieta invisible" id="martesDieta">
                             <div class="desalluno">
                                 <h2>
-                                    Desalluno
+                                    Desayuno
                                 </h2>
                                 <div class="espacioDieta" id ="DesallunoMartes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
@@ -218,7 +202,7 @@
                         <div class = "diasDieta invisible" id="miercolesDieta">
                             <div class="desalluno">
                                 <h2>
-                                    Desalluno
+                                    Desayuno
                                 </h2>
                                 <div class="espacioDieta" id ="DesallunoMiercoles" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
@@ -256,7 +240,7 @@
                         <div class = "diasDieta invisible" id="juevesDieta">
                             <div class="desalluno">
                                 <h2>
-                                    Desalluno
+                                    Desayuno
                                 </h2>
                                 <div class="espacioDieta" id ="DesallunoJueves" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
@@ -294,7 +278,7 @@
                         <div class = "diasDieta invisible" id="viernesDieta">
                             <div class="desalluno">
                                 <h2>
-                                    Desalluno
+                                    Desayuno
                                 </h2>
                                 <div class="espacioDieta" id ="DesallunoViernes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
@@ -332,7 +316,7 @@
                         <div class = "diasDieta invisible" id="sabadoDieta">
                             <div class="desalluno">
                                 <h2>
-                                    Desalluno
+                                    Desayuno
                                 </h2>
                                 <div class="espacioDieta" id ="DesallunoSabado" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>

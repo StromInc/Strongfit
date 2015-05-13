@@ -1,0 +1,84 @@
+.menuChatNutriologo{
+    padding: 0;
+    margin: 0 0 .5em 0;
+}
+
+.menuChatNutriologo li{
+    display: inline-block;
+    padding: 0 .5em;
+}
+
+.menuChatNutriologo li label{
+    cursor: pointer;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+#chatN:checked ~ #cN,
+#infoN:checked ~ #iN,
+#estaN:checked ~ #eN,
+#dietN:checked ~ #dN{
+    text-decoration: underline;
+}
+
+.ventanasChat{
+    height: 90%;
+}
+
+#dom:checked ~ #dom-label,
+#lun:checked ~ #lun-label,
+#mar:checked ~ #mar-label,
+#mie:checked ~ #mie-label,
+#jue:checked ~ #jue-label,
+#vie:checked ~ #vie-label,
+#sab:checked ~ #sab-label {
+  background-color: rgba(23,113,40,0.9);
+}
+#dom:checked ~ #dom-horas2,
+#lun:checked ~ #lun-horas2,
+#mar:checked ~ #mar-horas2,
+#mie:checked ~ #mie-horas2,
+#jue:checked ~ #jue-horas2,
+#vie:checked ~ #vie-horas2,
+#sab:checked ~ #sab-horas2 {
+  display: inline-block;
+}
+
+#tablaA tr td{
+    padding: .21em .6em;
+}
+
+#divI{
+    display: inline-block; 
+    text-align: left;
+}
+
+#divA{
+    display: inline-block; 
+    vertical-align: top;
+    margin-left: 1em;
+}
+
+#divA table{
+    font-size: .8em;
+}
+
+.tableCal{
+    display: inline-block;
+}
+
+.tableCal tr td{
+    padding: 0.3em 0.2em
+}
+
+.titulo{
+    margin: 1.5em 0 .4em 0;
+}
+
+
+
+
+
+

@@ -1,3 +1,6 @@
+var idAlimentoD = 0;
+var contadorD = 0;
+
 //oculta el menu de las dietas creadas
 function ocultar()
 {
@@ -63,9 +66,10 @@ function allowDrop(ev) {
 }
 
 /*se dispara cuando alguien arrastra un elemento*/
-function drag(ev) {
+function drag(ev, id) {
     /*obtiene el tipo de dato que se esta arrastrando*/
     ev.dataTransfer.setData("text", ev.target.id);
+    idAlimentoD = id;
 }
 
 //Se dispara cuando el elemento se suelta en alguna parte
@@ -79,9 +83,9 @@ function drop(ev, id)
         
         divContent.appendChild(document.getElementById(dat));
         //hacemos visible un tache para que cuando se apachurre se elimine ese elemento
-        $('#tache1').removeClass('invisible');
+        $('#tache'+idAlimentoD).removeClass('invisible');
         //Ajustamos al elemento contenedor de el alimento para que se vea bien
-        $('#resultado1').addClass('enMenu');
+        $('#'+idAlimentoD).addClass('enMenu');
     });
 }
 
@@ -109,6 +113,8 @@ function mostrarDomingo()
         $('#jueves').removeClass('transparente');
         $('#viernes').removeClass('transparente');
         $('#sabado').removeClass('transparente');
+        
+        $('.tdDe').first().html('Domingo');
     });
 }
 
@@ -134,6 +140,8 @@ function mostrarLunes()
         $('#jueves').removeClass('transparente');
         $('#viernes').removeClass('transparente');
         $('#sabado').removeClass('transparente');
+        
+        $('.tdDe').first().html('Lunes');
     });
 }
 
@@ -159,6 +167,8 @@ function mostrarMartes()
         $('#jueves').removeClass('transparente');
         $('#viernes').removeClass('transparente');
         $('#sabado').removeClass('transparente');
+        
+        $('.tdDe').first().html('Martes');
     });
 }
 
@@ -184,6 +194,8 @@ function mostrarMiercoles()
         $('#jueves').removeClass('transparente');
         $('#viernes').removeClass('transparente');
         $('#sabado').removeClass('transparente');
+        
+        $('.tdDe').first().html('Miércoles');
     });
 }
 
@@ -209,6 +221,8 @@ function mostrarJueves()
         $('#jueves').addClass('transparente');
         $('#viernes').removeClass('transparente');
         $('#sabado').removeClass('transparente');
+        
+        $('.tdDe').first().html('Jueves');
     });
 }
 
@@ -234,6 +248,8 @@ function mostrarViernes()
         $('#jueves').removeClass('transparente');
         $('#viernes').addClass('transparente');
         $('#sabado').removeClass('transparente');
+        
+        $('.tdDe').first().html('Viernes');
     });
 }
 
@@ -259,6 +275,8 @@ function mostrarSabado()
         $('#jueves').removeClass('transparente');
         $('#viernes').removeClass('transparente');
         $('#sabado').addClass('transparente');
+        
+        $('.tdDe').first().html('Sábado');
     });
 }
 
@@ -267,6 +285,51 @@ function mostrarSabado()
 function remover(id)
 {
     $(function(){
-        $("#resultado1").remove();
+        $("#"+id).remove();
     });
 }
+
+
+function buscarAlimento(){
+    $(function(){
+        $('#buscar').autocomplete({
+            source: function(request, response){
+                var alimento = request.term;
+                if(alimento.length  > 0){
+                    $.ajax({
+                        url: 'http://localhost:8080/StrongFit/sBusqueda',
+                        type: 'get',
+                        dataType: 'json',
+                        data: {'nombre-alimento': alimento},
+                        success: function(datos){
+                            $('#idcontenedor-resultados').html('<div class = "resultado invisible" id = "resultadoClon" draggable = "true" ondragstart="drag(event, id)"></div>');
+                            var nombre = [];
+                            var calorias = [];
+                            var ids = [];
+                            for(var i in datos){
+                                nombre[i] = datos[i].nombre;
+                                calorias[i] = datos[i].calorias; 
+                                ids[i] = datos[i].id;
+                            }
+                            for(var i = 0; i < nombre.length; ++i){
+                                var $clon = $('#resultadoClon').clone();
+                                var idClon = ids[i] + contadorD;
+                                $clon.removeClass('invisible');
+                                $clon.attr('id', idClon);
+                                $clon.html('<input type = "hidden" id = "alimento'+idClon+'" name = "ids" value="'+idClon+'"><input type = "hidden" id = "calorias'+idClon+'" name = "calorias" value="'+calorias[i]+'"><input type = "hidden" id = "lipidos'+idClon+'" name = "lipidos" value="lipidos"><input type = "hidden" id = "proteinas'+idClon+'" name = "proteinas" value="proteinas"><input type = "hidden" id = "carbohidratos'+idClon+'" name = "carbohidratos" value="carbohidratos"><span id="textoResultado">'+nombre[i]+'</span><span id = "tache'+idClon+'" class = "icon-cancel-circle invisible"></span>');
+                                $('#resultadoClon').addClass('invisible');
+                                $clon.appendTo("#idcontenedor-resultados");
+                                document.getElementById("tache"+idClon).addEventListener('click', function(){remover(idClon)});
+                                contadorD++;
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    });
+}
+
+
+
+

@@ -36,3 +36,25 @@ function subirAlPerfil(){
         }, 500);
     });
 }
+
+
+//-------------------------Esto solo aplica al nutriologo-----------------------------------------------------------------------
+function mostrarMenu(id){
+    $(function(){
+        var ids = ['contenedorChatNutriologo', 'contenedorInfoPaciente', 'contenedorEstaPaciente', 'contenedorDietPaciente'];
+        for(var i = 0; i < ids.length; ++i){
+            if(id === ids[i]){
+                if($("#"+id).hasClass('invisible')){
+                    $("#"+id).removeClass('invisible');
+                }
+            }
+            else{
+                if(!$("#"+ids[i]).hasClass('invisible')){
+                    $("#"+ids[i]).addClass('invisible');
+                }
+            }
+        }
+    });
+}
+
+
