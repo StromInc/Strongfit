@@ -634,9 +634,9 @@ public class cConexion {
     }
     return arreglodecomentarios;
     }
-    public String altaarticulo(String idusr, String nPost, String nTexto) throws SQLException{
+    public String altaarticulo(String idusr, String nPost, String nTexto, String nVPost, String idUser) throws SQLException{
     this.st = con.createStatement();
-    ResultSet rs = this.st.executeQuery("call sp_altaarticulo('"+idusr+"','"+nPost+"','"+nTexto+"');");
+    ResultSet rs = this.st.executeQuery("call sp_altaarticulo('"+idusr+"','"+nPost+"','"+nTexto+"','"+nVPost+"','"+idUser+"');");
     String validacion = "";
     if(rs.next()){
      validacion = rs.getString("proceso");

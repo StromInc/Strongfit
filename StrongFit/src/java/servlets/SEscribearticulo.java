@@ -34,7 +34,7 @@ public class SEscribearticulo extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -42,14 +42,22 @@ public class SEscribearticulo extends HttpServlet {
             clases.cCifrado objcifrado = new clases.cCifrado();
             objconexion.conectar();
             HttpSession sesion = request.getSession();
-            String idUsr = (String)sesion.getAttribute("idUsr");
+            String idUsr = (String)sesion.getAttribute("idUsr");          
             String idArt = request.getParameter("idArt");
-            if(request.getParameter("operacion").equals("escribe")){
-            String validacion = objconexion.altaarticulo(idUsr, objcifrado.sustituye(request.getParameter("nombre"),1), request.getParameter("texto"));           
+            String idArti = (String)sesion.getAttribute("edicion");
+            if(request.getParameter("operacion").equals("escribe")){    
+            String validacion = objconexion.altaarticulo(idUsr, objcifrado.sustituye(request.getParameter("nombre"),1), request.getParameter("texto"), idArti, idUsr);           
             }
             if(request.getParameter("operacion").equals("llamadatos")){
             clases.cArticulos objarticulo = new clases.cArticulos();
-            String texto = objarticulo.buscadatos(idArt);
+            String texto = null;
+            if(!"nuevoarticuloenblanco".equals(idArt)){             
+            texto = objarticulo.buscadatos(idArt,1);
+            sesion.setAttribute("edicion",idArt);        
+            }else{
+            texto = objarticulo.buscadatos(idArt,2);
+            sesion.setAttribute("edicion",idArt);
+            }
             out.print(texto);
             }else{
             clases.cArticulos objarticulo = new clases.cArticulos();
@@ -75,6 +83,8 @@ public class SEscribearticulo extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(SEscribearticulo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(SEscribearticulo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -92,6 +102,8 @@ public class SEscribearticulo extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(SEscribearticulo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(SEscribearticulo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
