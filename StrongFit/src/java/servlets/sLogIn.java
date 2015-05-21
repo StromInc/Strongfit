@@ -61,7 +61,7 @@ public class sLogIn extends HttpServlet {
             try{                   
             // Logica para permitir o no el acceso
             if (verificacion.equals("si")){
-                sesion.setAttribute("idUsr",idUser);
+                sesion.setAttribute("idUsr",idUser);                
                 sesion.setAttribute("pass",pass);
                 //logica para mandar al usuario a donde deba
                 tipo = objconexion.tipodeusuario(idUS);
@@ -94,6 +94,7 @@ public class sLogIn extends HttpServlet {
                             sesion.setAttribute("municipio", municipio);
                             sesion.setAttribute("colonia", colonia);
                             sesion.setAttribute("tipodeus","2");
+                            sesion.setAttribute("edicion","");
                             response.sendRedirect("jsp/nutriologo/inicio.jsp");
                         }
                         else{

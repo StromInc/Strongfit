@@ -34,7 +34,7 @@ function votar(Npost, numero,nvoto) {
    function escribearticulo(operacion) {      
             $.post('../../SEscribearticulo', {
                 nombre : $('#txtnombre').val(),
-                texto: $('#txtarticulo').val(),
+                texto: $('#txtarticulo').html(),
                 operacion: operacion
         }, function(responseText) {
            $('#misarticulos').html(responseText);          
@@ -44,7 +44,7 @@ function votar(Npost, numero,nvoto) {
    function buscamisarticulos(operacion){
      $.post('../../SEscribearticulo', {
                 nombre : $('#txtnombre').val(),
-                texto: $('#txtarticulo').val(),
+                texto: $('#txtarticulo').html(),
                 operacion: operacion
         }, function(responseText) {          
            $('#misarticulos').html(responseText);          
@@ -57,7 +57,8 @@ function votar(Npost, numero,nvoto) {
                 operacion: "llamadatos"
         }, function(responseText) {
             console.log(":DD");
-           $('#edicion').html(responseText);                  
+           $('#edicion').html(responseText);
+           
     });   
         
     }

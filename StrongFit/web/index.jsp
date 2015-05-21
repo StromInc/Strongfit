@@ -72,8 +72,8 @@
             HttpSession sesion = request.getSession();
             if(sesion.getAttribute("mensaje") != null){
                 String mensaje = (String)sesion.getAttribute("mensaje");
-                System.out.println(mensaje);
                 out.print("<script>alert('"+mensaje+"');</script>");
+                sesion.setAttribute("mensaje", null);
                 sesion.removeAttribute("mensaje");
                 sesion.invalidate();
             }
