@@ -1,10 +1,23 @@
 @font-face {
   font-family: 'icomoon';
+  
   src: url("../Fuentes/icomoon.eot?pue5jm");
   src: url("../Fuentes/icomoon.eot?#iefixpue5jm") format('embedded-opentype'), url("../Fuentes/icomoon.woff?pue5jm") format('woff'), url("../Fuentes/icomoon.ttf?pue5jm") format('truetype'), url("../Fuentes/icomoon.svg?pue5jm#icomoon") format('svg');
+
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face{
+    font-family: 'icomoon2';
+    
+    src: url("../Fuentes/otrasIcoFuentes/icomoon.eot?o4tn8c");
+    src: url("../Fuentes/otrasIcoFuentes/icomoon.eot?#iefixo4tn8c") format('embedded-opentype'), url("../Fuentes/otrasIcoFuentes/icomoon.woff?o4tn8c") format("woff"), url("../Fuentes/otrasIcoFuentes/icomoon.ttf?o4tn8c") format('truetype'), url("../Fuentes/otrasIcoFuentes/icomoon.svg?o4tn8c#icomoon") format('svg');
+  
+    font-weight: normal;
+    font-style: normal;
+}
+
 [class^="icon-"],
 [class*=" icon-"] {
   font-family: 'icomoon';
@@ -17,6 +30,20 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+[class^="icon2-"],
+[class*=" icon2-"] {
+  font-family: 'icomoon2';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .icon-uniE60D:before {
   content: "\e60d";
 }
@@ -73,6 +100,19 @@
   content: "\f02e";
   font-size: 1.1em;
 }
+
+.icon2-area-graph:before {
+    content: "\e600";
+}
+
+.icon2-pie-chart:before {
+	content: "\e99a";
+}
+
+.icon2-stats-dots:before {
+	content: "\e99b";
+}
+
 .Header {
   background-color: #1b5e20;
   color: #fff;

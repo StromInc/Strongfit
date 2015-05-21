@@ -431,6 +431,34 @@ public class cConexion {
         this.st = con.createStatement();
         return this.st.executeQuery("call spAceptaSolicitud('"+idUsr+"', '"+idOtro+"', "+acepta+", "+idAmigo+");");
     }
+    
+    //Con esto se crea una nueva dieta
+    public ResultSet spSetDieta(String nom, int tipo, int kcal, float pro, float car, float lip, int considera) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spSetDieta('"+nom+"', "+tipo+", "+kcal+", "+pro+", "+car+", "+lip+", "+considera+");");
+    }
+    
+    //Esto es para crear un dia de la dieta
+    public ResultSet spSetDiaDieta(int catDia, int idDieta) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spSetDiaDieta("+catDia+", "+idDieta+");");
+    }
+    
+    //Esto es para crear una comida de cada dia
+    public ResultSet spSetComidaDieta(int tiempoComid, int dia) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spSetComidaDieta("+tiempoComid+", "+dia+");");
+    }
+    
+    //Esto es para crear una comida de cada dia
+    public ResultSet spInsertarAlimentoComida(int idAlimen, int idComi, int cant) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spInsertarAlimentoComida("+idAlimen+", "+idComi+", "+cant+");");
+    }
             
     //Esto busca los alimentos y los agrega a un Array 
     public ArrayList<cAlimento> buscarAlimento(String info) throws SQLException{
@@ -450,6 +478,15 @@ public class cConexion {
         System.out.print("Tamaño " + lista.size());
         return lista;
     }
+    
+    //trae todas las propiedades de los alimentos
+    public ResultSet spGetAlimentoNutriologo(String nomAlimento)throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetAlimentoNutriologo('"+nomAlimento+"');");
+    }
+    
+    
+    
     //Esto agrega las calorias al conteo calorico
     public void agregarAlimento(String id, int idCont) throws SQLException {
         this.st = con.createStatement();

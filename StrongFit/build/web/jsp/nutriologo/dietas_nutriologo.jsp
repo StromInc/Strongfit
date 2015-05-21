@@ -55,9 +55,13 @@
                 </div>
             </article>
             
+            <%
+                conecta.conectar();
+                String dominio = conecta.getDominio();
+            %>
+            <form id = "dietaNueva" action="<%=dominio%>sCrearDieta" method="post">
             <!--Esta es la parte en la que se ensambla la dieta-->
             <article class="Article-dietas Article-dietas2 invisible tamano" id="crearDietas">
-                <form id = "dietaNueva">
                     <div class = "menuCrear">
                         <div class="opcionMenu transparente" id ="domingo" onclick = "mostrarDomingo()">
                             Domingo
@@ -90,35 +94,35 @@
                                 <h2>
                                     Desayuno
                                 </h2>
-                                <div class="espacioDieta" id ="DesallunoDomingo" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id ="espacio0" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 1
                                 </h2>
-                                <div class="espacioDieta" id="Colacion1Domingo" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio1" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="comida">
                                 <h2>
                                     Comida
                                 </h2>
-                                <div class="espacioDieta" id="ComdiaDomingo" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio2" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 2
                                 </h2>
-                                <div class="espacioDieta" id = "Colacion2Domingo" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio3" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="cena">
                                 <h2>
                                     Cena
                                 </h2>
-                                <div class="espacioDieta" id = "CenaDomingo" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio4" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                         </div>
                         
@@ -128,35 +132,35 @@
                                 <h2>
                                     Desayuno
                                 </h2>
-                                <div class="espacioDieta" id ="DesallunoLunes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id ="espacio5" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 1
                                 </h2>
-                                <div class="espacioDieta" id="Colacion1Lunes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio6" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="comida">
                                 <h2>
                                     Comida
                                 </h2>
-                                <div class="espacioDieta" id="ComdiaLunes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio7" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 2
                                 </h2>
-                                <div class="espacioDieta" id = "Colacion2Lunes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio8" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="cena">
                                 <h2>
                                     Cena
                                 </h2>
-                                <div class="espacioDieta" id = "CenaLunes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio9" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                         </div>
                         
@@ -166,35 +170,35 @@
                                 <h2>
                                     Desayuno
                                 </h2>
-                                <div class="espacioDieta" id ="DesallunoMartes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id ="espacio10" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 1
                                 </h2>
-                                <div class="espacioDieta" id="Colacion1Martes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio11" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="comida">
                                 <h2>
                                     Comida
                                 </h2>
-                                <div class="espacioDieta" id="ComdiaMartes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio12" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 2
                                 </h2>
-                                <div class="espacioDieta" id = "Colacion2Martes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio13" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="cena">
                                 <h2>
                                     Cena
                                 </h2>
-                                <div class="espacioDieta" id = "CenaMartes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio14" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                         </div>
                         
@@ -204,35 +208,35 @@
                                 <h2>
                                     Desayuno
                                 </h2>
-                                <div class="espacioDieta" id ="DesallunoMiercoles" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id ="espacio15" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 1
                                 </h2>
-                                <div class="espacioDieta" id="Colacion1Miercoles" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio16" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="comida">
                                 <h2>
                                     Comida
                                 </h2>
-                                <div class="espacioDieta" id="ComdiaMiercoles" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio17" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 2
                                 </h2>
-                                <div class="espacioDieta" id = "Colacion2Miercoles" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio18" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="cena">
                                 <h2>
                                     Cena
                                 </h2>
-                                <div class="espacioDieta" id = "CenaMiercoles" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio19" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                         </div>
                         
@@ -242,35 +246,35 @@
                                 <h2>
                                     Desayuno
                                 </h2>
-                                <div class="espacioDieta" id ="DesallunoJueves" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id ="espacio20" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 1
                                 </h2>
-                                <div class="espacioDieta" id="Colacion1Jueves" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio21" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="comida">
                                 <h2>
                                     Comida
                                 </h2>
-                                <div class="espacioDieta" id="ComdiaJueves" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio22" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 2
                                 </h2>
-                                <div class="espacioDieta" id = "Colacion2Jueves" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio23" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="cena">
                                 <h2>
                                     Cena
                                 </h2>
-                                <div class="espacioDieta" id = "CenaJueves" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio24" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                         </div>
                         
@@ -280,35 +284,35 @@
                                 <h2>
                                     Desayuno
                                 </h2>
-                                <div class="espacioDieta" id ="DesallunoViernes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id ="espacio25" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 1
                                 </h2>
-                                <div class="espacioDieta" id="Colacion1Viernes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio26" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="comida">
                                 <h2>
                                     Comida
                                 </h2>
-                                <div class="espacioDieta" id="ComdiaViernes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio27" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 2
                                 </h2>
-                                <div class="espacioDieta" id = "Colacion2Viernes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio28" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="cena">
                                 <h2>
                                     Cena
                                 </h2>
-                                <div class="espacioDieta" id = "CenaViernes" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio29" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                         </div>
                         
@@ -318,44 +322,45 @@
                                 <h2>
                                     Desayuno
                                 </h2>
-                                <div class="espacioDieta" id ="DesallunoSabado" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id ="espacio30" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 1
                                 </h2>
-                                <div class="espacioDieta" id="Colacion1Sabado" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio31" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="comida">
                                 <h2>
                                     Comida
                                 </h2>
-                                <div class="espacioDieta" id="ComdiaSabado" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id="espacio32" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="colacion">
                                 <h2>
                                     Colación 2
                                 </h2>
-                                <div class="espacioDieta" id = "Colacion2Sabado" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio33" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                             
                             <div class="cena">
                                 <h2>
                                     Cena
                                 </h2>
-                                <div class="espacioDieta" id = "CenaSabado" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
+                                <div class="espacioDieta" id = "espacio34" ondrop="drop(event, id)" ondragover="allowDrop(event)"></div>
                             </div>
                         </div>
                     </div>
-                </form>
+                
             </article>
             
             <!--Esta es la parte en donde se ve el balanceo de los nutrientes-->
             <article class="Article-dietas Article-dietas3 invisible tamano" id = "balanceoDietas">
-                <input type="text" id = "nombreNuevaDieta" class ="nombreDieta-txt" name = "nombreNuevaDieta" placeholder = "Nombre de la dieta" required>
+                <input type="text" id = "nombreNuevaDieta" class ="nombreDieta-txt" placeholder = "Nombre de la dieta" required>
+                <input type="text" id="caloriasMeta" onchange="setCaloriasMeta();" class="caloriasMeta nombreDieta-txt" placeholder="Kilo calorías meta" required>
                 <hr>
                 <table class = "tablaInf">
                     <tr>
@@ -367,34 +372,35 @@
                 <table class = "tablaInf">
                     <tr>
                         <td class="tdIz">Calorías del Día:</td>
-                        <td class="tdDe">2000kc</td>
+                        <td class="tdDe" id="caloriasDia">0kc</td>
                     </tr>
                     <tr>
                         <td class="tdIz">Calorías promedio:</td>
-                        <td class="tdDe">1950kc</td>
+                        <td class="tdDe" id="caloriasPromedio">0kc</td>
                     </tr>
                 </table>
                 <hr>
                 <table class = "tablaInf">
                     <tr>
                         <td class="tdIz">Proteinas:</td>
-                        <td class="tdDe">20%</td>
+                        <td class="tdDe" id="proteinasPromedio">0%</td><!--20% es lo ideal-->
                     </tr>
                     <tr>
                         <td class="tdIz">Lípidos:</td>
-                        <td class="tdDe">30%</td>
+                        <td class="tdDe" id="lipidosPromedio">0%</td><!--30% es lo ideal-->
                     </tr>
                     <tr>
                         <td class="tdIz">Carbohidratos:</td>
-                        <td class="tdDe">50%</td>
+                        <td class="tdDe" id="carbohidratosPromedio">0%</td><!--50% es lo ideal-->
                     </tr>
                 </table>
                 <div class = "menuFinalizar">
                     <hr>
-                    <input type="button" id="finalizarDieta" class="btn-act-usr btnMenuFin" value="Finalizar">
+                    <input type="button" id="finalizarDieta" onclick="contarElementos();" class="btn-act-usr btnMenuFin" value="Finalizar">
                     <p id="cancelarDieta" class="btn-act-usr btnCancelar icon-cancel-circle"></p>
                 </div>
             </article>
+            </form>
             <div class = "arrow-left invisible"></div>
         </section>
         <script src="../../js/acciones_dietasnutriologo.js"></script>

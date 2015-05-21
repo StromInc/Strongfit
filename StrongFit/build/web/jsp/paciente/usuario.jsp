@@ -131,18 +131,7 @@
                         <input type = "submit" value="cambiar" class="btn-imagen"/>
                     </form>
                 </article>    
-                <!--esta es informacion nutrimental como si esta gordo y cuantas calorias debe de consumir-->
-                <article class = "Article-tbl-usr2" style = "margin-left: 0">
-                    <h2 class = "Article-title">Calorias a consumir diariamente</h2>
-                    <hr>
-                    <%for(int i = 0; i < caloriasD.length; ++i)
-                        {
-                    %>
-                    <div class = "micha" style="text-align: left;"><div class = "diaCalorias"><%=diasSemana[i]%></div></div><div class = "micha" style ="text-align: right;"><div class = "caloriasPaciente "><%=caloriasD[i]%> kcal</div></div>
-                    <%
-                        }
-                    %>
-                </article>
+                
                 <article class = "Article-tbl-usr2" style = "margin-left: 0; <%=color%>">
                     <h2 class = "Article-title">Estado de salud</h2>
                     <hr>
