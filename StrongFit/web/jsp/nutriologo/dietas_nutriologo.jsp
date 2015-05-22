@@ -360,7 +360,7 @@
             <!--Esta es la parte en donde se ve el balanceo de los nutrientes-->
             <article class="Article-dietas Article-dietas3 invisible tamano" id = "balanceoDietas">
                 <input type="text" id = "nombreNuevaDieta" class ="nombreDieta-txt" placeholder = "Nombre de la dieta" required>
-                <input type="text" id="caloriasMeta" onchange="setCaloriasMeta();" class="caloriasMeta nombreDieta-txt" placeholder="Kilo calorías meta" required>
+             
                 <hr>
                 <table class = "tablaInf">
                     <tr>
@@ -372,26 +372,26 @@
                 <table class = "tablaInf">
                     <tr>
                         <td class="tdIz">Calorías del Día:</td>
-                        <td class="tdDe" id="caloriasDia">0kc</td>
+                        <td class="tdDe" ><span id="caloriasDia">0</span>kc</td>
                     </tr>
                     <tr>
                         <td class="tdIz">Calorías promedio:</td>
-                        <td class="tdDe" id="caloriasPromedio">0kc</td>
+                        <td class="tdDe" ><span id="caloriasPromedio">0</span>kc</td>
                     </tr>
                 </table>
                 <hr>
                 <table class = "tablaInf">
                     <tr>
                         <td class="tdIz">Proteinas:</td>
-                        <td class="tdDe" id="proteinasPromedio">0%</td><!--20% es lo ideal-->
+                        <td class="tdDe" ><span id="proteinasPromedio">0</span>%</td><!--20% es lo ideal-->
                     </tr>
                     <tr>
                         <td class="tdIz">Lípidos:</td>
-                        <td class="tdDe" id="lipidosPromedio">0%</td><!--30% es lo ideal-->
+                        <td class="tdDe" ><span id="lipidosPromedio">0</span>%</td><!--30% es lo ideal-->
                     </tr>
                     <tr>
                         <td class="tdIz">Carbohidratos:</td>
-                        <td class="tdDe" id="carbohidratosPromedio">0%</td><!--50% es lo ideal-->
+                        <td class="tdDe" ><span id="carbohidratosPromedio">0</span>%</td><!--50% es lo ideal-->
                     </tr>
                 </table>
                 <div class = "menuFinalizar">

@@ -63,6 +63,17 @@ public class sCrearDieta extends HttpServlet {
             float pro = 0f;
             float car = 0f;
             float lip = 0f;
+            
+            for(int i = 0; i < proteinas.length; ++i){
+                pro += Float.parseFloat(proteinas[i]);
+                car += Float.parseFloat(carbohidratos[i]);
+                lip += Float.parseFloat(lipidos[i]);
+                kcal += Integer.parseInt(calorias[i]);
+            }
+            pro = pro / proteinas.length;
+            car = car / carbohidratos.length;
+            lip = lip /lipidos.length;
+            kcal = kcal / calorias.length;
 
             //primero se crea la dieta
             int idDieta = 0;

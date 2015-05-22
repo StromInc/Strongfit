@@ -324,8 +324,18 @@ function mostrarSabado()
 function remover(id)
 {
     $(function(){
-        alert(id);
-        $("#"+id).remove();
+        caloriasDia[dia] -= parseFloat($('#calorias'+id).val());
+        caloriasPromedio = 0;
+        for(var i = 0; i < caloriasDia.length; ++i){
+            caloriasPromedio += caloriasDia[i];
+        }
+        caloriasPromedio = caloriasPromedio / 7;
+        
+        proteinas[dia] -= parseFloat($('#proteinas'+id).val());
+        lipidos[dia] -= parseFloat($('#lipidos'+id).val());
+        carbohidratos[dia] -= parseFloat($('#carbohidratos'+id).val());
+        
+        porcentajes();$("#"+id).remove();
     });
 }
 
@@ -363,10 +373,17 @@ function buscarAlimento(){
                                 var idClon = contadorD;
                                 $clon.removeClass('invisible');
                                 $clon.attr('id', idClon);
-                                $clon.html('<input type = "hidden" id = "alimento'+idClon+'" name = "ids" value="'+ids[i]+'"><input type = "hidden" id = "calorias'+idClon+'" name = "calorias" value="'+calorias[i]+'"><input type = "hidden" id = "lipidos'+idClon+'" name = "lipidos" value="'+datos[i].lipidos+'"><input type = "hidden" id = "proteinas'+idClon+'" name = "proteinas" value="'+datos[i].proteinas+'"><input type = "hidden" id = "carbohidratos'+idClon+'" name = "carbohidratos" value="'+datos[i].carbohidratos+'"><input type="hidden" id="consideracion'+idClon+'" name="consideracion" value="'+datos[i].consideracion+'"><input type="hidden" id="porcion'+idClon+'" name="porcion" value="'+datos[i].porcion+'"><input type="hidden" id="cantidad'+idClon+'" name="cantidad" value="1" ><span id="textoResultado">'+nombre[i]+'</span><span id = "tache'+idClon+'" class = "icon-cancel-circle invisible"></span>');
+//                                console.log(idClon);
+                                $clon.html('<input type = "hidden" id = "alimento'+idClon+'" name = "ids" value="'+ids[i]+'"><input type = "hidden" id = "calorias'+idClon+'" name = "calorias" value="'+calorias[i]+'"><input type = "hidden" id = "lipidos'+idClon+'" name = "lipidos" value="'+datos[i].lipidos+'"><input type = "hidden" id = "proteinas'+idClon+'" name = "proteinas" value="'+datos[i].proteinas+'"><input type = "hidden" id = "carbohidratos'+idClon+'" name = "carbohidratos" value="'+datos[i].carbohidratos+'"><input type="hidden" id="consideracion'+idClon+'" name="consideracion" value="'+datos[i].consideracion+'"><input type="hidden" id="porcion'+idClon+'" name="porcion" value="'+datos[i].porcion+'"><input type="hidden" id="cantidad'+idClon+'" name="cantidad" value="1" ><span id="textoResultado">'+nombre[i]+'</span><span id = "tache'+idClon+'" onclick="remover('+idClon+');" class = "icon-cancel-circle invisible"></span>');
                                 $('#resultadoClon').addClass('invisible');
                                 $clon.appendTo("#idcontenedor-resultados");
-                                document.getElementById("tache"+idClon).addEventListener('click', function(){remover(idClon)});
+//                                var tache =  document.getElementById("tache"+idClon);
+//                                tache.addEventListener('click', function(){remover();});
+//                                var tache =  document.getElementById("tache"+idClon);
+//                                var conte = document.getElementById(idClon);
+//                                console.log(tache);
+//                                console.log(conte);
+                                
                                 contadorD++;
                             }
                         }
@@ -411,6 +428,16 @@ function automatizarCalculos(id){
             caloriasPromedio += caloriasDia[i];
         }
         caloriasPromedio = caloriasPromedio / 7;
+        tem = caloriasPromedio - Math.floor(caloriasPromedio);
+        if(tem >= .5){
+            tem = 1;
+        }
+        else{
+            tem = 0;
+        }
+        
+        caloriasPromedio = Math.floor(caloriasPromedio) + tem;
+        tem = 0;
         
         proteinas[dia] += parseFloat($('#proteinas'+id).val());
         lipidos[dia] += parseFloat($('#lipidos'+id).val());
@@ -437,37 +464,43 @@ function porcentajes(){
      * 1g de carbohidrato --------- 4 kcal
      */
     
-    proPorciento[dia] = ((4 * proteinas[dia]) / caloriasDia[dia]) * 100;console.log(proPorciento[dia]);
-    lipPorciento[dia] = ((9 * lipidos[dia]) / caloriasDia[dia]) * 100;console.log(lipPorciento[dia]);
-    carPorciento[dia] = ((4 * carbohidratos[dia]) / caloriasDia[dia]) * 100;console.log(carPorciento[dia]);
-    
-    tem = proPorciento[dia] - Math.floor(proPorciento[dia]);
-    if(tem >= .5){
-        tem = 1;
+    if(caloriasDia[dia] > 0){
+        proPorciento[dia] = ((4 * proteinas[dia]) / caloriasDia[dia]) * 100;console.log(proPorciento[dia]);
+        lipPorciento[dia] = ((9 * lipidos[dia]) / caloriasDia[dia]) * 100;console.log(lipPorciento[dia]);
+        carPorciento[dia] = ((4 * carbohidratos[dia]) / caloriasDia[dia]) * 100;console.log(carPorciento[dia]);
+
+        tem = proPorciento[dia] - Math.floor(proPorciento[dia]);
+        if(tem >= .5){
+            tem = 1;
+        }
+        else{
+            tem = 0;
+        }
+        proPorciento[dia] = Math.floor(proPorciento[dia]) + parseInt(tem);
+
+        tem = carPorciento[dia] - Math.floor(carPorciento[dia]);
+        if(tem >= .5){
+            tem = 1;
+        }
+        else{
+            tem = 0;
+        }
+        carPorciento[dia] = Math.floor(carPorciento[dia]) + parseInt(tem);
+
+        tem = lipPorciento[dia] - Math.floor(lipPorciento[dia]);console.log(tem);
+        if(tem >= .5){
+            tem = 1;
+        }
+        else{
+            tem = 0;
+        }
+        lipPorciento[dia] = Math.floor(lipPorciento[dia]) + parseInt(tem);
     }
     else{
-        tem = 0;
+        proPorciento[dia] = 0;
+        lipPorciento[dia] = 0;
+        carPorciento[dia] = 0;
     }
-    proPorciento[dia] = Math.floor(proPorciento[dia]) + parseInt(tem);
-    
-    tem = carPorciento[dia] - Math.floor(carPorciento[dia]);
-    if(tem >= .5){
-        tem = 1;
-    }
-    else{
-        tem = 0;
-    }
-    carPorciento[dia] = Math.floor(carPorciento[dia]) + parseInt(tem);
-    
-    tem = lipPorciento[dia] - Math.floor(lipPorciento[dia]);console.log(tem);
-    if(tem >= .5){
-        tem = 1;
-    }
-    else{
-        tem = 0;
-    }
-    lipPorciento[dia] = Math.floor(lipPorciento[dia]) + parseInt(tem);
-    
     $('#caloriasDia').html(caloriasDia[dia]);
     $('#caloriasPromedio').html(caloriasPromedio);
     $('#proteinasPromedio').html(proPorciento[dia]);
