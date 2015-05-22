@@ -439,8 +439,10 @@ function setCaloriasMeta(){
 
 function automatizarCalculos(id){
     $(function(){
+        alert(caloriasDia[dia]);
+        alert(calTem);
         caloriasDia[dia] += calTem;
-        caloriasDia[dia] = caloriasDia[dia].toFixed(1);
+        caloriasDia[dia] = parseFloat(caloriasDia[dia].toFixed(1));
         caloriasPromedio = 0;
         for(var i = 0; i < caloriasDia.length; ++i){
             caloriasPromedio += caloriasDia[i];
