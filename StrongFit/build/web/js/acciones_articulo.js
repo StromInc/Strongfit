@@ -6,16 +6,22 @@ function votar(Npost, numero,nvoto) {
             if(responseText === "0"){
              $('#u'+numero).html("<img src='../../Imagenes/Iconos/sticky-vote.png'>");      
              $('#d'+numero).html("<img src='../../Imagenes/Iconos/sticky-vote2.png'>");
+             $('#us').html("<img src='../../Imagenes/Iconos/sticky-vote.png'>");      
+             $('#ds').html("<img src='../../Imagenes/Iconos/sticky-vote2.png'>");
              
             }
             if(responseText === "1"){
              $('#u'+numero).html("<img src='../../Imagenes/Iconos/sticky-vote3.png'>");      
              $('#d'+numero).html("<img src='../../Imagenes/Iconos/sticky-vote2.png'>");
+             $('#us').html("<img src='../../Imagenes/Iconos/sticky-vote3.png'>");      
+             $('#ds').html("<img src='../../Imagenes/Iconos/sticky-vote2.png'>");
              
             }
             if(responseText === "2"){
              $('#u'+numero).html("<img src='../../Imagenes/Iconos/sticky-vote.png'>");      
              $('#d'+numero).html("<img src='../../Imagenes/Iconos/sticky-vote4.png'>");
+             $('#us').html("<img src='../../Imagenes/Iconos/sticky-vote.png'>");      
+             $('#ds').html("<img src='../../Imagenes/Iconos/sticky-vote4.png'>");
              
             }
               
@@ -27,7 +33,8 @@ function votar(Npost, numero,nvoto) {
                 nombre : Npost,
                 comentario: $('#t'+numero).val()
         }, function(responseText) {
-           $('#P'+numero).html(responseText);          
+           $('#P'+numero).html(responseText);  
+           $('#Ps').html(responseText);  
     });
     
    }
@@ -61,5 +68,16 @@ function votar(Npost, numero,nvoto) {
            
     });   
         
+    }
+    function abrir(nombre, lugar){
+      $.post('../../Scargaarticulo', {
+                idArt : nombre,
+                numpost: lugar
+        }, function(responseText) {
+            console.log(":DD");
+           $('#spanoculto').html(responseText);
+           $('#spanoculto').css("z-Index",0);
+            $('#spanoculto').show("slow");
+    }); 
     }
     

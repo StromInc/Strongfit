@@ -24,6 +24,7 @@
                 </div>
             </article>
             <!--Esta es la seccion donde se pueden ver cosas publicadas por los medicos-->
+            <span id="spanoculto" hidden></span>
             <article class = "Article-articulos Article-articulo">
                 <%                                                         
                 clases.cArticulos objarticulos = new clases.cArticulos();

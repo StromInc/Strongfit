@@ -708,5 +708,16 @@ public class cConexion {
     }
     return misarticulos;
     }
+    public String[] buscadatosdemiarticulo(String idArt) throws SQLException{
+    String[] misarticulos = new String[3];
+    this.st = con.createStatement();
+    ResultSet rs = this.st.executeQuery("call sp_buscamiarticulo('"+idArt+"');");
+    if(rs.next()){
+    misarticulos[1] = rs.getString("texto");
+    misarticulos[2] = rs.getString("idmedico");
+    }
+    return misarticulos;
+    }
+    
 }
 

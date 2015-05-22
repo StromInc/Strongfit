@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" session="true" errorPage="error500.jsp" import="org.apache.jasper.JasperException"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true" errorPage="../nutriologo/error500.jsp" import="org.apache.jasper.JasperException"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,9 +16,7 @@
             <!--Esta es la parte en la que te sugiere el platillo que te toca segun tu dieta-->
             <article class = "Article-title Article-articulo">
                 <div class = "Article-platillos">
-                    <div class = "meta estadisticas" onclick='location.href="Escribir_articulo.jsp"'>
-                        Escribir un artículo
-                    </div>
+                  
                     <div class = "faltante estadisticas"> 
                     </div>
                 </div>
