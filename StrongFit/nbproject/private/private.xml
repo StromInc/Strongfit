@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/js/acciones_dietasnutriologo.js</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sCrearDieta.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/nutriologo/dietas_nutriologo.jsp</file>
+            <file>file:/C:/Users/jorge%20pastrana/trabajo/SW3/Strongfit/StrongFit/src/java/clases/cArticulos.java</file>
+            <file>file:/C:/Users/jorge%20pastrana/trabajo/SW3/Strongfit/StrongFit/web/js/acciones_articulo.js</file>
+            <file>file:/C:/Users/jorge%20pastrana/trabajo/SW3/Strongfit/StrongFit/src/java/servlets/SCheca.java</file>
+            <file>file:/C:/Users/jorge%20pastrana/trabajo/SW3/Strongfit/StrongFit/web/jsp/nutriologo/inicio.jsp</file>
+            <file>file:/C:/Users/jorge%20pastrana/trabajo/SW3/Strongfit/StrongFit/src/java/servlets/Scargaarticulo.java</file>
+            <file>file:/C:/Users/jorge%20pastrana/trabajo/SW3/Strongfit/StrongFit/src/java/clases/cConexion.java</file>
+            <file>file:/C:/Users/jorge%20pastrana/trabajo/SW3/Strongfit/StrongFit/web/jsp/paciente/articulos.jsp</file>
+            <file>file:/C:/Users/jorge%20pastrana/trabajo/SW3/Strongfit/StrongFit/src/java/servlets/sLogIn.java</file>
         </group>
     </open-files>
 </project-private>

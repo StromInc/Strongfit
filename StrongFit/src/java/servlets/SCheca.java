@@ -63,7 +63,7 @@ public class SCheca extends HttpServlet {
                 sesion.setAttribute("pass",pass);
                 //logica para mandar al usuario a donde deba
                 tipo = objconexion.tipodeusuario(idUserS);
-                
+                System.out.print(tipo+"!!!!!!!!!!!!!!!!!!!!!");
                 if(tipo.equals("medico")){
                     resultado = objconexion.cargadedatos(idUserS, tipo);
                     if(resultado.next()){
@@ -101,8 +101,9 @@ public class SCheca extends HttpServlet {
                     }
                 }else{
                     if(tipo.equals("paciente")){  
-                        resultado = objconexion.cargadedatos(idUser, tipo);
+                        resultado = objconexion.cargadedatos(idUserS, tipo);
                         if(resultado.next()){
+                            System.out.print("hooooooo shiiiit");
                             int idPaciente = resultado.getInt("idPaciente");
                             int peso = resultado.getInt("peso");
                             int edad = resultado.getInt("edad");
@@ -131,6 +132,7 @@ public class SCheca extends HttpServlet {
                             sesion.setAttribute("tipodeus","1");
                             out.print("si2");
                         }
+                        System.out.print("cargadatotes");
                     }else{
                         if(tipo.equals("admin")){
                             sesion.setAttribute("idUsr", "supremo");

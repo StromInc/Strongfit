@@ -98,21 +98,27 @@ function guardarsesion() {
         }, function(responseText) {
             var validacion = responseText;
             console.log(validacion);
+           
+            
             if(validacion == "si1"){               
                 localStorage.setItem("id", correoVar);
                 localStorage.setItem("contra", contraVar);
                 localStorage.setItem("sesioniniciada", "si");
+                
             }
             if(validacion == "si2"){               
                 localStorage.setItem("id", correoVar);
                 localStorage.setItem("contra", contraVar);
                 localStorage.setItem("sesioniniciada", "si");
+                
+                
             }
             if(validacion == "si3"){               
                 localStorage.setItem("id", correoVar);
                 localStorage.setItem("contra", contraVar);
                 localStorage.setItem("sesioniniciada", "si");
-            }
+                 
+        }
         });
     }
    }
