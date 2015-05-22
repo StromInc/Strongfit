@@ -1,19 +1,19 @@
 <<<<<<< HEAD
-deploy.ant.properties.file=/home/ian/.netbeans/8.0.2/config/GlassFishEE6/Properties/gfv32012263344.properties
+deploy.ant.properties.file=/home/ian/.netbeans/8.0.2/config/GlassFishEE6/Properties/gfv31718860337.properties
 j2ee.platform.is.jsr109=true
-j2ee.server.domain=/home/ian/.netbeans/8.0.2/config/GF_4.1_91/domain1
+j2ee.server.domain=/home/ian/.netbeans/8.0.2/config/GF_4.1_92/domain1
 j2ee.server.home=/usr/local/glassfish-4.1/glassfish
 j2ee.server.instance=[/usr/local/glassfish-4.1/glassfish:/usr/local/glassfish-4.1/glassfish/domains/domain1]deployer:gfv3ee6:localhost:4848
 j2ee.server.middleware=/usr/local/glassfish-4.1
 =======
-deploy.ant.properties.file=C:\\Users\\USER\\AppData\\Roaming\\NetBeans\\8.0.2\\config\\GlassFishEE6\\Properties\\gfv3-1139387577.properties
+deploy.ant.properties.file=/home/ian/.netbeans/8.0.2/config/GlassFishEE6/Properties/gfv31718860337.properties
 j2ee.platform.is.jsr109=true
-j2ee.server.domain=C:/Users/USER/AppData/Roaming/NetBeans/8.0.2/config/GF_4.1/domain1
-j2ee.server.home=C:/Program Files/glassfish-4.1/glassfish
-j2ee.server.instance=[C:\\Program Files\\glassfish-4.1\\glassfish;C:\\Program Files\\glassfish-4.1\\glassfish\\domains\\domain1]deployer:gfv3ee6:localhost:4848
-j2ee.server.middleware=C:/Program Files/glassfish-4.1
->>>>>>> c511e1c4bd7b310a620fc4e41db019b2cfe07195
+j2ee.server.domain=/home/ian/.netbeans/8.0.2/config/GF_4.1_92/domain1
+j2ee.server.home=C:/Program Files/glassfish-4.0/glassfish
+j2ee.server.instance=[/usr/local/glassfish-4.1/glassfish:/usr/local/glassfish-4.1/glassfish/domains/domain1]deployer:gfv3ee6:localhost:4848
+j2ee.server.middleware=/usr/local/glassfish-4.1
+>>>>>>> 674751792f677d6b32409efb9932fb67fe09aaa8
 javac.debug=true
 javadoc.preview=true
 selected.browser=default
-user.properties.file=C:\\Users\\USER\\AppData\\Roaming\\NetBeans\\8.0.2\\build.properties
+user.properties.file=C:\\Users\\Alumno\\AppData\\Roaming\\NetBeans\\7.4\\build.properties
