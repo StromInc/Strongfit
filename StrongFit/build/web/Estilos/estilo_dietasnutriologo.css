@@ -134,7 +134,8 @@
   text-align: center;
 }
 .resultado {
-  background-color: #0d5e0e;
+  /*background-color: #0d5e0e;*/
+  background-color: #0070C8;
   color: #fff;
   width: 80%;
   -webkit-border-radius: 3px;
@@ -142,8 +143,10 @@
   padding: 0.5em;
   margin-bottom: 0.3em;
   display: inline-block;
-  border: solid;
-  border-color: #074408;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+/*  border: solid;
+  border-color: #074408;*/
+  border: none;
   cursor: move;
 }
 .icon-cancel-circle {
@@ -224,4 +227,27 @@
   margin-right: 1em;
   width: auto;
   text-align: center;
+}
+
+.flechitasF{
+    cursor: pointer;
+}
+
+.flechitasF{
+    margin-right: .2em;
+}
+
+.setCantidad{
+    width: 2em;
+    background-color: #0070C8;
+    /*background-color: #0d5e0e;*/
+    border: none;
+    color: white;
+    padding: 0;
+    text-align: right;
+}
+
+.setCantidad:focus{
+    text-decoration: underline;
+    outline: none;
 }
