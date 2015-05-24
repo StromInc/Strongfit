@@ -23,7 +23,7 @@ public class cArticulos {
         String articulos = "";
         
         for(int i = articulosNom.length-1; i >= 0 ;i--){
-            articulos+= "<h2>" + objcifrado.sustituye(articulosNom[i],2) +"<h2> <br>";
+            articulos+= "<h2>" + objcifrado.sustituye(articulosNom[i],2) +"</h2> <br>";
             articulos+= "por: " + articulosAut[i] + " <br>";
             for(int j = 0; j < 200;j++){
             articulos+= articulosTex[i].charAt(j);
@@ -85,7 +85,7 @@ public class cArticulos {
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote4.png'>";                       
                 break;                                  
             }
-            articulos+= "</span><input type='text' id='t"+i+"'><button id='botoncoment' onclick=comentar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+")>comentar</button><hr>";
+            articulos+= "</span><input type='text' id='t"+i+"'><button id='botoncoment' onclick=comentar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",'1')>comentar</button><hr>";
             articulos+="<button id='botonabrir' onclick=abrir('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+")>Seguir leyendo</button>";
        }
     return articulos;
@@ -139,18 +139,18 @@ public class cArticulos {
         objconexion.conectar();
         String[] articulosAut = objconexion.buscadatosdemiarticulo(idArt);
         
-        String articulos = "";
+        String articulos = "<span id='articulo' class='Article-articulosc'>";
         
         
-            articulos+= "<h2>" + idArt +"<h2> <br>";
+            articulos+= "<h2>" + idArt +"</h2><hr> <br>";
             articulos+= "por: " + articulosAut[2] + " <br>";
             
             articulos+= articulosAut[1];
             
-            
-            articulos+="<br><br>";
-             articulos+= "Comentarios: " + "<hr>";
-             articulos+= "<span id='Ps'>";
+            articulos+= "</span>";
+            articulos+="<span id='Ps'  class='Article-articulosd'>";
+             articulos+= "Comentarios:<hr>";
+             
              String[][] arreglodecomentarios = objconexion.regresacomentarios(idArt);
            
             
@@ -180,7 +180,7 @@ public class cArticulos {
             }else{
             articulos+= "Se el primero en dejar un comentario" + " <hr>"; 
             }
-            articulos+= "</span>";
+            articulos+= "</span><span class='icon-cancel-circle' style='left:82%;position:fixed;color:red;' onClick=cerrar()></span><span id='acciones' class='Article-articulose'>";
             int estado = objconexion.regresavoto(idusr, idArt);
             switch (estado){
                 case 0:
@@ -202,7 +202,7 @@ public class cArticulos {
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote4.png'>";                       
                 break;                                  
             }
-            articulos+= "</span><input type='text' id='ts'><button id='botoncoment' onclick=comentar('"+idArt+"',"+i+")>comentar</button><hr>";
+            articulos+= "</span><input type='text' id='ts'><button id='botoncoment' onclick=comentar('"+idArt+"',"+i+",'s')>comentar</button></span>";
             
        
     return articulos;

@@ -11,7 +11,7 @@
     </head>
     <body>
         <%@include file = "barra_menu.jsp" %>
-        
+        <span Style="width:100%;height:100%;background:rgba(0,0,0,0.8); position:fixed;" hidden id="spanventana"></span>
         <section class="Section-todo">
             <!--Esta es la parte en la que te sugiere el platillo que te toca segun tu dieta-->
             <article class = "Article-title Article-articulo">
@@ -22,7 +22,7 @@
                 </div>
             </article>
             <!--Esta es la seccion donde se pueden ver cosas publicadas por los medicos-->
-            <span id="spanoculto" hidden></span>
+            <span id="spanoculto" hidden style="" class = "Article-articulosB"></span>
             <article class = "Article-articulos Article-articulo">
                 <%                                                         
                 clases.cArticulos objarticulos = new clases.cArticulos();
