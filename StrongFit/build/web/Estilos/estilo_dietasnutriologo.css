@@ -251,3 +251,10 @@
     text-decoration: underline;
     outline: none;
 }
+
+.desactivado{
+    opacity: .5;
+    cursor: default;
+}
+
+.yaEsta{}

@@ -5,11 +5,13 @@
  */
 package servlets;
 
+import clases.cCifrado;
 import clases.cConexion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,11 +38,19 @@ public class sCrearDieta extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String msjError = "";
+            
+            cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
+            
+            HttpSession sesion = request.getSession();
+            
+            String idUsr = (String)sesion.getAttribute("idUsr");
+                   idUsr = seguro.encriptar(idUsr);
             
             cConexion conector = new cConexion();
             conector.conectar();
@@ -57,30 +68,48 @@ public class sCrearDieta extends HttpServlet {
             String nom = request.getParameter("nombreNuevaDieta");
             
             int tipo = 2;
-            int kcal = 0;
+            int kcal2 = 0;
             int considera = 1;
             
+            float kcal = 0;
             float pro = 0f;
             float car = 0f;
             float lip = 0f;
             
+            DecimalFormat formateador = new DecimalFormat("####.##"); 
+            
             for(int i = 0; i < proteinas.length; ++i){
-                pro += Float.parseFloat(proteinas[i]);
-                car += Float.parseFloat(carbohidratos[i]);
-                lip += Float.parseFloat(lipidos[i]);
-                kcal += Integer.parseInt(calorias[i]);
+                pro += Float.parseFloat(cantidad[i]) * Float.parseFloat(proteinas[i]) / 100;
+                car += Float.parseFloat(cantidad[i]) * Float.parseFloat(carbohidratos[i]) / 100;
+                lip += Float.parseFloat(cantidad[i]) * Float.parseFloat(lipidos[i]) / 100;
+                kcal += Float.parseFloat(cantidad[i]) * Integer.parseInt(calorias[i]) / 100;
             }
-            pro = pro / proteinas.length;
-            car = car / carbohidratos.length;
-            lip = lip /lipidos.length;
-            kcal = kcal / calorias.length;
+            
+            pro = formateador.parse(formateador.format(pro)).floatValue();
+            car = formateador.parse(formateador.format(car)).floatValue();
+            lip = formateador.parse(formateador.format(lip)).floatValue();
+            kcal = formateador.parse(formateador.format(kcal)).floatValue();
+            
+            pro = pro / 7;
+            car = car / 7;
+            lip = lip / 7;
+            kcal = kcal / 7;
+            
+            pro = formateador.parse(formateador.format(pro)).floatValue();
+            car = formateador.parse(formateador.format(car)).floatValue();
+            lip = formateador.parse(formateador.format(lip)).floatValue();
+            kcal = formateador.parse(formateador.format(kcal)).floatValue();
+            
+            kcal2 = (int)kcal;
 
             //primero se crea la dieta
             int idDieta = 0;
-            ResultSet dieta = conector.spSetDieta(nom, tipo, kcal, pro, car, lip, considera);
+            ResultSet dieta = conector.spSetDieta(nom, tipo, kcal2, pro, car, lip, considera);
             if(dieta.next()){
                 idDieta = dieta.getInt("idDietaCreada");
             }
+            
+            conector.actualizarDieta(idUsr, idDieta, "no");
             
             //segundo se crea el dia de la dieta
             int cuantosAlimentos = 0;
@@ -132,6 +161,8 @@ public class sCrearDieta extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(sCrearDieta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(sCrearDieta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -149,6 +180,8 @@ public class sCrearDieta extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(sCrearDieta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(sCrearDieta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
