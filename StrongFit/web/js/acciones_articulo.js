@@ -28,11 +28,19 @@ function votar(Npost, numero,nvoto) {
     });
     
    }
-   function comentar(Npost, numero) {      
-            $.post('../../SComenta', {
+   function comentar(Npost, numero, desde) {      
+       var tipo;
+       if(desde == 's'){
+           tipo = 's';         
+       }else{
+         tipo = numero;  
+           
+       }     
+       $.post('../../SComenta', {
                 nombre : Npost,
-                comentario: $('#t'+numero).val()
+                comentario: $('#t'+tipo).val()
         }, function(responseText) {
+            
            $('#P'+numero).html(responseText);  
            $('#Ps').html(responseText);  
     });
@@ -76,8 +84,14 @@ function votar(Npost, numero,nvoto) {
         }, function(responseText) {
             console.log(":DD");
            $('#spanoculto').html(responseText);
-           $('#spanoculto').css("z-Index",0);
-            $('#spanoculto').show("slow");
+           $('#spanoculto').css("z-Index",1);
+           $('#spanventana').css("z-Index",0);
+           $('#spanventana').show("slow");    
+        $('#spanoculto').show("slow");
+            
     }); 
     }
-    
+    function cerrar(){
+      $('#spanoculto').hide("slow");
+      $('#spanventana').hide("slow");
+    }
