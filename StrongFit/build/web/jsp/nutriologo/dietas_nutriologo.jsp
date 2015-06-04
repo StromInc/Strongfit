@@ -1,3 +1,5 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="clases.cCifrado"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error500.jsp" import="org.apache.jasper.JasperException"%>
 <!DOCTYPE html>
 <html>
@@ -6,6 +8,8 @@
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_dietasusr.css">
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_dietasnutriologo.css">
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+        <script src="../../js/acciones_dietasnutriologo.js"></script>
+         <script src="../../js/salir.js"></script>
     </head>
     <body>
         <%@include file = "barra_menu.jsp" %>
@@ -18,31 +22,42 @@
                 <form>
                     <input type="hidden" value="" name="<%%>" id = "dieta" >
                 </form>
+                <%
+                    HttpSession sesion = request.getSession();
+                    cCifrado seguro = new cCifrado();
+                    seguro.AlgoritmoAES();
+                    String usrid = seguro.encriptar((String)sesion.getAttribute("idUsr"));
+                    
+                    ResultSet rs = conecta.getDietasRegistradas(usrid);
+                    
+                    String nom = "";
+                    int idDieta = 0;
+                    int contadorD = 0;
+                    
+                    while(rs.next()){
+                        idDieta = rs.getInt("idDieta");
+                        nom = rs.getString("nombre");
+                %>
                 <!--Esto es de prueba-->
-                <div class = "dietaCreada" id = "dieta1" onmouseover = "mostrarOpciones(id)" onmouseout="ocultarOpciones(id)">
-                    Nombre de la dieta
-                    <div id = "opc1" class="opciones invisible">
-                        <span class = "arrow-left"></span>
-                        <div class = "opcionesDiv"><p onclick = "editarDieta()">Editar</p><p onclick = "borrarDieta()">Eliminar</p></div>
-                    </div>
+                <div class = "dietaCreada" id = '<%="dieta" + contadorD%>'>
+                    <input type="hidden" name="idsDieta" id="idsDieta<%=contadorD%>" value="<%=idDieta%>">
+                    <span><%=nom%></span><div class="divTusDietas"><input type="button" name="btnEditarD" class="btnEditarD" onclick="editarDieta(<%=contadorD%>);" value="Editar"><input type="button" name="btnBorrarD" class="btnEliminarD" onclick="borrarDieta(<%=contadorD%>);" value="Eliminar"></div>
                 </div>
-                <div class = "dietaCreada" id = "dieta2" onmouseover = "mostrarOpciones(id)" onmouseout="ocultarOpciones(id)">
-                    Nombre de la dieta
-                    <div id = "opc2" class="opciones invisible">
-                        <span class = "arrow-left"></span>
-                        <div class = "opcionesDiv"><p onclick = "editarDieta()">Editar</p><p onclick = "borrarDieta()">Eliminar</p></div>
-                    </div>
-                </div>
-                <div class = "dietaCreada" id = "dieta3" onmouseover = "mostrarOpciones(id)" onmouseout="ocultarOpciones(id)">
-                    Nombre de la dieta
-                    <div id = "opc3" class="opciones invisible">
-                        <span class = "arrow-left"></span>
-                        <div class = "opcionesDiv"><p onclick = "editarDieta()">Editar</p><p onclick = "borrarDieta()">Eliminar</p></div>
-                    </div>
-                </div>
-                <!------------------------>
+                <%
+                        contadorD++;
+                    }
+                %>
+
                 <input type="button" name="nueva" value="Nueva" class="btn-act-usr" onclick = "ocultar()">
             </article>
+                
+                <%
+                    String editando = (String)sesion.getAttribute("editandoDieta");
+                    if(editando != null){
+                        %><script>ocultar();</script><%
+                        sesion.removeAttribute("editandoDieta");
+                    }
+                %>
             
             <!--Esta es la parte en donde aparece un buscador y tu puedes arrastrar los alimentos-->
             <article class="Article-dietas invisible tamano" id = "buscarAlimentos">
@@ -403,7 +418,6 @@
             </form>
             <div class = "arrow-left invisible"></div>
         </section>
-        <script src="../../js/acciones_dietasnutriologo.js"></script>
-         <script src="../../js/salir.js"></script>
+        
     </body>
 </html>

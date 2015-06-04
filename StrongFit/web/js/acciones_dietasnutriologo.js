@@ -31,8 +31,7 @@ for(var i = 0; i < 7; ++i){
 }
 
 //oculta el menu de las dietas creadas
-function ocultar()
-{
+function ocultar(){
     $(function(){
         $('#textoTitulo').addClass('textoBueno');
         $('#tusDietas').animate({
@@ -70,24 +69,24 @@ function revelar()
 }
 
 //muestra las opciones de las dietas creadas
-function mostrarOpciones(id)
-{
-    $(function(){
-        setTimeout(function(){
-            $('#opc' + id).removeClass('invisible');
-        },200);
-    });
-}
-
-//oculta las opciones que tienen las dietas creadas
-function ocultarOpciones(id)
-{
-    $(function(){
-        setTimeout(function(){
-            $('#opc' + id).addClass('invisible');
-        },200);
-    });
-}
+//function mostrarOpciones(id)
+//{
+//    $(function(){
+//        setTimeout(function(){
+//            $('#opc' + id).removeClass('invisible');
+//        },200);
+//    });
+//}
+//
+////oculta las opciones que tienen las dietas creadas
+//function ocultarOpciones(id)
+//{
+//    $(function(){
+//        setTimeout(function(){
+//            $('#opc' + id).addClass('invisible');
+//        },200);
+//    });
+//}
 
 //Se dispara para evitar cualquier cosa que ocurra por default
 function allowDrop(ev) {
@@ -433,7 +432,7 @@ function buscarAlimento(){
 
 function contarElementos(){
     $(function(){
-        var confirmar = confirm("Esta seguro(a) que desea finalizar esta dieta, podra editarla después si es necesario.");
+        var confirmar = confirm("¿Esta seguro(a) qué desea finalizar esta dieta?, podrá editarla después si es necesario.");
         if(confirmar){
             var tam = 0;
             var valores = "";
@@ -620,5 +619,43 @@ function cambiarIndependiente(id){
     });
 }
 
+
+function borrarDieta(contadorD){
+    $(function(){
+        var confirmacion = confirm("Esta seguro(a) que desesa borrar esta dieta, los pacientes que la esten siguiendo también se verán afectados.");
+        if(confirmacion){
+            var idDiet = $('#idsDieta'+contadorD).val();
+            $.ajax({
+                url: 'http://localhost:8080/StrongFit/sBorrarDieta',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    idDieta: idDiet
+                },
+                success: function(res){
+                    $('#dieta'+contadorD).remove();
+                }
+            });
+        }
+    });
+}
+
+
+function editarDieta(contadorD){
+    $(function(){
+        var idDiet = $('#idsDieta'+contadorD).val();
+        $.ajax({
+            url: 'http://localhost:8080/StrongFit/sEditarDieta',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                idDieta: idDiet
+            },
+            success: function(res){
+                location.reload();
+            }
+        });
+    });
+}
 
 

@@ -459,6 +459,48 @@ public class cConexion {
         this.st = con.createStatement();
         return this.st.executeQuery("call spInsertarAlimentoComida("+idAlimen+", "+idComi+", "+cant+");");
     }
+    
+    //Esto borrara la dieta despues de verificar su pertenencia 
+    public ResultSet spBorrarDieta(int dieta, String idUsr) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spBorrarDieta("+dieta+", '"+idUsr+"');");
+    }
+    
+    //Esto borrara el dia despues de verificar su pertenencia 
+    public ResultSet spBorrarDia(int idDia) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spBorrarDia("+idDia+");");
+    }
+    
+    //Esto borrara la comida despues de verificar su pertenencia 
+    public ResultSet spBorrarComida(int idComi, int idDiet) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spBorrarComida("+idComi+", "+idDiet+");");
+    }
+    
+    //Esto borrara el dia despues de verificar su pertenencia 
+    public ResultSet spGetDiaDieta(int idDiet) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetDiaDieta("+idDiet+");");
+    }
+    
+    //Esto borrara el dia despues de verificar su pertenencia 
+    public ResultSet spGetComidaDia(int idDia) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetComidaDia("+idDia+");");
+    }
+    
+    //Esto borrara el dia despues de verificar su pertenencia 
+    public ResultSet spGetAlimentoComida(int idCom) throws SQLException
+    {
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetAlimentoComida("+idCom+");");
+    }
             
     //Esto busca los alimentos y los agrega a un Array 
     public ArrayList<cAlimento> buscarAlimento(String info) throws SQLException{

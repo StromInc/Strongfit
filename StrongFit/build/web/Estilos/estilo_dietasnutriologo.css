@@ -17,9 +17,31 @@
   color: #fff;
 }
 .dietaCreada:hover {
-  background-color: transparent;
-  cursor: pointer;
+  background-color: rgba(123, 123, 123, 1);
 }
+
+.btnEditarD,
+.btnEliminarD{
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border: none;
+}
+
+.btnEditarD{
+    background-color: #0070c8;
+}
+.btnEditarD:hover{
+    background-color: #01579b
+}
+
+.btnEliminarD{
+    background-color: #ff2115;
+}
+.btnEliminarD:hover{
+    background-color: #c80000;
+}
+
+
 .btn-act-usr {
   background-color: #0070c8;
   color: #fff;
@@ -258,3 +280,7 @@
 }
 
 .yaEsta{}
+
+.divTusDietas{
+    display: inline-block;
+}
