@@ -16,7 +16,7 @@ function cambiarFondo(){
         $body.removeClass('fondo');
         $(window).load(function(){
         $('#background').fadeIn(1500);//Muestra el background oculto cuando carga todo
-        setInterval('cycleImages()', 4000); //se ejecuta cada 4s
+        setInterval('cycleImages()', 7000); //se ejecuta cada 7s
     });
     }
 }

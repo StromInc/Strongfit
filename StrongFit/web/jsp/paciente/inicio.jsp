@@ -66,12 +66,8 @@
                             %>
                         <p id="consumido">Consumido <%=kcalorias%> cal</p>
                         </div>
-                        <div id="container"></div> 
+                        <div id="container"></div> <!--El div de la grafica--> 
                     </div>      
-                </div>
-                <div>
-                    <h3>Otro div que no recuerdo que va a tener</h3>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima magni consequuntur expedita ex quasi. Incidunt dolore iste, non quia quod animi aliquam sed alias, facere dignissimos ratione labore magni beatae!
                 </div>
                 <div class="Registrados">
                     <p>Alimentos Registrados</p>
@@ -92,17 +88,7 @@
                             <%
                                 }
                             %>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name">Taco</p>
-                                <span>5 cal</span>
-                                <button class="Consumidos-borrar">X</button>
-                            </li>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name">Taco</p>
-                                <span>5 cal</span>
-                                <button class="Consumidos-borrar">X</button>
-                            </li>
-                            <li class="Consumidos-item">
+                            <li class="Consumidos-item ocultar">
                                 <p class="Consumidos-name">Taco</p>
                                 <span>5 cal</span>
                                 <button class="Consumidos-borrar">X</button>
@@ -113,8 +99,16 @@
             </div>                 
         </article>
         <aside class="Buscador x-large">
-            <div class="Buscador-title">
-                Alimentos
+            <div class="Buscador-header">
+                <h3 class="Buscador-title">Agrear alimentos a: Desayuno</h3>    
+                <div class="Buscador-cambiar" id="buscadorCambiar">+</div>
+                <ul class="Buscador-nav" id="buscadorNav">
+                    <li class="Comida Seleccionado">Desayuno</li>
+                    <li class="Comida">Colacion 1</li>
+                    <li class="Comida">Comida</li>
+                    <li class="Comida">Colacion 2</li>       
+                    <li class="Comida">Cena</li>
+                </ul>
             </div>
             <div class="Buscador-form">
                 <input type="search" name="nombre-alimento" class="Buscador-search" id="input-alimento" placeholder="buscar" required> 
@@ -126,7 +120,7 @@
                 <h3 class="Buscador-aviso">Alimentos por defecto</h3>
                 <div class="Buscador-list">
                     <ul class="Alimentos">
-                        <li class="Alimentos-item">
+                        <li class="Alimentos-item ocultar">
                             <p class="Alimentos-name">Taco</p>
                             
                             <span>5 cal</span>

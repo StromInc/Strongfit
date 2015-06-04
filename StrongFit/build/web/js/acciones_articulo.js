@@ -8,21 +8,21 @@ function votar(Npost, numero,nvoto) {
              $('#d'+numero).html("<img src='../../Imagenes/Iconos/sticky-vote2.png'>");
              $('#us').html("<img src='../../Imagenes/Iconos/sticky-vote.png'>");      
              $('#ds').html("<img src='../../Imagenes/Iconos/sticky-vote2.png'>");
-             
+             console.log("1 " + numero);
             }
             if(responseText === "1"){
              $('#u'+numero).html("<img src='../../Imagenes/Iconos/sticky-vote3.png'>");      
              $('#d'+numero).html("<img src='../../Imagenes/Iconos/sticky-vote2.png'>");
              $('#us').html("<img src='../../Imagenes/Iconos/sticky-vote3.png'>");      
              $('#ds').html("<img src='../../Imagenes/Iconos/sticky-vote2.png'>");
-             
+             console.log("2 " + numero);
             }
             if(responseText === "2"){
              $('#u'+numero).html("<img src='../../Imagenes/Iconos/sticky-vote.png'>");      
              $('#d'+numero).html("<img src='../../Imagenes/Iconos/sticky-vote4.png'>");
              $('#us').html("<img src='../../Imagenes/Iconos/sticky-vote.png'>");      
              $('#ds').html("<img src='../../Imagenes/Iconos/sticky-vote4.png'>");
-             
+             console.log("3 " + numero);
             }
               
     });
@@ -42,7 +42,7 @@ function votar(Npost, numero,nvoto) {
         }, function(responseText) {
             
            $('#P'+numero).html(responseText);  
-           $('#Ps').html(responseText);  
+           $('#Ps').html('Comentarios: <hr>'+responseText);  
     });
     
    }

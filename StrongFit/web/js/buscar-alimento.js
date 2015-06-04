@@ -23,9 +23,23 @@ $(function(){
         });
         }
     });
+    var $buttonCambiar = $( "#buscadorCambiar");
+    var $menuComidas = $( "#buscadorNav" );
+    function showMenu(e) {
+        e.preventDefault();
+         var $comidas = $( ".Comida" );
+         $comidas.on('click', function(){
+             $('.Buscador-title').text('Agregar alimentos a: ' + $(this).text());
+             $comidas.removeClass('Seleccionado');
+             $(this).addClass('Seleccionado');
+         });
+        $menuComidas.fadeToggle(200);
+    }
+    $buttonCambiar.on('click', showMenu); 
+    
     //Esto despliega todos los alimentos
     function alimentoAdapter(nombre, calorias, ids){
-        var $alimentoItem = $('.Alimentos-item').first();;
+        var $alimentoItem = $('.Alimentos-item').first();
         var $contenedor = $('.Alimentos');
         var $buscadorAviso = $('.Buscador-aviso');
         var aviso = $buscadorAviso.val();
