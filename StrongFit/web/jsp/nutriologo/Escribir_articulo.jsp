@@ -26,12 +26,12 @@
                         <input type = "file"  name="uploadFile" id="ImgUsuario" class="input-subir" required/>
                         <input type = "submit" value="cambiar" class="btn-imagen"/>
                 </form><br>
-                Texto:<br><div contentEditable="true" id="txtarticulo"><p>  
+                Texto:<br><div contentEditable="true" id="txtarticulo" class="Article-articulosf"><p>  
                         <br>                    
                     </p></div><br>
-                <input type="button" value="Enviar" onclick=escribearticulo('escribe')>                
+                    <input type="button" value="Enviar" onclick=escribearticulo('escribe') class="botonenviar">            
             </span>
-                <span id="misarticulos" >
+                <span id="misarticulos" class="Article-articulosg">
                     
                 </span>   
             </form>    

@@ -46,7 +46,7 @@ public class SComenta extends HttpServlet {
             String idUsr = (String)sesion.getAttribute("idUsr");
             objconexion.altacomentario(idUsr, npost, comentario);
             String[][] arreglodecomentarios = objconexion.regresacomentarios(npost);
-            String articulos = "Comentarios:  <hr>";
+            String articulos = "";
             
             if(arreglodecomentarios != null){
              int[] ordendecomentarios = new int[arreglodecomentarios.length];
