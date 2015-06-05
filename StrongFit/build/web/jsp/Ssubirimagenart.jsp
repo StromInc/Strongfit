@@ -1,9 +1,3 @@
-<%-- 
-    Document   : Ssubirimagen
-    Created on : 22/02/2015, 11:29:28 AM
-    Author     : jorge pastrana
---%>
-
 <%@page import="org.apache.jasper.JasperException"%>
 <%@ page import="org.apache.commons.fileupload.FileItem" %> 
 <%@ page import="java.util.*" %> 
@@ -16,7 +10,7 @@
 
 <%
  clases.cConexion objruta = new clases.cConexion();
-            String ubicacionArchivo = objruta.ruta(1);
+            String ubicacionArchivo = objruta.ruta(2);
 HttpSession sesion = request.getSession();
 DiskFileItemFactory factory = new DiskFileItemFactory();
 factory.setSizeThreshold(1024); 
@@ -90,7 +84,7 @@ if(tipodeus.equals("1")){
 response.sendRedirect("paciente/usuario.jsp");
 }
 if(tipodeus.equals("2")){
-response.sendRedirect("nutriologo/usuario.jsp");
+response.sendRedirect("nutriologo/Escribir_articulo.jsp");
 }
 }
 catch(FileUploadException ex)

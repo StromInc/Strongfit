@@ -65,7 +65,42 @@ body {
   position:fixed;
   z-index:3;
   left:24%;
-  top:85%;
+  top:74%;
   width:30%;
   height:10%;
 }
+.Article-articulosf {
+  background-color:#A4C2A3;
+  height: 40%;
+  width: 70%;
+  position: absolute;
+  border-radius: 15px;
+}
+.Article-articulosg {
+  position: fixed;
+  top: 20%;
+  right: 5%;
+  width: 10%;
+  border-right-style: outset;
+  border-bottom-style: outset;
+  border-width: thin;
+  border-top-style: inset;
+  border-left-style: inset;
+}
+.Article-articulosh {
+ background-color: skyblue;
+  border-top-style: outset;
+  position: absolute;
+  width: 100%;
+}
+.Article-articulosi {
+   position: absolute;
+  left: 24%;
+  top: 22%;
+}
+
+.botonenviar {
+  position: fixed;
+  top: 80%;
+}
+  

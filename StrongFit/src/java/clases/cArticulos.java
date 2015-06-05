@@ -55,9 +55,12 @@ public class cArticulos {
             numeroc = nmayor;
             }
             for(int m = ordendecomentarios.length-1 ; m >= 0 ;m--){
+            if(m <= 3){
             articulos+= arreglodecomentarios[ordendecomentarios[m]][0] + "<br>";
             articulos+= arreglodecomentarios[ordendecomentarios[m]][1] + "<br>";
             articulos+= "<hr>";
+            }
+            
             }
             articulos+= "<hr>";
             }else{
@@ -93,13 +96,15 @@ public class cArticulos {
    public String buscamisarticulos(String idUsr) throws SQLException{
    String articulos = "";
    clases.cCifrado objcifrado = new clases.cCifrado();
-   articulos += "<span onClick=cambiaarticulo('nuevoarticuloenblanco')>Nuevo articulo</span><br>";
+   articulos += "<span onClick=cambiaarticulo('nuevoarticuloenblanco') class='Article-articulosh'>Nuevo articulo</span><br>";
    cConexion objconexion = new cConexion();
    objconexion.conectar();
    String[] misarticulos = objconexion.buscamisarticulos(idUsr);
    if(misarticulos != null){
-   for(int i = 0; i < misarticulos.length;i++){
-     articulos += "<span onClick=cambiaarticulo('"+misarticulos[i]+"')>" + objcifrado.sustituye(misarticulos[i],2) + "</span>" + "</br>";
+   for(int i = 0; i < misarticulos.length;i++){    
+     
+     articulos += "<span onClick=cambiaarticulo('"+misarticulos[i]+"') class='Article-articulosh'>" + objcifrado.sustituye(misarticulos[i],2) + "</span>" + "</br>";
+     
    }
    }else{
    articulos += "<span>Todavia no has escrito ningun articulo</span><br>";
@@ -109,27 +114,37 @@ public class cArticulos {
    public String buscadatos(String idArticulo, int operacion) throws SQLException{
    cConexion objconexion = new cConexion();
    clases.cCifrado objcifrado = new clases.cCifrado();
+   clases.CImagen objimg = new clases.CImagen();
+   int verificacionimg = objimg.devuelveexistencia(idArticulo,2);
+                String ruta = "";
+                String ruta2 = "../../Imagenes/Articulos/";
+                switch(verificacionimg){
+                    case 1: 
+                        ruta = ruta2 + idArticulo + ".jpg";
+                        break;
+                    case 2: 
+                        ruta = ruta2 + idArticulo + ".png";
+                        break;
+                    case 3: 
+                        ruta = ruta2 + idArticulo + ".gif";
+                        break;
+                    default: 
+                        ruta = "../../Imagenes/usr_sin_imagen.jpg";
+                        break;
+              }
    String articulo = null;
    if(operacion == 1){
    objconexion.conectar();
    String misarticulos = objconexion.buscamiarticulo(idArticulo);
    articulo = "Nombre:<br><input type=\"text\" id=\"txtnombre\" value = '"+objcifrado.sustituye(idArticulo,2)+"'><br>\n" +
-"                 <img src = \"\" class =\"img-usr\" alt = \"foto de usuario\">\n" +
-"                <form  enctype=\"multipart/form-data\" id=\"img_frm\" method=\"post\" action=\"../Ssubirimagen.jsp\" name=\"img_frm\">\n" +
-"                        <input type = \"file\"  name=\"uploadFile\" id=\"ImgUsuario\" class=\"input-subir\" required/>\n" +
-"                        <input type = \"submit\" value=\"cambiar\" class=\"btn-imagen\"/>\n" +
-"                </form><br>\n" +
-"                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\">"+misarticulos+"</div><br>\n" +
-"                <input type=\"button\" value=\"Enviar\" onclick=escribearticulo('escribe')>";
+"                 <img src = \""+ruta+"\" class =\"img-usr\" alt = \"foto de usuario\">\n"+
+"                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\">"+misarticulos+"</div><br>\n" +
+"                <input type=\"button\" value=\"Enviar\" onclick=escribearticulo('escribe') class=\"botonenviar\">";
    }else{
    articulo = "Nombre:<br><input type=\"text\" id=\"txtnombre\" value = ''><br>\n" +
-"                 <img src = \"\" class =\"img-usr\" alt = \"foto de usuario\">\n" +
-"                <form  enctype=\"multipart/form-data\" id=\"img_frm\" method=\"post\" action=\"../Ssubirimagen.jsp\" name=\"img_frm\">\n" +
-"                        <input type = \"file\"  name=\"uploadFile\" id=\"ImgUsuario\" class=\"input-subir\" required/>\n" +
-"                        <input type = \"submit\" value=\"cambiar\" class=\"btn-imagen\"/>\n" +
-"                </form><br>\n" +
-"                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\"><br></div><br>\n" +
-"                <input type=\"button\" value=\"Enviar\" onclick=escribearticulo('escribe')>";
+"                 <img src = \""+ruta+"\" class =\"img-usr\" alt = \"foto de usuario\">\n" +
+"                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\"><br></div><br>\n" +
+"                <input type=\"button\" value=\"Enviar\" onclick=escribearticulo('escribe') class=\"botonenviar\">";
    }
    return articulo;
    }

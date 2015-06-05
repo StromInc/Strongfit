@@ -8,9 +8,6 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author jorge pastrana
  */
-@WebServlet(name = "SComenta", urlPatterns = {"/SComenta"})
-public class SComenta extends HttpServlet {
+@WebServlet(name = "Sartenuso", urlPatterns = {"/Sartenuso"})
+public class Sartenuso extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,45 +31,13 @@ public class SComenta extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           clases.cConexion objconexion= new clases.cConexion();
-            objconexion.conectar();
-            String npost = request.getParameter("nombre");
-            String comentario = request.getParameter("comentario");
-             HttpSession sesion = request.getSession();
-            String idUsr = (String)sesion.getAttribute("idUsr");
-            objconexion.altacomentario(idUsr, npost, comentario);
-            String[][] arreglodecomentarios = objconexion.regresacomentarios(npost);
-            String articulos = "";
-            
-            if(arreglodecomentarios != null){
-             int[] ordendecomentarios = new int[arreglodecomentarios.length];
-            int numeroc = 1000000;
-            
-            int nmayor;
-            for(int k = 0; k < arreglodecomentarios.length;k++){
-             nmayor = Integer.parseInt(arreglodecomentarios[0][2]);    
-            for(int l = 0; l < arreglodecomentarios.length;l++){         
-                if(Integer.parseInt(arreglodecomentarios[l][2]) < numeroc){
-                    if(Integer.parseInt(arreglodecomentarios[l][2]) > nmayor){
-                    nmayor = Integer.parseInt(arreglodecomentarios[l][2]);
-                    } 
-            }
-            }
-            ordendecomentarios[k] = nmayor;
-            numeroc = nmayor;
-            }
-            for(int m = ordendecomentarios.length-1 ; m >= 0 ;m--){
-            articulos+= arreglodecomentarios[ordendecomentarios[m]][0] + "<br>";
-            articulos+= arreglodecomentarios[ordendecomentarios[m]][1] + "<br>";
-            articulos+= "<hr>";
-            }
-            articulos+= "<hr>";
-            }
-            out.print(articulos);
+           HttpSession sesion = request.getSession();
+           String idArt = request.getParameter("idArt");
+           sesion.setAttribute("artenuso", idArt);
         }
     }
 
@@ -88,11 +53,7 @@ public class SComenta extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SComenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -106,11 +67,7 @@ public class SComenta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SComenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
