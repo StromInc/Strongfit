@@ -41,10 +41,12 @@ public class sEditarDieta extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             int idDieta = Integer.parseInt(request.getParameter("idDieta"));
+            String nombreDieta = request.getParameter("nombreDieta");
             
             HttpSession sesion = request.getSession();
             sesion.setAttribute("editandoDieta", "editando");
             sesion.setAttribute("idDietaEditar", idDieta);
+            sesion.setAttribute("nombreDieta", nombreDieta);
             
             Map<String, String> mapa = new HashMap();
             mapa.put("aEditar", "editar");

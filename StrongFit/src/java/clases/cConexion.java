@@ -433,10 +433,10 @@ public class cConexion {
     }
     
     //Con esto se crea una nueva dieta
-    public ResultSet spSetDieta(String nom, int tipo, int kcal, float pro, float car, float lip, int considera) throws SQLException
+    public ResultSet spSetDieta(int idD, String nom, int tipo, int kcal, float pro, float car, float lip, int considera) throws SQLException
     {
         this.st = con.createStatement();
-        return this.st.executeQuery("call spSetDieta('"+nom+"', "+tipo+", "+kcal+", "+pro+", "+car+", "+lip+", "+considera+");");
+        return this.st.executeQuery("call spSetDieta("+idD+", '"+nom+"', "+tipo+", "+kcal+", "+pro+", "+car+", "+lip+", "+considera+");");
     }
     
     //Esto es para crear un dia de la dieta
