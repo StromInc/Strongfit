@@ -92,6 +92,7 @@ public class SCheca extends HttpServlet {
                             sesion.setAttribute("colonia", colonia);
                             sesion.setAttribute("tipodeus","2");
                             sesion.setAttribute("edicion","");
+                            sesion.setAttribute("artenuso","");
                             out.print("si1");
                         }
                         else{

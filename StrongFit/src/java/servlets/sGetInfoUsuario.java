@@ -61,7 +61,7 @@ public class sGetInfoUsuario extends HttpServlet {
             desti = seguro.encriptar(desti);
             
             clases.CImagen objimg = new clases.CImagen();
-            int verificacionimg = objimg.devuelveexistencia(destiS);
+            int verificacionimg = objimg.devuelveexistencia(destiS,1);
             String sesUsr = "";
             String ruta = "lel";
             String ruta2 = "../../Imagenes/Usuarios/";

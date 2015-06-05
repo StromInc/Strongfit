@@ -40,13 +40,17 @@ public class SEscribearticulo extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             clases.cConexion objconexion= new clases.cConexion();
             clases.cCifrado objcifrado = new clases.cCifrado();
+            clases.CImagen objimagen = new clases.CImagen();
             objconexion.conectar();
             HttpSession sesion = request.getSession();
             String idUsr = (String)sesion.getAttribute("idUsr");          
             String idArt = request.getParameter("idArt");
             String idArti = (String)sesion.getAttribute("edicion");
             if(request.getParameter("operacion").equals("escribe")){    
-            String validacion = objconexion.altaarticulo(idUsr, objcifrado.sustituye(request.getParameter("nombre"),1), request.getParameter("texto"), idArti, idUsr);           
+            String validacion = objconexion.altaarticulo(idUsr, objcifrado.sustituye(request.getParameter("nombre"),1), request.getParameter("texto"), idArti, idUsr);
+            if(validacion.equals("Exitoso")){
+            objimagen.cambianombreimagen(idUsr, objcifrado.sustituye(request.getParameter("nombre"),1), 2);
+            }
             }
             if(request.getParameter("operacion").equals("llamadatos")){
             clases.cArticulos objarticulo = new clases.cArticulos();

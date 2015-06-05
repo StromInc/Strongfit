@@ -95,6 +95,7 @@ public class sLogIn extends HttpServlet {
                             sesion.setAttribute("colonia", colonia);
                             sesion.setAttribute("tipodeus","2");
                             sesion.setAttribute("edicion","");
+                            sesion.setAttribute("artenuso","");
                             response.sendRedirect("jsp/nutriologo/inicio.jsp");
                         }
                         else{

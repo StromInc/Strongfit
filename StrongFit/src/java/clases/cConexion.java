@@ -559,10 +559,14 @@ public class cConexion {
         return respuesta;
     }
     
-    public String ruta(){
+    public String ruta(int i){
         String ruta = "";
-        //ruta = "C:\\Users\\jorge pastrana\\Proyectos\\s5\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
-        ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
+        if(i == 1){
+        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
+        //ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
+        }else{
+        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
+        }
         return  ruta;
     }
     

@@ -102,7 +102,7 @@
         con++;
     }
     clases.CImagen objimg = new clases.CImagen();
-    int verificacionimg = objimg.devuelveexistencia(idUsr);
+    int verificacionimg = objimg.devuelveexistencia(idUsr,1);
     String ruta = "";
     String ruta2 = "../../Imagenes/Usuarios/";
     switch(verificacionimg){

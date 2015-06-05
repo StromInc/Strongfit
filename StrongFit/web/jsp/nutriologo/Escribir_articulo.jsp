@@ -9,6 +9,49 @@
 <html>
     <head>
               <%@include file = "../meta.jsp" %>
+              <%
+              
+              HttpSession sesion = request.getSession();
+              String idUsr = (String)sesion.getAttribute("idUsr");
+              String idArt = (String)sesion.getAttribute("artenuso");
+              clases.CImagen objimg = new clases.CImagen();
+              if(idArt.equals("")){
+                int verificacionimg = objimg.devuelveexistencia(idUsr,2);
+                String ruta = "";
+                String ruta2 = "../../Imagenes/Articulos/";
+                switch(verificacionimg){
+                    case 1: 
+                        ruta = ruta2 + idUsr + ".jpg";
+                        break;
+                    case 2: 
+                        ruta = ruta2 + idUsr + ".png";
+                        break;
+                    case 3: 
+                        ruta = ruta2 + idUsr + ".gif";
+                        break;
+                    default: 
+                        ruta = "../../Imagenes/usr_sin_imagen.jpg";
+                        break;
+                }
+    }else{
+              int verificacionimg = objimg.devuelveexistencia(idArt,2);
+                String ruta = "";
+                String ruta2 = "../../Imagenes/Articulos/";
+                switch(verificacionimg){
+                    case 1: 
+                        ruta = ruta2 + idArt + ".jpg";
+                        break;
+                    case 2: 
+                        ruta = ruta2 + idArt + ".png";
+                        break;
+                    case 3: 
+                        ruta = ruta2 + idArt + ".gif";
+                        break;
+                    default: 
+                        ruta = "../../Imagenes/usr_sin_imagen.jpg";
+                        break;
+              }
+              %>
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio2.css">
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src = "../../js/acciones_inicio.js"></script>
@@ -18,23 +61,24 @@
     <%@include file = "barra_menu.jsp" %>
     <body onLoad=buscamisarticulos('busca');>
         <section class="Section-todo">
-            <form action="" method="post">
-            <span id="edicion">
-                Nombre:<br><input type="text" id="txtnombre"><br>
-                 <img src = "" class ="img-usr" alt = "foto de usuario">
-                <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagen.jsp" name="img_frm">
+            <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagenart.jsp" name="img_frm" class="Article-articulosi" >
                         <input type = "file"  name="uploadFile" id="ImgUsuario" class="input-subir" required/>
                         <input type = "submit" value="cambiar" class="btn-imagen"/>
-                </form><br>
-                Texto:<br><div contentEditable="true" id="txtarticulo" class="Article-articulosf"><p>  
+                    </form>         
+            <span id="edicion">
+                Titulo:<br><input type="text" id="txtnombre"><br>
+                <img src = "<%=ruta%>" class ="img-usr" alt = "foto de usuario">
+                 
+                 <br>
+                Texto:<br><span contentEditable="true" id="txtarticulo" class="Article-articulosf"><p>  
                         <br>                    
-                    </p></div><br>
+                    </p></span><br>
                     <input type="button" value="Enviar" onclick=escribearticulo('escribe') class="botonenviar">            
             </span>
                 <span id="misarticulos" class="Article-articulosg">
                     
                 </span>   
-            </form>    
+              
         </section> 
     </body>
 </html>
