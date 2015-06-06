@@ -44,7 +44,7 @@
         <section class="Section small x-large">
         <article class="Content small x-large">
             <div class="Content-title">
-                Consumo Clalorico
+                Consumo Calórico
             </div>
             <div class="Content-informacion">      
                 <div class="Estadisticas">
