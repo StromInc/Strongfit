@@ -47,7 +47,14 @@ public class sBorrarDieta extends HttpServlet {
             cCifrado seguro = new cCifrado();
             seguro.AlgoritmoAES();
             String idUser = seguro.encriptar((String)sesion.getAttribute("idUsr"));
-            int idDieta = Integer.parseInt(request.getParameter("idDieta"));
+            int idDieta = 0;
+            
+            try{
+                idDieta = Integer.parseInt(request.getParameter("idDieta"));
+            }
+            catch(NumberFormatException e){
+                idDieta = (Integer)sesion.getAttribute("idDietaEditar");
+            }
             
             cConexion conecta = new cConexion();
             conecta.conectar();
@@ -62,10 +69,18 @@ public class sBorrarDieta extends HttpServlet {
             }
             conecta.actualizarDieta(idUser, idDieta, "si");
             
-            Map<String, String> mapa = new HashMap();
-            mapa.put("estado", "borrado");
-            
-            write(response, mapa);
+            if((String)sesion.getAttribute("nombreDieta") == null){
+                Map<String, String> mapa = new HashMap();
+                mapa.put("estado", "borrado");
+
+                write(response, mapa);
+            }
+            else{
+                sesion.setAttribute("idDieta", (Integer)sesion.getAttribute("idDietaEditar"));
+                sesion.removeAttribute("idDietaEditar");
+                sesion.removeAttribute("nombreDieta");
+                response.sendRedirect("http://localhost:8080/StrongFit/sCrearDieta");
+            }
         }
     }
 

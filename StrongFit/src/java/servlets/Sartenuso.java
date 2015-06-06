@@ -3,28 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package servlets;
 
-import clases.cConexion;
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 /**
  *
- * @author ian
+ * @author jorge pastrana
  */
-@WebServlet(name = "sEditarDieta", urlPatterns = {"/sEditarDieta"})
-public class sEditarDieta extends HttpServlet {
+@WebServlet(name = "Sartenuso", urlPatterns = {"/Sartenuso"})
+public class Sartenuso extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,18 +35,9 @@ public class sEditarDieta extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int idDieta = Integer.parseInt(request.getParameter("idDieta"));
-            String nombreDieta = request.getParameter("nombreDieta");
-            
-            HttpSession sesion = request.getSession();
-            sesion.setAttribute("editandoDieta", "editando");
-            sesion.setAttribute("idDietaEditar", idDieta);
-            sesion.setAttribute("nombreDieta", nombreDieta);
-            
-            Map<String, String> mapa = new HashMap();
-            mapa.put("aEditar", "editar");
-            
-            write(response, mapa);
+           HttpSession sesion = request.getSession();
+           String idArt = request.getParameter("idArt");
+           sesion.setAttribute("artenuso", idArt);
         }
     }
 
@@ -94,10 +80,4 @@ public class sEditarDieta extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void write(HttpServletResponse response, Map<String, String> map) throws IOException 
-    {
-        response.setContentType("aplication/json");
-        response.setCharacterEncoding("charset=UTF-8");
-        response.getWriter().write(new Gson().toJson(map));
-    }
 }

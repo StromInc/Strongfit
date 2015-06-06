@@ -16,7 +16,7 @@
 
 <%
  clases.cConexion objruta = new clases.cConexion();
-            String ubicacionArchivo = objruta.ruta();
+            String ubicacionArchivo = objruta.ruta(1);
 HttpSession sesion = request.getSession();
 DiskFileItemFactory factory = new DiskFileItemFactory();
 factory.setSizeThreshold(1024); 

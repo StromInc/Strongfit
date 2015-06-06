@@ -95,3 +95,10 @@ function votar(Npost, numero,nvoto) {
       $('#spanoculto').hide("slow");
       $('#spanventana').hide("slow");
     }
+    function cambiarartenuso(nombre, valor){
+      $.post('../../Sartenuso', {
+                idArt : nombre,
+                texto: valor
+        }, function(responseText){
+    }); 
+    }

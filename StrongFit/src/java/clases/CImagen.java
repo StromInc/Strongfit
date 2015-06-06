@@ -11,10 +11,10 @@ import java.io.File;
  * @author jorge pastrana
  */
 public class CImagen {
-public int devuelveexistencia(String IdUser){
+public int devuelveexistencia(String IdUser, int i){
         int verificacion = 0;
         cConexion objruta = new cConexion();
-        String ruta = objruta.ruta();
+        String ruta = objruta.ruta(i);
         File file2 = new File(ruta, IdUser + ".jpg");
          File file3 = new File(ruta, IdUser + ".png");
           File file4 = new File(ruta, IdUser + ".gif");         
@@ -30,9 +30,9 @@ public int devuelveexistencia(String IdUser){
         
       return verificacion;  
 }
-public void cambianombreimagen(String iduser, String iduser2){
+public void cambianombreimagen(String iduser, String iduser2, int i){
             cConexion objruta = new cConexion();
-            String ruta = objruta.ruta();
+            String ruta = objruta.ruta(i);
             File file2 = new File(ruta, iduser + ".jpg");
             File file3 = new File(ruta, iduser + ".png");
             File file4 = new File(ruta, iduser + ".gif");

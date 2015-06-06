@@ -510,9 +510,9 @@ function porcentajes(){
      */
     
     if(caloriasDia[dia] > 0){
-        proPorciento[dia] = ((4 * proteinas[dia]) / caloriasDia[dia]) * 100;console.log(proPorciento[dia]);
-        lipPorciento[dia] = ((9 * lipidos[dia]) / caloriasDia[dia]) * 100;console.log(lipPorciento[dia]);
-        carPorciento[dia] = ((4 * carbohidratos[dia]) / caloriasDia[dia]) * 100;console.log(carPorciento[dia]);
+        proPorciento[dia] = ((4 * proteinas[dia]) / caloriasDia[dia]) * 100;
+        lipPorciento[dia] = ((9 * lipidos[dia]) / caloriasDia[dia]) * 100;
+        carPorciento[dia] = ((4 * carbohidratos[dia]) / caloriasDia[dia]) * 100;
 
         proPorciento[dia] = parseInt(proPorciento[dia].toFixed());
         carPorciento[dia] = parseInt(carPorciento[dia].toFixed());
@@ -644,12 +644,15 @@ function borrarDieta(contadorD){
 function editarDieta(contadorD){
     $(function(){
         var idDiet = $('#idsDieta'+contadorD).val();
+        var nombre = $('#nombreDieta'+contadorD).html();
+        alert(nombre);
         $.ajax({
             url: 'http://localhost:8080/StrongFit/sEditarDieta',
             type: 'post',
             dataType: 'json',
             data: {
-                idDieta: idDiet
+                idDieta: idDiet,
+                nombreDieta: nombre
             },
             success: function(res){
                 location.reload();
@@ -658,4 +661,52 @@ function editarDieta(contadorD){
     });
 }
 
+
+function setContadorD(stCon){
+    contadorD = stCon;
+}
+
+function setCaloriasEdicion(cal1, cal2, cal3, cal4, cal5, cal6, cal7){
+    caloriasDia[0] = cal1;
+    caloriasDia[1] = cal2;
+    caloriasDia[2] = cal3;
+    caloriasDia[3] = cal4;
+    caloriasDia[4] = cal5;
+    caloriasDia[5] = cal6;
+    caloriasDia[6] = cal7;
+}
+
+function setProteinasEdicion(cal1, cal2, cal3, cal4, cal5, cal6, cal7){
+    proteinas[0] = cal1;
+    proteinas[1] = cal2;
+    proteinas[2] = cal3;
+    proteinas[3] = cal4;
+    proteinas[4] = cal5;
+    proteinas[5] = cal6;
+    proteinas[6] = cal7;
+}
+
+function setLipidosEdicion(cal1, cal2, cal3, cal4, cal5, cal6, cal7){
+    lipidos[0] = cal1;
+    lipidos[1] = cal2;
+    lipidos[2] = cal3;
+    lipidos[3] = cal4;
+    lipidos[4] = cal5;
+    lipidos[5] = cal6;
+    lipidos[6] = cal7;
+}
+
+function setCarbohidratosEdicion(cal1, cal2, cal3, cal4, cal5, cal6, cal7){
+    $(function(){
+        carbohidratos[0] = cal1;
+        carbohidratos[1] = cal2;
+        carbohidratos[2] = cal3;
+        carbohidratos[3] = cal4;
+        carbohidratos[4] = cal5;
+        carbohidratos[5] = cal6;
+        carbohidratos[6] = cal7;
+
+        porcentajes();
+    });
+}
 

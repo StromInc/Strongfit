@@ -44,101 +44,164 @@ public class sCrearDieta extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String msjError = "";
             
-            cCifrado seguro = new cCifrado();
-            seguro.AlgoritmoAES();
-            
             HttpSession sesion = request.getSession();
             
-            String idUsr = (String)sesion.getAttribute("idUsr");
-                   idUsr = seguro.encriptar(idUsr);
+            int idDietaEdicion = 0;
+                        //nombreDieta = (String)sesion.getAttribute("nombreDieta");
             
-            cConexion conector = new cConexion();
-            conector.conectar();
-            
-            String cuantos[] = request.getParameter("cuantos").split(",");
-            
-            String ids[] = request.getParameterValues("ids");
-            String calorias[] = request.getParameterValues("calorias");
-            String lipidos[] = request.getParameterValues("lipidos");
-            String proteinas[] = request.getParameterValues("proteinas");
-            String carbohidratos[] = request.getParameterValues("carbohidratos");
-            String consideracion[] = request.getParameterValues("consideracion");
-            String porcion[] = request.getParameterValues("porcion");
-            String cantidad[] = request.getParameterValues("cantidad");
-            String nom = request.getParameter("nombreNuevaDieta");
-            
-            int tipo = 2;
-            int kcal2 = 0;
-            int considera = 1;
-            
-            float kcal = 0;
-            float pro = 0f;
-            float car = 0f;
-            float lip = 0f;
-            
-            DecimalFormat formateador = new DecimalFormat("####.##"); 
-            
-            for(int i = 0; i < proteinas.length; ++i){
-                pro += Float.parseFloat(cantidad[i]) * Float.parseFloat(proteinas[i]) / 100;
-                car += Float.parseFloat(cantidad[i]) * Float.parseFloat(carbohidratos[i]) / 100;
-                lip += Float.parseFloat(cantidad[i]) * Float.parseFloat(lipidos[i]) / 100;
-                kcal += Float.parseFloat(cantidad[i]) * Integer.parseInt(calorias[i]) / 100;
+            try{
+                idDietaEdicion = (Integer)sesion.getAttribute("idDietaEditar");
             }
+            catch(NullPointerException e){}
+            System.out.print("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
+            System.out.print(idDietaEdicion);
+            System.out.print("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
             
-            pro = formateador.parse(formateador.format(pro)).floatValue();
-            car = formateador.parse(formateador.format(car)).floatValue();
-            lip = formateador.parse(formateador.format(lip)).floatValue();
-            kcal = formateador.parse(formateador.format(kcal)).floatValue();
-            
-            pro = pro / 7;
-            car = car / 7;
-            lip = lip / 7;
-            kcal = kcal / 7;
-            
-            pro = formateador.parse(formateador.format(pro)).floatValue();
-            car = formateador.parse(formateador.format(car)).floatValue();
-            lip = formateador.parse(formateador.format(lip)).floatValue();
-            kcal = formateador.parse(formateador.format(kcal)).floatValue();
-            
-            kcal2 = (int)kcal;
+            String cuantos[] = null;
 
-            //primero se crea la dieta
-            int idDieta = 0;
-            ResultSet dieta = conector.spSetDieta(nom, tipo, kcal2, pro, car, lip, considera);
-            if(dieta.next()){
-                idDieta = dieta.getInt("idDietaCreada");
-            }
-            
-            conector.actualizarDieta(idUsr, idDieta, "no");
-            
-            //segundo se crea el dia de la dieta
-            int cuantosAlimentos = 0;
-            int cuanto = 0;
-            int contadorComida = 0;
-            int idDia = 0;
-            int idComida = 0;
-            for(int i = 1; i <= 7; ++i){
+                String ids[] = null;
+                String calorias[] = null;
+                String lipidos[] = null;
+                String proteinas[] = null;
+                String carbohidratos[] = null;
+                String consideracion[] = null;
+                String porcion[] = null;
+                String cantidad[] = null;
+                String nom = null;
                 
-                ResultSet dia = conector.spSetDiaDieta(i, idDieta);
-                if(dia.next()){
-                    idDia = dia.getInt("idDiaCreado");
-                }
-                
-                for(int j = 1; j <= 5; ++j){
+                try{
+                    cuantos = request.getParameter("cuantos").split(",");
+
+                    ids = request.getParameterValues("ids");
+                    calorias = request.getParameterValues("calorias");
+                    lipidos = request.getParameterValues("lipidos");
+                    proteinas = request.getParameterValues("proteinas");
+                    carbohidratos = request.getParameterValues("carbohidratos");
+                    consideracion = request.getParameterValues("consideracion");
+                    porcion = request.getParameterValues("porcion");
+                    cantidad = request.getParameterValues("cantidad");
+                    nom = request.getParameter("nombreNuevaDieta");
                     
-                    ResultSet comida = conector.spSetComidaDieta(j, idDia);
-                    if(comida.next()){
-                        idComida = comida.getInt("idComidaCreada");
-                    }
-                    cuantosAlimentos = Integer.parseInt(cuantos[cuanto]);
-                    for(int k = 0; k < cuantosAlimentos; ++k){
-                        conector.spInsertarAlimentoComida(Integer.parseInt(ids[contadorComida]), idComida, Integer.parseInt(cantidad[contadorComida]));
-                        contadorComida++;
-                    }
-                    cuanto++;
+                    sesion.setAttribute("cuantos", cuantos);
+                    sesion.setAttribute("ids", ids);
+                    sesion.setAttribute("calorias", calorias);
+                    sesion.setAttribute("lipidos", lipidos);
+                    sesion.setAttribute("proteinas", proteinas);
+                    sesion.setAttribute("carbohidratos", carbohidratos);
+                    sesion.setAttribute("consideracion", consideracion);
+                    sesion.setAttribute("porcion", porcion);
+                    sesion.setAttribute("cantidad", cantidad);
+                    sesion.setAttribute("nom", nom);
                 }
+                catch(Exception e){
+                    cuantos = (String[])sesion.getAttribute("cuantos");
+                    ids = (String[])sesion.getAttribute("ids");
+                    calorias = (String[])sesion.getAttribute("calorias");
+                    lipidos = (String[])sesion.getAttribute("lipidos");
+                    proteinas = (String[])sesion.getAttribute("proteinas");
+                    carbohidratos = (String[])sesion.getAttribute("carbohidratos");
+                    consideracion = (String[])sesion.getAttribute("consideracion");
+                    porcion = (String[])sesion.getAttribute("porcion");
+                    cantidad = (String[])sesion.getAttribute("cantidad");
+                    nom = (String)sesion.getAttribute("nom");
+                }
+            
+            if(idDietaEdicion == 0){
+                cCifrado seguro = new cCifrado();
+                seguro.AlgoritmoAES();
+
+                String idUsr = (String)sesion.getAttribute("idUsr");
+                       idUsr = seguro.encriptar(idUsr);
+
+                cConexion conector = new cConexion();
+                conector.conectar();
+
+                
+
+                int tipo = 2;
+                int kcal2 = 0;
+                int considera = 1;
+
+                float kcal = 0;
+                float pro = 0f;
+                float car = 0f;
+                float lip = 0f;
+
+                DecimalFormat formateador = new DecimalFormat("####.##"); 
+
+                for(int i = 0; i < proteinas.length; ++i){
+                    pro += Float.parseFloat(cantidad[i]) * Float.parseFloat(proteinas[i]) / 100;
+                    car += Float.parseFloat(cantidad[i]) * Float.parseFloat(carbohidratos[i]) / 100;
+                    lip += Float.parseFloat(cantidad[i]) * Float.parseFloat(lipidos[i]) / 100;
+                    kcal += Float.parseFloat(cantidad[i]) * Float.parseFloat(calorias[i]) / 100;
+                }
+
+                pro = formateador.parse(formateador.format(pro)).floatValue();
+                car = formateador.parse(formateador.format(car)).floatValue();
+                lip = formateador.parse(formateador.format(lip)).floatValue();
+                kcal = formateador.parse(formateador.format(kcal)).floatValue();
+
+                pro = pro / 7;
+                car = car / 7;
+                lip = lip / 7;
+                kcal = kcal / 7;
+
+                pro = formateador.parse(formateador.format(pro)).floatValue();
+                car = formateador.parse(formateador.format(car)).floatValue();
+                lip = formateador.parse(formateador.format(lip)).floatValue();
+                kcal = formateador.parse(formateador.format(kcal)).floatValue();
+
+                kcal2 = (int)kcal;
+
+                //primero se crea la dieta
+                int idDieta = 0;
+                int idDEdicion = 0;
+                try{
+                    idDEdicion = (Integer)sesion.getAttribute("idDieta");
+                    idDieta = idDEdicion;
+                }
+                catch(Exception e){}
+                
+                ResultSet dieta = conector.spSetDieta(idDieta, nom, tipo, kcal2, pro, car, lip, considera);
+                if(dieta.next()){
+                    idDieta = dieta.getInt("idDietaCreada");
+                }
+
+                conector.actualizarDieta(idUsr, idDieta, "no");
+
+                //segundo se crea el dia de la dieta
+                int cuantosAlimentos = 0;
+                int cuanto = 0;
+                int contadorComida = 0;
+                int idDia = 0;
+                int idComida = 0;
+
+                for(int i = 1; i <= 7; ++i){
+
+                    ResultSet dia = conector.spSetDiaDieta(i, idDieta);
+                    if(dia.next()){
+                        idDia = dia.getInt("idDiaCreado");
+                    }
+
+                    for(int j = 1; j <= 5; ++j){
+
+                        ResultSet comida = conector.spSetComidaDieta(j, idDia);
+                        if(comida.next()){
+                            idComida = comida.getInt("idComidaCreada");
+                        }
+                        cuantosAlimentos = Integer.parseInt(cuantos[cuanto]);
+                        for(int k = 0; k < cuantosAlimentos; ++k){
+                            conector.spInsertarAlimentoComida(Integer.parseInt(ids[contadorComida]), idComida, Integer.parseInt(cantidad[contadorComida]));
+                            contadorComida++;
+                        }
+                        cuanto++;
+                    }
+                }
+                response.sendRedirect("jsp/nutriologo/dietas_nutriologo.jsp");
             }
-            response.sendRedirect("jsp/nutriologo/dietas_nutriologo.jsp");
+            else{
+                response.sendRedirect("http://localhost:8080/StrongFit/sBorrarDieta");
+            }
         }
 //        catch(Exception e){
 //            System.out.println("Parece que hubo un error.");

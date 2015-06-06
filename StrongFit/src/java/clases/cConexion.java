@@ -433,10 +433,10 @@ public class cConexion {
     }
     
     //Con esto se crea una nueva dieta
-    public ResultSet spSetDieta(String nom, int tipo, int kcal, float pro, float car, float lip, int considera) throws SQLException
+    public ResultSet spSetDieta(int idD, String nom, int tipo, int kcal, float pro, float car, float lip, int considera) throws SQLException
     {
         this.st = con.createStatement();
-        return this.st.executeQuery("call spSetDieta('"+nom+"', "+tipo+", "+kcal+", "+pro+", "+car+", "+lip+", "+considera+");");
+        return this.st.executeQuery("call spSetDieta("+idD+", '"+nom+"', "+tipo+", "+kcal+", "+pro+", "+car+", "+lip+", "+considera+");");
     }
     
     //Esto es para crear un dia de la dieta
@@ -559,10 +559,14 @@ public class cConexion {
         return respuesta;
     }
     
-    public String ruta(){
+    public String ruta(int i){
         String ruta = "";
-        //ruta = "C:\\Users\\jorge pastrana\\Proyectos\\s5\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
-        ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
+        if(i == 1){
+        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
+        //ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
+        }else{
+        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
+        }
         return  ruta;
     }
     
