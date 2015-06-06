@@ -51,11 +51,23 @@ switch(nombre.charAt(lugar - 3)){
     tipo = ".gif";    
         break;
 }
+String nomart = (String)sesion.getAttribute("artenuso");
+String nombre2 = "";
+String nombre3 = "";
+String nombre4 = "";
+String nombre5 = "";
+if(nomart.equals("")){
+ nombre2 = (String)sesion.getAttribute("idUsr") + tipo;
+ nombre3 = (String)sesion.getAttribute("idUsr") + ".jpg";
+ nombre4 = (String)sesion.getAttribute("idUsr") + ".png";
+ nombre5 = (String)sesion.getAttribute("idUsr") + ".gif";
+}else{
+ nombre2 = nomart + tipo;
+ nombre3 = nomart + ".jpg";
+ nombre4 = nomart + ".png";
+ nombre5 = nomart + ".gif";
+}
 
-String nombre2 = (String)sesion.getAttribute("idUsr") + tipo;
-String nombre3 = (String)sesion.getAttribute("idUsr") + ".jpg";
-String nombre4 = (String)sesion.getAttribute("idUsr") + ".png";
-String nombre5 = (String)sesion.getAttribute("idUsr") + ".gif";
 File file2 = new File(ubicacionArchivo, nombre2);
 File file3 = new File(ubicacionArchivo, nombre3);
 File file4 = new File(ubicacionArchivo, nombre4);

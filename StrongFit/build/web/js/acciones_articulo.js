@@ -88,17 +88,19 @@ function votar(Npost, numero,nvoto) {
            $('#spanventana').css("z-Index",0);
            $('#spanventana').show("slow");    
         $('#spanoculto').show("slow");
+        $('#body').css("overflow-y","hidden");
             
     }); 
     }
     function cerrar(){
       $('#spanoculto').hide("slow");
       $('#spanventana').hide("slow");
+      $('#body').css("overflow-y","auto");
     }
-    function cambiarartenuso(nombre, valor){
+    function cambiarartenuso(){
       $.post('../../Sartenuso', {
-                idArt : nombre,
-                texto: valor
+                idArt : $('#txtnombre').val(),
+                texto: $('#txtarticulo').val()
         }, function(responseText){
     }); 
     }

@@ -21,10 +21,32 @@ public class cArticulos {
         String[] articulosAut = objconexion.getArticulosAut();
         String[] articulosTex = objconexion.getArticulosTex();
         String articulos = "";
-        
+        clases.CImagen objimg = new clases.CImagen();
+              String ruta = "";
+              
         for(int i = articulosNom.length-1; i >= 0 ;i--){
             articulos+= "<h2>" + objcifrado.sustituye(articulosNom[i],2) +"</h2> <br>";
-            articulos+= "por: " + articulosAut[i] + " <br>";
+           
+              int verificacionimg = objimg.devuelveexistencia(articulosNom[i],2);
+           
+                String ruta2 = "../../Imagenes/Articulos/";
+                switch(verificacionimg){
+                    case 1: 
+                        ruta = ruta2 + articulosNom[i] + ".jpg";
+                        break;
+                    case 2: 
+                        ruta = ruta2 + articulosNom[i] + ".png";
+                        break;
+                    case 3: 
+                        ruta = ruta2 + articulosNom[i] + ".gif";
+                        break;
+                    default: 
+                        ruta = "../../Imagenes/articulo_sin_imagen.jpg";
+                        break;
+              }
+              
+            articulos += "<img src = \""+ruta+"\" class =\"portada2\" alt = \"foto de usuario\">";
+            articulos+= "<br><br><br><br><br><br><br><br>por: " + articulosAut[i] + " <br>";
             for(int j = 0; j < 200;j++){
             articulos+= articulosTex[i].charAt(j);
             if(j == (articulosTex[i].length()-1) ){
@@ -103,7 +125,7 @@ public class cArticulos {
    if(misarticulos != null){
    for(int i = 0; i < misarticulos.length;i++){    
      
-     articulos += "<span onClick=cambiaarticulo('"+misarticulos[i]+"') class='Article-articulosh'>" + objcifrado.sustituye(misarticulos[i],2) + "</span>" + "</br>";
+     articulos += "<span onClick=\"cambiaarticulo('"+misarticulos[i]+"'),cambiarartenuso()\" class='Article-articulosh'>" + objcifrado.sustituye(misarticulos[i],2) + "</span>" + "</br>";
      
    }
    }else{
@@ -129,20 +151,20 @@ public class cArticulos {
                         ruta = ruta2 + idArticulo + ".gif";
                         break;
                     default: 
-                        ruta = "../../Imagenes/usr_sin_imagen.jpg";
+                        ruta = "../../Imagenes/articulo_sin_imagen.jpg";
                         break;
               }
    String articulo = null;
    if(operacion == 1){
    objconexion.conectar();
    String misarticulos = objconexion.buscamiarticulo(idArticulo);
-   articulo = "Nombre:<br><input type=\"text\" id=\"txtnombre\" value = '"+objcifrado.sustituye(idArticulo,2)+"'><br>\n" +
-"                 <img src = \""+ruta+"\" class =\"img-usr\" alt = \"foto de usuario\">\n"+
+   articulo = "Titulo:<br><input type=\"text\" id=\"txtnombre\" value = '"+objcifrado.sustituye(idArticulo,2)+"'><br><br>\n" +
+"                 <img src = \""+ruta+"\" class =\"portada\" alt = \"foto de usuario\">\n"+
 "                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\">"+misarticulos+"</div><br>\n" +
 "                <input type=\"button\" value=\"Enviar\" onclick=escribearticulo('escribe') class=\"botonenviar\">";
    }else{
-   articulo = "Nombre:<br><input type=\"text\" id=\"txtnombre\" value = ''><br>\n" +
-"                 <img src = \""+ruta+"\" class =\"img-usr\" alt = \"foto de usuario\">\n" +
+   articulo = "Titulo:<br><input type=\"text\" id=\"txtnombre\" value = ''><br><br>\n" +
+"                 <img src = \""+ruta+"\" class =\"portada\" alt = \"foto de usuario\">\n" +
 "                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\"><br></div><br>\n" +
 "                <input type=\"button\" value=\"Enviar\" onclick=escribearticulo('escribe') class=\"botonenviar\">";
    }
