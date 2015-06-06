@@ -6,6 +6,8 @@ azulHover = #01579B
 gris = #F2F2F2
 grisBorde = #d2d4d5
 rojo-chido = #FF4F4F
+morado = #3A366C
+morado-borde = #6B67A1
 verde-claro = #99CC66
 vendor-prefixes = webkit o ms moz official
 
@@ -49,7 +51,7 @@ a
 	text-align center
 	color black
 
-.Alimentos, .Consumidos
+.Alimentos
 	list-style none
 	padding 0
 	margin 0
@@ -72,12 +74,21 @@ a
 		margin 0
 		
 .Consumidos
+	list-style none
+	padding 0
+	margin 0
+	&-name
+		margin 0
+	&-item
+		border-bottom 1px solid grisBorde
+		padding 0.5em
+		position relative
 	&-borrar
 		position absolute
 		right 10px
 		background-color white
 		color rojo-chido
-		top 12px
+		top 1em
 		border-radius 50%
 		box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 		border 1px solid rojo-chido
@@ -90,6 +101,43 @@ a
 	border-radius 4px
 	background white
 	box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+	&-header
+		color white
+		position relative
+	&-title
+		margin 0
+		border-radius 4px 4px 0 0
+		font-size 1em
+		padding 0.5em 1em
+		font-weight normal
+		background verdeHeader
+	&-nav
+		list-style none
+		margin 0
+		position absolute
+		z-index 100
+		right 0
+		left 0
+		border-radius 0 0 4px 4px
+		padding 0
+		display none
+		background morado
+		.Comida
+			border-bottom 1px solid morado-borde
+			padding 0.5em 1em
+			cursor pointer
+			&:last-child
+				border none
+	&-cambiar
+		position absolute
+		right 0
+		top 0
+		height 36px
+		cursor pointer
+		width 40px
+		border-left 1px solid grisBorde
+		text-align center
+		line-height 36px
 	&-aviso
 		background gris
 		font-size 0.8em
@@ -114,7 +162,7 @@ a
 		text-align center
 	&-list
 		overflow-y auto
-		max-height 400px
+		max-height 630px
 		&::-webkit-scrollbar
 			width 2px
 		&::-webkit-scrollbar-thumb
@@ -123,13 +171,13 @@ a
 		border-radius 3px
 		border 1px solid grisBorde
 		padding 4px 0.5em
-	&-title
-		background verdeHeader
-		padding 0.5em
-		border-radius 4px 4px 0 0
-		color white
 		
 .Registrados
+	&-header
+		background gris
+		text-align center
+		border-bottom 1px solid grisBorde
+		padding 0.5em 0
 	&-list
 		overflow-y auto
 		max-height 200px
@@ -183,21 +231,27 @@ a
 .color-rojo
 	color white
 	background rojo-chido
-		
+.ocultar
+	display none
+.Seleccionado
+	font-weight bold
+	&-titulo
+		border-bottom 1px solid grisBorde
 @media screen and (min-width:1000px)
 	.Buscador.x-large
 		display block
-		min-height 450px
-		
+		min-height 500px
+		max-height 750px
+
 	.Content.x-large
 		width 37em
-		min-height 450px
-		
+		min-height 500px
+
 	.FloatButton
 		display none
-		
+
 	.Section.x-large
 		width 62.5em
-		min-height 450px
+		min-height 600px
 		margin-bottom 1em
 		miDysplay(flex, wrap, space-between, stretch)

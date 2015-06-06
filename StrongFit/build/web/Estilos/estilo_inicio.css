@@ -13,14 +13,12 @@ a {
   text-align: center;
   color: #000;
 }
-.Alimentos,
-.Consumidos {
+.Alimentos {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.Alimentos-agregar,
-.Consumidos-agregar {
+.Alimentos-agregar {
   position: absolute;
   right: 10px;
   background-color: #fff;
@@ -32,26 +30,36 @@ a {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   border: 1px solid #0070c8;
 }
-.Alimentos-agregar:hover,
-.Consumidos-agregar:hover {
+.Alimentos-agregar:hover {
   background: #f2f2f2;
 }
-.Alimentos-item,
-.Consumidos-item {
+.Alimentos-item {
   border-bottom: 1px solid #d2d4d5;
   padding: 4px;
   position: relative;
 }
-.Alimentos-name,
+.Alimentos-name {
+  margin: 0;
+}
+.Consumidos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .Consumidos-name {
   margin: 0;
+}
+.Consumidos-item {
+  border-bottom: 1px solid #d2d4d5;
+  padding: 0.5em;
+  position: relative;
 }
 .Consumidos-borrar {
   position: absolute;
   right: 10px;
   background-color: #fff;
   color: #ff4f4f;
-  top: 12px;
+  top: 1em;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -69,6 +77,51 @@ a {
   background: #fff;
   -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.Buscador-header {
+  color: #fff;
+  position: relative;
+}
+.Buscador-title {
+  margin: 0;
+  -webkit-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  font-weight: normal;
+  background: #1b5e20;
+}
+.Buscador-nav {
+  list-style: none;
+  margin: 0;
+  position: absolute;
+  z-index: 100;
+  right: 0;
+  left: 0;
+  -webkit-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+  padding: 0;
+  display: none;
+  background: #3a366c;
+}
+.Buscador-nav .Comida {
+  border-bottom: 1px solid #6b67a1;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+.Buscador-nav .Comida:last-child {
+  border: none;
+}
+.Buscador-cambiar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 36px;
+  cursor: pointer;
+  width: 40px;
+  border-left: 1px solid #d2d4d5;
+  text-align: center;
+  line-height: 36px;
 }
 .Buscador-aviso {
   background: #f2f2f2;
@@ -101,7 +154,7 @@ a {
 }
 .Buscador-list {
   overflow-y: auto;
-  max-height: 400px;
+  max-height: 630px;
 }
 .Buscador-list::-webkit-scrollbar {
   width: 2px;
@@ -115,12 +168,11 @@ a {
   border: 1px solid #d2d4d5;
   padding: 4px 0.5em;
 }
-.Buscador-title {
-  background: #1b5e20;
-  padding: 0.5em;
-  -webkit-border-radius: 4px 4px 0 0;
-  border-radius: 4px 4px 0 0;
-  color: #fff;
+.Registrados-header {
+  background: #f2f2f2;
+  text-align: center;
+  border-bottom: 1px solid #d2d4d5;
+  padding: 0.5em 0;
 }
 .Registrados-list {
   overflow-y: auto;
@@ -207,21 +259,31 @@ a {
   color: #fff;
   background: #ff4f4f;
 }
+.ocultar {
+  display: none;
+}
+.Seleccionado {
+  font-weight: bold;
+}
+.Seleccionado-titulo {
+  border-bottom: 1px solid #d2d4d5;
+}
 @media screen and (min-width: 1000px) {
   .Buscador.x-large {
     display: block;
-    min-height: 450px;
+    min-height: 500px;
+    max-height: 750px;
   }
   .Content.x-large {
     width: 37em;
-    min-height: 450px;
+    min-height: 500px;
   }
   .FloatButton {
     display: none;
   }
   .Section.x-large {
     width: 62.5em;
-    min-height: 450px;
+    min-height: 600px;
     margin-bottom: 1em;
     -webkit-display: flex;
     -webkit-flex-wrap: wrap;

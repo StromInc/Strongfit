@@ -23,18 +23,33 @@ $(function(){
         });
         }
     });
+    var $buttonCambiar = $( "#buscadorCambiar");
+    var $menuComidas = $( "#buscadorNav" );
+    function showMenu(e) {
+        e.preventDefault();
+         var $comidas = $( ".Comida" );
+         $comidas.on('click', function(){
+             $('.Buscador-title').text('Agregar alimentos a: ' + $(this).text());
+             $comidas.removeClass('Seleccionado');
+             $(this).addClass('Seleccionado');
+             $menuComidas.fadeOut(200);
+         });
+        $menuComidas.fadeToggle(200);
+    }
+    $buttonCambiar.on('click', showMenu); 
+    
     //Esto despliega todos los alimentos
     function alimentoAdapter(nombre, calorias, ids){
-        var $alimentoItem = $('.Alimentos-item').first();;
+        var $alimentoItem = $('.Alimentos-item').first();
         var $contenedor = $('.Alimentos');
-        var $buscadorAviso = $('.Buscador-aviso');
+        var $buscadorAviso = $('#Buscador-aviso');
         var aviso = $buscadorAviso.val();
         if(nombre.length > 0){
             $contenedor.empty();
             for(i in nombre){
                 var $clon = $alimentoItem.clone();
                 $buscadorAviso.hide();
-                $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p><span>'+calorias[i]+' cal</span><button class="Alimentos-agregar">+<input type="hidden" id="alimento" value="'+ids[i]+'"></button>');
+                $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p><span>'+calorias[i]+' kcal</span><button class="Alimentos-agregar">+<input type="hidden" id="alimento" value="'+ids[i]+'"></button>');
                 $clon.hide();
                 $contenedor.prepend($clon);
                 $clon.slideDown();
@@ -63,7 +78,8 @@ $(function(){
             className: 'progressbar__label'
         }
     });
-    $('.Alimentos-agregar').on('click', agregar);   
+    $('.Alimentos-agregar').on('click', agregar);
+    $('.Consumidos-borrar').on('click', borrarAlimento);
 });
 function setValores(){
     var valor;
@@ -76,34 +92,80 @@ function setValores(){
         type: 'get',
         dataType: 'json',
         data: $('#formularioOculto').serialize(),
-            success: function(datos){
-                valor = datos.calDia;
-                meta = $('#metaCalorias').html();
-                restantes = meta - valor;
-                porcentaje = valor / meta;
-                $('#consumido').html('Consumido: '+valor+' cal');
-                if(restantes < meta){
-                    circulo.path.setAttribute('stroke', 'red');
-                }
-                circulo.animate(porcentaje, {
-                    duration: duracion
-                }, function(){
-                    console.log("Cargado");
-                    circulo.setText(restantes + ' cal. restantes');
-                }); 
+        success: function(datos){
+            valor = datos.calDia;
+            meta = $('#metaCalorias').html();
+            restantes = meta - valor;
+            porcentaje = valor / meta;
+            $('#consumido').html('Consumido: '+valor+' kcal');
+            if(restantes < meta){
+                circulo.path.setAttribute('stroke', 'red');
             }
+            circulo.animate(porcentaje, {
+                duration: duracion
+            }, function(){
+                console.log("Cargado");
+                circulo.setText(restantes + ' kcal. restantes');
+            }); 
+        }
     });   
 }
 function agregar(e){
     e.preventDefault();
     var idAlimento;
     idAlimento = this.children[0].value;
-    console.log(this + " " + idAlimento);
-    $.post('http://localhost:8080/StrongFit/sAgregarAlimento', {
-        dataType: 'json', 
-        valor: idAlimento}, 
-        function(){
+    console.log("IDAlimento" + idAlimento);
+    var elemento = $('.Seleccionado').text();
+    console.log(elemento);
+    var tipo = 1;
+    var $listaTipo;
+    var textCalorias =  $(this).siblings('span').text();
+    var textNombre =  $(this).siblings('p').text();
+    if(elemento === "Desayuno"){
+        tipo = 1;
+        $listaTipo = $('#comida-desayuno');
+    }else if(elemento === "Colacion 1"){
+        tipo = 2;
+        $listaTipo = $('#comida-colacion1');
+    }else if(elemento === "Comida"){
+        tipo = 3;
+        $listaTipo = $('#comida-comida');
+    }else if(elemento === "Colacion 2"){
+        tipo = 4;
+        $listaTipo = $('#comida-colacion2');
+    }else if(elemento === "Cena"){
+        tipo = 5;
+        $listaTipo = $('#comida-cena');
+    }
+    var $clonBorrar = $('#prototipo-borrar').clone().removeClass("ocultar");
+    console.log("Esta aqui");
+    $.ajax({
+        url: "http://localhost:8080/StrongFit/sAgregarAlimento",
+        type: "post",
+        dataType: "text",
+        data: {tipo: tipo, 
+            valor: idAlimento},
+        success: function(datos){
+            console.log(datos + " Y los datos apa");
             setValores();
+            $clonBorrar.html('<p class="Alimentos-name">'+textNombre+'</p><span>'+textCalorias+'</span><button class="Consumidos-borrar">X<input type="hidden" value="'+datos+'"></button>');
+            $listaTipo.append($clonBorrar);
+            $('.Consumidos-borrar').on('click', borrarAlimento); 
+        },error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+        }
+    });
+}
+function borrarAlimento(e){
+    var idValor = $(this).children('input').val();
+    console.log("Esta cosa funciona?" + idValor);
+    var $elemento = $(this).parent();
+    $.post('http://localhost:8080/StrongFit/sBorrarAlimentoFecha', {
+        valor: idValor}, 
+        function(){
+            $elemento.remove();
         }
     );
+    
 }

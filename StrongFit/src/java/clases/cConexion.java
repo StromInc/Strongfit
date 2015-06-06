@@ -764,6 +764,27 @@ public class cConexion {
     }
     return misarticulos;
     }
-    
+    //Este procedure agrega los alimentos mediante el id del paciente, el del alimento y el dia del mes, el mes y año
+    public int spSetAlimentoFecha(int idA, int idPaciente, int tipo, int diaMes, int mes, int year) throws SQLException{
+        this.st = con.createStatement();
+        ResultSet rs = this.st.executeQuery("call spSetAlimentoFecha("+idA+", "+idPaciente+", "+tipo+", "+diaMes+", "+mes+", "+year+");");
+        int idAlta = 0;
+        while(rs.next()){
+            idAlta = rs.getInt("valor"); //Recupera el ID de la relacion muchos a muchos para poder borrar el alimento si se requiere
+        }
+        return idAlta;
+    }
+    //Con esto recuperamos todos los alimentos usando parametros similares a los anteriores
+    public ResultSet getAlimentosPorFecha(int idPaciente, int dia, int mes, int year) throws SQLException{
+        this.st = con.createStatement();
+        ResultSet rs = this.st.executeQuery("call spGetAlimentosPorFecha("+idPaciente+", "+dia+", "+mes+", "+year+");");
+        return rs;
+    }
+    //Borramos el alimento mediante el id de la relacion muchos a muchos antes mencionada
+    //Solo borra la relacion de la tabla muchos a muchos (alimento_fecha), creo que eso esta bien
+    public void spBorrarAlimentoFecha(int idFecha) throws SQLException{
+        this.st = con.createStatement();
+        this.st.executeQuery("call spBorrarAlimentoFecha("+idFecha+");");
+    }
 }
 
