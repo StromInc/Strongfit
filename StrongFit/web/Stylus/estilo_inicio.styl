@@ -51,7 +51,7 @@ a
 	text-align center
 	color black
 
-.Alimentos, .Consumidos
+.Alimentos
 	list-style none
 	padding 0
 	margin 0
@@ -74,12 +74,21 @@ a
 		margin 0
 		
 .Consumidos
+	list-style none
+	padding 0
+	margin 0
+	&-name
+		margin 0
+	&-item
+		border-bottom 1px solid grisBorde
+		padding 0.5em
+		position relative
 	&-borrar
 		position absolute
 		right 10px
 		background-color white
 		color rojo-chido
-		top 12px
+		top 1em
 		border-radius 50%
 		box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 		border 1px solid rojo-chido
@@ -106,6 +115,7 @@ a
 		list-style none
 		margin 0
 		position absolute
+		z-index 100
 		right 0
 		left 0
 		border-radius 0 0 4px 4px
@@ -152,7 +162,7 @@ a
 		text-align center
 	&-list
 		overflow-y auto
-		max-height 500px
+		max-height 630px
 		&::-webkit-scrollbar
 			width 2px
 		&::-webkit-scrollbar-thumb
@@ -163,6 +173,11 @@ a
 		padding 4px 0.5em
 		
 .Registrados
+	&-header
+		background gris
+		text-align center
+		border-bottom 1px solid grisBorde
+		padding 0.5em 0
 	&-list
 		overflow-y auto
 		max-height 200px
@@ -220,20 +235,23 @@ a
 	display none
 .Seleccionado
 	font-weight bold
+	&-titulo
+		border-bottom 1px solid grisBorde
 @media screen and (min-width:1000px)
 	.Buscador.x-large
 		display block
-		min-height 450px
+		min-height 500px
+		max-height 750px
 
 	.Content.x-large
 		width 37em
-		min-height 450px
+		min-height 500px
 
 	.FloatButton
 		display none
 
 	.Section.x-large
 		width 62.5em
-		min-height 500px
+		min-height 600px
 		margin-bottom 1em
 		miDysplay(flex, wrap, space-between, stretch)

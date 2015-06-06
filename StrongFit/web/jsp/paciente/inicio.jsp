@@ -23,6 +23,9 @@
             int dia = c2.get(Calendar.DAY_OF_WEEK);
             int diaA = c2.get(Calendar.DAY_OF_YEAR);
             int caloriasdia = 0;
+            int diaMes = c2.get(Calendar.DATE); //Agregue esta variable
+            int numMes = c2.get(Calendar.MONTH) + 1;//Agregue esta variable mas uno porque se maneja como un array
+            int year = c2.get(Calendar.YEAR);//Agregue esta variable
             
             cConexion conecta = new cConexion();
             conecta.conectar();
@@ -52,10 +55,11 @@
                     </div>
                     <div class="Estadisticas-section">
                         <div class="Estadisticas-wrapper">
-                            <p>Meta <span id="metaCalorias"><%=caloriasdia%></span> cal</p>
+                            <p>Meta <span id="metaCalorias"><%=caloriasdia%></span> kcal</p>
                             <%
-                                //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
-                                ResultSet rs2 = conecta.spConsultarAlimentosDiarios(idPaciente, diaA);         
+                                //Cambie el metodo a uno que recupera por una fecha mas especifica
+                                //Hace lo mismo que el anterior
+                                ResultSet rs2 = conecta.getAlimentosPorFecha(idPaciente, diaMes, numMes, year);
                                 int calorias = 0, con = 0;
                                 int kcalorias = 0;
                                 while(rs2.next()){
@@ -63,36 +67,158 @@
                                     kcalorias += calorias;
                                     con++;
                                 }
+                                System.out.println("Numero de alimentos " + con);
                             %>
-                        <p id="consumido">Consumido <%=kcalorias%> cal</p>
+                        <p id="consumido">Consumido <%=kcalorias%> kcal</p>
                         </div>
                         <div id="container"></div> <!--El div de la grafica--> 
                     </div>      
                 </div>
                 <div class="Registrados">
-                    <p>Alimentos Registrados</p>
+                    <h3 class="Buscador-aviso Seleccionado-titulo">Alimentos Registrados</h3>
+                    <div class="Registrados-header">Desayuno</div>
                     <div class="Registrados-list">
-                        <ul class="Consumidos">
+                        <ul class="Consumidos" id="comida-desayuno">
+                            <li class="Consumidos-item ocultar" id="prototipo-borrar">
+                                <p class="Consumidos-name ">Taco</p>
+                                <span>5 kcal</span>
+                                <button class="Consumidos-borrar">X <input type="hidden"></button>
+                            </li>
                             <%
-                                //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
+                                //Datos del alimento que se mostraran cuando cargue la pagina
+                                //Estan organizados por tipo de comida
                                 String nombre = "";
+                                int tipoAlimento = 0;
+                                int idAlimentoFecha;
+                                System.out.println("Antes del while");
+                                rs2.beforeFirst();
                                 while(rs2.next()){
                                     nombre = rs2.getString("nombre");
                                     calorias = rs2.getInt("calorias");
+                                    tipoAlimento = rs2.getInt("tiempo_comida_id");
+                                    idAlimentoFecha = rs2.getInt("idAlimento_fecha");
+                                    if(tipoAlimento == 1){                                              
                             %>
                             <li class="Consumidos-item">
                                 <p class="Consumidos-name"><%=nombre%></p>
-                                <span><%=calorias%> cal</span>
-                                <button class="Consumidos-borrar">X</button>
+                                <span><%=calorias%> kcal</span>
+                                <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
                             </li>
                             <%
+                                    }
                                 }
                             %>
-                            <li class="Consumidos-item ocultar">
-                                <p class="Consumidos-name">Taco</p>
-                                <span>5 cal</span>
-                                <button class="Consumidos-borrar">X</button>
+                        </ul>
+                    </div> 
+                    <div class="Registrados-header">Colación 1</div>
+                    <div class="Registrados-list">
+                        <ul class="Consumidos" id="comida-colacion1">
+                            <%
+                                nombre = "";
+                                tipoAlimento = 0;
+                                idAlimentoFecha = 0;
+                                System.out.println("Antes del while");
+                                rs2.beforeFirst();
+                                while(rs2.next()){
+                                    nombre = rs2.getString("nombre");
+                                    calorias = rs2.getInt("calorias");
+                                    tipoAlimento = rs2.getInt("tiempo_comida_id");
+                                    idAlimentoFecha = rs2.getInt("idAlimento_fecha");
+                                    if(tipoAlimento == 2){                                              
+                            %>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name"><%=nombre%></p>
+                                <span><%=calorias%> kcal</span>
+                                <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
                             </li>
+                            <%
+                                    }
+                                }
+                            %>
+                        </ul>
+                    </div> 
+                    <div class="Registrados-header">Comida</div>
+                    <div class="Registrados-list">
+                        <ul class="Consumidos" id="comida-comida">
+                            <%
+                                //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
+                                nombre = "";
+                                tipoAlimento = 0;
+                                idAlimentoFecha = 0;
+                                System.out.println("Antes del while");
+                                rs2.beforeFirst();
+                                while(rs2.next()){
+                                    nombre = rs2.getString("nombre");
+                                    calorias = rs2.getInt("calorias");
+                                    tipoAlimento = rs2.getInt("tiempo_comida_id");
+                                    idAlimentoFecha = rs2.getInt("idAlimento_fecha");
+                                    if(tipoAlimento == 3){                                              
+                            %>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name"><%=nombre%></p>
+                                <span><%=calorias%> kcal</span>
+                                <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
+                            </li>
+                            <%
+                                    }
+                                }
+                            %>
+                        </ul>
+                    </div> 
+                    <div class="Registrados-header">Colación 2</div>
+                    <div class="Registrados-list">
+                        <ul class="Consumidos" id="comida-colacion2">
+                            <%
+                                //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
+                                nombre = "";
+                                tipoAlimento = 0;
+                                idAlimentoFecha = 0;
+                                System.out.println("Antes del while");
+                                rs2.beforeFirst();
+                                while(rs2.next()){
+                                    nombre = rs2.getString("nombre");
+                                    calorias = rs2.getInt("calorias");
+                                    tipoAlimento = rs2.getInt("tiempo_comida_id");
+                                    idAlimentoFecha = rs2.getInt("idAlimento_fecha");
+                                    if(tipoAlimento == 4){                                              
+                            %>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name"><%=nombre%></p>
+                                <span><%=calorias%> kcal</span>
+                                <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
+                            </li>
+                            <%
+                                    }
+                                }
+                            %>
+                        </ul>
+                    </div> 
+                    <div class="Registrados-header">Cena</div>
+                    <div class="Registrados-list">
+                        <ul class="Consumidos" id="comida-cena">
+                            <%
+                                //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
+                                nombre = "";
+                                tipoAlimento = 0;
+                                idAlimentoFecha = 0;
+                                System.out.println("Antes del while");
+                                rs2.beforeFirst();
+                                while(rs2.next()){
+                                    nombre = rs2.getString("nombre");
+                                    calorias = rs2.getInt("calorias");
+                                    tipoAlimento = rs2.getInt("tiempo_comida_id");
+                                    idAlimentoFecha = rs2.getInt("idAlimento_fecha");
+                                    if(tipoAlimento == 5){                                              
+                            %>
+                            <li class="Consumidos-item">
+                                <p class="Consumidos-name"><%=nombre%></p>
+                                <span><%=calorias%> kcal</span>
+                                <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
+                            </li>
+                            <%
+                                    }
+                                }
+                            %>
                         </ul>
                     </div> 
                 </div>     
@@ -117,13 +243,12 @@
                 </button>
             </div>
             <div class="Buscador-contenedor">
-                <h3 class="Buscador-aviso">Alimentos por defecto</h3>
+                <h3 class="Buscador-aviso" id="Buscador-aviso">Alimentos por defecto</h3>
                 <div class="Buscador-list">
                     <ul class="Alimentos">
                         <li class="Alimentos-item ocultar">
-                            <p class="Alimentos-name">Taco</p>
-                            
-                            <span>5 cal</span>
+                            <p class="Alimentos-name">Taco</p>            
+                            <span>5 kcal</span>
                             <button class="Alimentos-agregar">+<input type="hidden"></button>
                         </li>
                     </ul>

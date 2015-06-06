@@ -49,6 +49,12 @@ public class sAgregarAlimento extends HttpServlet {
             Calendar calendario = new GregorianCalendar();
             int dia = calendario.get(Calendar.DAY_OF_YEAR);
             
+            int diaMes = calendario.get(Calendar.DATE);
+            int mes = calendario.get(Calendar.MONTH) + 1; //Es un array de meses
+            int year = calendario.get(Calendar.YEAR);
+            
+            int tipo = Integer.parseInt(request.getParameter("tipo"));
+            
             //id del conteo calorico
             int idCont = (Integer) sesion.getAttribute("idcont");
             System.out.print(idCont);
@@ -59,6 +65,11 @@ public class sAgregarAlimento extends HttpServlet {
             //Agregamos el alimento a la base
             int idA = Integer.parseInt(id);
             con.spSetAlimentoConsumido(idPaciente, idA, dia);
+   
+            //Agregar alimento por fecha especifica tipo, idpaciente, numdia, mes, year
+            int idAlta = con.spSetAlimentoFecha(idA, idPaciente, tipo, diaMes, mes, year);
+            System.out.println(" poque no avanza " +idAlta);
+            response.getWriter().write(String.valueOf(idAlta));
         }
     }
 
