@@ -6,6 +6,7 @@ var idRandom = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p',
 var idReforzado = 0;
 var cantidadDef = 30;
 var tiemposComida = ['Desayuno', 'Colación 1', 'Comida', 'Colación 2', 'Cena'];
+var diasArreglo = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
 var caloriasMeta = 0;
 var caloriasDia = [];
@@ -153,208 +154,18 @@ function drop(ev, id)
     });
 }
 
-
-//esta es la parte en la que se muestran las pestañas
-function mostrarDomingo()
-{
+//muestra los 
+function mostrarDias(id){
     $(function(){
-        $('#domingoDieta').addClass('visible');
-        dia = 0;
-        mostrarEseDia(dia);
-        if($('#domingoDieta').hasClass('invisible'))
-        {
-            $(this).removeClass('invisible');
-        }
-        $('#lunesDieta').addClass('invisible').removeClass('visible');
-        $('#martesDieta').addClass('invisible').removeClass('visible');
-        $('#miercolesDieta').addClass('invisible').removeClass('visible');
-        $('#juevesDieta').addClass('invisible').removeClass('visible');
-        $('#viernesDieta').addClass('invisible').removeClass('visible');
-        $('#sabadoDieta').addClass('invisible').removeClass('visible');
+        $('.opcionMenu').removeClass('transparente');
+        $('#diamen'+id).addClass('transparente');
         
-        $('#domingo').addClass('transparente');
-        $('#lunes').removeClass('transparente');
-        $('#martes').removeClass('transparente');
-        $('#miercoles').removeClass('transparente');
-        $('#jueves').removeClass('transparente');
-        $('#viernes').removeClass('transparente');
-        $('#sabado').removeClass('transparente');
+        $('.diasDieta').addClass('invisible');
+        $('#diaDieta'+id).removeClass('invisible');
         
-        $('.tdDe').first().html('Domingo');
-    });
-}
-
-function mostrarLunes()
-{
-    $(function(){
-        $('#lunesDieta').addClass('visible');
-        dia = 1;
-        mostrarEseDia(dia);
-        if($('#lunesDieta').hasClass('invisible'))
-        {
-            $(this).removeClass('invisible');
-        }
-        $('#domingoDieta').addClass('invisible').removeClass('visible');
-        $('#martesDieta').addClass('invisible').removeClass('visible');
-        $('#miercolesDieta').addClass('invisible').removeClass('visible');
-        $('#juevesDieta').addClass('invisible').removeClass('visible');
-        $('#viernesDieta').addClass('invisible').removeClass('visible');
-        $('#sabadoDieta').addClass('invisible').removeClass('visible');
+        $('.tdDe').first().html(diasArreglo[id]);
         
-        $('#domingo').removeClass('transparente');
-        $('#lunes').addClass('transparente');
-        $('#martes').removeClass('transparente');
-        $('#miercoles').removeClass('transparente');
-        $('#jueves').removeClass('transparente');
-        $('#viernes').removeClass('transparente');
-        $('#sabado').removeClass('transparente');
-        
-        $('.tdDe').first().html('Lunes');
-    });
-}
-
-function mostrarMartes()
-{
-    $(function(){
-        $('#martesDieta').addClass('visible');
-        dia = 2;
-        mostrarEseDia(dia);
-        if($('#martesDieta').hasClass('invisible'))
-        {
-            $(this).removeClass('invisible');
-        }
-        $('#lunesDieta').addClass('invisible').removeClass('visible');
-        $('#domingoDieta').addClass('invisible').removeClass('visible');
-        $('#miercolesDieta').addClass('invisible').removeClass('visible');
-        $('#juevesDieta').addClass('invisible').removeClass('visible');
-        $('#viernesDieta').addClass('invisible').removeClass('visible');
-        $('#sabadoDieta').addClass('invisible').removeClass('visible');
-        
-        $('#domingo').removeClass('transparente');
-        $('#lunes').removeClass('transparente');
-        $('#martes').addClass('transparente');
-        $('#miercoles').removeClass('transparente');
-        $('#jueves').removeClass('transparente');
-        $('#viernes').removeClass('transparente');
-        $('#sabado').removeClass('transparente');
-        
-        $('.tdDe').first().html('Martes');
-    });
-}
-
-function mostrarMiercoles()
-{
-    $(function(){
-        $('#miercolesDieta').addClass('visible');
-        dia = 3;
-        mostrarEseDia(dia);
-        if($('#miercolesDieta').hasClass('invisible'))
-        {
-            $(this).removeClass('invisible');
-        }
-        $('#lunesDieta').addClass('invisible').removeClass('visible');
-        $('#martesDieta').addClass('invisible').removeClass('visible');
-        $('#domingoDieta').addClass('invisible').removeClass('visible');
-        $('#juevesDieta').addClass('invisible').removeClass('visible');
-        $('#viernesDieta').addClass('invisible').removeClass('visible');
-        $('#sabadoDieta').addClass('invisible').removeClass('visible');
-        
-        $('#domingo').removeClass('transparente');
-        $('#lunes').removeClass('transparente');
-        $('#martes').removeClass('transparente');
-        $('#miercoles').addClass('transparente');
-        $('#jueves').removeClass('transparente');
-        $('#viernes').removeClass('transparente');
-        $('#sabado').removeClass('transparente');
-        
-        $('.tdDe').first().html('Miércoles');
-    });
-}
-
-function mostrarJueves()
-{
-    $(function(){
-        $('#juevesDieta').addClass('visible');
-        dia = 4;
-        mostrarEseDia(dia);
-        if($('#juevesDieta').hasClass('invisible'))
-        {
-            $(this).removeClass('invisible');
-        }
-        $('#lunesDieta').addClass('invisible').removeClass('visible');
-        $('#martesDieta').addClass('invisible').removeClass('visible');
-        $('#miercolesDieta').addClass('invisible').removeClass('visible');
-        $('#domingoDieta').addClass('invisible').removeClass('visible');
-        $('#viernesDieta').addClass('invisible').removeClass('visible');
-        $('#sabadoDieta').addClass('invisible').removeClass('visible');
-        
-        $('#domingo').removeClass('transparente');
-        $('#lunes').removeClass('transparente');
-        $('#martes').removeClass('transparente');
-        $('#miercoles').removeClass('transparente');
-        $('#jueves').addClass('transparente');
-        $('#viernes').removeClass('transparente');
-        $('#sabado').removeClass('transparente');
-        
-        $('.tdDe').first().html('Jueves');
-    });
-}
-
-function mostrarViernes()
-{
-    $(function(){
-        $('#viernesDieta').addClass('visible');
-        dia = 5;
-        mostrarEseDia(dia);
-        if($('#viernesDieta').hasClass('invisible'))
-        {
-            $(this).removeClass('invisible');
-        }
-        $('#lunesDieta').addClass('invisible').removeClass('visible');
-        $('#martesDieta').addClass('invisible').removeClass('visible');
-        $('#miercolesDieta').addClass('invisible').removeClass('visible');
-        $('#juevesDieta').addClass('invisible').removeClass('visible');
-        $('#domingoDieta').addClass('invisible').removeClass('visible');
-        $('#sabadoDieta').addClass('invisible').removeClass('visible');
-        
-        $('#domingo').removeClass('transparente');
-        $('#lunes').removeClass('transparente');
-        $('#martes').removeClass('transparente');
-        $('#miercoles').removeClass('transparente');
-        $('#jueves').removeClass('transparente');
-        $('#viernes').addClass('transparente');
-        $('#sabado').removeClass('transparente');
-        
-        $('.tdDe').first().html('Viernes');
-    });
-}
-
-function mostrarSabado()
-{
-    $(function(){
-        $('#sabadoDieta').addClass('visible');
-        dia = 6;
-        mostrarEseDia(dia);
-        if($('#sabadoDieta').hasClass('invisible'))
-        {
-            $(this).removeClass('invisible');
-        }
-        $('#lunesDieta').addClass('invisible').removeClass('visible');
-        $('#martesDieta').addClass('invisible').removeClass('visible');
-        $('#miercolesDieta').addClass('invisible').removeClass('visible');
-        $('#juevesDieta').addClass('invisible').removeClass('visible');
-        $('#viernesDieta').addClass('invisible').removeClass('visible');
-        $('#domingoDieta').addClass('invisible').removeClass('visible');
-        
-        $('#domingo').removeClass('transparente');
-        $('#lunes').removeClass('transparente');
-        $('#martes').removeClass('transparente');
-        $('#miercoles').removeClass('transparente');
-        $('#jueves').removeClass('transparente');
-        $('#viernes').removeClass('transparente');
-        $('#sabado').addClass('transparente');
-        
-        $('.tdDe').first().html('Sábado');
+        mostrarEseDia(id);
     });
 }
 
