@@ -93,14 +93,11 @@ body {
   position: absolute;
   width: 100%;
 }
-<<<<<<< HEAD
-=======
 .Article-articulosi {
    position: absolute;
   left: 24%;
   top: 22%;
 }
->>>>>>> origin/master
 
 .botonenviar {
   position: fixed;

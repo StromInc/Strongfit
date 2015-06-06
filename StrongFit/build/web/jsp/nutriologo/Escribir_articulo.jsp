@@ -64,12 +64,6 @@
             <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagenart.jsp" name="img_frm" class="Article-articulosi" >
                         <input type = "file"  name="uploadFile" id="ImgUsuario" class="input-subir" required/>
                         <input type = "submit" value="cambiar" class="btn-imagen"/>
-<<<<<<< HEAD
-                </form><br>
-                Texto:<br><div contentEditable="true" id="txtarticulo" class="Article-articulosf"><p>  
-                        <br>                    
-                    </p></div><br>
-=======
                     </form>         
             <span id="edicion">
                 Titulo:<br><input type="text" id="txtnombre"><br>
@@ -79,7 +73,6 @@
                 Texto:<br><span contentEditable="true" id="txtarticulo" class="Article-articulosf"><p>  
                         <br>                    
                     </p></span><br>
->>>>>>> origin/master
                     <input type="button" value="Enviar" onclick=escribearticulo('escribe') class="botonenviar">            
             </span>
                 <span id="misarticulos" class="Article-articulosg">
