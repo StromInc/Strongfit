@@ -39,7 +39,7 @@
                         nom = rs.getString("nombre");
                 %>
                 <!--Esto es de prueba-->
-                <div class = "dietaCreada" id = '<%="dieta" + contadorD%>'>
+                <div class = "dietaCreada" id = '<%="dieta" + contadorD%>' onclick="mostrarDieta(<%=idDieta%>, <%=contadorD%>);">
                     <input type="hidden" name="idsDieta" id="idsDieta<%=contadorD%>" value="<%=idDieta%>">
                     <span id="nombreDieta<%=contadorD%>"><%=nom%></span><div class="divTusDietas"><input type="button" name="btnEditarD" class="btnEditarD" onclick="editarDieta(<%=contadorD%>);" value="Editar"><input type="button" name="btnBorrarD" class="btnEliminarD" onclick="borrarDieta(<%=contadorD%>);" value="Eliminar"></div>
                 </div>
@@ -50,6 +50,68 @@
 
                 <input type="button" name="nueva" value="Nueva" class="btn-act-usr" onclick = "ocultar()">
             </article>
+                
+                <article class="Article-dietas" id="mostrarDieta">
+                    <div id="datosDieta">
+                        <span id="nombreMuestraDieta"></span>
+                        <br>
+                        <span id="caloriasMuestra"></span>
+                        <span id="proteinasMuestra"></span>
+                        <span id="lipidosMuestra"></span>
+                        <span id="carbohidratosMuestra"></span>
+                    </div>
+                    <div class = "menuCrear">
+                        <div class="opcionMenu transparente MenuMuestra" id ="muestraDia0" onclick = "mostrarDiaMuestra(0);">
+                            Domingo
+                        </div>
+                        <div class="opcionMenu MenuMuestra" id ="muestraDia1" onclick = "mostrarDiaMuestra(1);">
+                            Lunes
+                        </div>
+                        <div class="opcionMenu MenuMuestra" id ="muestraDia2" onclick = "mostrarDiaMuestra(2);">
+                            Martes
+                        </div>
+                        <div class="opcionMenu MenuMuestra" id ="muestraDia3" onclick = "mostrarDiaMuestra(3);">
+                            Miércoles
+                        </div>
+                        <div class="opcionMenu MenuMuestra" id ="muestraDia4" onclick = "mostrarDiaMuestra(4);">
+                            Jueves
+                        </div>
+                        <div class="opcionMenu MenuMuestra" id ="muestraDia5" onclick = "mostrarDiaMuestra(5);">
+                            Viernes
+                        </div>
+                        <div class="opcionMenu MenuMuestra" id ="muestraDia6" onclick = "mostrarDiaMuestra(6);">
+                            Sábado
+                        </div>
+                    </div>
+                    
+                    <%
+                        String catalogoComidas[] = {"Desayuno", "Colación 1", "Comida", "Colación 2", "Cena"};
+                        String mostrar = "";
+                        int contadorMuestra = 0;
+                        for(int i = 0; i < 7; ++i){
+                            if(i == 1){mostrar = "invisible";}
+                    %>
+                    
+                    <div class = "Muestras diasDieta <%=mostrar%>" id="diaMuestra<%=i%>">
+                        <%
+                        for(int j = 0; j < 5; j++){
+                        %>
+                        <div class="espacionMuestra">
+                            <h2>
+                                <%=catalogoComidas[j]%>
+                            </h2>
+                            <div class="espacioDieta" id="espacioMuestraContenedor<%=contadorMuestra%>"></div>
+                        </div>
+                        <%
+                        contadorMuestra++;
+                        }
+                        %>
+                    </div>
+                    
+                    <%
+                        }
+                    %>
+                </article>
                 
                 <%
                     String editando = (String)sesion.getAttribute("editandoDieta");

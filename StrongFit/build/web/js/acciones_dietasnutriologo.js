@@ -5,6 +5,7 @@ var dia = 0;
 var idRandom = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 var idReforzado = 0;
 var cantidadDef = 30;
+var tiemposComida = ['Desayuno', 'Colación 1', 'Comida', 'Colación 2', 'Cena'];
 
 var caloriasMeta = 0;
 var caloriasDia = [];
@@ -12,6 +13,11 @@ var caloriasPromedio = 0;
 var proteinas = [], proPorciento = [];
 var lipidos = [], lipPorciento = [];
 var carbohidratos = [], carPorciento = [];
+
+var caloriasMuestra = [];
+var proteinasMuestra = [];
+var lipidosMuestra = [];
+var carbohidratosMuestra = [];
 
 var proTem = 0;
 var lipTem = 0;
@@ -28,6 +34,10 @@ for(var i = 0; i < 7; ++i){
     proPorciento[i] = 0;
     lipPorciento[i] = 0;
     carPorciento[i] = 0;
+    caloriasMuestra[i] = 0;
+    proteinasMuestra[i] = 0;
+    lipidosMuestra[i] = 0;
+    carbohidratosMuestra[i] = 0;
 }
 
 //oculta el menu de las dietas creadas
@@ -37,6 +47,12 @@ function ocultar(){
         $('#tusDietas').animate({
             width : 0,
             opacity : 0
+        }, function(){
+            $(this).addClass('invisible');
+        });
+        $('#mostrarDieta').animate({
+            width: 0,
+            opacity: 0
         }, function(){
             $(this).addClass('invisible');
             revelar();
@@ -645,7 +661,7 @@ function editarDieta(contadorD){
     $(function(){
         var idDiet = $('#idsDieta'+contadorD).val();
         var nombre = $('#nombreDieta'+contadorD).html();
-        alert(nombre);
+
         $.ajax({
             url: 'http://localhost:8080/StrongFit/sEditarDieta',
             type: 'post',
@@ -710,3 +726,52 @@ function setCarbohidratosEdicion(cal1, cal2, cal3, cal4, cal5, cal6, cal7){
     });
 }
 
+function mostrarDiaMuestra(id){
+    $(function(){
+        $('.MenuMuestra').removeClass('transparente');
+        $('#muestraDia'+id).addClass('transparente');
+        
+        $('.Muestras').addClass('invisible');
+        $('#diaMuestra'+id).removeClass('invisible');
+        
+        $('#caloriasMuestra').html('Calorías: ' + caloriasMuestra[id]);
+        $('#proteinasMuestra').html('Proteinas: ' + proteinasMuestra[id]);
+        $('#lipidosMuestra').html('Lípidos: ' + lipidosMuestra[id]);
+        $('#carbohidratosMuestra').html('Carbohidratos: ' + carbohidratosMuestra[id]);
+    });
+}
+
+function mostrarDieta(idDieta, con){
+    $(function(){
+        $.ajax({
+            url: 'http://localhost:8080/StrongFit/sMostrarDieta',
+            type: 'post',
+            dataType: 'json',
+            data:{
+                idDietaMostrar: idDieta
+            },
+            success: function(res){                
+                var contadorDieta = 0;
+                
+                for(var i = 0; i < 7; ++i){
+                    caloriasMuestra[i] = res.caloriasM[i];
+                    proteinasMuestra[i] = res.proteinasM[i];
+                    lipidosMuestra[i] = res.lipidosM[i];
+                    carbohidratosMuestra[i] = res.carbohidratosM[i];
+                }
+                
+                for(var i = 0; i < 35; ++i){
+                    $('#espacioMuestraContenedor'+i).html("");
+                    for(var j = 0; j < res.cuantosM[i]; ++j){
+                        $('#espacioMuestraContenedor'+i).append("<div class = 'resultado enMenu yaEsta' style='cursor:default;'>"+res.nombresM[contadorDieta]+" "+res.cantidadesM[contadorDieta]+"g</div>");
+                        contadorDieta++;
+                    }
+                }
+                
+                $('#nombreMuestraDieta').html($('#nombreDieta'+con).html());
+                
+                mostrarDiaMuestra(0);
+            }
+        });
+    });
+}
