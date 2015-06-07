@@ -75,13 +75,13 @@ body {
   width: 70%;
   position: absolute;
   border-radius: 15px;
-  top: 47%;
+  top: 53%;
 }
 .Article-articulosg {
   position: fixed;
   top: 20%;
   right: 5%;
-  width: 10%;
+  width: 22%;
   border-right-style: outset;
   border-bottom-style: outset;
   border-width: thin;
@@ -102,7 +102,7 @@ body {
 
 .botonenviar {
   position: fixed;
-  top: 80%;
+  top: 88%;
 }
 .portada {
   width: 70% ;

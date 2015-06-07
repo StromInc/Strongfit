@@ -104,3 +104,19 @@ function votar(Npost, numero,nvoto) {
         }, function(responseText){
     }); 
     }
+    function borrar(nombre){
+      $.post('../../Sborraarticulo', {
+                 idArt : nombre
+                
+        }, function(responseText){
+            $('#misarticulos').html(responseText);   
+    }); 
+    }
+    function contar(nombre, numero){
+      $.post('../../Scontarvoto', {
+                 idArt : nombre
+                
+        }, function(responseText){
+            $('#votos'+numero+'').html(responseText);   
+    }); 
+    }
