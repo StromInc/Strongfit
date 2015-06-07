@@ -562,10 +562,10 @@ public class cConexion {
     public String ruta(int i){
         String ruta = "";
         if(i == 1){
-        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
+        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Nueva carpeta\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
         //ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
         }else{
-        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
+        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Nueva carpeta\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
         }
         return  ruta;
     }

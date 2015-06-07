@@ -125,7 +125,7 @@ public class cArticulos {
    if(misarticulos != null){
    for(int i = 0; i < misarticulos.length;i++){    
      
-     articulos += "<span onClick=\"cambiaarticulo('"+misarticulos[i]+"'),cambiarartenuso()\" class='Article-articulosh'>" + objcifrado.sustituye(misarticulos[i],2) + "</span>" + "</br>";
+     articulos += "<span onClick=\"cambiaarticulo('"+misarticulos[i]+"'),cambiarartenuso()\" class='Article-articulosh'>" + objcifrado.sustituye(misarticulos[i],2) + "<span class='icon-cancel-circle' style='left:93%;position:fixed;color:red;' onClick=borrar()></span></span>" + "</br>";
      
    }
    }else{
