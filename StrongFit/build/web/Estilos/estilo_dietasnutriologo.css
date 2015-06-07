@@ -15,6 +15,7 @@
   padding: 0.6em 0;
   position: relative;
   color: #fff;
+  cursor: pointer;
 }
 .dietaCreada:hover {
   background-color: rgba(123, 123, 123, 1);
@@ -143,6 +144,7 @@
   background-color: #dcdcdc;
   margin-bottom: 0;
   padding-left: 1em;
+  font-weight: 100;
 }
 .espacioDieta {
   background-color: #d3d3d3;
@@ -283,4 +285,17 @@
 
 .divTusDietas{
     display: inline-block;
+}
+
+#mostrarDieta{
+    margin-left: 35%;
+    width: 60%;
+}
+
+#datosDieta{
+    padding: 1em 0;
+}
+
+#datosDieta span{
+    margin-right: .5em;
 }

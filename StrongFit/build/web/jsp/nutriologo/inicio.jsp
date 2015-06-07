@@ -9,7 +9,7 @@
         <script src = "../../js/acciones_articulo.js"></script>
          <script src="../../js/salir.js"></script>
     </head>
-    <body>
+    <body id="body">
         <%@include file = "barra_menu.jsp" %>
          <span Style="width:100%;height:100%;background:rgba(0,0,0,0.8); position:fixed;" hidden id="spanventana"></span>
         <section class="Section-todo">

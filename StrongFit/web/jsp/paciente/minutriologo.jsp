@@ -84,7 +84,7 @@
                                 msj += "...";
                             }
                             
-                            int verificacionimg = objimg.devuelveexistencia(idOtro);
+                            int verificacionimg = objimg.devuelveexistencia(idOtro, 1);
                             String ruta = "lel";
                             String ruta2 = "../../Imagenes/Usuarios/";
                             
@@ -138,7 +138,7 @@
                                 ResultSet rs3 = conecta.spGetInfoUsuario(correoSolicitud);
                                 if(rs3.next()){
                                     clases.CImagen objimg = new clases.CImagen();
-                                    int verificacionimg = objimg.devuelveexistencia(seguro.desencriptar(rs3.getString("idUsuario")));
+                                    int verificacionimg = objimg.devuelveexistencia(seguro.desencriptar(rs3.getString("idUsuario")), 1);
                                     String ruta = "lel";
                                     String ruta2 = "../../Imagenes/Usuarios/";
                                     String nom = seguro.desencriptar(rs3.getString("idUsuario"));

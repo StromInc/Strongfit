@@ -75,6 +75,7 @@ body {
   width: 70%;
   position: absolute;
   border-radius: 15px;
+  top: 47%;
 }
 .Article-articulosg {
   position: fixed;
@@ -102,5 +103,16 @@ body {
 .botonenviar {
   position: fixed;
   top: 80%;
+}
+.portada {
+  width: 70% ;
+ height: 20%;
+  position: absolute;
+}
+
+.portada2 {
+  width: 60% ;
+ height: 20%;
+  position: absolute;
 }
   
