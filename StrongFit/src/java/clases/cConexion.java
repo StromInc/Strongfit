@@ -786,5 +786,21 @@ public class cConexion {
         this.st = con.createStatement();
         this.st.executeQuery("call spBorrarAlimentoFecha("+idFecha+");");
     }
+    //borra articulos
+    public void borrararticulo(String idArt) throws SQLException{
+        this.st = con.createStatement();
+        this.st.executeQuery("call sp_Borrararticulo('"+idArt+"');");
+    }
+     public int[] cuentavotos(String idArt) throws SQLException{
+        this.st = con.createStatement();
+        ResultSet resultado = null;
+        int votos[] = new int[2];
+        resultado = this.st.executeQuery("call sp_regresavotos('"+idArt+"');");
+        if(resultado.next()){
+         votos[0] = resultado.getInt("arriba");
+          votos[1] = resultado.getInt("abajo");       
+        }
+        return votos;
+    }
 }
 

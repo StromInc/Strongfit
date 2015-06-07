@@ -16,14 +16,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author jorge pastrana
  */
-@WebServlet(name = "Sborraarticulo", urlPatterns = {"/Sborraarticulo"})
-public class Sborraarticulo extends HttpServlet {
+@WebServlet(name = "Scontarvoto", urlPatterns = {"/Scontarvoto"})
+public class Scontarvoto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,13 +40,14 @@ public class Sborraarticulo extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             clases.cConexion objconexion= new clases.cConexion();
             objconexion.conectar();
-            HttpSession sesion = request.getSession();
-            String idUsr = (String)sesion.getAttribute("idUsr");
+           try{
+           Thread.sleep(100);
+           }catch(Exception e){}
             String idArt = request.getParameter("idArt");
-            objconexion.borrararticulo(idArt);
-            clases.cArticulos objarticulo = new clases.cArticulos();
-            String texto = objarticulo.buscamisarticulos(idUsr);
-            out.print(texto);
+            int[] nvotos = objconexion.cuentavotos(idArt);
+            out.print("<p style='color: limegreen;\n" +
+"  display: inline-block'>"+nvotos[0]+" </p><p style='color: red;\n" +
+"  display: inline;'>"+nvotos[1]+"</p>");
         }
     }
 
@@ -66,7 +66,7 @@ public class Sborraarticulo extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Sborraarticulo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Scontarvoto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -84,7 +84,7 @@ public class Sborraarticulo extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Sborraarticulo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Scontarvoto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

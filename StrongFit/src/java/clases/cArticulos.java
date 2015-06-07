@@ -90,23 +90,28 @@ public class cArticulos {
             }
             articulos+= "</div>";
             int estado = objconexion.regresavoto(idusr, articulosNom[i]);
+            int arriba = objconexion.cuentavotos(articulosNom[i])[0];
+            int abajo = objconexion.cuentavotos(articulosNom[i])[1];
+            articulos += "<span id='votos"+i+"'><p style='color: limegreen;\n" +
+"  display: inline-block'>"+arriba+" </p><p style='color: red;\n" +
+"  display: inline;'>"+abajo+"</p></span>";
             switch (estado){
                 case 0:
-                        articulos+= "<span id='u"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",1)>";
+                        articulos+= "<span id='u"+i+"' onclick=\"votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",1),contar('"+articulosNom[i]+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote.png'></span>";
-                        articulos+= "<span id='d"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",0)>";
+                        articulos+= "<span id='d"+i+"' onclick=\"votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",0),contar('"+articulosNom[i]+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote2.png'>";                       
                 break;
                 case 1:
-                        articulos+= "<span id='u"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",1)>";
+                        articulos+= "<span id='u"+i+"' onclick=\"votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",1),contar('"+articulosNom[i]+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote3.png'></span>";
-                        articulos+= "<span id='d"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",0)>";
+                        articulos+= "<span id='d"+i+"' onclick=\"votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",0),contar('"+articulosNom[i]+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote2.png'>";                        
                 break;
                 case 2:
-                        articulos+= "<span id='u"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",1)>";
+                        articulos+= "<span id='u"+i+"' onclick=\"votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",1),contar('"+articulosNom[i]+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote.png'></span>";
-                        articulos+= "<span id='d"+i+"' onclick=votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",0)>";
+                        articulos+= "<span id='d"+i+"' onclick=\"votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",0),contar('"+articulosNom[i]+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote4.png'>";                       
                 break;                                  
             }
@@ -125,7 +130,7 @@ public class cArticulos {
    if(misarticulos != null){
    for(int i = 0; i < misarticulos.length;i++){    
      
-     articulos += "<span onClick=\"cambiaarticulo('"+misarticulos[i]+"'),cambiarartenuso()\" class='Article-articulosh'>" + objcifrado.sustituye(misarticulos[i],2) + "<span class='icon-cancel-circle' style='left:93%;position:fixed;color:red;' onClick=borrar()></span></span>" + "</br>";
+     articulos += "<span class='Article-articulosh'><span onClick=\"cambiaarticulo('"+misarticulos[i]+"'),cambiarartenuso()\" >" + objcifrado.sustituye(misarticulos[i],2) + "</span><span class='icon-cancel-circle' style='left:93%;position:fixed;color:red;' onClick=borrar('"+misarticulos[i]+"')></span></span>" + "</br>";
      
    }
    }else{
