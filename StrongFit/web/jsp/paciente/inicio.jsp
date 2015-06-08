@@ -24,9 +24,8 @@
             int diaA = c2.get(Calendar.DAY_OF_YEAR);
             int caloriasdia = 0;
             int diaMes = c2.get(Calendar.DATE); //Agregue esta variable
-            int numMes = c2.get(Calendar.MONTH) + 1;//Agregue esta variable mas uno porque se maneja como un array
+            int numMes = c2.get(Calendar.MONTH); //Esto se maneja como arreglos
             int year = c2.get(Calendar.YEAR);//Agregue esta variable
-            
             cConexion conecta = new cConexion();
             conecta.conectar();
             
@@ -49,9 +48,9 @@
             <div class="Content-informacion">      
                 <div class="Estadisticas">
                     <div class="Estadisticas-header">
-                        <span class="Estadisticas-atras"><</span>
-                        <h3 class="Estadisticas-titulo">Hoy</h3> 
-                        <span class="Estadisticas-adelante">></span>
+                        <span><a href="#" class="Estadisticas-atras" id="cambiar-atras"> < </a></span>
+                        <h3 class="Estadisticas-titulo" id="tituloFecha">Hoy</h3> 
+                        <span><a href="#" class="Estadisticas-adelante" id="cambiar-adelante"> > </a></span>
                     </div>
                     <div class="Estadisticas-section">
                         <div class="Estadisticas-wrapper">
@@ -60,14 +59,12 @@
                                 //Cambie el metodo a uno que recupera por una fecha mas especifica
                                 //Hace lo mismo que el anterior
                                 ResultSet rs2 = conecta.getAlimentosPorFecha(idPaciente, diaMes, numMes, year);
-                                int calorias = 0, con = 0;
+                                int calorias = 0;
                                 int kcalorias = 0;
                                 while(rs2.next()){
                                     calorias = rs2.getInt("calorias");
                                     kcalorias += calorias;
-                                    con++;
                                 }
-                                System.out.println("Numero de alimentos " + con);
                             %>
                         <p id="consumido">Consumido <%=kcalorias%> kcal</p>
                         </div>
@@ -90,7 +87,6 @@
                                 String nombre = "";
                                 int tipoAlimento = 0;
                                 int idAlimentoFecha;
-                                System.out.println("Antes del while");
                                 rs2.beforeFirst();
                                 while(rs2.next()){
                                     nombre = rs2.getString("nombre");
@@ -117,7 +113,6 @@
                                 nombre = "";
                                 tipoAlimento = 0;
                                 idAlimentoFecha = 0;
-                                System.out.println("Antes del while");
                                 rs2.beforeFirst();
                                 while(rs2.next()){
                                     nombre = rs2.getString("nombre");
@@ -145,7 +140,6 @@
                                 nombre = "";
                                 tipoAlimento = 0;
                                 idAlimentoFecha = 0;
-                                System.out.println("Antes del while");
                                 rs2.beforeFirst();
                                 while(rs2.next()){
                                     nombre = rs2.getString("nombre");
@@ -173,7 +167,6 @@
                                 nombre = "";
                                 tipoAlimento = 0;
                                 idAlimentoFecha = 0;
-                                System.out.println("Antes del while");
                                 rs2.beforeFirst();
                                 while(rs2.next()){
                                     nombre = rs2.getString("nombre");
@@ -201,7 +194,6 @@
                                 nombre = "";
                                 tipoAlimento = 0;
                                 idAlimentoFecha = 0;
-                                System.out.println("Antes del while");
                                 rs2.beforeFirst();
                                 while(rs2.next()){
                                     nombre = rs2.getString("nombre");

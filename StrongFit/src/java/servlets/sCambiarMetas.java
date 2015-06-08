@@ -44,21 +44,26 @@ public class sCambiarMetas extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             HttpSession sesion = request.getSession();
-            int idCon = Integer.parseInt(request.getParameter("idCon"));     
-            int caloriasDia = 0;
-            
             cConexion conectar = new cConexion();
             conectar.conectar();
             
-            ResultSet rs = conectar.spGetConteo(idCon);
-            if(rs.next())
-            {
-                caloriasDia = rs.getInt("caloriasDia");
-            }
+            int idPaciente = (Integer)sesion.getAttribute("idPaciente");
             
+            int diaMes = Integer.parseInt(request.getParameter("diaMes"));
+            int numMes = Integer.parseInt(request.getParameter("numMes"));
+            int year = Integer.parseInt(request.getParameter("year"));
+            
+            int calorias = 0;
+            int kcalorias = 0;
+            ResultSet rs = conectar.getAlimentosPorFecha(idPaciente, diaMes, numMes, year);
+            while(rs.next())
+            {
+                calorias = rs.getInt("calorias");
+                kcalorias += calorias;
+            }
             Map respuesta = new HashMap();
-            respuesta.put("calDia", caloriasDia);
-            write(response,respuesta);
+            respuesta.put("calDia", kcalorias);
+            write(response, respuesta);
         }
     }
 

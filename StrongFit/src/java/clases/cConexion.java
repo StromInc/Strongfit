@@ -511,7 +511,6 @@ public class cConexion {
         this.st = con.createStatement();
         ResultSet rs = this.st.executeQuery("call spBuscarAlimento('"+info+"');");
         while(rs.next()){
-            System.out.print("***************Entro al while************************");
             id = Integer.parseInt(rs.getString("idAlimento"));
             nombre = rs.getString("nombre");
             calorias = Float.parseFloat(rs.getString("calorias"));
