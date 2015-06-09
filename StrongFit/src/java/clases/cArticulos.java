@@ -94,7 +94,7 @@ public class cArticulos {
             int abajo = objconexion.cuentavotos(articulosNom[i])[1];
             articulos += "<span id='votos"+i+"'><p style='color: limegreen;\n" +
 "  display: inline-block'>"+arriba+" </p><p style='color: red;\n" +
-"  display: inline;'>"+abajo+"</p></span>";
+"  display: inline;'> "+abajo+"</p></span>";
             switch (estado){
                 case 0:
                         articulos+= "<span id='u"+i+"' onclick=\"votar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",1),contar('"+articulosNom[i]+"',"+i+")\">";
@@ -184,7 +184,7 @@ public class cArticulos {
         String articulos = "<span id='articulo' class='Article-articulosc'>";
         
         
-            articulos+= "<h2>" + idArt +"</h2><hr> <br>";
+            articulos+= "<h2>" + objcifrado.sustituye(idArt,2) +"</h2><hr> <br>";
             articulos+= "por: " + articulosAut[2] + " <br>";
             
             articulos+= articulosAut[1];
@@ -224,23 +224,28 @@ public class cArticulos {
             }
             articulos+= "</span><span class='icon-cancel-circle' style='left:82%;position:fixed;color:red;' onClick=cerrar()></span><span id='acciones' class='Article-articulose'>";
             int estado = objconexion.regresavoto(idusr, idArt);
+            int arriba = objconexion.cuentavotos(idArt)[0];
+            int abajo = objconexion.cuentavotos(idArt)[1];
+            articulos += "<span id='votos"+i+"'><p style='color: limegreen;\n" +
+            "  display: inline-block'>"+arriba+" </p><p style='color: red;\n" +
+            "  display: inline;'> "+abajo+"</p></span>";
             switch (estado){
                 case 0:
-                        articulos+= "<span id='us' onclick=votar('"+idArt+"',"+i+",1)>";
+                        articulos+= "<span id='u"+i+"' onclick=\"votar('"+objcifrado.sustituye(idArt,1)+"',"+i+",1),contar('"+idArt+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote.png'></span>";
-                        articulos+= "<span id='ds' onclick=votar('"+idArt+"',"+i+",0)>";
+                        articulos+= "<span id='d"+i+"' onclick=\"votar('"+objcifrado.sustituye(idArt,1)+"',"+i+",0),contar('"+idArt+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote2.png'>";                       
                 break;
                 case 1:
-                        articulos+= "<span id='u"+i+"' onclick=votar('"+idArt+"',"+i+",1)>";
+                        articulos+= "<span id='u"+i+"' onclick=\"votar('"+objcifrado.sustituye(idArt,1)+"',"+i+",1),contar('"+idArt+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote3.png'></span>";
-                        articulos+= "<span id='d"+i+"' onclick=votar('"+idArt+"',"+i+",0)>";
+                        articulos+= "<span id='d"+i+"' onclick=\"votar('"+objcifrado.sustituye(idArt,1)+"',"+i+",0),contar('"+idArt+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote2.png'>";                        
                 break;
                 case 2:
-                        articulos+= "<span id='u"+i+"' onclick=votar('"+idArt+"',"+i+",1)>";
+                        articulos+= "<span id='u"+i+"' onclick=\"votar('"+objcifrado.sustituye(idArt,1)+"',"+i+",1),contar('"+idArt+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote.png'></span>";
-                        articulos+= "<span id='d"+i+"' onclick=votar('"+idArt+"',"+i+",0)>";
+                        articulos+= "<span id='d"+i+"' onclick=\"votar('"+objcifrado.sustituye(idArt,1)+"',"+i+",0),contar('"+idArt+"',"+i+")\">";
                         articulos+= "<img src='../../Imagenes/Iconos/sticky-vote4.png'>";                       
                 break;                                  
             }
