@@ -2,6 +2,7 @@ var circulo;
 var $tituloFecha;
 var fechaCambia;
 var texto = "Hoy";
+
 $(function(){
     //Se ejecuta cuando se busca un alimento
     $("#buscadorBoton").on("click", function() {
@@ -49,10 +50,10 @@ $(function(){
         var aviso = $buscadorAviso.val();
         if(nombre.length > 0){
             $contenedor.empty();
-            for(i in nombre){
+            for(var i in nombre){
                 var $clon = $alimentoItem.clone();
                 $buscadorAviso.hide();
-                $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p><span>'+calorias[i]+' kcal</span><button class="Alimentos-agregar">+<input type="hidden" id="alimento" value="'+ids[i]+'"></button>');
+                $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p><span>'+calorias[i]+' kcal</span><button class="Alimentos-agregar">+<input type="hidden" value="'+ids[i]+'"></button>');
                 $clon.hide();
                 $contenedor.prepend($clon);
                 $clon.slideDown();
@@ -90,6 +91,65 @@ $(function(){
     $('#cambiar-adelante').on('click', cambiarAdelante);
     $('#cambiar-atras').on('click', cambiarAtras);
 });
+//Esto nos muestra los alimentos consumidos
+function consumidosAdapter(nombre, calorias, ids, tiempoComida){
+    var $alimentoItem = $('#prototipo-borrar');
+    var $contenedor;
+    $('.Consumidos-item').remove();
+    if(nombre.length > 0){
+        for(var i in nombre){
+            var $clon = $alimentoItem.clone().removeClass("ocultar").attr("id", "");
+            if(tiempoComida[i] === 1){
+                $contenedor = $('#comida-desayuno');
+            }else if(tiempoComida[i] === 2){
+                $contenedor = $('#comida-colacion1');
+            }else if(tiempoComida[i] === 3){
+                $contenedor = $('#comida-comida');
+            }else if(tiempoComida[i] === 4){
+                $contenedor = $('#comida-colacion2');
+            }else if(tiempoComida[i] === 5){
+                $contenedor = $('#comida-cena');
+            }
+            $clon.html('<p class="Consumidos-name">'+nombre[i]+'</p><span>'+calorias[i]+' kcal</span><button class="Consumidos-borrar">X<input type="hidden" value="'+ids[i]+'"></button>');
+            $contenedor.prepend($clon);
+        }    
+    }
+    var $clon = $alimentoItem.clone();
+    $('#comida-desayuno').prepend($clon);
+    
+    $('.Consumidos-borrar').on('click', borrarAlimento);
+}
+    
+function getAlimentosFecha(){
+    var dayOfMonth = fechaCambia.getDate();
+    var mes = fechaCambia.getMonth();
+    var fullYear = fechaCambia.getFullYear();
+    $.ajax({
+        url: "http://localhost:8080/StrongFit/sGetAlimentosFecha",
+        type: 'get',
+        dataType: 'json',
+        data: {diaMes: dayOfMonth, 
+               numMes: mes, 
+               year: fullYear},
+        success: function(datos){
+            var nombre = [];
+            var tiempoComida = [];
+            var calorias = [];
+            var ids = [];
+            for(var i in datos){
+                nombre[i] = datos[i].nombre;
+                calorias[i] = datos[i].calorias; 
+                ids[i] = datos[i].id;
+                tiempoComida[i] = datos[i].tiempo_comida;
+            }
+            consumidosAdapter(nombre, calorias, ids, tiempoComida);
+        },error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+        }
+    });
+}
+
 function evaluaDia(){
     var fechaActual = new Date(); //Esta fecha se usa com referencia
     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -107,20 +167,25 @@ function evaluaDia(){
     
     return (meses[fechaCambia.getMonth()] + " " + fechaCambia.getDate()); 
 }
+
 function cambiarAtras(e){
     e.preventDefault();
     fechaCambia.setDate(fechaCambia.getDate() - 1); //Obtiene el dia siguiente en base al "actual" menos uno
     texto = evaluaDia();
     $tituloFecha.text(texto);
-    setValores(); //Esto actualiza la grafica
+    setValores(); //Esto actualiza la grafica 
+    getAlimentosFecha();
 }
+
 function cambiarAdelante(e){
     e.preventDefault();
     fechaCambia.setDate(fechaCambia.getDate() + 1); //Obtiene el dia siguiente en base al "actual" mas uno
     texto = evaluaDia();
     $tituloFecha.text(texto);
-    setValores();
+    setValores(); //Esto actualiza la grafica
+    getAlimentosFecha();
 }
+
 function setValores(){
     var valor, restantes, meta, textCirculo,
         porcentaje, css, colorLinea;
@@ -227,6 +292,7 @@ function agregar(e){
         }
     });
 }
+
 function borrarAlimento(e){
     var idValor = $(this).children('input').val();
     console.log("Esta cosa funciona?" + idValor);
