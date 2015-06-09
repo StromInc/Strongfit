@@ -1,9 +1,6 @@
 var circulo;
 var $tituloFecha;
-var fechaActual;
 var fechaCambia;
-var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-            "Julio", "Agosto", "Septiempre", "Octubre", "Noviembre", "Diciembre"];
 var texto = "Hoy";
 $(function(){
     //Se ejecuta cuando se busca un alimento
@@ -76,7 +73,7 @@ $(function(){
     }
     //Esto crea un circulo
     circulo = new ProgressBar.Circle('#container', {
-        color: '#0070C8',
+        color: '#645EB5',
         strokeWidth: 2,
         trailColor: "#f4f4f4",
         text: {
@@ -85,9 +82,8 @@ $(function(){
         }
     });
     $tituloFecha = $('#tituloFecha');
-    fechaActual = new Date();
-    fechaCambia = new Date();
-    console.log("Actual: " + fechaActual);
+    fechaCambia = new Date(); //Esta fecha cambia constantemente
+    console.log("Actual: " + fechaCambia);
     $('.Alimentos-agregar').on('click', agregar);
     $('.Consumidos-borrar').on('click', borrarAlimento);
     
@@ -95,6 +91,10 @@ $(function(){
     $('#cambiar-atras').on('click', cambiarAtras);
 });
 function evaluaDia(){
+    var fechaActual = new Date(); //Esta fecha se usa com referencia
+    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiempre", "Octubre", "Noviembre", "Diciembre"];
+        
     if((fechaCambia.getMonth() === fechaActual.getMonth()) && (fechaCambia.getFullYear() === fechaActual.getFullYear())){  
         if(fechaCambia.getDate() === fechaActual.getDate()){
             return "Hoy";
@@ -104,32 +104,31 @@ function evaluaDia(){
             return "Mañana";
         }
     }
+    
     return (meses[fechaCambia.getMonth()] + " " + fechaCambia.getDate()); 
 }
-function cambiarAtras(){
-    var diaActual = fechaCambia.getDate();
-    fechaCambia.setDate(diaActual - 1);
+function cambiarAtras(e){
+    e.preventDefault();
+    fechaCambia.setDate(fechaCambia.getDate() - 1); //Obtiene el dia siguiente en base al "actual" menos uno
     texto = evaluaDia();
     $tituloFecha.text(texto);
-    console.log("Actual: " + fechaCambia);
-    setValores();
+    setValores(); //Esto actualiza la grafica
 }
-function cambiarAdelante(){
-    var diaActual = fechaCambia.getDate();
-    fechaCambia.setDate(diaActual + 1);   
+function cambiarAdelante(e){
+    e.preventDefault();
+    fechaCambia.setDate(fechaCambia.getDate() + 1); //Obtiene el dia siguiente en base al "actual" mas uno
     texto = evaluaDia();
     $tituloFecha.text(texto);
-    console.log("Actual: " + fechaCambia);
     setValores();
 }
 function setValores(){
-    var valor;
-    var restantes;
-    var meta;
-    var porcentaje;
+    var valor, restantes, meta, textCirculo,
+        porcentaje, css, colorLinea;
     var duracion = 500;
+    //Variables necesarias para modificar los datos
     var dayOfMonth = fechaCambia.getDate();
     var mes = fechaCambia.getMonth();
+    var dayOfWeek = fechaCambia.getDay();
     var fullYear = fechaCambia.getFullYear();
     $.ajax({
         url: 'http://localhost:8080/StrongFit/sCambiarMetas',
@@ -137,27 +136,43 @@ function setValores(){
         dataType: 'json',
         data: {diaMes: dayOfMonth, 
                numMes: mes, 
-               year: fullYear},
+               year: fullYear,
+               diaSemana: dayOfWeek},
         success: function(datos){
             valor = datos.calDia; //Calorias consumidas ese dia
-            meta = $('#metaCalorias').html();
-            restantes = meta - valor;
-            porcentaje = valor / meta;
-            porcentaje = porcentaje.toPrecision(2);
-            console.log("Este es el porcentaje: " + porcentaje);
+            meta = datos.laMeta;
+            console.log("La meta del dia: " + meta);
+            $('#metaCalorias').html(meta); //Nuestra meta
+            restantes = meta - valor; //Las que faltan
+            
             $('#consumido').html('Consumido: '+ valor +' kcal');
-            if(restantes < meta){
-                circulo.path.setAttribute('stroke', 'red');
+            //Se ejecuta si las calorias consumidas son demasiadas
+            if(restantes < 0){
+                //Seteamos los valores para la grafica
+                colorLinea = 'red';
+                css = {'color': 'red', 'font-weight': 'bold'};
+                textCirculo = Math.abs(restantes) + ' kcal. excedentes';
+                porcentaje = 1;
+            }else{
+                //Seteamos los valores para la grafica
+                colorLinea = '#645EB5';
+                css = {'color': 'black', 'font-weight': 'normal'};
+                $('.progressbar__label').css(css);
+                textCirculo = restantes + ' kcal. restantes';
+                porcentaje = valor / meta;
+                porcentaje = porcentaje.toPrecision(2);
             }
+            circulo.path.setAttribute('stroke', colorLinea);
+            $('.progressbar__label').css(css); //Color del texto
             circulo.animate(porcentaje, {
                 duration: duracion
             }, function(){
-                console.log("Cargado");
-                circulo.setText(restantes + ' kcal. restantes');
+                circulo.setText(textCirculo);
             }); 
         }
     });   
 }
+
 function agregar(e){
     e.preventDefault();
     var $listaTipo; //Sabemos a que lista agregar el alimento en el html

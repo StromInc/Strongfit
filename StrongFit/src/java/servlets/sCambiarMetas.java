@@ -50,19 +50,27 @@ public class sCambiarMetas extends HttpServlet {
             int idPaciente = (Integer)sesion.getAttribute("idPaciente");
             
             int diaMes = Integer.parseInt(request.getParameter("diaMes"));
+            int diaSemana = Integer.parseInt(request.getParameter("diaSemana")) + 1; //Por que en la base el domingo es 1
             int numMes = Integer.parseInt(request.getParameter("numMes"));
             int year = Integer.parseInt(request.getParameter("year"));
             
+            int caloriasdia = 0;
             int calorias = 0;
             int kcalorias = 0;
+            
             ResultSet rs = conectar.getAlimentosPorFecha(idPaciente, diaMes, numMes, year);
-            while(rs.next())
-            {
+            while(rs.next()){
                 calorias = rs.getInt("calorias");
                 kcalorias += calorias;
             }
+            
+            ResultSet rs2 = conectar.spGetCaloriasPacienteEspecifico(idPaciente, diaSemana);
+            if(rs2.next()){
+                caloriasdia = rs2.getInt("calorias");
+            }
             Map respuesta = new HashMap();
             respuesta.put("calDia", kcalorias);
+            respuesta.put("laMeta", caloriasdia);
             write(response, respuesta);
         }
     }
