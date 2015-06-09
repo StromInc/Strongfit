@@ -228,4 +228,27 @@ public class cCifrado {
     return cadena;
     }
     
+    public String sanar(String mala){
+        
+        String sanado = mala;
+        sanado = sanado.replaceAll("\"", "&quot;");
+        sanado = sanado.replaceAll("'", "&#39;");
+        sanado = sanado.replaceAll("<", "&lt;");
+        sanado = sanado.replaceAll(">", "&gt;");
+        sanado = sanado.replaceAll("Ã¡", "á");
+        sanado = sanado.replaceAll("Ã©", "é");
+        sanado = sanado.replaceAll("Ã­", "í");
+        sanado = sanado.replaceAll("Ã³", "ó");
+        sanado = sanado.replaceAll("Ãº", "ú");
+        sanado = sanado.replaceAll("Ã€", "ä");
+        sanado = sanado.replaceAll("Ã«", "ë");
+        sanado = sanado.replaceAll("Ã¯", "ï");
+        sanado = sanado.replaceAll("Ã¶", "ö");
+        sanado = sanado.replaceAll("ÃŒ", "ü");
+        //nombrearchivo = nombrearchivo.replaceAll("Ã?", "Ñ");
+        sanado = sanado.replaceAll("Ã±", "ñ");
+
+        return sanado;
+    } 
+     
 }

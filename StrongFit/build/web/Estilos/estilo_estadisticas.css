@@ -1,0 +1,78 @@
+#chart_div{
+    width: 70%;
+    display: inline-block;
+    height: 20em;
+    background-color: blue;
+}
+
+.sinP{
+    padding: 0 0 1em 0;
+}
+
+.issues2{
+    position: fixed;
+    left: 0;
+    width: 26%;
+    height: 70%;
+    margin-left: 1%;
+}
+
+.particularEst{
+    margin-right: 1%;
+}
+
+.graficas{
+    left: 30.5%;
+}
+
+input[type = "radio"]{
+    display: none;
+}
+
+#btnLabels{
+    text-align: center;
+}
+
+#labelCalEst,
+#labelProCarLip{
+    cursor: pointer;
+    width: 40%;
+    display: inline-block;
+}
+
+#caloriasEst:checked ~ #labelCalEst,
+#procarlip:checked ~ #labelProCarLip{
+    text-decoration: underline;
+}
+
+.Content-title ~ ul{
+    padding: 0;
+    margin: 0;
+}
+
+.listaGraficas{
+    border-bottom: 1px solid #d2d4d5;
+    display: inline-block;
+    cursor: pointer;
+    width: 100%;
+    padding: .5em 0;
+}
+
+.listaGraficas label{
+    cursor: pointer;
+}
+
+.listaGraficas:hover{
+    background-color: #f2f2f2;
+}
+
+#listaG1:checked ~ #labelG1,
+#listaG2:checked ~ #labelG2,
+#listaG3:checked ~ #labelG3,
+#listaG4:checked ~ #labelG4{
+    background-color: #f2f2f2;
+}
+
+.fondoGris{
+    background-color: #f2f2f2;
+}

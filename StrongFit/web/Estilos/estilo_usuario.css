@@ -262,9 +262,10 @@ a {
   max-width: 10em;
 }
 .micha {
-  width: 50%;
-  display: inline-block;
-  font-size: 1.1rem;
+    width: 40%;
+    display: inline-block;
+    font-size: 1.1rem;
+    margin-left: .1rem;
 }
 .diaCalorias {
   background-color: rgba(23,113,40,0.9);

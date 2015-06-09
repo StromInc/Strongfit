@@ -16,7 +16,7 @@
 
 <script>
              //notar el protocolo.. es 'ws' y no 'http'
-        var wsUri = "ws://192.168.1.66:8080/StrongFit/endpoint";
+        var wsUri = "ws://192.168.1.71:8080/StrongFit/endpoint";
         var websocket = new WebSocket(wsUri); //creamos el socket
         var solicitud = '';
         var sesionDestinatario = '';
@@ -63,7 +63,7 @@
                         $('#log').animate({
                             scrollTop: $('.mensaje').last().height() * 200
                         });
-                        log("<div class = 'destinatarioDiv'><div class = 'destinatario msj'>" + diferenciar[1] + "</div></div>");
+                        log("<div class = 'destinatarioDiv'><div class = 'destinatario msj'>" + sanar(diferenciar[1]) + "</div></div>");
                         $.ajax({
                             url: 'http://localhost:8080/StrongFit/sCambiarEstadoLeido',
                             type: 'post',
@@ -157,8 +157,8 @@
                 $('#log').animate({
                     scrollTop: $('.mensaje').last().height() * 200
                 });
-                websocket.send( idUsuario + ',' + $('#destinatario').val() + ',' + mensajeTXT.value + ',' + sesionDestinatario);
-                log("<div class = 'remitenteDiv'><div class = 'remitente msj'>" + mensajeTXT.value + "</div></div>");
+                websocket.send( idUsuario + ',' + $('#destinatario').val() + ',' + sanar(mensajeTXT.value) + ',' + sesionDestinatario);
+                log("<div class = 'remitenteDiv'><div class = 'remitente msj'>" + sanar(mensajeTXT.value) + "</div></div>");
             });
         }
         function log(mensaje) { //aqui mostrará el LOG de lo que está haciendo el WebSocket
@@ -516,6 +516,29 @@ function getInfoNutricional(){
             }
         });
     }
+}
+
+
+function sanar(cadenaMala){
+    var cadenaBuena = "";
+    for (c in cadenaMala){
+            if(cadenaMala[c] === "<"){
+                cadenaBuena += "&lt;";
+            }
+            else if(cadenaMala[c] === ">"){
+                cadenaBuena += "&gt;";
+            }
+            else if(cadenaMala[c] === "\""){
+                cadenaBuena += "&quot;";
+            }
+            else if(cadenaMala[c] === "'"){
+                cadenaBuena += "&#39;";
+            }
+            else{
+                cadenaBuena += cadenaMala[c];
+            }
+    }
+    return cadenaBuena;
 }
 </script>
 <!--Su hoja de estilos esta definida en la pagina meta.jsp, que debe de ser incluida en todas las paginas de este proyecto-->

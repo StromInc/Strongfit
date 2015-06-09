@@ -1,21 +1,73 @@
 google.load("visualization", "1", {packages:["corechart"]});
 google.setOnLoadCallback(drawChart);
+
+var opciones = {};
+var datos = [];
+
 function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-    ['Year', 'Sales', 'Expenses'],
-    ['2013',  1000,      400],
-    ['2014',  1170,      460],
-    ['2015',  660,       1120],
-    ['2016',  1030,      540]
-  ]);
+    $(function(){
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Work',     11],
+            ['Eat',      2],
+            ['Commute',  2],
+            ['Watch TV', 2],
+            ['Sleep',    7]
+        ]);
 
-  var options = {
-    title: 'Company Performance',
-    hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-    vAxis: {minValue: 0}
-  };
+        var options = {
+          legend: 'none'
+        };
 
-  var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-  chart.draw(data, options);
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+    });
+}
+
+function datosGrafica(id){
+    $(function(){
+        datos = [];
+        opciones = {};
+        
+        var cal = 1;
+        var por = 0;
+        
+        $('.listaGraficas').removeClass('fondoGris');
+        $('#'+id).addClass('fondoGris');
+        
+        if(!$('#caloriasEst').is(':checked')){
+            cal = 0;
+        }
+        
+        if($('#'+id).html() === "labelG1"){
+            por = 1;
+        }
+        else if($('#'+id).html() === "labelG2"){
+            por = 2;
+        }
+        else if($('#'+id).html() === "labelG3"){
+            por = 3;
+        }
+        else if($('#'+id).html() === "labelG4"){
+            por = 4;
+        }
+        else{
+            por = 0;
+        }
+        
+        $.ajax({
+            url: 'http://localhost:8080/StrongFit/sGetDatosGrafica',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                cal: cal,
+                por: por
+            },
+            success: function(res){
+                
+            }
+        });
+    });
 }
 

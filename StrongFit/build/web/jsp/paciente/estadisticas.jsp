@@ -13,6 +13,7 @@
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio.css">
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_chat.css" >
+        <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_estadisticas.css" >
         
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript" src="../../js/acciones_estadisticasP.js"></script>
@@ -41,8 +42,8 @@
             }
         %>
         <section class = "Section-tbl-usr">
-            <article class="Article-tbl-usr2 issues">
-                <h2 style="font-size: 1.3em;">Calorias a consumir diariamente</h2>
+            <article class="Article-tbl-usr2 issues2 sinP">
+                <div class="Content-title">Calorías a consumir diariamente</div>
                     <%for(int i = 0; i < caloriasD.length; ++i)
                         {
                     %>
@@ -51,16 +52,20 @@
                         }
                     %>
             </article>
-            <article class="Article-tbl-usr2 cajachat">
-                <div id="chart_div" style="width: 550px; height: 400px;"></div>
+            <article class="Article-tbl-usr2 cajachat graficas sinP">
+                <div id="btnLabels" class="Content-title">
+                    <input type="radio" checked name="estadistics" id="caloriasEst"><label for="caloriasEst" id="labelCalEst">Calorías</label>
+                    <input type="radio" name="estadistics" id="procarlip"><label for="procarlip" id="labelProCarLip">Pro/Car/Lip</label>
+                </div>
+                <div id="chart_div"></div>
             </article>
-            <article class="Article-tbl-usr2 contactos">
+            <article class="Article-tbl-usr2 contactos sinP particularEst">
+                <div class="Content-title">Ver estadísticas por:</div>
                 <ul>
-                    <li class="listaGraficas"><label>Hoy</label></li>
-                    <li class="listaGraficas"><label>Semanal</label></li>
-                    <li class="listaGraficas"><label>Mensual</label></li>
-                    <li class="listaGraficas"><label>P/C/L</label></li>
-                    <li class="listaGraficas"><label>Alimentos</label></li>
+                    <li class="listaGraficas" id="labelG1" onclick="datosGrafica(id);">Hoy</li>
+                    <li class="listaGraficas" id="labelG2" onclick="datosGrafica(id);">Semanal</li>
+                    <li class="listaGraficas" id="labelG3" onclick="datosGrafica(id);">Mensual</li>
+                    <li class="listaGraficas" id="labelG4" onclick="datosGrafica(id);">Alimentos</li>
                 </ul>
             </article>
         </section>
