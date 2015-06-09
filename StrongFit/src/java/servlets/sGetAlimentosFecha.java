@@ -5,12 +5,14 @@
  */
 package servlets;
 
+import clases.cAlimento;
 import clases.cConexion;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -24,8 +26,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author USER
  */
-@WebServlet(name = "sAgregarAlimento", urlPatterns = {"/sAgregarAlimento"})
-public class sAgregarAlimento extends HttpServlet {
+@WebServlet(name = "sGetAlimentosFecha", urlPatterns = {"/sGetAlimentosFecha"})
+public class sGetAlimentosFecha extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,30 +48,32 @@ public class sAgregarAlimento extends HttpServlet {
             HttpSession sesion = request.getSession();
             int idPaciente = (Integer)sesion.getAttribute("idPaciente");
             
-            Calendar calendario = new GregorianCalendar();
-            int dia = calendario.get(Calendar.DAY_OF_YEAR);
-            
             int diaMes = Integer.parseInt(request.getParameter("diaMes"));
-            int mes = Integer.parseInt(request.getParameter("mes")); //Es un array de meses
-            int year = Integer.parseInt(request.getParameter("thisYear"));
+            int mes = Integer.parseInt(request.getParameter("numMes")); //Es un array de meses
+            int year = Integer.parseInt(request.getParameter("year"));
+            ArrayList<cAlimento> alimentos = new ArrayList<cAlimento>();
+            ResultSet rs = con.getAlimentosPorFecha(idPaciente, diaMes, mes, year);
             
-            int tipo = Integer.parseInt(request.getParameter("tipo"));
-            
-            //id del conteo calorico
-            int idCont = (Integer) sesion.getAttribute("idcont");
-            System.out.print(idCont);
-            String id = request.getParameter("valor");
-            System.out.print("ID Alimento" + id + " id usuario " +idCont);
-            con.agregarAlimento(id, idCont);
-            
-            //Agregamos el alimento a la base
-            int idA = Integer.parseInt(id);
-            con.spSetAlimentoConsumido(idPaciente, idA, dia);
-   
-            //Agregar alimento por fecha especifica tipo, idpaciente, numdia, mes, year
-            int idAlta = con.spSetAlimentoFecha(idA, idPaciente, tipo, diaMes, mes, year);
-            response.getWriter().write(String.valueOf(idAlta));
+            while(rs.next()){
+                cAlimento miAlimento = new cAlimento();
+                
+                miAlimento.setID(rs.getInt("idAlimento_fecha"));
+                miAlimento.setNombre(rs.getString("nombre"));
+                miAlimento.setCalorias(rs.getInt("calorias"));
+                miAlimento.setTiempoComida(rs.getInt("tiempo_comida_id"));
+                alimentos.add(miAlimento);
+            }
+            regresarAlimentos(response, alimentos);
         }
+    }
+    
+    //Esto convierte el array en un Json y lo regresa al html
+    private void regresarAlimentos(HttpServletResponse response, ArrayList<cAlimento> alimentos) throws IOException 
+    {
+        response.setContentType("aplication/json");
+        response.setCharacterEncoding("charset=UTF-8");
+        response.getWriter().write(new Gson().toJson(alimentos));
+        System.out.print(alimentos);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -87,7 +91,7 @@ public class sAgregarAlimento extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sAgregarAlimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sGetAlimentosFecha.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -105,7 +109,7 @@ public class sAgregarAlimento extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sAgregarAlimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sGetAlimentosFecha.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

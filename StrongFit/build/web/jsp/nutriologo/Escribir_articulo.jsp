@@ -15,9 +15,11 @@
               String idUsr = (String)sesion.getAttribute("idUsr");
               String idArt = (String)sesion.getAttribute("artenuso");
               clases.CImagen objimg = new clases.CImagen();
+              String ruta = "";
+
               if(idArt.equals("")){
                 int verificacionimg = objimg.devuelveexistencia(idUsr,2);
-                String ruta = "";
+                idArt = "nuevoarticuloenblanco";
                 String ruta2 = "../../Imagenes/Articulos/";
                 switch(verificacionimg){
                     case 1: 
@@ -30,12 +32,12 @@
                         ruta = ruta2 + idUsr + ".gif";
                         break;
                     default: 
-                        ruta = "../../Imagenes/usr_sin_imagen.jpg";
+                        ruta = "../../Imagenes/articulo_sin_imagen.jpg";
                         break;
                 }
     }else{
               int verificacionimg = objimg.devuelveexistencia(idArt,2);
-                String ruta = "";
+                
                 String ruta2 = "../../Imagenes/Articulos/";
                 switch(verificacionimg){
                     case 1: 
@@ -48,8 +50,9 @@
                         ruta = ruta2 + idArt + ".gif";
                         break;
                     default: 
-                        ruta = "../../Imagenes/usr_sin_imagen.jpg";
+                        ruta = "../../Imagenes/articulo_sin_imagen.jpg";
                         break;
+              }
               }
               %>
         <link rel="stylesheet" type = "text/css" href="../../Estilos/estilo_inicio2.css">
@@ -59,15 +62,15 @@
          <script src="../../js/salir.js"></script>
     </head>
     <%@include file = "barra_menu.jsp" %>
-    <body onLoad=buscamisarticulos('busca');>
+    <body onLoad="buscamisarticulos('busca'),cambiaarticulo('<%=idArt%>')" >
         <section class="Section-todo">
             <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagenart.jsp" name="img_frm" class="Article-articulosi" >
                         <input type = "file"  name="uploadFile" id="ImgUsuario" class="input-subir" required/>
-                        <input type = "submit" value="cambiar" class="btn-imagen"/>
+                        <input type = "submit" value="cambiar" class="btn-imagen" onclick="cambiarartenuso()"/>
                     </form>         
             <span id="edicion">
-                Titulo:<br><input type="text" id="txtnombre"><br>
-                <img src = "<%=ruta%>" class ="img-usr" alt = "foto de usuario">
+                Titulo:<br><input type="text" id="txtnombre"><br><br>
+                <img src = "<%=ruta%>" class ="portada" alt = "foto de usuario">
                  
                  <br>
                 Texto:<br><span contentEditable="true" id="txtarticulo" class="Article-articulosf"><p>  

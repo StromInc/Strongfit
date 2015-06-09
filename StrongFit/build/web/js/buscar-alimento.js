@@ -1,4 +1,8 @@
 var circulo;
+var $tituloFecha;
+var fechaCambia;
+var texto = "Hoy";
+
 $(function(){
     //Se ejecuta cuando se busca un alimento
     $("#buscadorBoton").on("click", function() {
@@ -46,10 +50,10 @@ $(function(){
         var aviso = $buscadorAviso.val();
         if(nombre.length > 0){
             $contenedor.empty();
-            for(i in nombre){
+            for(var i in nombre){
                 var $clon = $alimentoItem.clone();
                 $buscadorAviso.hide();
-                $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p><span>'+calorias[i]+' kcal</span><button class="Alimentos-agregar">+<input type="hidden" id="alimento" value="'+ids[i]+'"></button>');
+                $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p><span>'+calorias[i]+' kcal</span><button class="Alimentos-agregar">+<input type="hidden" value="'+ids[i]+'"></button>');
                 $clon.hide();
                 $contenedor.prepend($clon);
                 $clon.slideDown();
@@ -70,7 +74,7 @@ $(function(){
     }
     //Esto crea un circulo
     circulo = new ProgressBar.Circle('#container', {
-        color: '#0070C8',
+        color: '#645EB5',
         strokeWidth: 2,
         trailColor: "#f4f4f4",
         text: {
@@ -78,49 +82,176 @@ $(function(){
             className: 'progressbar__label'
         }
     });
+    $tituloFecha = $('#tituloFecha');
+    fechaCambia = new Date(); //Esta fecha cambia constantemente
+    console.log("Actual: " + fechaCambia);
     $('.Alimentos-agregar').on('click', agregar);
     $('.Consumidos-borrar').on('click', borrarAlimento);
+    
+    $('#cambiar-adelante').on('click', cambiarAdelante);
+    $('#cambiar-atras').on('click', cambiarAtras);
 });
+//Esto nos muestra los alimentos consumidos
+function consumidosAdapter(nombre, calorias, ids, tiempoComida){
+    var $alimentoItem = $('#prototipo-borrar');
+    var $contenedor;
+    $('.Consumidos-item').remove();
+    if(nombre.length > 0){
+        for(var i in nombre){
+            var $clon = $alimentoItem.clone().removeClass("ocultar").attr("id", "");
+            if(tiempoComida[i] === 1){
+                $contenedor = $('#comida-desayuno');
+            }else if(tiempoComida[i] === 2){
+                $contenedor = $('#comida-colacion1');
+            }else if(tiempoComida[i] === 3){
+                $contenedor = $('#comida-comida');
+            }else if(tiempoComida[i] === 4){
+                $contenedor = $('#comida-colacion2');
+            }else if(tiempoComida[i] === 5){
+                $contenedor = $('#comida-cena');
+            }
+            $clon.html('<p class="Consumidos-name">'+nombre[i]+'</p><span>'+calorias[i]+' kcal</span><button class="Consumidos-borrar">X<input type="hidden" value="'+ids[i]+'"></button>');
+            $contenedor.prepend($clon);
+        }    
+    }
+    var $clon = $alimentoItem.clone();
+    $('#comida-desayuno').prepend($clon);
+    
+    $('.Consumidos-borrar').on('click', borrarAlimento);
+}
+    
+function getAlimentosFecha(){
+    var dayOfMonth = fechaCambia.getDate();
+    var mes = fechaCambia.getMonth();
+    var fullYear = fechaCambia.getFullYear();
+    $.ajax({
+        url: "http://localhost:8080/StrongFit/sGetAlimentosFecha",
+        type: 'get',
+        dataType: 'json',
+        data: {diaMes: dayOfMonth, 
+               numMes: mes, 
+               year: fullYear},
+        success: function(datos){
+            var nombre = [];
+            var tiempoComida = [];
+            var calorias = [];
+            var ids = [];
+            for(var i in datos){
+                nombre[i] = datos[i].nombre;
+                calorias[i] = datos[i].calorias; 
+                ids[i] = datos[i].id;
+                tiempoComida[i] = datos[i].tiempo_comida;
+            }
+            consumidosAdapter(nombre, calorias, ids, tiempoComida);
+        },error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+        }
+    });
+}
+
+function evaluaDia(){
+    var fechaActual = new Date(); //Esta fecha se usa com referencia
+    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiempre", "Octubre", "Noviembre", "Diciembre"];
+        
+    if((fechaCambia.getMonth() === fechaActual.getMonth()) && (fechaCambia.getFullYear() === fechaActual.getFullYear())){  
+        if(fechaCambia.getDate() === fechaActual.getDate()){
+            return "Hoy";
+        } else if(fechaCambia.getDate() === (fechaActual.getDate() - 1)){
+            return "Ayer";
+        } else if(fechaCambia.getDate() === (fechaActual.getDate() + 1)){
+            return "Mañana";
+        }
+    }
+    
+    return (meses[fechaCambia.getMonth()] + " " + fechaCambia.getDate()); 
+}
+
+function cambiarAtras(e){
+    e.preventDefault();
+    fechaCambia.setDate(fechaCambia.getDate() - 1); //Obtiene el dia siguiente en base al "actual" menos uno
+    texto = evaluaDia();
+    $tituloFecha.text(texto);
+    setValores(); //Esto actualiza la grafica 
+    getAlimentosFecha();
+}
+
+function cambiarAdelante(e){
+    e.preventDefault();
+    fechaCambia.setDate(fechaCambia.getDate() + 1); //Obtiene el dia siguiente en base al "actual" mas uno
+    texto = evaluaDia();
+    $tituloFecha.text(texto);
+    setValores(); //Esto actualiza la grafica
+    getAlimentosFecha();
+}
+
 function setValores(){
-    var valor;
-    var restantes;
-    var meta;
-    var porcentaje;
+    var valor, restantes, meta, textCirculo,
+        porcentaje, css, colorLinea;
     var duracion = 500;
+    //Variables necesarias para modificar los datos
+    var dayOfMonth = fechaCambia.getDate();
+    var mes = fechaCambia.getMonth();
+    var dayOfWeek = fechaCambia.getDay();
+    var fullYear = fechaCambia.getFullYear();
     $.ajax({
         url: 'http://localhost:8080/StrongFit/sCambiarMetas',
         type: 'get',
         dataType: 'json',
-        data: $('#formularioOculto').serialize(),
+        data: {diaMes: dayOfMonth, 
+               numMes: mes, 
+               year: fullYear,
+               diaSemana: dayOfWeek},
         success: function(datos){
-            valor = datos.calDia;
-            meta = $('#metaCalorias').html();
-            restantes = meta - valor;
-            porcentaje = valor / meta;
-            $('#consumido').html('Consumido: '+valor+' kcal');
-            if(restantes < meta){
-                circulo.path.setAttribute('stroke', 'red');
+            valor = datos.calDia; //Calorias consumidas ese dia
+            meta = datos.laMeta;
+            console.log("La meta del dia: " + meta);
+            $('#metaCalorias').html(meta); //Nuestra meta
+            restantes = meta - valor; //Las que faltan
+            
+            $('#consumido').html('Consumido: '+ valor +' kcal');
+            //Se ejecuta si las calorias consumidas son demasiadas
+            if(restantes < 0){
+                //Seteamos los valores para la grafica
+                colorLinea = 'red';
+                css = {'color': 'red', 'font-weight': 'bold'};
+                textCirculo = Math.abs(restantes) + ' kcal. excedentes';
+                porcentaje = 1;
+            }else{
+                //Seteamos los valores para la grafica
+                colorLinea = '#645EB5';
+                css = {'color': 'black', 'font-weight': 'normal'};
+                $('.progressbar__label').css(css);
+                textCirculo = restantes + ' kcal. restantes';
+                porcentaje = valor / meta;
+                porcentaje = porcentaje.toPrecision(2);
             }
+            circulo.path.setAttribute('stroke', colorLinea);
+            $('.progressbar__label').css(css); //Color del texto
             circulo.animate(porcentaje, {
                 duration: duracion
             }, function(){
-                console.log("Cargado");
-                circulo.setText(restantes + ' kcal. restantes');
+                circulo.setText(textCirculo);
             }); 
         }
     });   
 }
+
 function agregar(e){
     e.preventDefault();
-    var idAlimento;
-    idAlimento = this.children[0].value;
-    console.log("IDAlimento" + idAlimento);
-    var elemento = $('.Seleccionado').text();
-    console.log(elemento);
+    var $listaTipo; //Sabemos a que lista agregar el alimento en el html
+    var idAlimento = this.children[0].value; //El valor de hidden
+    var textCalorias =  $(this).siblings('span').text(); //Calorias del alimento seleccionado
+    var textNombre =  $(this).siblings('p').text(); //Nombre del alimento seleccionado
+    var $clonBorrar = $('#prototipo-borrar').clone().removeClass("ocultar"); //Necesario para poder agregar un div de alimento a borrar
+    var elemento = $('.Seleccionado').text(); //Con esto sabemos que tipo de comida es
     var tipo = 1;
-    var $listaTipo;
-    var textCalorias =  $(this).siblings('span').text();
-    var textNombre =  $(this).siblings('p').text();
+    //Cuando fue agregado el alimento 
+    var dayOfMonth = fechaCambia.getDate(); 
+    var month = fechaCambia.getMonth();
+    var year = fechaCambia.getFullYear();
+    
     if(elemento === "Desayuno"){
         tipo = 1;
         $listaTipo = $('#comida-desayuno');
@@ -137,17 +268,21 @@ function agregar(e){
         tipo = 5;
         $listaTipo = $('#comida-cena');
     }
-    var $clonBorrar = $('#prototipo-borrar').clone().removeClass("ocultar");
+    
     console.log("Esta aqui");
     $.ajax({
         url: "http://localhost:8080/StrongFit/sAgregarAlimento",
         type: "post",
         dataType: "text",
         data: {tipo: tipo, 
-            valor: idAlimento},
+              valor: idAlimento,
+              diaMes: dayOfMonth,
+              mes: month,
+              thisYear: year},
         success: function(datos){
             console.log(datos + " Y los datos apa");
             setValores();
+            //Variable datos es el id del catalo fecha_alimento, con esto lo borramos ya ya no se muestra al usuario
             $clonBorrar.html('<p class="Alimentos-name">'+textNombre+'</p><span>'+textCalorias+'</span><button class="Consumidos-borrar">X<input type="hidden" value="'+datos+'"></button>');
             $listaTipo.append($clonBorrar);
             $('.Consumidos-borrar').on('click', borrarAlimento); 
@@ -157,6 +292,7 @@ function agregar(e){
         }
     });
 }
+
 function borrarAlimento(e){
     var idValor = $(this).children('input').val();
     console.log("Esta cosa funciona?" + idValor);
@@ -164,6 +300,7 @@ function borrarAlimento(e){
     $.post('http://localhost:8080/StrongFit/sBorrarAlimentoFecha', {
         valor: idValor}, 
         function(){
+            setValores();
             $elemento.remove();
         }
     );

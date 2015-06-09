@@ -36,7 +36,8 @@ public class Sartenuso extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
            HttpSession sesion = request.getSession();
-           String idArt = request.getParameter("idArt");
+           clases.cCifrado objcifrado = new clases.cCifrado();          
+           String idArt = objcifrado.sustituye(request.getParameter("idArt"), 1);
            sesion.setAttribute("artenuso", idArt);
         }
     }

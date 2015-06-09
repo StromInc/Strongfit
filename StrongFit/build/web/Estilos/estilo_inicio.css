@@ -197,8 +197,8 @@ a {
 }
 .Estadisticas-atras,
 .Estadisticas-adelante {
-  padding: 0.5em;
-  cursor: pointer;
+  padding: 0.5em 1em;
+  color: #fff !important;
 }
 .Estadisticas-section {
   margin-top: 0.5em;

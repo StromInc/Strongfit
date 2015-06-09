@@ -511,7 +511,6 @@ public class cConexion {
         this.st = con.createStatement();
         ResultSet rs = this.st.executeQuery("call spBuscarAlimento('"+info+"');");
         while(rs.next()){
-            System.out.print("***************Entro al while************************");
             id = Integer.parseInt(rs.getString("idAlimento"));
             nombre = rs.getString("nombre");
             calorias = Float.parseFloat(rs.getString("calorias"));
@@ -562,10 +561,10 @@ public class cConexion {
     public String ruta(int i){
         String ruta = "";
         if(i == 1){
-        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
+        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Nueva carpeta\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
         //ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
         }else{
-        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
+        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Nueva carpeta\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
         }
         return  ruta;
     }
@@ -573,7 +572,9 @@ public class cConexion {
     public String[] getArticulosNom() throws SQLException{
     this.st = con.createStatement();
     ResultSet rs = this.st.executeQuery("call sp_SeleccionarArticulos();");
-    String[] articulos = null;
+    ResultSet rs3 = null;
+    String[][] articulos = null;
+    String[] articulosordenados = null;
     int contador = 0;
     if(rs.next()){
     while(rs.next()){
@@ -581,21 +582,71 @@ public class cConexion {
     }
     contador++;
     ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
-    articulos = new String[contador];
+    articulos = new String[contador][2];
+    articulosordenados = new String[contador];
      int contador2 = 0;
      while(rs2.next()){
-     articulos[contador2] = rs2.getString("nombre");
-     
+     System.out.println( "0" );
+         articulos[contador2][0] = rs2.getString("nombre");
+     System.out.println( "1" );
+    
+     }
      contador2++;
+     System.out.println( "3" );
+     
+     
+     
+     for(int i = 0; i < contador;i++){
+      System.out.println( "4" );
+     rs3 = this.st.executeQuery("call sp_regresavotos('"+articulos[i][0]+"');");
+     if(rs3.next()){
+      int resultado = rs3.getInt("arriba");
+      resultado -= rs3.getInt("abajo");
+      articulos[i][1] = Integer.toString(resultado);
+      System.out.println( resultado );
+     System.out.println( "5" );
+     }
+     }
+     System.out.println("llegue aquí friend1");
+     boolean termine = false;
+     int contador3 = 0;
+     int valor = -2000;
+     String identifica = "";
+     System.out.println("llegue aquí friend2");
+     while(!termine){
+     System.out.println("Soy un bug");    
+     for(int i = 0; i < contador;i++){
+         System.out.println("1"); 
+     if(!articulos[i][0].equals(identifica)){
+         System.out.println("2");
+         int numero = Integer.parseInt(articulos[i][1]);
+         System.out.println(numero);
+     if(Integer.parseInt(articulos[i][1]) >= valor ){
+         System.out.println("3"); 
+     valor = Integer.parseInt(articulos[i][1]);
+     identifica = articulos[i][0];
+     }
+     }
+     }
+     articulosordenados[contador3] = identifica;
+     contador3++;
+     valor = 0;
+     if(contador3 == contador){
+     termine = true;
+     System.out.println("Soy verdadero"); 
+     }
      }
     }
-    return articulos;
+    System.out.println("Soy un bug enorme"); 
+    return articulosordenados;
     }
     
     public String[] getArticulosAut() throws SQLException{
     this.st = con.createStatement();
     ResultSet rs = this.st.executeQuery("call sp_SeleccionarArticulos();");
-    String[] articulos = null;
+    ResultSet rs3 = null;
+    String[][] articulos = null;
+    String[] articulosordenados = null;
     int contador = 0;
     if(rs.next()){
     while(rs.next()){
@@ -603,21 +654,71 @@ public class cConexion {
     }
     contador++;
     ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
-    articulos = new String[contador];
+    articulos = new String[contador][2];
+    articulosordenados = new String[contador];
      int contador2 = 0;
      while(rs2.next()){
-     articulos[contador2] = rs2.getString("idmedico");
-     
+     System.out.println( "0" );
+         articulos[contador2][0] = rs2.getString("idmedico");
+     System.out.println( "1" );
+    
+     }
      contador2++;
+     System.out.println( "3" );
+     
+     
+     
+     for(int i = 0; i < contador;i++){
+      System.out.println( "4" );
+     rs3 = this.st.executeQuery("call sp_regresavotos('"+articulos[i][0]+"');");
+     if(rs3.next()){
+      int resultado = rs3.getInt("arriba");
+      resultado -= rs3.getInt("abajo");
+      articulos[i][1] = Integer.toString(resultado);
+      System.out.println( resultado );
+     System.out.println( "5" );
+     }
+     }
+     System.out.println("llegue aquí friend1");
+     boolean termine = false;
+     int contador3 = 0;
+     int valor = -2000;
+     String identifica = "";
+     System.out.println("llegue aquí friend2");
+     while(!termine){
+     System.out.println("Soy un bug");    
+     for(int i = 0; i < contador;i++){
+         System.out.println("1"); 
+     if(!articulos[i][0].equals(identifica)){
+         System.out.println("2");
+         int numero = Integer.parseInt(articulos[i][1]);
+         System.out.println(numero);
+     if(Integer.parseInt(articulos[i][1]) >= valor ){
+         System.out.println("3"); 
+     valor = Integer.parseInt(articulos[i][1]);
+     identifica = articulos[i][0];
+     }
+     }
+     }
+     articulosordenados[contador3] = identifica;
+     contador3++;
+     valor = 0;
+     if(contador3 == contador){
+     termine = true;
+     System.out.println("Soy verdadero"); 
+     }
      }
     }
-    return articulos;
+    System.out.println("Soy un bug enorme"); 
+    return articulosordenados;
     }
     
     public String[] getArticulosTex() throws SQLException{
     this.st = con.createStatement();
     ResultSet rs = this.st.executeQuery("call sp_SeleccionarArticulos();");
-    String[] articulos = null;
+    ResultSet rs3 = null;
+    String[][] articulos = null;
+    String[] articulosordenados = null;
     int contador = 0;
     if(rs.next()){
     while(rs.next()){
@@ -625,15 +726,63 @@ public class cConexion {
     }
     contador++;
     ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
-    articulos = new String[contador];
+    articulos = new String[contador][2];
+    articulosordenados = new String[contador];
      int contador2 = 0;
      while(rs2.next()){
-     articulos[contador2] = rs2.getString("texto");
-     
+     System.out.println( "0" );
+         articulos[contador2][0] = rs2.getString("texto");
+     System.out.println( "1" );
+    
+     }
      contador2++;
+     System.out.println( "3" );
+     
+     
+     
+     for(int i = 0; i < contador;i++){
+      System.out.println( "4" );
+     rs3 = this.st.executeQuery("call sp_regresavotos('"+articulos[i][0]+"');");
+     if(rs3.next()){
+      int resultado = rs3.getInt("arriba");
+      resultado -= rs3.getInt("abajo");
+      articulos[i][1] = Integer.toString(resultado);
+      System.out.println( resultado );
+     System.out.println( "5" );
+     }
+     }
+     System.out.println("llegue aquí friend1");
+     boolean termine = false;
+     int contador3 = 0;
+     int valor = -2000;
+     String identifica = "";
+     System.out.println("llegue aquí friend2");
+     while(!termine){
+     System.out.println("Soy un bug");    
+     for(int i = 0; i < contador;i++){
+         System.out.println("1"); 
+     if(!articulos[i][0].equals(identifica)){
+         System.out.println("2");
+         int numero = Integer.parseInt(articulos[i][1]);
+         System.out.println(numero);
+     if(Integer.parseInt(articulos[i][1]) >= valor ){
+         System.out.println("3"); 
+     valor = Integer.parseInt(articulos[i][1]);
+     identifica = articulos[i][0];
+     }
+     }
+     }
+     articulosordenados[contador3] = identifica;
+     contador3++;
+     valor = 0;
+     if(contador3 == contador){
+     termine = true;
+     System.out.println("Soy verdadero"); 
+     }
      }
     }
-    return articulos;
+    System.out.println("Soy un bug enorme"); 
+    return articulosordenados;
     }
     
     public int regresavoto(String idusr, String nPost) throws SQLException{
@@ -785,6 +934,22 @@ public class cConexion {
     public void spBorrarAlimentoFecha(int idFecha) throws SQLException{
         this.st = con.createStatement();
         this.st.executeQuery("call spBorrarAlimentoFecha("+idFecha+");");
+    }
+    //borra articulos
+    public void borrararticulo(String idArt) throws SQLException{
+        this.st = con.createStatement();
+        this.st.executeQuery("call sp_Borrararticulo('"+idArt+"');");
+    }
+     public int[] cuentavotos(String idArt) throws SQLException{
+        this.st = con.createStatement();
+        ResultSet resultado = null;
+        int votos[] = new int[2];
+        resultado = this.st.executeQuery("call sp_regresavotos('"+idArt+"');");
+        if(resultado.next()){
+         votos[0] = resultado.getInt("arriba");
+          votos[1] = resultado.getInt("abajo");       
+        }
+        return votos;
     }
 }
 

@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package servlets;
 
-import clases.cConexion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,10 +20,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author USER
+ * @author jorge pastrana
  */
-@WebServlet(name = "sAgregarAlimento", urlPatterns = {"/sAgregarAlimento"})
-public class sAgregarAlimento extends HttpServlet {
+@WebServlet(name = "Sborraarticulo", urlPatterns = {"/Sborraarticulo"})
+public class Sborraarticulo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,34 +39,15 @@ public class sAgregarAlimento extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            cConexion con = new cConexion();
-            con.conectar();
+            clases.cConexion objconexion= new clases.cConexion();
+            objconexion.conectar();
             HttpSession sesion = request.getSession();
-            int idPaciente = (Integer)sesion.getAttribute("idPaciente");
-            
-            Calendar calendario = new GregorianCalendar();
-            int dia = calendario.get(Calendar.DAY_OF_YEAR);
-            
-            int diaMes = Integer.parseInt(request.getParameter("diaMes"));
-            int mes = Integer.parseInt(request.getParameter("mes")); //Es un array de meses
-            int year = Integer.parseInt(request.getParameter("thisYear"));
-            
-            int tipo = Integer.parseInt(request.getParameter("tipo"));
-            
-            //id del conteo calorico
-            int idCont = (Integer) sesion.getAttribute("idcont");
-            System.out.print(idCont);
-            String id = request.getParameter("valor");
-            System.out.print("ID Alimento" + id + " id usuario " +idCont);
-            con.agregarAlimento(id, idCont);
-            
-            //Agregamos el alimento a la base
-            int idA = Integer.parseInt(id);
-            con.spSetAlimentoConsumido(idPaciente, idA, dia);
-   
-            //Agregar alimento por fecha especifica tipo, idpaciente, numdia, mes, year
-            int idAlta = con.spSetAlimentoFecha(idA, idPaciente, tipo, diaMes, mes, year);
-            response.getWriter().write(String.valueOf(idAlta));
+            String idUsr = (String)sesion.getAttribute("idUsr");
+            String idArt = request.getParameter("idArt");
+            objconexion.borrararticulo(idArt);
+            clases.cArticulos objarticulo = new clases.cArticulos();
+            String texto = objarticulo.buscamisarticulos(idUsr);
+            out.print(texto);
         }
     }
 
@@ -87,7 +66,7 @@ public class sAgregarAlimento extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sAgregarAlimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sborraarticulo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -105,7 +84,7 @@ public class sAgregarAlimento extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sAgregarAlimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sborraarticulo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
