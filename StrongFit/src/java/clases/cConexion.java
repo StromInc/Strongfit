@@ -34,6 +34,9 @@ public class cConexion {
         }
         return con;
     }
+    public void cerrar() throws SQLException{
+        con.close();
+    }
     
     //Para conectar con nuestros propios datos
     public Connection conectar(String driver, String puerto, String usuario, String pasword)

@@ -63,6 +63,8 @@ public class sGetAlimentosFecha extends HttpServlet {
                 miAlimento.setTiempoComida(rs.getInt("tiempo_comida_id"));
                 alimentos.add(miAlimento);
             }
+            con.cerrar();
+            con = null;
             regresarAlimentos(response, alimentos);
         }
     }
