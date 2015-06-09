@@ -124,6 +124,7 @@ function getAlimentosFecha(){
     var dayOfMonth = fechaCambia.getDate();
     var mes = fechaCambia.getMonth();
     var fullYear = fechaCambia.getFullYear();
+    console.log("Dia mes: " + dayOfMonth + " mes " + mes + " año" + fullYear);
     $.ajax({
         url: "http://localhost:8080/StrongFit/sGetAlimentosFecha",
         type: 'get',
@@ -195,6 +196,7 @@ function setValores(){
     var mes = fechaCambia.getMonth();
     var dayOfWeek = fechaCambia.getDay();
     var fullYear = fechaCambia.getFullYear();
+    console.log("Dia mes: " + dayOfMonth + " mes " + mes + " año" + fullYear);
     $.ajax({
         url: 'http://localhost:8080/StrongFit/sCambiarMetas',
         type: 'get',

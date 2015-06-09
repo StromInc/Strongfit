@@ -4,26 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/js/acciones_dietasnutriologo.js</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/dietas_paciente.jsp</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/clases/cConexion.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sDietasUsr.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sBorrarDieta.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/nutriologo/dietas_nutriologo.jsp</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/minutriologo.jsp</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/Estilos/estilo_dietasnutriologo.css</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sEditarDieta.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/inicio.jsp</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/nutriologo/pacientes.jsp</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sMostrarDieta.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/index.jsp</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/Estilos/estilo_estadisticas.css</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sGetDatosGrafica.java</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/js/acciones_estadisticasP.js</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/estadisticas.jsp</file>
 =======
-            <file>file:/J:/Strom/Strongfit/StrongFit/src/java/servlets/sGetAlimentosFecha.java</file>
-            <file>file:/J:/Strom/Strongfit/StrongFit/web/js/buscar-alimento.js</file>
-            <file>file:/J:/Strom/Strongfit/StrongFit/src/java/servlets/sBusqueda.java</file>
-            <file>file:/J:/Strom/Strongfit/StrongFit/src/java/clases/cAlimento.java</file>
-            <file>file:/J:/Strom/Strongfit/StrongFit/web/jsp/paciente/inicio.jsp</file>
->>>>>>> a62c1cf0232da699ab5d7b6d26011433a699d7be
+            <file>file:/D:/Strom/Strongfit/StrongFit/src/java/clases/cConexion.java</file>
+            <file>file:/D:/Strom/Strongfit/StrongFit/src/java/servlets/sCambiarMetas.java</file>
+            <file>file:/D:/Strom/Strongfit/StrongFit/web/js/buscar-alimento.js</file>
+>>>>>>> e87a3ef082a24a7b9040b7216ab288105f48b1bd
         </group>
     </open-files>
 </project-private>

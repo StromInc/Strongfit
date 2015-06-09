@@ -57,7 +57,7 @@ public class sCambiarMetas extends HttpServlet {
             int caloriasdia = 0;
             int calorias = 0;
             int kcalorias = 0;
-            
+            System.out.println("IDPaciente: " + idPaciente + " " + diaSemana + " " + diaMes);
             ResultSet rs = conectar.getAlimentosPorFecha(idPaciente, diaMes, numMes, year);
             while(rs.next()){
                 calorias = rs.getInt("calorias");
@@ -68,6 +68,8 @@ public class sCambiarMetas extends HttpServlet {
             if(rs2.next()){
                 caloriasdia = rs2.getInt("calorias");
             }
+            conectar.cerrar();
+            conectar = null;
             Map respuesta = new HashMap();
             respuesta.put("calDia", kcalorias);
             respuesta.put("laMeta", caloriasdia);
