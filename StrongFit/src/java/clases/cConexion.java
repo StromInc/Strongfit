@@ -36,6 +36,7 @@ public class cConexion {
     }
     public void cerrar() throws SQLException{
         con.close();
+        con = null;
     }
     
     //Para conectar con nuestros propios datos
@@ -917,9 +918,9 @@ public class cConexion {
     return misarticulos;
     }
     //Este procedure agrega los alimentos mediante el id del paciente, el del alimento y el dia del mes, el mes y año
-    public int spSetAlimentoFecha(int idA, int idPaciente, int tipo, int diaMes, int mes, int year) throws SQLException{
+    public int spSetAlimentoFecha(int idA, int idPaciente, int tipo, int diaMes, int mes, int year, float gramos) throws SQLException{
         this.st = con.createStatement();
-        ResultSet rs = this.st.executeQuery("call spSetAlimentoFecha("+idA+", "+idPaciente+", "+tipo+", "+diaMes+", "+mes+", "+year+");");
+        ResultSet rs = this.st.executeQuery("call spSetAlimentoFecha("+idA+", "+idPaciente+", "+tipo+", "+diaMes+", "+mes+", "+year+", "+gramos+");");
         int idAlta = 0;
         while(rs.next()){
             idAlta = rs.getInt("valor"); //Recupera el ID de la relacion muchos a muchos para poder borrar el alimento si se requiere

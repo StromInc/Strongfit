@@ -74,8 +74,28 @@ public class sGetDatosGrafica extends HttpServlet {
             cConexion conecta = new cConexion();
             conecta.conectar();
             
-            ResultSet rs = conecta.getAlimentosPorFecha(idPaciente, dia, mes, anio);
-            ResultSet calorias = conecta.spGetCaloriasPacienteEspecifico(idPaciente, diaSem);
+            if(por == 1){
+                ResultSet rs = conecta.getAlimentosPorFecha(idPaciente, dia, mes, anio);
+                //ResultSet calorias = conecta.spGetCaloriasPacienteEspecifico(idPaciente, diaSem);
+
+                float calorias[] = new float[5];
+                float proteinas[] = new float[5];
+                float lipidos[] = new float[5];
+                float carbohidratos[] = new float[5];
+                int conteoLugar = 0, calT = 0, proT = 0, lipT = 0, carT = 0;
+                
+                for(int i = 0; i < calorias.length; ++i){
+                    calorias[i] = 0;
+                    proteinas[i] = 0;
+                    lipidos[i] = 0;
+                    carbohidratos[i] = 0;
+                }
+                
+                while(rs.next()){
+                    conteoLugar = rs.getInt("tiempo_comida_id") - 1;
+                    calorias[conteoLugar] += rs.getFloat("") * Float.parseFloat() / 100;
+                }
+            }
         }
     }
 

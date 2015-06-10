@@ -1,7 +1,7 @@
 <<<<<<< HEAD
-deploy.ant.properties.file=/home/ian/.netbeans/8.0.2/config/GlassFishEE6/Properties/gfv3-1893938747.properties
+deploy.ant.properties.file=/home/ian/.netbeans/8.0.2/config/GlassFishEE6/Properties/gfv3-639079330.properties
 j2ee.platform.is.jsr109=true
-j2ee.server.domain=/home/ian/.netbeans/8.0.2/config/GF_4.1_119/domain1
+j2ee.server.domain=/home/ian/.netbeans/8.0.2/config/GF_4.1_123/domain1
 j2ee.server.home=/usr/local/glassfish-4.1/glassfish
 j2ee.server.instance=[/usr/local/glassfish-4.1/glassfish:/usr/local/glassfish-4.1/glassfish/domains/domain1]deployer:gfv3ee6:localhost:4848
 j2ee.server.middleware=/usr/local/glassfish-4.1
@@ -10,14 +10,14 @@ javadoc.preview=true
 selected.browser=default
 user.properties.file=/home/ian/.netbeans/8.0.2/build.properties
 =======
-deploy.ant.properties.file=C:\\Users\\Alumno\\AppData\\Roaming\\NetBeans\\7.4\\config\\GlassFishEE6\\Properties\\gfv3482608672.properties
+deploy.ant.properties.file=C:\\Users\\USER\\AppData\\Roaming\\NetBeans\\8.0.2\\config\\GlassFishEE6\\Properties\\gfv3-1139387577.properties
 j2ee.platform.is.jsr109=true
-j2ee.server.domain=C:/Users/Alumno/AppData/Roaming/NetBeans/7.4/config/GF_4.0/domain1
-j2ee.server.home=C:/Program Files/glassfish-4.0/glassfish
-j2ee.server.instance=[C:\\Program Files\\glassfish-4.0\\glassfish;C:\\Program Files\\glassfish-4.0\\glassfish\\domains\\domain1]deployer:gfv3ee6wc:localhost:4848
-j2ee.server.middleware=C:/Program Files/glassfish-4.0
+j2ee.server.domain=C:/Users/USER/AppData/Roaming/NetBeans/8.0.2/config/GF_4.1/domain1
+j2ee.server.home=C:/Program Files/glassfish-4.1/glassfish
+j2ee.server.instance=[C:\\Program Files\\glassfish-4.1\\glassfish;C:\\Program Files\\glassfish-4.1\\glassfish\\domains\\domain1]deployer:gfv3ee6:localhost:4848
+j2ee.server.middleware=C:/Program Files/glassfish-4.1
 javac.debug=true
 javadoc.preview=true
 selected.browser=default
-user.properties.file=C:\\Users\\Alumno\\AppData\\Roaming\\NetBeans\\7.4\\build.properties
->>>>>>> e87a3ef082a24a7b9040b7216ab288105f48b1bd
+user.properties.file=C:\\Users\\USER\\AppData\\Roaming\\NetBeans\\8.0.2\\build.properties
+>>>>>>> 15cadbd09cb40d8babc0046be3f47eb3f798db60

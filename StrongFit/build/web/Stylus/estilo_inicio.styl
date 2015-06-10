@@ -9,6 +9,7 @@ rojo-chido = #FF4F4F
 morado = #3A366C
 morado-borde = #6B67A1
 verde-claro = #99CC66
+sub-text = #696969
 vendor-prefixes = webkit o ms moz official
 
 miDysplay(valor1, valor2, valor3, valor4)
@@ -55,12 +56,19 @@ a
 	list-style none
 	padding 0
 	margin 0
+	&-cantidad
+		color black
+		outline none
+		border none
+		border-bottom 1px solid grisBorde
+		width 70px
+		text-align center
 	&-agregar
 		position absolute
 		right 10px
 		background-color white
 		color azul
-		top 10px
+		top 22px
 		border-radius 3px
 		box-shadow 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
 		border 1px solid azul
@@ -68,15 +76,28 @@ a
 			background gris
 	&-item
 		border-bottom 1px solid grisBorde
-		padding 4px
+		padding 4px 0.5em
 		position relative
 	&-name
 		margin 0
+	&-subname
+		font-size 0.8em
+		color sub-text
+	&-abajo, &-arriba
+		margin-left 0.3em
+		cursor pointer
+		border-radius 50%
+		&:hover
+			background grisBorde
+			color black
 		
 .Consumidos
 	list-style none
 	padding 0
 	margin 0
+	&-subname
+		font-size 0.8em
+		color sub-text
 	&-name
 		margin 0
 	&-item
@@ -86,6 +107,9 @@ a
 	&-borrar
 		position absolute
 		right 10px
+		width 22px
+		line-height 18px
+		height 22px
 		background-color white
 		color rojo-chido
 		top 1em

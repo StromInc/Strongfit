@@ -52,6 +52,7 @@ public class sAgregarAlimento extends HttpServlet {
             int diaMes = Integer.parseInt(request.getParameter("diaMes"));
             int mes = Integer.parseInt(request.getParameter("mes")); //Es un array de meses
             int year = Integer.parseInt(request.getParameter("thisYear"));
+            float gramos = Float.parseFloat(request.getParameter("gramos"));
             
             int tipo = Integer.parseInt(request.getParameter("tipo"));
             
@@ -64,10 +65,10 @@ public class sAgregarAlimento extends HttpServlet {
             
             //Agregamos el alimento a la base
             int idA = Integer.parseInt(id);
-            con.spSetAlimentoConsumido(idPaciente, idA, dia);
-   
+            con.spSetAlimentoConsumido(idPaciente, idA, dia);    
             //Agregar alimento por fecha especifica tipo, idpaciente, numdia, mes, year
-            int idAlta = con.spSetAlimentoFecha(idA, idPaciente, tipo, diaMes, mes, year);
+            int idAlta = con.spSetAlimentoFecha(idA, idPaciente, tipo, diaMes, mes, year, gramos);
+            con.cerrar();
             response.getWriter().write(String.valueOf(idAlta));
         }
     }
