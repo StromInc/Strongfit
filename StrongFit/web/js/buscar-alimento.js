@@ -51,9 +51,16 @@ $(function(){
         if(nombre.length > 0){
             $contenedor.empty();
             for(var i in nombre){
-                var $clon = $alimentoItem.clone();
+                var $clon = $alimentoItem.clone().removeClass("ocultar");
                 $buscadorAviso.hide();
-                $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p><span>'+calorias[i]+' kcal</span><button class="Alimentos-agregar">+<input type="hidden" value="'+ids[i]+'"></button>');
+                $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p>\n\
+                            <span class="Alimentos-subname">Contiene: '+calorias[i]+' kcal/100g</span>\n\
+                            <div class="Alimentos-subname">\n\
+                                Cantidad:<span class="icon3-circle-up Alimentos-arriba"></span>\n\
+                                <input class="Alimentos-cantidad" type="number" id="alimentoCantidad" value="100"> g\n\
+                                <span class="icon3-circle-down Alimentos-abajo"></span>\n\
+                            </div>\n\
+                            <button class="Alimentos-agregar">+<input type="hidden" value="'+ids[i]+'"></button>');
                 $clon.hide();
                 $contenedor.prepend($clon);
                 $clon.slideDown();
@@ -110,7 +117,7 @@ function consumidosAdapter(nombre, calorias, ids, tiempoComida){
             }else if(tiempoComida[i] === 5){
                 $contenedor = $('#comida-cena');
             }
-            $clon.html('<p class="Consumidos-name">'+nombre[i]+'</p><span>'+calorias[i]+' kcal</span><button class="Consumidos-borrar">X<input type="hidden" value="'+ids[i]+'"></button>');
+            $clon.html('<p class="Consumidos-name">'+nombre[i]+'</p><span>Consumidos: '+calorias[i]+' kcal</span><button class="Consumidos-borrar">X<input type="hidden" value="'+ids[i]+'"></button>');
             $contenedor.prepend($clon);
         }    
     }
@@ -245,7 +252,13 @@ function agregar(e){
     var $listaTipo; //Sabemos a que lista agregar el alimento en el html
     var idAlimento = this.children[0].value; //El valor de hidden
     var textCalorias =  $(this).siblings('span').text(); //Calorias del alimento seleccionado
+    var calorias = parseFloat(textCalorias.split(' ', 2)[1]);
     var textNombre =  $(this).siblings('p').text(); //Nombre del alimento seleccionado
+    var misGramos = parseFloat($(this).siblings('div').children('#alimentoCantidad').val());
+    
+    calorias = (misGramos * calorias)/100;
+    calorias = calorias.toPrecision(3);
+    console.log(calorias);
     var $clonBorrar = $('#prototipo-borrar').clone().removeClass("ocultar"); //Necesario para poder agregar un div de alimento a borrar
     var elemento = $('.Seleccionado').text(); //Con esto sabemos que tipo de comida es
     var tipo = 1;
@@ -280,12 +293,13 @@ function agregar(e){
               valor: idAlimento,
               diaMes: dayOfMonth,
               mes: month,
-              thisYear: year},
+              thisYear: year,
+              gramos: misGramos},
         success: function(datos){
             console.log(datos + " Y los datos apa");
             setValores();
             //Variable datos es el id del catalo fecha_alimento, con esto lo borramos ya ya no se muestra al usuario
-            $clonBorrar.html('<p class="Alimentos-name">'+textNombre+'</p><span>'+textCalorias+'</span><button class="Consumidos-borrar">X<input type="hidden" value="'+datos+'"></button>');
+            $clonBorrar.html('<p class="Consumidos-name">'+textNombre+'</p><span class="Consumidos-subname">Consumidos: '+calorias+' kcal<button class="Consumidos-borrar">X<input type="hidden" value="'+datos+'"></button>');
             $listaTipo.append($clonBorrar);
             $('.Consumidos-borrar').on('click', borrarAlimento); 
         },error: function (xhr, ajaxOptions, thrownError) {

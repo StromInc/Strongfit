@@ -77,8 +77,8 @@
                     <div class="Registrados-list">
                         <ul class="Consumidos" id="comida-desayuno">
                             <li class="Consumidos-item ocultar" id="prototipo-borrar">
-                                <p class="Consumidos-name ">Taco</p>
-                                <span>5 kcal</span>
+                                <p class="Consumidos-name ">Taco </p>
+                                <span class="Consumidos-subname">Consumidos: 5 kcal</span>
                                 <button class="Consumidos-borrar">X <input type="hidden"></button>
                             </li>
                             <%
@@ -97,7 +97,7 @@
                             %>
                             <li class="Consumidos-item">
                                 <p class="Consumidos-name"><%=nombre%></p>
-                                <span><%=calorias%> kcal</span>
+                                <span class="Consumidos-subname">Consumidos: <%=calorias%> kcal</span>
                                 <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
                             </li>
                             <%
@@ -123,7 +123,7 @@
                             %>
                             <li class="Consumidos-item">
                                 <p class="Consumidos-name"><%=nombre%></p>
-                                <span><%=calorias%> kcal</span>
+                                <span class="Consumidos-subname">Consumidos: <%=calorias%> kcal</span>
                                 <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
                             </li>
                             <%
@@ -150,7 +150,7 @@
                             %>
                             <li class="Consumidos-item">
                                 <p class="Consumidos-name"><%=nombre%></p>
-                                <span><%=calorias%> kcal</span>
+                                <span class="Consumidos-subname">Consumidos: <%=calorias%> kcal</span>
                                 <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
                             </li>
                             <%
@@ -177,7 +177,7 @@
                             %>
                             <li class="Consumidos-item">
                                 <p class="Consumidos-name"><%=nombre%></p>
-                                <span><%=calorias%> kcal</span>
+                                <span class="Consumidos-subname">Consumidos: <%=calorias%> kcal</span>
                                 <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
                             </li>
                             <%
@@ -204,7 +204,7 @@
                             %>
                             <li class="Consumidos-item">
                                 <p class="Consumidos-name"><%=nombre%></p>
-                                <span><%=calorias%> kcal</span>
+                                <span class="Consumidos-subname">Consumidos: <%=calorias%> kcal</span>
                                 <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
                             </li>
                             <%
@@ -240,7 +240,13 @@
                     <ul class="Alimentos">
                         <li class="Alimentos-item ocultar">
                             <p class="Alimentos-name">Taco</p>            
-                            <span>5 kcal</span>
+                            <span class="Alimentos-subname">Contiene: 5 kcal/100g</span>
+                            <div class="Alimentos-subname">
+                                Cantidad:
+                                <span class="icon3-circle-up Alimentos-arriba"></span>
+                                <input class="Alimentos-cantidad" id="alimentoCantidad" type="number" value="100"> g
+                                <span class="icon3-circle-down Alimentos-abajo"></span>     
+                            </div>
                             <button class="Alimentos-agregar">+<input type="hidden"></button>
                         </li>
                     </ul>
