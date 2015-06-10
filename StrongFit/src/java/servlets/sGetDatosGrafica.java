@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -41,7 +43,7 @@ public class sGetDatosGrafica extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -74,6 +76,7 @@ public class sGetDatosGrafica extends HttpServlet {
             cConexion conecta = new cConexion();
             conecta.conectar();
             
+            DecimalFormat formateador = new DecimalFormat("####.##"); 
             if(por == 1){
                 ResultSet rs = conecta.getAlimentosPorFecha(idPaciente, dia, mes, anio);
                 //ResultSet calorias = conecta.spGetCaloriasPacienteEspecifico(idPaciente, diaSem);
@@ -82,7 +85,8 @@ public class sGetDatosGrafica extends HttpServlet {
                 float proteinas[] = new float[5];
                 float lipidos[] = new float[5];
                 float carbohidratos[] = new float[5];
-                int conteoLugar = 0, calT = 0, proT = 0, lipT = 0, carT = 0;
+                int conteoLugar = 0;
+                float calT = 0, proT = 0, lipT = 0, carT = 0;
                 
                 for(int i = 0; i < calorias.length; ++i){
                     calorias[i] = 0;
@@ -93,7 +97,48 @@ public class sGetDatosGrafica extends HttpServlet {
                 
                 while(rs.next()){
                     conteoLugar = rs.getInt("tiempo_comida_id") - 1;
-                    // calorias[conteoLugar] += rs.getFloat("") * Float.parseFloat() / 100;
+                    calorias[conteoLugar] += rs.getFloat("calorias") * rs.getFloat("gramos") / 100;
+                    proteinas[conteoLugar] += rs.getFloat("proteinas") * rs.getFloat("gramos") / 100;
+                    lipidos[conteoLugar] += rs.getFloat("lipidos") * rs.getFloat("gramos") / 100;
+                    carbohidratos[conteoLugar] += rs.getFloat("carbohidratos") * rs.getFloat("gramos") / 100;
+                    
+                    calorias[conteoLugar] = formateador.parse(formateador.format(calorias[conteoLugar])).floatValue();
+                    proteinas[conteoLugar] = formateador.parse(formateador.format(proteinas[conteoLugar])).floatValue();
+                    lipidos[conteoLugar] = formateador.parse(formateador.format(lipidos[conteoLugar])).floatValue();
+                    carbohidratos[conteoLugar] = formateador.parse(formateador.format(carbohidratos[conteoLugar])).floatValue();
+                    
+                    calT += rs.getFloat("calorias") * rs.getFloat("gramos") / 100;
+                    proT += rs.getFloat("proteinas") * rs.getFloat("gramos") / 100;
+                    lipT += rs.getFloat("lipidos") * rs.getFloat("gramos") / 100;
+                    carT += rs.getFloat("carbohidratos") * rs.getFloat("gramos") / 100;
+                    
+                    calT = formateador.parse(formateador.format(calT)).floatValue();
+                    proT = formateador.parse(formateador.format(proT)).floatValue();
+                    lipT = formateador.parse(formateador.format(lipT)).floatValue();
+                    carT = formateador.parse(formateador.format(carT)).floatValue();
+                }
+                
+                Map<String, Object> mapa = new HashMap<>();
+                String comidas[] = {"Desayuno", "Colación 1", "Comida", "Colación 2", "Cena"};
+                int contadorC = 0;
+                if(cal == 1){
+                    String valores[][] = new String[5][2];
+                    for(int i = 0; i < 5; ++i){
+                        valores[i][0] = comidas[contadorC];
+                        valores[i][1] = String.valueOf(calorias[i]);
+                        contadorC++;
+                    }
+                    mapa.put("comidas", valores);
+                    mapa.put("quees", 1);
+                    mapa.put("estado", "comidahoy");
+                    if(proT == 0){
+                        mapa.put("valorT", "no");
+                    }
+                    write(response, mapa);
+                }
+                else{
+                    mapa.put("estado", "no");
+                    write(response, mapa);
                 }
             }
         }
@@ -115,6 +160,8 @@ public class sGetDatosGrafica extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(sGetDatosGrafica.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(sGetDatosGrafica.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -132,6 +179,8 @@ public class sGetDatosGrafica extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(sGetDatosGrafica.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(sGetDatosGrafica.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
