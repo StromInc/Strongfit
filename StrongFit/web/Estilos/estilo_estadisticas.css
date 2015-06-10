@@ -76,3 +76,16 @@ input[type = "radio"]{
 .fondoGris{
     background-color: #f2f2f2;
 }
+
+.spanCambiarMensual:first-child,
+.spanCambiarSemana:first-child,
+.spanCambiarDia:first-child{
+    float: left;
+    margin-left: 1em;
+}
+.spanCambiarMensual:last-child,
+.spanCambiarSemana:last-child,
+.spanCambiarDia:last-child{
+    float: right;
+    margin-right: 1em;
+}

@@ -4,6 +4,8 @@
     Author     : ian
 --%>
 
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -62,10 +64,10 @@
             <article class="Article-tbl-usr2 contactos sinP particularEst">
                 <div class="Content-title">Ver estadísticas por:</div>
                 <ul>
-                    <li class="listaGraficas" id="labelG1" onclick="datosGrafica(id);">Hoy</li>
-                    <li class="listaGraficas" id="labelG2" onclick="datosGrafica(id);">Semanal</li>
-                    <li class="listaGraficas" id="labelG3" onclick="datosGrafica(id);">Mensual</li>
-                    <li class="listaGraficas" id="labelG4" onclick="datosGrafica(id);">Alimentos</li>
+                    <li class="listaGraficas" id="labelG1" onclick="datosGrafica(id);"><span class="spanCambiarDia" onclick="cambiarDia(0);"><</span><span id="spanInfoDia">Hoy</span><span class="spanCambiarDia" onclick="cambiarDia(1);">></span></li>
+                    <!--<li class="listaGraficas" id="labelG2" onclick="datosGrafica(id);"><span class="spanCambiarSemana"><</span><span id="spanInfoSem">Esta semana</span><span class="spanCambiarSemana">></span></li>-->
+                    <li class="listaGraficas" id="labelG3" onclick="datosGrafica(id);"><span class="spanCambiarMensual" onclick="cambiarMensual(0);"><</span><span id="spanInfoMes">Este mes</span><span class="spanCambiarMensual" onclick="cambiarMensual(1);">></span></li>
+                    <!--<li class="listaGraficas" id="labelG4" onclick="datosGrafica(id);"><span><</span>Alimentos<span>></span></li>-->
                 </ul>
             </article>
         </section>
