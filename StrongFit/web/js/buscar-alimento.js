@@ -117,7 +117,7 @@ function consumidosAdapter(nombre, calorias, ids, tiempoComida){
             }else if(tiempoComida[i] === 5){
                 $contenedor = $('#comida-cena');
             }
-            $clon.html('<p class="Consumidos-name">'+nombre[i]+'</p><span>Consumidos: '+calorias[i]+' kcal</span><button class="Consumidos-borrar">X<input type="hidden" value="'+ids[i]+'"></button>');
+            $clon.html('<p class="Consumidos-name">'+nombre[i]+'</p><span class="Consumidos-subname">Consumidos: '+calorias[i]+' kcal</span><button class="Consumidos-borrar">X<input type="hidden" value="'+ids[i]+'"></button>');
             $contenedor.prepend($clon);
         }    
     }
@@ -217,7 +217,8 @@ function setValores(){
             meta = datos.laMeta;
             console.log("La meta del dia: " + meta);
             $('#metaCalorias').html(meta); //Nuestra meta
-            restantes = meta - valor; //Las que faltan
+            restantes = ((meta*100) - (valor*100))/100; //Las que faltan
+            restantes = restantes.toFixed(2);
             
             $('#consumido').html('Consumido: '+ valor +' kcal');
             //Se ejecuta si las calorias consumidas son demasiadas
@@ -234,7 +235,7 @@ function setValores(){
                 $('.progressbar__label').css(css);
                 textCirculo = restantes + ' kcal. restantes';
                 porcentaje = valor / meta;
-                porcentaje = porcentaje.toPrecision(2);
+                porcentaje = porcentaje.toFixed(2);
             }
             circulo.path.setAttribute('stroke', colorLinea);
             $('.progressbar__label').css(css); //Color del texto
@@ -257,7 +258,7 @@ function agregar(e){
     var misGramos = parseFloat($(this).siblings('div').children('#alimentoCantidad').val());
     
     calorias = (misGramos * calorias)/100;
-    calorias = calorias.toPrecision(3);
+    calorias = calorias.toFixed(2);
     console.log(calorias);
     var $clonBorrar = $('#prototipo-borrar').clone().removeClass("ocultar"); //Necesario para poder agregar un div de alimento a borrar
     var elemento = $('.Seleccionado').text(); //Con esto sabemos que tipo de comida es

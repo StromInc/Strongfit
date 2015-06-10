@@ -42,6 +42,7 @@ public class sBorrarAlimentoFecha extends HttpServlet {
             con.conectar();
            int idAlta = Integer.parseInt(request.getParameter("valor"));
            con.spBorrarAlimentoFecha(idAlta);
+           con.cerrar();
         }
     }
 

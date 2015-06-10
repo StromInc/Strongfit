@@ -56,22 +56,25 @@ public class sCambiarMetas extends HttpServlet {
             
             int caloriasdia = 0;
             int calorias = 0;
-            int kcalorias = 0;
+            float kcalorias = 0;
+            float gramos;
             System.out.println("IDPaciente: " + idPaciente + " " + diaSemana + " " + diaMes);
             ResultSet rs = conectar.getAlimentosPorFecha(idPaciente, diaMes, numMes, year);
             while(rs.next()){
                 calorias = rs.getInt("calorias");
-                kcalorias += calorias;
+                gramos = rs.getFloat("gramos");
+
+                kcalorias += (gramos * calorias)/100;
             }
+            String calTotales = String.format("%.2f", kcalorias);
             
             ResultSet rs2 = conectar.spGetCaloriasPacienteEspecifico(idPaciente, diaSemana);
             if(rs2.next()){
                 caloriasdia = rs2.getInt("calorias");
             }
             conectar.cerrar();
-            conectar = null;
             Map respuesta = new HashMap();
-            respuesta.put("calDia", kcalorias);
+            respuesta.put("calDia", calTotales);
             respuesta.put("laMeta", caloriasdia);
             write(response, respuesta);
         }

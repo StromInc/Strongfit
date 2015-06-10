@@ -47,6 +47,7 @@ public class sBusqueda extends HttpServlet {
             System.out.println(valor);
             //Array de objetos
             ArrayList<cAlimento> lista=con.buscarAlimento(valor);
+            con.cerrar();
             buscarRespuesta(response, lista);
         }
     }

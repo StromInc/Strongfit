@@ -36,6 +36,7 @@ public class cConexion {
     }
     public void cerrar() throws SQLException{
         con.close();
+        con = null;
     }
     
     //Para conectar con nuestros propios datos

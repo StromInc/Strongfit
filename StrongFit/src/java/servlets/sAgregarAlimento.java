@@ -65,10 +65,10 @@ public class sAgregarAlimento extends HttpServlet {
             
             //Agregamos el alimento a la base
             int idA = Integer.parseInt(id);
-            con.spSetAlimentoConsumido(idPaciente, idA, dia);
-   
+            con.spSetAlimentoConsumido(idPaciente, idA, dia);    
             //Agregar alimento por fecha especifica tipo, idpaciente, numdia, mes, year
             int idAlta = con.spSetAlimentoFecha(idA, idPaciente, tipo, diaMes, mes, year, gramos);
+            con.cerrar();
             response.getWriter().write(String.valueOf(idAlta));
         }
     }

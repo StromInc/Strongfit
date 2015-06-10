@@ -12,14 +12,15 @@ package clases;
 public class cAlimento {
     int id;
     String nombre;
-    float calorias;
+    String calorias;
     int tiempo_comida;
+    float gramos;
     
     //datos que se necesitan sobre los alimentos
     public cAlimento(int ids, String nom, float calo){
         this.id = ids;
         this.nombre = nom;
-        this.calorias = calo;
+        this.calorias = String.valueOf(calo);
     }
     public cAlimento(){
         
@@ -32,9 +33,12 @@ public class cAlimento {
         this.nombre = nombre;
     }
     public void setCalorias(float calorias){
-        this.calorias = calorias;
+        this.calorias = String.format("%.2f", (gramos * calorias)/100);
     }
     public void setTiempoComida(int tiempo_comida){
         this.tiempo_comida = tiempo_comida;
+    }
+    public void setGramos(float gramos){
+        this.gramos = gramos;
     }
 }
