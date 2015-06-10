@@ -1,5 +1,5 @@
 google.load("visualization", "1", {packages:["corechart"]});
-google.setOnLoadCallback(drawChart);
+//google.setOnLoadCallback(drawChart);
 
 var opciones = {};
 var datos = [];
@@ -15,19 +15,23 @@ var anio = fecha.getFullYear();
 var anio2 = anio;
 var diaSem = 0;
 
-function drawChart() {
-    $(function(){
-        var data = google.visualization.arrayToDataTable([
+/*
+ * 
+ * @returns {undefined}
+ * [
             ['Task', 'Hours per Day'],
             ['Work',     11],
             ['Eat',      2],
             ['Commute',  2],
             ['Watch TV', 2],
             ['Sleep',    7]
-        ]);
+        ]
+ */
+function drawChart() {
+    $(function(){
+        var data = google.visualization.arrayToDataTable(datos);
 
-        var options = {
-        };
+        var options = opciones;
 
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
 
@@ -51,16 +55,16 @@ function datosGrafica(id){
             cal = 0;
         }
         
-        if($('#'+id).html() === "labelG1"){
+        if(id === "labelG1"){
             por = 1;
         }
-        else if($('#'+id).html() === "labelG2"){
+        else if(id === "labelG2"){
             por = 2;
         }
-        else if($('#'+id).html() === "labelG3"){
+        else if(id === "labelG3"){
             por = 3;
         }
-        else if($('#'+id).html() === "labelG4"){
+        else if(id === "labelG4"){
             por = 4;
         }
         else{
@@ -82,7 +86,24 @@ function datosGrafica(id){
                 diaSem: diaSem
             },
             success: function(res){
-                
+                console.log(res);
+                if(res.estado === "comidahoy"){
+                    if(res.quees === 1){
+                        datos[0] = ['Task', "Calorías por comida"];
+                        var con = 1;
+                        for(var i = 0; i < 5; ++i){
+                            datos[con] = [res.comidas[i][0], parseFloat(res.comidas[i][1])];
+                            con++;
+                        }
+                        drawChart();
+                        if(res.valorT === "no"){
+                            $('#div_chart').html("No has comido nada en este día.");
+                        }
+                    }
+                    else{
+                        
+                    }
+                }
             }
         });
     });
