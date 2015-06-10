@@ -63,17 +63,43 @@
                                 int calorias = 0;
                                 float gramos;
                                 float kcalorias = 0;
+                                float calDesayuno = 0; 
+                                float calColacion1 = 0;
+                                float calColacion2 = 0; 
+                                float calComida = 0;
+                                float calCena = 0;
+                                int idAlimentoFecha;
                                 //100 g - calorias
                                 //gramos - x calorias
                                 while(rs2.next()){
                                     calorias = rs2.getInt("calorias");
                                     gramos = rs2.getFloat("gramos");
-                                    
+                                    idAlimentoFecha = rs2.getInt("tiempo_comida_id");
                                     kcalorias += (gramos * calorias)/100;
+                                    if(idAlimentoFecha == 1){
+                                        calDesayuno += (gramos * calorias)/100;
+                                    }else if(idAlimentoFecha == 2){
+                                        calColacion1 += (gramos * calorias)/100;
+                                    }else if(idAlimentoFecha == 3){
+                                        calComida += (gramos * calorias)/100;
+                                    }else if(idAlimentoFecha == 4){
+                                        calColacion2 += (gramos * calorias)/100;
+                                    }else if(idAlimentoFecha == 5){
+                                        calCena += (gramos * calorias)/100;
+                                    }
                                 }
-                                System.out.println("Totales " + kcalorias); 
+                                System.out.println("Totales " + kcalorias);
+                                
                                 String calTotales = String.format("%.2f", kcalorias);
+                                
+                                String calTotalesDesayuno = String.format("%.2f", calDesayuno);
+                                String calTotalesColacion1 = String.format("%.2f", calColacion1);
+                                String calTotalesComida = String.format("%.2f", calComida);
+                                String calTotalesColacion2 = String.format("%.2f", calColacion2);
+                                String calTotalesCena = String.format("%.2f", calCena);
+                                
                                 System.out.println("otras totales: " + calTotales);
+                                System.out.println(calTotalesDesayuno);
   
                             %>
                         <p id="consumido">Consumido <%=calTotales%> kcal</p>
@@ -83,7 +109,7 @@
                 </div>
                 <div class="Registrados">
                     <h3 class="Buscador-aviso Seleccionado-titulo">Alimentos Registrados</h3>
-                    <div class="Registrados-header">Desayuno</div>
+                    <div class="Registrados-header" id="tituloDesayuno">Desayuno - <%=calTotalesDesayuno%> kcal</div>
                     <div class="Registrados-list">
                         <ul class="Consumidos" id="comida-desayuno">
                             <li class="Consumidos-item ocultar" id="prototipo-borrar">
@@ -98,7 +124,7 @@
                                 //gramos - x calorias
                                 String nombre = "";
                                 int tipoAlimento = 0;
-                                int idAlimentoFecha;
+                                
                                 String calAlimento;
                                 rs2.beforeFirst();
                                 while(rs2.next()){
@@ -122,7 +148,7 @@
                             %>
                         </ul>
                     </div> 
-                    <div class="Registrados-header">Colación 1</div>
+                    <div class="Registrados-header" id="tituloColacion1">Colación 1 - <%=calTotalesColacion1%> kcal</div>
                     <div class="Registrados-list">
                         <ul class="Consumidos" id="comida-colacion1">
                             <%
@@ -148,7 +174,7 @@
                             %>
                         </ul>
                     </div> 
-                    <div class="Registrados-header">Comida</div>
+                    <div class="Registrados-header" id="tituloComida">Comida - <%=calTotalesComida%> kcal</div>
                     <div class="Registrados-list">
                         <ul class="Consumidos" id="comida-comida">
                             <%
@@ -175,7 +201,7 @@
                             %>
                         </ul>
                     </div> 
-                    <div class="Registrados-header">Colación 2</div>
+                    <div class="Registrados-header" id="tituloColacion2">Colación 2 - <%=calTotalesColacion2%> kcal</div>
                     <div class="Registrados-list">
                         <ul class="Consumidos" id="comida-colacion2">
                             <%
@@ -202,7 +228,7 @@
                             %>
                         </ul>
                     </div> 
-                    <div class="Registrados-header">Cena</div>
+                    <div class="Registrados-header" id="tituloCena">Cena - <%=calTotalesCena%> kcal</div>
                     <div class="Registrados-list">
                         <ul class="Consumidos" id="comida-cena">
                             <%

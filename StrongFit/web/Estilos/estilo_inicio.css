@@ -85,6 +85,9 @@ a {
 .Consumidos-borrar {
   position: absolute;
   right: 10px;
+  width: 22px;
+  line-height: 18px;
+  height: 22px;
   background-color: #fff;
   color: #ff4f4f;
   top: 1em;

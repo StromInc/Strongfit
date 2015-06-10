@@ -267,23 +267,45 @@ function agregar(e){
     var dayOfMonth = fechaCambia.getDate(); 
     var month = fechaCambia.getMonth();
     var year = fechaCambia.getFullYear();
-    
+    var $calTiempo;
+    var calTiempoTexto;
+    var otroTitulo;
     if(elemento === "Desayuno"){
         tipo = 1;
+        $calTiempo = $('#tituloDesayuno');
+        otroTitulo = "Desayuno";
         $listaTipo = $('#comida-desayuno');
+        calTiempoTexto = parseFloat($calTiempo.text().split(" ")[2]);
     }else if(elemento === "Colacion 1"){
         tipo = 2;
+        otroTitulo = "Colacion 1";
+        $calTiempo = $('#tituloColacion1');
         $listaTipo = $('#comida-colacion1');
+        calTiempoTexto = parseFloat($calTiempo.text().split(" ")[3]);
     }else if(elemento === "Comida"){
         tipo = 3;
+        otroTitulo = "Comida";
+        $calTiempo = $('#tituloComida');
         $listaTipo = $('#comida-comida');
+        calTiempoTexto = parseFloat($calTiempo.text().split(" ")[2]);
     }else if(elemento === "Colacion 2"){
         tipo = 4;
+        otroTitulo = "Colacion 2";
+        $calTiempo = $('#tituloColacion2');
         $listaTipo = $('#comida-colacion2');
+        calTiempoTexto = parseFloat($calTiempo.text().split(" ")[3]);
     }else if(elemento === "Cena"){
         tipo = 5;
+        otroTitulo = "Cena";
+        $calTiempo = $('#tituloCena');
         $listaTipo = $('#comida-cena');
+        calTiempoTexto = parseFloat($calTiempo.text().split(" ")[2]);
     }
+    
+    calTiempoTexto = ((calTiempoTexto*100) + (calorias*100))/100;
+    calTiempoTexto = calTiempoTexto.toFixed(2);
+    $calTiempo.html(otroTitulo + " - " + calTiempoTexto + " kcal");
+    debugger;
     
     console.log("Esta aqui");
     $.ajax({
