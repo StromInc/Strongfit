@@ -93,7 +93,7 @@ public class sGetDatosGrafica extends HttpServlet {
                 
                 while(rs.next()){
                     conteoLugar = rs.getInt("tiempo_comida_id") - 1;
-                    calorias[conteoLugar] += rs.getFloat("") * Float.parseFloat() / 100;
+                    // calorias[conteoLugar] += rs.getFloat("") * Float.parseFloat() / 100;
                 }
             }
         }
