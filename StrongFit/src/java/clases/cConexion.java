@@ -585,68 +585,77 @@ public class cConexion {
     contador++;
     }
     contador++;
+    System.out.println(contador + " contador");
     ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
     articulos = new String[contador][2];
     articulosordenados = new String[contador];
      int contador2 = 0;
      while(rs2.next()){
-     System.out.println( "0" );
          articulos[contador2][0] = rs2.getString("nombre");
-     System.out.println( "1" );
-    
+         contador2++;
      }
-     contador2++;
-     System.out.println( "3" );
+     
+     
      
      
      
      for(int i = 0; i < contador;i++){
-      System.out.println( "4" );
+      
      rs3 = this.st.executeQuery("call sp_regresavotos('"+articulos[i][0]+"');");
      if(rs3.next()){
       int resultado = rs3.getInt("arriba");
       resultado -= rs3.getInt("abajo");
       articulos[i][1] = Integer.toString(resultado);
       System.out.println( resultado );
-     System.out.println( "5" );
+     
      }
      }
-     System.out.println("llegue aquí friend1");
+    
      boolean termine = false;
-     int contador3 = 0;
+     int contador3 = contador - 1;
      int valor = -2000;
      String identifica = "";
-     System.out.println("llegue aquí friend2");
+     String identifica2 = "";
+     int val = 0;
+   
      while(!termine){
-     System.out.println("Soy un bug");    
+      int e = 0;  
      for(int i = 0; i < contador;i++){
-         System.out.println("1"); 
-     if(!articulos[i][0].equals(identifica)){
-         System.out.println("2");
+      System.out.println(contador  + " ");
+     if(!articulos[i][0].equals(identifica2)){
+        
          int numero = Integer.parseInt(articulos[i][1]);
          System.out.println(numero);
+         System.out.println("val evaluados " + numero + " nombre " + articulos[i][0] );  
      if(Integer.parseInt(articulos[i][1]) >= valor ){
-         System.out.println("3"); 
+          
      valor = Integer.parseInt(articulos[i][1]);
      identifica = articulos[i][0];
+     e = i;
+     System.out.println("artic " + articulos[i][0] + " num " + valor);
      }
      }
+     
      }
      articulosordenados[contador3] = identifica;
-     contador3++;
-     valor = 0;
-     if(contador3 == contador){
+     articulos[e][1] = "-201";
+     System.out.println(identifica + " el valor");
+     contador3--;
+     
+     if(contador3 == -1){
      termine = true;
-     System.out.println("Soy verdadero"); 
+      
      }
+     identifica2 = identifica;
+     valor = -200;
      }
     }
-    System.out.println("Soy un bug enorme"); 
+   
     return articulosordenados;
     }
     
     public String[] getArticulosAut() throws SQLException{
-    this.st = con.createStatement();
+     this.st = con.createStatement();
     ResultSet rs = this.st.executeQuery("call sp_SeleccionarArticulos();");
     ResultSet rs3 = null;
     String[][] articulos = null;
@@ -657,68 +666,80 @@ public class cConexion {
     contador++;
     }
     contador++;
+    System.out.println(contador + " contador");
     ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
-    articulos = new String[contador][2];
+    articulos = new String[contador][3];
     articulosordenados = new String[contador];
      int contador2 = 0;
      while(rs2.next()){
-     System.out.println( "0" );
-         articulos[contador2][0] = rs2.getString("idmedico");
-     System.out.println( "1" );
-    
+         articulos[contador2][0] = rs2.getString("nombre");
+         articulos[contador2][2] = rs2.getString("idmedico");
+         contador2++;
      }
-     contador2++;
-     System.out.println( "3" );
+     
+     
      
      
      
      for(int i = 0; i < contador;i++){
-      System.out.println( "4" );
+      
      rs3 = this.st.executeQuery("call sp_regresavotos('"+articulos[i][0]+"');");
      if(rs3.next()){
       int resultado = rs3.getInt("arriba");
       resultado -= rs3.getInt("abajo");
       articulos[i][1] = Integer.toString(resultado);
       System.out.println( resultado );
-     System.out.println( "5" );
+     
      }
      }
-     System.out.println("llegue aquí friend1");
+    
      boolean termine = false;
-     int contador3 = 0;
+     int contador3 = contador - 1;
      int valor = -2000;
      String identifica = "";
-     System.out.println("llegue aquí friend2");
+     String identifica2 = "";
+     String valt = "";
+     int val = 0;
+   
      while(!termine){
-     System.out.println("Soy un bug");    
+       int e = 0;  
      for(int i = 0; i < contador;i++){
-         System.out.println("1"); 
-     if(!articulos[i][0].equals(identifica)){
-         System.out.println("2");
+      System.out.println(contador  + " ");
+     if(!articulos[i][0].equals(identifica2)){
+        
          int numero = Integer.parseInt(articulos[i][1]);
          System.out.println(numero);
+         System.out.println("val evaluados " + numero + " nombre " + articulos[i][0] );  
      if(Integer.parseInt(articulos[i][1]) >= valor ){
-         System.out.println("3"); 
+          
      valor = Integer.parseInt(articulos[i][1]);
+     e = i;
      identifica = articulos[i][0];
+     valt = articulos[i][2];
+     System.out.println("artic " + articulos[i][0] + " num " + valor);
      }
      }
+     
      }
-     articulosordenados[contador3] = identifica;
-     contador3++;
-     valor = 0;
-     if(contador3 == contador){
+     articulosordenados[contador3] = valt;
+     articulos[e][1] = "-201";
+     System.out.println(identifica + " el valor");
+     contador3--;
+     
+     if(contador3 == -1){
      termine = true;
-     System.out.println("Soy verdadero"); 
+      
      }
+     identifica2 = identifica;
+     valor = -200;
      }
     }
-    System.out.println("Soy un bug enorme"); 
+   
     return articulosordenados;
     }
     
     public String[] getArticulosTex() throws SQLException{
-    this.st = con.createStatement();
+     this.st = con.createStatement();
     ResultSet rs = this.st.executeQuery("call sp_SeleccionarArticulos();");
     ResultSet rs3 = null;
     String[][] articulos = null;
@@ -729,63 +750,75 @@ public class cConexion {
     contador++;
     }
     contador++;
+    System.out.println(contador + " contador");
     ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
-    articulos = new String[contador][2];
+    articulos = new String[contador][3];
     articulosordenados = new String[contador];
      int contador2 = 0;
      while(rs2.next()){
-     System.out.println( "0" );
-         articulos[contador2][0] = rs2.getString("texto");
-     System.out.println( "1" );
-    
+         articulos[contador2][0] = rs2.getString("nombre");
+         articulos[contador2][2] = rs2.getString("texto");
+         contador2++;
      }
-     contador2++;
-     System.out.println( "3" );
+     
+     
      
      
      
      for(int i = 0; i < contador;i++){
-      System.out.println( "4" );
+      
      rs3 = this.st.executeQuery("call sp_regresavotos('"+articulos[i][0]+"');");
      if(rs3.next()){
       int resultado = rs3.getInt("arriba");
       resultado -= rs3.getInt("abajo");
       articulos[i][1] = Integer.toString(resultado);
       System.out.println( resultado );
-     System.out.println( "5" );
+     
      }
      }
-     System.out.println("llegue aquí friend1");
+    
      boolean termine = false;
-     int contador3 = 0;
+     int contador3 = contador - 1;
      int valor = -2000;
      String identifica = "";
-     System.out.println("llegue aquí friend2");
+     String identifica2 = "";
+     String valt = "";
+     int val = 0;
+   
      while(!termine){
-     System.out.println("Soy un bug");    
+     int e = 0;   
      for(int i = 0; i < contador;i++){
-         System.out.println("1"); 
-     if(!articulos[i][0].equals(identifica)){
-         System.out.println("2");
+      System.out.println(contador  + " ");
+     if(!articulos[i][0].equals(identifica2)){
+        
          int numero = Integer.parseInt(articulos[i][1]);
          System.out.println(numero);
+         System.out.println("val evaluados " + numero + " nombre " + articulos[i][0] );  
      if(Integer.parseInt(articulos[i][1]) >= valor ){
-         System.out.println("3"); 
+          
      valor = Integer.parseInt(articulos[i][1]);
      identifica = articulos[i][0];
+    e = i;
+     valt = articulos[i][2];
+     System.out.println("artic " + articulos[i][0] + " num " + valor);
      }
      }
+     
      }
-     articulosordenados[contador3] = identifica;
-     contador3++;
-     valor = 0;
-     if(contador3 == contador){
+     articulosordenados[contador3] = valt;
+      articulos[e][1] = "-201";
+     System.out.println(identifica + " el valor");
+     contador3--;
+     
+     if(contador3 == -1){
      termine = true;
-     System.out.println("Soy verdadero"); 
+      
      }
+     identifica2 = identifica;
+     valor = -200;
      }
     }
-    System.out.println("Soy un bug enorme"); 
+   
     return articulosordenados;
     }
     
