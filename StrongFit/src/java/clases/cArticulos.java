@@ -123,15 +123,17 @@ public class cArticulos {
    public String buscamisarticulos(String idUsr) throws SQLException{
    String articulos = "";
    clases.cCifrado objcifrado = new clases.cCifrado();
-   articulos += "<span onClick=cambiaarticulo('nuevoarticuloenblanco') class='Article-articulosh'>Nuevo articulo</span><br>";
+   articulos += "<span onClick=cambiaarticulo('nuevoarticuloenblanco') class='Article-articulosh2'>Nuevo articulo</span><br>";
    cConexion objconexion = new cConexion();
    objconexion.conectar();
    String[] misarticulos = objconexion.buscamisarticulos(idUsr);
    if(misarticulos != null){
    for(int i = 0; i < misarticulos.length;i++){    
-     
-     articulos += "<span class='Article-articulosh'><span onClick=\"cambiaarticulo('"+misarticulos[i]+"'),cambiarartenuso()\" >" + objcifrado.sustituye(misarticulos[i],2) + "</span><span class='icon-cancel-circle' style='left:93%;position:fixed;color:red;' onClick=borrar('"+misarticulos[i]+"')></span></span>" + "</br>";
-     
+     if(i != misarticulos.length - 1){
+     articulos += "<span class='Article-articulosh'><span onClick=\"cambiaarticulo('"+misarticulos[i]+"'),cambiarartenuso()\" >" + objcifrado.sustituye(misarticulos[i],2) + "</span><span class='icon-cancel-circle' style='left:91.5%;position:fixed;color:red;' onClick=borrar('"+misarticulos[i]+"')></span></span>" + "</br>";
+     }else{
+     articulos += "<span class='Article-articulosh3'><span onClick=\"cambiaarticulo('"+misarticulos[i]+"'),cambiarartenuso()\" >" + objcifrado.sustituye(misarticulos[i],2) + "</span><span class='icon-cancel-circle' style='left:91.5%;position:fixed;color:red;' onClick=borrar('"+misarticulos[i]+"')></span></span>" + "</br>";
+     }
    }
    }else{
    articulos += "<span>Todavia no has escrito ningun articulo</span><br>";
@@ -166,12 +168,12 @@ public class cArticulos {
    articulo = "Titulo:<br><input type=\"text\" id=\"txtnombre\" value = '"+objcifrado.sustituye(idArticulo,2)+"'><br><br>\n" +
 "                 <img src = \""+ruta+"\" class =\"portada\" alt = \"foto de usuario\">\n"+
 "                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\">"+misarticulos+"</div><br>\n" +
-"                <input type=\"button\" value=\"Enviar\" onclick=escribearticulo('escribe') class=\"botonenviar\">";
+"                <input type=\"button\" value=\"Guardar\" onclick=\"escribearticulo('escribe'),selecciona()\" class=\"botonenviar\">";
    }else{
    articulo = "Titulo:<br><input type=\"text\" id=\"txtnombre\" value = ''><br><br>\n" +
 "                 <img src = \""+ruta+"\" class =\"portada\" alt = \"foto de usuario\">\n" +
 "                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\"><br></div><br>\n" +
-"                <input type=\"button\" value=\"Enviar\" onclick=escribearticulo('escribe') class=\"botonenviar\">";
+"                <input type=\"button\" value=\"Guardar\" onclick=\"escribearticulo('escribe'),selecciona()\" class=\"botonenviar\">";
    }
    return articulo;
    }

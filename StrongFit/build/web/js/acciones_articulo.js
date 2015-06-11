@@ -120,3 +120,6 @@ function votar(Npost, numero,nvoto) {
             $('#votos'+numero+'').html(responseText);   
     }); 
     }
+    function selecciona(){
+        
+    }

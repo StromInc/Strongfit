@@ -70,7 +70,7 @@ body {
   height:10%;
 }
 .Article-articulosf {
-  background-color:#A4C2A3;
+  background-color:yellowgreen;
   height: 40%;
   width: 70%;
   position: absolute;
@@ -82,21 +82,46 @@ body {
   top: 20%;
   right: 5%;
   width: 22%;
-  border-right-style: outset;
-  border-bottom-style: outset;
-  border-width: thin;
-  border-top-style: inset;
-  border-left-style: inset;
+  border-width: thin; 
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 30%;
+  overflow-y:  auto;
+  overflow-x: hidden;
+  
 }
 .Article-articulosh {
- background-color: skyblue;
+ background-color: whitesmoke;
+ border-right-style: outset;
+  border-top-style: outset;
+  border-left-style: outset;
+  position: absolute;
+  width: 96%;
+}
+.Article-articulosh2 {
+ background-color: whitesmoke;
+ border-right-style: outset;
+  border-top-style: outset;
+  border-left-style: outset;
+    border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+  position: absolute;
+  width: 96%;
+}
+.Article-articulosh3 {
+    border-right-style: outset;
+ background-color: whitesmoke;
+ border-left-style: outset;
   border-top-style: outset;
   position: absolute;
-  width: 100%;
+  width: 96%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-style: outset;
 }
 .Article-articulosi {
    position: absolute;
-  left: 24%;
+  left: 17%;
   top: 22%;
 }
 
@@ -108,6 +133,10 @@ body {
   width: 70% ;
  height: 20%;
   position: absolute;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+   border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
 }
 
 .portada2 {
