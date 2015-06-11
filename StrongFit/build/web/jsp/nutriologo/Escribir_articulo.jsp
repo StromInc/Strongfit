@@ -76,7 +76,7 @@
                 Texto:<br><span contentEditable="true" id="txtarticulo" class="Article-articulosf"><p>  
                         <br>                    
                     </p></span><br>
-                    <input type="button" value="Enviar" onclick=escribearticulo('escribe') class="botonenviar">            
+                    <input type="button" value=Guardar" onclick="escribearticulo('escribe')" class="botonenviar">            
             </span>
                 <span id="misarticulos" class="Article-articulosg">
                     
