@@ -165,14 +165,16 @@ public class cArticulos {
    if(operacion == 1){
    objconexion.conectar();
    String misarticulos = objconexion.buscamiarticulo(idArticulo);
-   articulo = "Titulo:<br><input type=\"text\" id=\"txtnombre\" value = '"+objcifrado.sustituye(idArticulo,2)+"'><br><br>\n" +
+   articulo = "Titulo:<br><input  id=\"txtnombre\" value = '"+objcifrado.sustituye(idArticulo,2)+"'><br><br>\n" +
 "                 <img src = \""+ruta+"\" class =\"portada\" alt = \"foto de usuario\">\n"+
 "                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\">"+misarticulos+"</div><br>\n" +
 "                <input type=\"button\" value=\"Guardar\" onclick=\"escribearticulo('escribe'),selecciona()\" class=\"botonenviar\">";
    }else{
    articulo = "Titulo:<br><input type=\"text\" id=\"txtnombre\" value = ''><br><br>\n" +
 "                 <img src = \""+ruta+"\" class =\"portada\" alt = \"foto de usuario\">\n" +
-"                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\"><br></div><br>\n" +
+"                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\"><p style=\"color: white;\">  \n" +
+"                        <br>                    \n" +
+"                    </p></div><br>\n" +
 "                <input type=\"button\" value=\"Guardar\" onclick=\"escribearticulo('escribe'),selecciona()\" class=\"botonenviar\">";
    }
    return articulo;

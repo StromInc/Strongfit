@@ -73,7 +73,7 @@
                 <img src = "<%=ruta%>" class ="portada" alt = "foto de usuario">
                  
                  <br>
-                Texto:<br><span contentEditable="true" id="txtarticulo" class="Article-articulosf"><p>  
+                Texto:<br><span contentEditable="true" id="txtarticulo" class="Article-articulosf"><p style="color: white;">  
                         <br>                    
                     </p></span><br>
                     <input type="button" value=Guardar" onclick="escribearticulo('escribe')" class="botonenviar">            
@@ -81,7 +81,29 @@
                 <span id="misarticulos" class="Article-articulosg">
                     
                 </span>   
-              
+                <span id="misopciones" class="Article-articulosj">
+                    <span id="tipo">Fuente: 
+                        <select id="tipo" onChange="cambia('tipo')">
+                            <option>Default</option>
+                            <option>Arial</option>
+                            <option>Comic Sans</option>
+                        </select>
+                    </span><hr>   
+                    <span id="tipo">Tamaño: 
+                       <select id="Tamaño">
+                            <option selected>default</option>
+                            <option>Titulo</option>
+                            <option>Subtitulo</option>
+                        </select>  
+                    </span><hr>
+                    <span id="tipo">Color: 
+                        <select id="color">
+                            <option selected>Blanco</option>
+                            <option>Rojo</option>
+                            <option>Azul</option>
+                        </select>
+                    </span><hr>
+                </span>
         </section> 
     </body>
 </html>

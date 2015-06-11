@@ -120,6 +120,14 @@ function votar(Npost, numero,nvoto) {
             $('#votos'+numero+'').html(responseText);   
     }); 
     }
-    function selecciona(){
-        
+    function cambia(tipo){
+        var datos = $("#txtarticulo");
+        switch(tipo){
+            case 'tipo':
+            for( i = 0; i < datos.length;i++){
+                
+            }
+            break;
+            
+        }
     }

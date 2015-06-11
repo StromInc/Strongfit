@@ -124,6 +124,21 @@ body {
   left: 17%;
   top: 22%;
 }
+.Article-articulosj {
+   position: fixed;
+   background-color: cornflowerblue;
+  bottom: 10%;
+  right: 5%;
+  width: 22%;
+  border-width: thin; 
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+   border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 30%;
+  overflow-y:  auto;
+  overflow-x: hidden;
+}
 
 .botonenviar {
   position: fixed;
