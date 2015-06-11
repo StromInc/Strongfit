@@ -3,11 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/Estilos/estilo_estadisticas.css</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sGetDatosGrafica.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sCrearDieta.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/js/acciones_estadisticasP.js</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/estadisticas.jsp</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/js/acciones_dietasnutriologo.js</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/dietas_paciente.jsp</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/clases/cConexion.java</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sDietasUsr.java</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sBorrarDieta.java</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/nutriologo/dietas_nutriologo.jsp</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/minutriologo.jsp</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/Estilos/estilo_dietasnutriologo.css</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sEditarDieta.java</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/inicio.jsp</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/nutriologo/pacientes.jsp</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sMostrarDieta.java</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/index.jsp</file>
         </group>
     </open-files>
 </project-private>

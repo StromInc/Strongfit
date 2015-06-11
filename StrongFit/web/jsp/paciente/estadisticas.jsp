@@ -59,7 +59,10 @@
                     <input type="radio" checked name="estadistics" id="caloriasEst"><label for="caloriasEst" id="labelCalEst">Calorías</label>
                     <input type="radio" name="estadistics" id="procarlip"><label for="procarlip" id="labelProCarLip">Pro/Car/Lip</label>
                 </div>
-                <div id="chart_div"></div>
+                <div id="chart_div">
+                    <br>
+                    No has seleccionado ninguna opción.
+                </div>
             </article>
             <article class="Article-tbl-usr2 contactos sinP particularEst">
                 <div class="Content-title">Ver estadísticas por:</div>

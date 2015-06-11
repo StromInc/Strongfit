@@ -56,7 +56,8 @@ $(function(){
                 $clon.html('<p class="Alimentos-name">'+nombre[i]+'</p>\n\
                             <span class="Alimentos-subname">Contiene: '+calorias[i]+' kcal/100g</span>\n\
                             <div class="Alimentos-subname">\n\
-                                Cantidad:<span class="icon3-circle-up Alimentos-arriba"></span>\n\
+                                Cantidad:\n\
+                                <span class="icon3-circle-up Alimentos-arriba"></span>\n\
                                 <input class="Alimentos-cantidad" type="number" id="alimentoCantidad" value="100"> g\n\
                                 <span class="icon3-circle-down Alimentos-abajo"></span>\n\
                             </div>\n\
@@ -78,6 +79,8 @@ $(function(){
             $buscadorAviso.slideDown();
         }
         $('.Alimentos-agregar').on('click', agregar);
+        $('.Alimentos-arriba').on('click', reducir);
+        $('.Alimentos-abajo').on('click', aumentar);
     }
     //Esto crea un circulo
     circulo = new ProgressBar.Circle('#container', {
@@ -344,4 +347,20 @@ function borrarAlimento(e){
         }
     );
     
+}
+function aumentar(e){
+    e.preventDefault();
+    var input = $(this).siblings('input').val();
+    input = input + 10;
+    $(this).siblings.val(input);
+    debugger;
+    alert("Hello moy");
+}
+function reducir(e){
+    e.preventDefault();
+    var input = parseFloat($(this).siblings('input').val());
+    if(input > 10){
+        input = input - 10;
+    }
+    $(this).siblings.val(input);
 }

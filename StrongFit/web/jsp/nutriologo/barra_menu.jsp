@@ -16,7 +16,7 @@
 
 <script>
              //notar el protocolo.. es 'ws' y no 'http'
-        var wsUri = "ws://192.168.1.71:8080/StrongFit/endpoint";
+        var wsUri = "ws://192.168.1.136:8080/StrongFit/endpoint";
         var websocket = new WebSocket(wsUri); //creamos el socket
         var solicitud = '';
         var sesionDestinatario = '';
