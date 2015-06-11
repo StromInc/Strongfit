@@ -79,8 +79,8 @@ $(function(){
             $buscadorAviso.slideDown();
         }
         $('.Alimentos-agregar').on('click', agregar);
-        $('.Alimentos-arriba').on('click', reducir);
-        $('.Alimentos-abajo').on('click', aumentar);
+        $('.Alimentos-arriba').on('click', aumentar);
+        $('.Alimentos-abajo').on('click', reducir);
     }
     //Esto crea un circulo
     circulo = new ProgressBar.Circle('#container', {
@@ -104,27 +104,44 @@ $(function(){
 //Esto nos muestra los alimentos consumidos
 function consumidosAdapter(nombre, calorias, ids, tiempoComida){
     var $alimentoItem = $('#prototipo-borrar');
-    var $contenedor;
+    var $contenedor, $clon;
+    var caloriasDesayuno = 0, caloriasColacion1 = 0, caloriasComida = 0,
+        caloriasColacion2 = 0, caloriasCena = 0;
     $('.Consumidos-item').remove();
     if(nombre.length > 0){
         for(var i in nombre){
-            var $clon = $alimentoItem.clone().removeClass("ocultar").attr("id", "");
+            $clon = $alimentoItem.clone().removeClass("ocultar").attr("id", "");
             if(tiempoComida[i] === 1){
                 $contenedor = $('#comida-desayuno');
+                caloriasDesayuno = ((caloriasDesayuno*100) + (parseFloat(calorias[i])*100))/100;
             }else if(tiempoComida[i] === 2){
                 $contenedor = $('#comida-colacion1');
+                caloriasColacion1 = ((caloriasColacion1*100) + (parseFloat(calorias[i])*100))/100;
             }else if(tiempoComida[i] === 3){
                 $contenedor = $('#comida-comida');
+                caloriasComida = ((caloriasComida*100) + (parseFloat(calorias[i])*100))/100;
             }else if(tiempoComida[i] === 4){
                 $contenedor = $('#comida-colacion2');
+                caloriasColacion2 = ((caloriasColacion2*100) + (parseFloat(calorias[i])*100))/100;
             }else if(tiempoComida[i] === 5){
                 $contenedor = $('#comida-cena');
+                caloriasCena = ((caloriasCena*100) + (parseFloat(calorias[i])*100))/100;
             }
             $clon.html('<p class="Consumidos-name">'+nombre[i]+'</p><span class="Consumidos-subname">Consumidos: '+calorias[i]+' kcal</span><button class="Consumidos-borrar">X<input type="hidden" value="'+ids[i]+'"></button>');
             $contenedor.prepend($clon);
-        }    
+        }   
     }
-    var $clon = $alimentoItem.clone();
+    caloriasDesayuno = caloriasDesayuno.toFixed(2);
+    caloriasColacion1 = caloriasColacion1.toFixed(2);
+    caloriasComida = caloriasComida.toFixed(2);
+    caloriasColacion2 = caloriasColacion2.toFixed(2);
+    caloriasCena = caloriasCena.toFixed(2);
+    $('#tituloDesayuno').html("Desayuno - " + caloriasDesayuno + " kcal");
+    $('#tituloColacion1').html("Colacion 1 - " + caloriasColacion1 + " kcal");
+    $('#tituloComida').html("Comida - " + caloriasComida + " kcal");
+    $('#tituloColacion2').html("Colacion 2 - " + caloriasColacion2 + " kcal");
+    $('#tituloCena').html("Cena - " + caloriasCena + " kcal");
+    $clon = $alimentoItem.clone();
     $('#comida-desayuno').prepend($clon);
     
     $('.Consumidos-borrar').on('click', borrarAlimento);
@@ -308,7 +325,6 @@ function agregar(e){
     calTiempoTexto = ((calTiempoTexto*100) + (calorias*100))/100;
     calTiempoTexto = calTiempoTexto.toFixed(2);
     $calTiempo.html(otroTitulo + " - " + calTiempoTexto + " kcal");
-    debugger;
     
     console.log("Esta aqui");
     $.ajax({
@@ -350,11 +366,9 @@ function borrarAlimento(e){
 }
 function aumentar(e){
     e.preventDefault();
-    var input = $(this).siblings('input').val();
+    var input = parseFloat($(this).siblings('input').val());
     input = input + 10;
-    $(this).siblings.val(input);
-    debugger;
-    alert("Hello moy");
+    $(this).siblings('input').val(input);
 }
 function reducir(e){
     e.preventDefault();
@@ -362,5 +376,5 @@ function reducir(e){
     if(input > 10){
         input = input - 10;
     }
-    $(this).siblings.val(input);
+    $(this).siblings('input').val(input);
 }
