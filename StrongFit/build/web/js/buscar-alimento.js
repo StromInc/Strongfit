@@ -47,7 +47,6 @@ $(function(){
         var $alimentoItem = $('.Alimentos-item').first();
         var $contenedor = $('.Alimentos');
         var $buscadorAviso = $('#Buscador-aviso');
-        var aviso = $buscadorAviso.val();
         if(nombre.length > 0){
             $contenedor.empty();
             for(var i in nombre){
@@ -353,7 +352,6 @@ function agregar(e){
 
 function borrarAlimento(e){
     var idValor = $(this).children('input').val();
-    console.log("Esta cosa funciona?" + idValor);
     var $elemento = $(this).parent();
     $.post('http://localhost:8080/StrongFit/sBorrarAlimentoFecha', {
         valor: idValor}, 
