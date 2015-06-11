@@ -311,21 +311,23 @@
                 <div id="contenedorDietPaciente" class="ventanasChat invisible">
                     <div class="contenedorDietasNutriologo">
                             <p>Dietas creadas por ti</p>
-                            <div>
+                            <div id="divTusDietas">
                             <%
                                 ResultSet misdietas = conecta.getDietasRegistradas(idS);
                                 String nomDieta = "";
+                                int contadorD = 0;
                                 while(misdietas.next()){
                                     nomDieta = misdietas.getString("nombre");
                                     %>
-                                    <div class="misDietas" draggable="true" ondragstart="drag(event, id)"><%=nomDieta%></div>
+                                    <div class="misDietas"><%=nomDieta%><input type="button" name="btnAgregar" class="btnAgregar" value="Agregar" onclick="agregarDieta();"><input type="button" name="btnQuitar" class="btnQuitar invisible" value="Quitar" onclick="quitarDieta();"></div>
                                     <%
+                                    contadorD++;
                                 }
                             %>
                         </div>
                     </div>
                     
-                    <div class="contenedorDietasNutriologo"  ondrop="drop(event, id)" ondragover="allowDrop(event)">
+                    <div class="contenedorDietasNutriologo" >
                         <p>Dietas del paciente</p>
                         <div id="divDietasPaciente"></div>
                     </div>

@@ -56,6 +56,8 @@ function mostrarMenu(id){
                 }
             }
         }
+        agregarDieta();
+        quitarDieta();
     });
 }
 
@@ -64,23 +66,23 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
-/*se dispara cuando alguien arrastra un elemento*/
-function drag(ev, id) {
-    /*obtiene el tipo de dato que se esta arrastrando*/
-    ev.dataTransfer.setData("text", ev.target.id);
-    idDieta = id;
-}
-
-/*Se dispara cuando alguien suelta un elemento en el formulario, ademas activara la funcion ajax*/
-function drop(ev) {
+function agregarDieta(){
     $(function(){
-        
-        ev.preventDefault();
-        
-        var formulario = document.getElementById("divDietasPaciente");
-        var dat = ev.dataTransfer.getData("text");
-        
-        formulario.appendChild(document.getElementById(dat));
+        $('.btnAgregar').on('click', function(){ 
+            $(this).addClass('invisible');
+            $(this).siblings().removeClass('invisible');
+            $('#divDietasPaciente').append($(this).parent());
+            //$(this).parent().remove();
+        });
     });
 }
 
+function quitarDieta(){
+    $(function(){
+        $('.btnQuitar').on('click', function(){
+            $(this).addClass('invisible');
+            $(this).siblings().removeClass('invisible');
+            $('#divTusDietas').append($(this).parent());
+        });
+    });
+}
