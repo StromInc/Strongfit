@@ -95,6 +95,7 @@ $(function(){
     fechaCambia = new Date(); //Esta fecha cambia constantemente
     console.log("Actual: " + fechaCambia);
     $('.Alimentos-agregar').on('click', agregar);
+    $('.Consumidos-borrar').unbind("click", borrarAlimento);
     $('.Consumidos-borrar').on('click', borrarAlimento);
     
     $('#cambiar-adelante').on('click', cambiarAdelante);
@@ -142,7 +143,7 @@ function consumidosAdapter(nombre, calorias, ids, tiempoComida){
     $('#tituloCena').html("Cena - " + caloriasCena + " kcal");
     $clon = $alimentoItem.clone();
     $('#comida-desayuno').prepend($clon);
-    
+    $('.Consumidos-borrar').unbind("click", borrarAlimento);
     $('.Consumidos-borrar').on('click', borrarAlimento);
 }
     
@@ -234,7 +235,6 @@ function setValores(){
         success: function(datos){
             valor = datos.calDia; //Calorias consumidas ese dia
             meta = datos.laMeta;
-            console.log("La meta del dia: " + meta);
             $('#metaCalorias').html(meta); //Nuestra meta
             restantes = ((meta*100) - (valor*100))/100; //Las que faltan
             restantes = restantes.toFixed(2);
@@ -340,8 +340,9 @@ function agregar(e){
             console.log(datos + " Y los datos apa");
             setValores();
             //Variable datos es el id del catalo fecha_alimento, con esto lo borramos ya ya no se muestra al usuario
-            $clonBorrar.html('<p class="Consumidos-name">'+textNombre+'</p><span class="Consumidos-subname">Consumidos: '+calorias+' kcal<button class="Consumidos-borrar">X<input type="hidden" value="'+datos+'"></button>');
+            $clonBorrar.html('<p class="Consumidos-name">'+textNombre+'</p><span class="Consumidos-subname">Consumidos: '+calorias+' kcal</span><button class="Consumidos-borrar">X<input type="hidden" value="'+datos+'"></button>');
             $listaTipo.append($clonBorrar);
+            $('.Consumidos-borrar').unbind("click", borrarAlimento);
             $('.Consumidos-borrar').on('click', borrarAlimento); 
         },error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
@@ -351,18 +352,41 @@ function agregar(e){
 }
 
 function borrarAlimento(e){
+    e.preventDefault();
     var idValor = $(this).children('input').val();
     var caloriasEliminadas = parseFloat($(this).siblings('span').text().split(" ")[1]);
-    debugger;
-    var $elemento = $(this).parent();
+    var $elemento = $(this).parent().parent().parent().siblings('h3');
+    var caloriasIniciales;
+    var $alimento = $(this).parent();
+    if($elemento.attr('id') === 'tituloDesayuno' || $elemento.attr('id') === 'tituloComida' || $elemento.attr('id') === 'tituloCena'){
+        caloriasIniciales = parseFloat($elemento.text().split(' ')[2]);
+    }else{
+        caloriasIniciales = parseFloat($elemento.text().split(' ')[3]);
+    }
+    caloriasEliminadas = ((100*caloriasIniciales) - (caloriasEliminadas*100))/100;
+    if($elemento.attr('id') === 'tituloDesayuno'){
+        console.log("primera");
+        $elemento.html('Desayuno - ' + caloriasEliminadas + ' kcal');
+    }else if($elemento.attr('id') === 'tituloColacion1'){
+        console.log("2");
+        $elemento.html('Colacion 1 - ' + caloriasEliminadas + ' kcal');
+    } else if($elemento.attr('id') === 'tituloComida'){
+        console.log("3");
+        $elemento.html('Comida - ' + caloriasEliminadas + ' kcal');
+    }else if($elemento.attr('id') === 'tituloColacion2'){
+        console.log("4");
+        $elemento.html('Colacion 2 - ' + caloriasEliminadas + ' kcal');
+    }else if($elemento.attr('id') === 'tituloCena'){
+        console.log("5");
+        $elemento.html('Cena - ' + caloriasEliminadas + ' kcal');
+    }
     $.post('http://localhost:8080/StrongFit/sBorrarAlimentoFecha', {
         valor: idValor}, 
         function(){
-            setValores();
-            $elemento.remove();
+            $alimento.remove();
+            setValores(); 
         }
-    );
-    
+    );  
 }
 function aumentar(e){
     e.preventDefault();

@@ -40,6 +40,7 @@ public class sBorrarAlimentoFecha extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             cConexion con = new cConexion();
             con.conectar();
+            System.out.println("Esta en borrar");
            int idAlta = Integer.parseInt(request.getParameter("valor"));
            con.spBorrarAlimentoFecha(idAlta);
            con.cerrar();
