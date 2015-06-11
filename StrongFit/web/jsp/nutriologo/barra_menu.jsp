@@ -16,7 +16,7 @@
 
 <script>
              //notar el protocolo.. es 'ws' y no 'http'
-        var wsUri = "ws://192.168.1.136:8080/StrongFit/endpoint";
+        var wsUri = "ws://192.168.1.120:8080/StrongFit/endpoint";
         var websocket = new WebSocket(wsUri); //creamos el socket
         var solicitud = '';
         var sesionDestinatario = '';
@@ -518,6 +518,23 @@ function getInfoNutricional(){
     }
 }
 
+function getDietasPaciente(){
+    $(function(){
+        if(evitarRepeticion !== evitarRedundar[1]){
+            $.ajax({
+                url: 'http://localhost:8080/StrongFit/sGetDietasPaciente',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    idOtro: evitarRepeticion
+                },
+                success: function(res){
+                    evitarRedundar[1] = evitarRepeticion;
+                }
+            });
+        }
+    });
+}
 
 function sanar(cadenaMala){
     var cadenaBuena = "";
