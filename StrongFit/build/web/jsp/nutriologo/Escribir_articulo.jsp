@@ -65,11 +65,11 @@
     <body onLoad="buscamisarticulos('busca'),cambiaarticulo('<%=idArt%>')" >
         <section class="Section-todo">
             <form  enctype="multipart/form-data" id="img_frm" method="post" action="../Ssubirimagenart.jsp" name="img_frm" class="Article-articulosi" >
-                        <input type = "file"  name="uploadFile" id="ImgUsuario" class="input-subir" required/>
-                        <input type = "submit" value="cambiar" class="btn-imagen" onclick="cambiarartenuso()"/>
+                        <input class = "articulosk"type = "file"  name="uploadFile" id="ImgUsuario" class="input-subir" required/>
+                        <input class = "articulosk"type = "submit" value="cambiar" class="btn-imagen" onclick="cambiarartenuso()"/>
                     </form>         
             <span id="edicion">
-                Titulo:<br><input type="text" id="txtnombre"><br><br>
+                Titulo:<br><input type="text" id="txtnombre" class = "articulosk"><br><br>
                 <img src = "<%=ruta%>" class ="portada" alt = "foto de usuario">
                  
                  <br>
@@ -83,21 +83,21 @@
                 </span>   
                 <span id="misopciones" class="Article-articulosj">
                     <span id="tipo">Fuente: 
-                        <select id="tipo" onChange="cambia('tipo')">
+                        <select id="fuente" onChange="cambia()" class = "articulosk">
                             <option>Default</option>
                             <option>Arial</option>
                             <option>Comic Sans</option>
                         </select>
                     </span><hr>   
-                    <span id="tipo">Tamaño: 
-                       <select id="Tamaño">
-                            <option selected>default</option>
-                            <option>Titulo</option>
-                            <option>Subtitulo</option>
-                        </select>  
+                    <span id="tipo" >Tamaño: 
+                        <select id="tamano" onChange="cambia()"  class = "articulosk">
+                            <option selected>Normal</option>
+                            <option>Pequeña</option>
+                            <option>Grande</option>
+                        </select>
                     </span><hr>
-                    <span id="tipo">Color: 
-                        <select id="color">
+                    <span id="tipo" >Color: 
+                        <select id="color" onChange="cambia()"  class = "articulosk">
                             <option selected>Blanco</option>
                             <option>Rojo</option>
                             <option>Azul</option>

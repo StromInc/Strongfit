@@ -120,14 +120,17 @@ function votar(Npost, numero,nvoto) {
             $('#votos'+numero+'').html(responseText);   
     }); 
     }
-    function cambia(tipo){
-        var datos = $("#txtarticulo");
-        switch(tipo){
-            case 'tipo':
-            for( i = 0; i < datos.length;i++){
-                
-            }
-            break;
+    function cambia(){
+       $.post('../../Scambiaformato', {
+            datos : $('#txtarticulo').html(),
+            tipo: $('#fuente').val(),
+            color: $('#color').val(),
+            tamano: $('#tamano').val()
+        }, function(responseText){
+        console.log($('#txtarticulo').html());    
+        $('#txtarticulo').html(responseText);
             
-        }
+        console.log(responseText);
+    });
+    
     }
