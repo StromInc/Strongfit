@@ -352,6 +352,8 @@ function agregar(e){
 
 function borrarAlimento(e){
     var idValor = $(this).children('input').val();
+    var caloriasEliminadas = parseFloat($(this).siblings('span').text().split(" ")[1]);
+    debugger;
     var $elemento = $(this).parent();
     $.post('http://localhost:8080/StrongFit/sBorrarAlimentoFecha', {
         valor: idValor}, 
