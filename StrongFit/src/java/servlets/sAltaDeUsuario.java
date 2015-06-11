@@ -46,8 +46,11 @@ public class sAltaDeUsuario extends HttpServlet {
             cCifrado seguro = new cCifrado();            
             //Recuperando Valores
             String idUser = request.getParameter("txt-mail");
+                   idUser = seguro.sanar(idUser);
             String pass = request.getParameter("txt-pass");
+                   pass = seguro.sanar(pass);
             String nombre = request.getParameter("txt-name");
+                   nombre = seguro.sanar(nombre);
              // conectar a la base de datos                                     
             try{
                 seguro.AlgoritmoAES();
@@ -95,7 +98,9 @@ public class sAltaDeUsuario extends HttpServlet {
                     response.sendRedirect("index.jsp");
                 }
             }catch(SQLException ex){
-                out.print(ex.toString());
+                //out.print(ex.toString());
+                sesion.setAttribute("mensaje", "Usuario inválido");
+                response.sendRedirect("index.jsp");
             }     
         }
     }

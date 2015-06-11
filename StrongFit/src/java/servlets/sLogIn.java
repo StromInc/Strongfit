@@ -46,11 +46,13 @@ public class sLogIn extends HttpServlet {
             objconexion.conectar();
             HttpSession sesion = request.getSession();
             sesion.setMaxInactiveInterval(-1);
-            String idUser = request.getParameter("txt-mail");
-            String pass = request.getParameter("txt-pass");
             
             cCifrado seguro = new cCifrado();
             seguro.AlgoritmoAES();
+            
+            String idUser = seguro.sanar(request.getParameter("txt-mail"));
+            String pass = seguro.sanar(request.getParameter("txt-pass"));
+            
             String idUS = seguro.encriptar(idUser);
             String passS = seguro.cifrarSHA1(pass);
             

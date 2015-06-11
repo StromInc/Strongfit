@@ -45,19 +45,19 @@ public class sAltaDeMedico extends HttpServlet {
             seguro.AlgoritmoAES();
             seguro.iniciarBuscador();
             /* TODO output your page here. You may use following sample code. */
-            String pass = seguro.cifrarSHA1(request.getParameter("txt-pass"));
-            String nombre = seguro.encriptar(request.getParameter("txt-name"));
-            String nombre2 = seguro.cifrarBuscador(request.getParameter("txt-name"));
-            String idUser = seguro.encriptar(request.getParameter("txt-mail"));
+            String pass = seguro.cifrarSHA1(seguro.sanar(request.getParameter("txt-pass")));
+            String nombre = seguro.encriptar(seguro.sanar(request.getParameter("txt-name")));
+            String nombre2 = seguro.cifrarBuscador(seguro.sanar(request.getParameter("txt-name")));
+            String idUser = seguro.encriptar(seguro.sanar(request.getParameter("txt-mail")));
             
-            String edad = request.getParameter("edad");
-            int sexo = Integer.parseInt(request.getParameter("idSexo"));
-            String estado = seguro.encriptar(request.getParameter("estado"));
-            String municipio = seguro.encriptar(request.getParameter("municipio"));
-            String colonia = seguro.encriptar(request.getParameter("colonia"));
-            String cedula = request.getParameter("plicense");
-            String escuela = seguro.encriptar(request.getParameter("school"));
-            String carrera = seguro.encriptar(request.getParameter("carrier"));
+            String edad = seguro.sanar(request.getParameter("edad"));
+            int sexo = Integer.parseInt(seguro.sanar(request.getParameter("idSexo")));
+            String estado = seguro.encriptar(seguro.sanar(request.getParameter("estado")));
+            String municipio = seguro.encriptar(seguro.sanar(request.getParameter("municipio")));
+            String colonia = seguro.encriptar(seguro.sanar(request.getParameter("colonia")));
+            String cedula = seguro.sanar(request.getParameter("plicense"));
+            String escuela = seguro.encriptar(seguro.sanar(request.getParameter("school")));
+            String carrera = seguro.encriptar(seguro.sanar(request.getParameter("carrier")));
             boolean noAvanza= true;
             int cedula2 = 0;
             int edad2 = 0;
@@ -86,7 +86,9 @@ public class sAltaDeMedico extends HttpServlet {
                         response.sendRedirect("jsp/nutriologo/altanutriologo.jsp"); 
                     }
                 }catch(SQLException ex){
-                    out.print(ex.toString());
+                    //out.print(ex.toString());
+                    sesion.setAttribute("mensaje", "Usuario inválido");
+                    response.sendRedirect("index.jsp");
                 } 
             }         
         }

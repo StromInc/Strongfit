@@ -87,23 +87,41 @@ function datosGrafica(id){
             },
             success: function(res){
                 console.log(res);
-                if(res.estado === "comidahoy"){
                     if(res.quees === 1){
                         datos[0] = ['Task', "Calorías por comida"];
+                        
                         var con = 1;
                         for(var i = 0; i < 5; ++i){
                             datos[con] = [res.comidas[i][0], parseFloat(res.comidas[i][1])];
                             con++;
                         }
-                        drawChart();
+                        
                         if(res.valorT === "no"){
                             $('#div_chart').html("No has comido nada en este día.");
                         }
                     }
                     else{
-                        
+                        datos[0] = ["Task", "Pro/Lip/Car por día"];
+                        var con = 1;
+                        for(var i = 0; i < 3; ++i){
+                            datos[con] = [res.comidas[i][0], parseFloat(res.comidas[i][1])];
+                            con++;
+                        }
                     }
-                }
+                    
+                    opciones = {
+                        chartArea: {
+                            title: res.tituloG,
+                            left: 35,
+                            top:30,
+                            width:'150%',
+                            height:'100%',
+                            fontSize: 16
+                            
+                        }
+                    };
+                    
+                    drawChart();
             }
         });
     });
@@ -243,4 +261,10 @@ function setDiaSemana(){
         m = regular[mes];
     }
     return semana[Math.ceil(Math.ceil(Math.ceil((anio-1)%7)+Math.ceil((Math.floor((anio-1)/4)-Math.floor((3*(Math.floor((anio-1)/100)+1))/4))%7)+m+dia%7)%7)]
+}
+
+function nuevoPor(){
+    if(idG !== ""){
+        datosGrafica(idG);
+    }
 }

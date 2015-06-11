@@ -955,5 +955,11 @@ public class cConexion {
         }
         return votos;
     }
+     
+    //spGetAlimentosMes(in id_paciente int, in numMes int, in numYear int)
+     public ResultSet spGetAlimentosMes(int idPaciente, int numMes, int year)throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetAlimentosMes("+idPaciente+", "+numMes+", "+year+");");
+    }
 }
 

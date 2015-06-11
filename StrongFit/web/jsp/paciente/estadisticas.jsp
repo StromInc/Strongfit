@@ -56,8 +56,8 @@
             </article>
             <article class="Article-tbl-usr2 cajachat graficas sinP">
                 <div id="btnLabels" class="Content-title">
-                    <input type="radio" checked name="estadistics" id="caloriasEst"><label for="caloriasEst" id="labelCalEst">Calorías</label>
-                    <input type="radio" name="estadistics" id="procarlip"><label for="procarlip" id="labelProCarLip">Pro/Car/Lip</label>
+                    <input type="radio" checked name="estadistics" id="caloriasEst" onclick="nuevoPor();"><label for="caloriasEst" id="labelCalEst">Calorías</label>
+                    <input type="radio" name="estadistics" id="procarlip" onclick="nuevoPor();"><label for="procarlip" id="labelProCarLip">Pro/Car/Lip</label>
                 </div>
                 <div id="chart_div">
                     <br>
