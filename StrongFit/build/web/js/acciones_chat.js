@@ -1,3 +1,5 @@
+var idDieta = "";
+
 function mostrarMsjSol(id){
     $(function(){
         if(id === 'divMenuMsj'){
@@ -57,4 +59,28 @@ function mostrarMenu(id){
     });
 }
 
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+/*se dispara cuando alguien arrastra un elemento*/
+function drag(ev, id) {
+    /*obtiene el tipo de dato que se esta arrastrando*/
+    ev.dataTransfer.setData("text", ev.target.id);
+    idDieta = id;
+}
+
+/*Se dispara cuando alguien suelta un elemento en el formulario, ademas activara la funcion ajax*/
+function drop(ev) {
+    $(function(){
+        
+        ev.preventDefault();
+        
+        var formulario = document.getElementById("divDietasPaciente");
+        var dat = ev.dataTransfer.getData("text");
+        
+        formulario.appendChild(document.getElementById(dat));
+    });
+}
 
