@@ -51,7 +51,7 @@ public class sPerfilDeUsuario extends HttpServlet {
             objconexion.conectar();
             
             cCifrado seguro = new cCifrado();
-            String pass = request.getParameter("contra");
+            String pass = seguro.sanar(request.getParameter("contra"));
             seguro.AlgoritmoAES();
             seguro.iniciarBuscador();
             String pass2 = seguro.cifrarSHA1(pass);
@@ -61,24 +61,29 @@ public class sPerfilDeUsuario extends HttpServlet {
             
             int idPaciente = (Integer)sesion.getAttribute("idPaciente");
             
-            String nombre = request.getParameter("name");
+            String nombre = seguro.sanar(request.getParameter("name"));
             String nombreS = seguro.encriptar(nombre);
             String nombre2 = seguro.cifrarBuscador(nombre);
-            String idUsr = request.getParameter("email");
+            String idUsr = seguro.sanar(request.getParameter("email"));
             String idUsrS = seguro.encriptar(idUsr);
             
-            String peso = request.getParameter("peso");
-            String estatura = request.getParameter("estatura");
-            String cintura = request.getParameter("cintura");
-            String edad = request.getParameter("edad");
+            if(nombre == null || idUsr == null || nombre.equals("") || idUsr.equals("")){
+                sesion.setAttribute("mensaje", "Usuario no válido, por favor intenta de nuevo.");
+                response.sendRedirect("jsp/paciente/usuario.jsp");
+            }
+            
+            String peso = seguro.sanar(request.getParameter("peso"));
+            String estatura = seguro.sanar(request.getParameter("estatura"));
+            String cintura = seguro.sanar(request.getParameter("cintura"));
+            String edad = seguro.sanar(request.getParameter("edad"));
             
             int edad2 = Integer.parseInt(edad);
             int peso2 = Integer.parseInt(peso);
             int cintura2 = Integer.parseInt(cintura);
             int estatura2 = Integer.parseInt(estatura);
-            int sexo = Integer.parseInt(request.getParameter("sexo"));
-            int ocupacion = Integer.parseInt(request.getParameter("ocupacion"));
-            int actividad = Integer.parseInt(request.getParameter("actividad"));
+            int sexo = Integer.parseInt(seguro.sanar(request.getParameter("sexo")));
+            int ocupacion = Integer.parseInt(seguro.sanar(request.getParameter("ocupacion")));
+            int actividad = Integer.parseInt(seguro.sanar(request.getParameter("actividad")));
             String d[], hrs[];
             int horasR[], dias[];
             d = request.getParameterValues("dias");
@@ -185,7 +190,9 @@ public class sPerfilDeUsuario extends HttpServlet {
              }
              }
         }catch(SQLException ex){
-             out.print(ex.toString());
+             //out.print(ex.toString());
+                sesion.setAttribute("mensaje", "Usuario no válido, por favor intenta de nuevo.");
+                response.sendRedirect("jsp/paciente/usuario.jsp");
              }
         }
         catch(NumberFormatException e){

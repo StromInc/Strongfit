@@ -13,11 +13,13 @@ public class cConexion {
     private Connection con = null;
     private Statement st;
     private String dominio = "";
+    private String direccionWS = "";
     
     //Para conectar por default
     public Connection conectar()
     {
         dominio = "http://localhost:8080/StrongFit/";
+        direccionWS = "ws://192.168.1.73:8080/StrongFit/endpoint";
         try
         {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -58,6 +60,10 @@ public class cConexion {
     public String getDominio()
     {
         return dominio;
+    }
+    
+    public String getWS(){
+        return direccionWS;
     }
     //Esto da de alta los primeros 3 campos de los nuevos usuarios
     public String altausuario(String idUser, String pass, String nombre, String nom) throws SQLException
@@ -993,6 +999,18 @@ public class cConexion {
      public ResultSet spGetAlimentosMes(int idPaciente, int numMes, int year)throws SQLException{
         this.st = con.createStatement();
         return this.st.executeQuery("call spGetAlimentosMes("+idPaciente+", "+numMes+", "+year+");");
+    }
+     
+     //spGetAlimentosMes(in id_paciente int, in numMes int, in numYear int)
+     public ResultSet spSetAsociasiones(int idPaciente, int idMe, int idD, String idUsrM, int accion)throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spSetAsociasiones("+idPaciente+", "+idMe+", "+idD+", '"+idUsrM+"', "+accion+");");
+    }
+     
+     //spGetAlimentosMes(in id_paciente int, in numMes int, in numYear int)
+     public ResultSet spGetAsociaciones(int idPaciente)throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetAsociaciones("+idPaciente+");");
     }
 }
 

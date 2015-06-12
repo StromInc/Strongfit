@@ -413,6 +413,14 @@ function cambiarIndependiente(id){
         var $can = parseInt($('#cantidad'+id).val());
         var $canAsignada = parseInt($('#cantidadAsignada'+id).val());
         
+        try{
+            if(isNaN($canAsignada)) throw "not a number"
+        }
+        catch(err){
+            $('#cantidadAsignada'+id).val($can);
+            return false;
+        }
+        
         ajustarCantidad2(id, $can);
         caloriasDia[dia] -= calTem;
         proteinas[dia] -= proTem;

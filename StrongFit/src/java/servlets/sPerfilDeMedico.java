@@ -44,7 +44,7 @@ public class sPerfilDeMedico extends HttpServlet {
            
            cCifrado seguro = new cCifrado();
             // recuperamos los valores
-           String pass = request.getParameter("txt-pass");
+           String pass = seguro.sanar(request.getParameter("txt-pass"));
             seguro.AlgoritmoAES();
             seguro.iniciarBuscador();
             String passS = seguro.cifrarSHA1(pass);
@@ -54,27 +54,32 @@ public class sPerfilDeMedico extends HttpServlet {
             
             int idMedico = (Integer)sesion.getAttribute("idMedico");
             
-            String nombre = request.getParameter("txt-name");
+            String nombre = seguro.sanar(request.getParameter("txt-name"));
             String nombreS = seguro.encriptar(nombre);
             String nombre2 = seguro.cifrarBuscador(nombre);
-            String idUsr = request.getParameter("txt-email");
+            String idUsr = seguro.sanar(request.getParameter("txt-email"));
             String idUsrS = seguro.encriptar(idUsr);
             
-            String edad = request.getParameter("edad");
+            if(nombre == null || idUsr == null || nombre.equals("") || idUsr.equals("")){
+                sesion.setAttribute("mensaje", "Usuario no válido, por favor intenta de nuevo.");
+                response.sendRedirect("jsp/paciente/usuario.jsp");
+            }
+            
+            String edad = seguro.sanar(request.getParameter("edad"));
             int sexo = Integer.parseInt(request.getParameter("sexo"));
             
-            String estado = request.getParameter("estado");
+            String estado = seguro.sanar(request.getParameter("estado"));
             String estadoS = seguro.encriptar(estado);
-            String municipio = request.getParameter("municipio");
+            String municipio = seguro.sanar(request.getParameter("municipio"));
             String municipioS = seguro.encriptar(municipio);
-            String colonia = request.getParameter("colonia");
+            String colonia = seguro.sanar(request.getParameter("colonia"));
             String coloniaS = seguro.encriptar(colonia);
             
-            String cedula = request.getParameter("plicense");
+            String cedula = seguro.sanar(request.getParameter("plicense"));
             
-            String escuela = request.getParameter("school");
+            String escuela = seguro.sanar(request.getParameter("school"));
             String escuelaS = seguro.encriptar(escuela);
-            String carrera = request.getParameter("carrier");
+            String carrera = seguro.sanar(request.getParameter("carrier"));
             String carreraS = seguro.encriptar(carrera);
             String verificacion = "";
              
@@ -125,7 +130,8 @@ public class sPerfilDeMedico extends HttpServlet {
              }
              }
         }catch(SQLException ex){
-             out.print(ex.toString());
+             //out.print(ex.toString());
+             response.sendRedirect("jsp/nutriologo/usuario.jsp");
              }
         }
     }

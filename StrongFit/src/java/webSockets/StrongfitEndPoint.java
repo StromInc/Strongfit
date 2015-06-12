@@ -58,7 +58,7 @@ public class StrongfitEndPoint {
  
     @OnMessage
     public void onMessage(String mensaje, Session session) throws Exception {
-        LOGGER.log(Level.INFO, "Que onda mensaje:{0}", mensaje);
+//        LOGGER.log(Level.INFO, "Que onda mensaje:{0}", mensaje);
         
         cConexion conecta = new cConexion();
         conecta.conectar();
@@ -66,7 +66,7 @@ public class StrongfitEndPoint {
         cCifrado seguro = new cCifrado();
         seguro.AlgoritmoAES();
         
-        String usrS = seguro.encriptar(mensaje);
+        String usrS = seguro.encriptar(seguro.sanar(mensaje));
         String res = "no";
         System.out.println("###############################################");
         System.out.println(usrS.length());

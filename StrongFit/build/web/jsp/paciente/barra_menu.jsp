@@ -7,7 +7,7 @@
 <%
     HttpSession sesion2 = request.getSession();
     conecta.conectar();
-    String dom = conecta.getDominio();
+    String ws = conecta.getWS();
     String idUsuarioBarra = (String)sesion2.getAttribute("idUsr");
     String nombreUsuario = (String)sesion2.getAttribute("nombre");
     nombreUsuario = nombreUsuario.split(" ", 1)[0];
@@ -21,7 +21,7 @@
 <script src = "../../js/acciones_dietasusr.js"></script>
 <script>
              //notar el protocolo.. es 'ws' y no 'http'
-        var wsUri = "ws://192.168.1.120:8080/StrongFit/endpoint";
+        var wsUri = "<%=ws%>";
         var websocket = new WebSocket(wsUri); //creamos el socket
         var solicitud = '';
         var sesionDestinatario = '';
@@ -431,6 +431,7 @@ function enviarSolicitud(){
             success: function(respuesta){
                 $('#botonSolicitud').addClass('invisible');
                 websocket.send(idUsuario + ',' + solicitud + ',' + $('#sesionProximoAmigo').val());
+                location.reload();
             }
         });
     });
@@ -450,6 +451,7 @@ function responderSolicitud(respuesta, idOtro, idEtiqueta){
                 //console.log(idEtiqueta);
                 alert("Nuevo amigo(a) " + res.res + "(a)");
                 document.getElementsByClassName('divSolicitud')[idEtiqueta+1].remove();
+                location.reload();
             }
         });
     });

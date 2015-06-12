@@ -5,7 +5,7 @@
 <%
     HttpSession sesion2 = request.getSession();
     conecta.conectar();
-    String dom = conecta.getDominio();
+    String ws = conecta.getWS();
     String idUsuarioBarra = (String)sesion2.getAttribute("idUsr");
     String tipo = (String) sesion2.getAttribute("tipodeus");
     if(!tipo.equals("2")){
@@ -16,7 +16,7 @@
 
 <script>
              //notar el protocolo.. es 'ws' y no 'http'
-        var wsUri = "ws://192.168.1.120:8080/StrongFit/endpoint";
+        var wsUri = "<%=ws%>";
         var websocket = new WebSocket(wsUri); //creamos el socket
         var solicitud = '';
         var sesionDestinatario = '';
@@ -427,6 +427,7 @@ function enviarSolicitud(){
             success: function(respuesta){
                 $('#botonSolicitud').addClass('invisible');
                 websocket.send(idUsuario + ',' + solicitud + ',' + $('#sesionProximoAmigo').val());
+                location.reload();
             }
         });
     });
@@ -446,6 +447,7 @@ function responderSolicitud(respuesta, idOtro, idEtiqueta){
                 //console.log(idEtiqueta);
                 alert("Nuevo amigo(a) " + res.res + "(a)");
                 document.getElementsByClassName('divSolicitud')[idEtiqueta+1].remove();
+                location.reload();
             }
         });
     });
@@ -533,6 +535,27 @@ function getDietasPaciente(){
                 }
             });
         }
+    });
+}
+
+function agregarDieta(){
+    $(function(){
+        $('.btnAgregar').on('click', function(){ 
+            $(this).addClass('invisible');
+            $(this).siblings().removeClass('invisible');
+            $('#divDietasPaciente').append($(this).parent());
+            //$(this).parent().remove();
+        });
+    });
+}
+
+function quitarDieta(){
+    $(function(){
+        $('.btnQuitar').on('click', function(){
+            $(this).addClass('invisible');
+            $(this).siblings().removeClass('invisible');
+            $('#divTusDietas').append($(this).parent());
+        });
     });
 }
 
