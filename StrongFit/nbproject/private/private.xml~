@@ -4,17 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/Estilos/estilo_estadisticas.css</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sGetDatosGrafica.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sCrearDieta.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/js/acciones_estadisticasP.js</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/estadisticas.jsp</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sAltaDeUsuario.java</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sLogIn.java</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sAltaDeMedico.java</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/index.jsp</file>
 =======
-            <file>file:/E:/Strom/Strongfit/StrongFit/src/java/servlets/sCambiarMetas.java</file>
-            <file>file:/E:/Strom/Strongfit/StrongFit/src/java/servlets/sGetAlimentosFecha.java</file>
-            <file>file:/E:/Strom/Strongfit/StrongFit/web/js/buscar-alimento.js</file>
-            <file>file:/E:/Strom/Strongfit/StrongFit/src/java/servlets/sLoginAndroid.java</file>
->>>>>>> f9de2e386a6568447a5d415fca93b9da1cec7c64
+            <file>file:/J:/Strom/Strongfit/StrongFit/src/java/servlets/sBorrarAlimentoFecha.java</file>
+            <file>file:/J:/Strom/Strongfit/StrongFit/src/java/servlets/sCambiarMetas.java</file>
+            <file>file:/J:/Strom/Strongfit/StrongFit/web/js/buscar-alimento.js</file>
+            <file>file:/J:/Strom/Strongfit/StrongFit/web/jsp/paciente/inicio.jsp</file>
+>>>>>>> 7b2b521c181e8f9dc46bb88eee92d2322e052d32
         </group>
     </open-files>
 </project-private>

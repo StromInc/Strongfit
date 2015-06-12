@@ -215,7 +215,7 @@
                     <li onclick="mostrarMenu('contenedorChatNutriologo');"><input type="radio" name="menuChat" id="chatN"><label id="cN" for="chatN">Chat</label></li>
                     <li onclick="mostrarMenu('contenedorInfoPaciente');"><input type="radio" onclick="getInfoNutricional();" name="menuChat" id="infoN"><label id="iN" for="infoN">Información</label></li>
                     <li onclick="mostrarMenu('contenedorEstaPaciente');"><input type="radio" name="menuChat" id="estaN"><label id="eN" for="estaN">Estadísticas</label></li>
-                    <li onclick="mostrarMenu('contenedorDietPaciente');"><input type="radio" name="menuChat" id="dietN"><label id="dN" for="dietN">Dietas</label></li>
+                    <li onclick="mostrarMenu('contenedorDietPaciente');"><input type="radio" onclick="getDietasPaciente();" name="menuChat" id="dietN"><label id="dN" for="dietN">Dietas</label></li>
                 </ul>
                 <div id="contenedorChatNutriologo" class="ventanasChat invisible" >
                     <div class="mensajes" id = "log">
@@ -309,7 +309,28 @@
                     Aqui va la parte de las estadisticas
                 </div>
                 <div id="contenedorDietPaciente" class="ventanasChat invisible">
-                    Aqui va la parte de las dietas
+                    <div class="contenedorDietasNutriologo">
+                            <p>Dietas creadas por ti</p>
+                            <div id="divTusDietas">
+                            <%
+                                ResultSet misdietas = conecta.getDietasRegistradas(idS);
+                                String nomDieta = "";
+                                int contadorD = 0;
+                                while(misdietas.next()){
+                                    nomDieta = misdietas.getString("nombre");
+                                    %>
+                                    <div class="misDietas"><%=nomDieta%><input type="button" name="btnAgregar" class="btnAgregar" value="Agregar" onclick="agregarDieta();"><input type="button" name="btnQuitar" class="btnQuitar invisible" value="Quitar" onclick="quitarDieta();"></div>
+                                    <%
+                                    contadorD++;
+                                }
+                            %>
+                        </div>
+                    </div>
+                    
+                    <div class="contenedorDietasNutriologo" >
+                        <p>Dietas del paciente</p>
+                        <div id="divDietasPaciente"></div>
+                    </div>
                 </div>
             </article>
 <!--===========================================================================================-->

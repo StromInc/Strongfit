@@ -58,7 +58,7 @@ public class sCambiarMetas extends HttpServlet {
             int calorias = 0;
             float kcalorias = 0;
             float gramos;
-            System.out.println("IDPaciente: " + idPaciente + " " + diaSemana + " " + diaMes);
+            System.out.println("Datos en sCambiarMetas: " + idPaciente + " " + diaSemana + " " + diaMes);
             ResultSet rs = conectar.getAlimentosPorFecha(idPaciente, diaMes, numMes, year);
             while(rs.next()){
                 calorias = rs.getInt("calorias");

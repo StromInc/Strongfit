@@ -109,153 +109,163 @@
                 </div>
                 <div class="Registrados">
                     <h3 class="Buscador-aviso Seleccionado-titulo">Alimentos Registrados</h3>
-                    <div class="Registrados-header" id="tituloDesayuno">Desayuno - <%=calTotalesDesayuno%> kcal</div>
-                    <div class="Registrados-list">
-                        <ul class="Consumidos" id="comida-desayuno">
-                            <li class="Consumidos-item ocultar" id="prototipo-borrar">
-                                <p class="Consumidos-name ">Taco </p>
-                                <span class="Consumidos-subname">Consumidos: 5 kcal</span>
-                                <button class="Consumidos-borrar">X <input type="hidden"></button>
-                            </li>
-                            <%
-                                //Datos del alimento que se mostraran cuando cargue la pagina
-                                //Estan organizados por tipo de comida
-                                //100 g - calorias
-                                //gramos - x calorias
-                                String nombre = "";
-                                int tipoAlimento = 0;
-                                
-                                String calAlimento;
-                                rs2.beforeFirst();
-                                while(rs2.next()){
-                                    nombre = rs2.getString("nombre");
-                                    calorias = rs2.getInt("calorias");
-                                    gramos = rs2.getFloat("gramos");
-                                    kcalorias = (gramos * calorias)/100;
-                                    calAlimento = String.format("%.2f", kcalorias);
-                                    tipoAlimento = rs2.getInt("tiempo_comida_id");
-                                    idAlimentoFecha = rs2.getInt("idAlimento_fecha");
-                                    if(tipoAlimento == 1){                                              
-                            %>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name"><%=nombre%></p>
-                                <span class="Consumidos-subname">Consumidos: <%=calAlimento%> kcal</span>
-                                <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
-                            </li>
-                            <%
+                    <div>
+                        <h3 class="Registrados-header" id="tituloDesayuno">Desayuno - <%=calTotalesDesayuno%> kcal</h3>
+                        <div class="Registrados-list">
+                            <ul class="Consumidos" id="comida-desayuno">
+                                <li class="Consumidos-item ocultar" id="prototipo-borrar">
+                                    <p class="Consumidos-name ">Taco </p>
+                                    <span class="Consumidos-subname">Consumidos: 5 kcal</span>
+                                    <button class="Consumidos-borrar">X <input type="hidden"></button>
+                                </li>
+                                <%
+                                    //Datos del alimento que se mostraran cuando cargue la pagina
+                                    //Estan organizados por tipo de comida
+                                    //100 g - calorias
+                                    //gramos - x calorias
+                                    String nombre = "";
+                                    int tipoAlimento = 0;
+
+                                    String calAlimento;
+                                    rs2.beforeFirst();
+                                    while(rs2.next()){
+                                        nombre = rs2.getString("nombre");
+                                        calorias = rs2.getInt("calorias");
+                                        gramos = rs2.getFloat("gramos");
+                                        kcalorias = (gramos * calorias)/100;
+                                        calAlimento = String.format("%.2f", kcalorias);
+                                        tipoAlimento = rs2.getInt("tiempo_comida_id");
+                                        idAlimentoFecha = rs2.getInt("idAlimento_fecha");
+                                        if(tipoAlimento == 1){                                              
+                                %>
+                                <li class="Consumidos-item">
+                                    <p class="Consumidos-name"><%=nombre%></p>
+                                    <span class="Consumidos-subname">Consumidos: <%=calAlimento%> kcal</span>
+                                    <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
+                                </li>
+                                <%
+                                        }
                                     }
-                                }
-                            %>
-                        </ul>
-                    </div> 
-                    <div class="Registrados-header" id="tituloColacion1">Colación 1 - <%=calTotalesColacion1%> kcal</div>
-                    <div class="Registrados-list">
-                        <ul class="Consumidos" id="comida-colacion1">
-                            <%
-                                rs2.beforeFirst();
-                                while(rs2.next()){
-                                    nombre = rs2.getString("nombre");
-                                    calorias = rs2.getInt("calorias");
-                                    gramos = rs2.getFloat("gramos");
-                                    kcalorias = (gramos * calorias)/100;
-                                    calAlimento = String.format("%.2f", kcalorias);
-                                    tipoAlimento = rs2.getInt("tiempo_comida_id");
-                                    idAlimentoFecha = rs2.getInt("idAlimento_fecha");
-                                    if(tipoAlimento == 2){                                              
-                            %>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name"><%=nombre%></p>
-                                <span class="Consumidos-subname">Consumidos: <%=calAlimento%> kcal</span>
-                                <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
-                            </li>
-                            <%
+                                %>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="Registrados-header" id="tituloColacion1">Colación 1 - <%=calTotalesColacion1%> kcal</h3>
+                        <div class="Registrados-list">
+                            <ul class="Consumidos" id="comida-colacion1">
+                                <%
+                                    rs2.beforeFirst();
+                                    while(rs2.next()){
+                                        nombre = rs2.getString("nombre");
+                                        calorias = rs2.getInt("calorias");
+                                        gramos = rs2.getFloat("gramos");
+                                        kcalorias = (gramos * calorias)/100;
+                                        calAlimento = String.format("%.2f", kcalorias);
+                                        tipoAlimento = rs2.getInt("tiempo_comida_id");
+                                        idAlimentoFecha = rs2.getInt("idAlimento_fecha");
+                                        if(tipoAlimento == 2){                                              
+                                %>
+                                <li class="Consumidos-item">
+                                    <p class="Consumidos-name"><%=nombre%></p>
+                                    <span class="Consumidos-subname">Consumidos: <%=calAlimento%> kcal</span>
+                                    <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
+                                </li>
+                                <%
+                                        }
                                     }
-                                }
-                            %>
-                        </ul>
-                    </div> 
-                    <div class="Registrados-header" id="tituloComida">Comida - <%=calTotalesComida%> kcal</div>
-                    <div class="Registrados-list">
-                        <ul class="Consumidos" id="comida-comida">
-                            <%
-                                //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
-                                rs2.beforeFirst();
-                                while(rs2.next()){
-                                    nombre = rs2.getString("nombre");
-                                    calorias = rs2.getInt("calorias");
-                                    gramos = rs2.getFloat("gramos");
-                                    kcalorias = (gramos * calorias)/100;
-                                    calAlimento = String.format("%.2f", kcalorias);
-                                    tipoAlimento = rs2.getInt("tiempo_comida_id");
-                                    idAlimentoFecha = rs2.getInt("idAlimento_fecha");
-                                    if(tipoAlimento == 3){                                              
-                            %>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name"><%=nombre%></p>
-                                <span class="Consumidos-subname">Consumidos: <%=calAlimento%> kcal</span>
-                                <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
-                            </li>
-                            <%
+                                %>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="Registrados-header" id="tituloComida">Comida - <%=calTotalesComida%> kcal</h3>
+                        <div class="Registrados-list">
+                            <ul class="Consumidos" id="comida-comida">
+                                <%
+                                    //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
+                                    rs2.beforeFirst();
+                                    while(rs2.next()){
+                                        nombre = rs2.getString("nombre");
+                                        calorias = rs2.getInt("calorias");
+                                        gramos = rs2.getFloat("gramos");
+                                        kcalorias = (gramos * calorias)/100;
+                                        calAlimento = String.format("%.2f", kcalorias);
+                                        tipoAlimento = rs2.getInt("tiempo_comida_id");
+                                        idAlimentoFecha = rs2.getInt("idAlimento_fecha");
+                                        if(tipoAlimento == 3){                                              
+                                %>
+                                <li class="Consumidos-item">
+                                    <p class="Consumidos-name"><%=nombre%></p>
+                                    <span class="Consumidos-subname">Consumidos: <%=calAlimento%> kcal</span>
+                                    <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
+                                </li>
+                                <%
+                                        }
                                     }
-                                }
-                            %>
-                        </ul>
-                    </div> 
-                    <div class="Registrados-header" id="tituloColacion2">Colación 2 - <%=calTotalesColacion2%> kcal</div>
-                    <div class="Registrados-list">
-                        <ul class="Consumidos" id="comida-colacion2">
-                            <%
-                                //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
-                                rs2.beforeFirst();
-                                while(rs2.next()){
-                                    nombre = rs2.getString("nombre");
-                                    calorias = rs2.getInt("calorias");
-                                    gramos = rs2.getFloat("gramos");
-                                    kcalorias = (gramos * calorias)/100;
-                                    calAlimento = String.format("%.2f", kcalorias);
-                                    tipoAlimento = rs2.getInt("tiempo_comida_id");
-                                    idAlimentoFecha = rs2.getInt("idAlimento_fecha");
-                                    if(tipoAlimento == 4){                                              
-                            %>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name"><%=nombre%></p>
-                                <span class="Consumidos-subname">Consumidos: <%=calAlimento%> kcal</span>
-                                <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
-                            </li>
-                            <%
+                                %>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="Registrados-header" id="tituloColacion2">Colación 2 - <%=calTotalesColacion2%> kcal</h3>
+                        <div class="Registrados-list">
+                            <ul class="Consumidos" id="comida-colacion2">
+                                <%
+                                    //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
+                                    rs2.beforeFirst();
+                                    while(rs2.next()){
+                                        nombre = rs2.getString("nombre");
+                                        calorias = rs2.getInt("calorias");
+                                        gramos = rs2.getFloat("gramos");
+                                        kcalorias = (gramos * calorias)/100;
+                                        calAlimento = String.format("%.2f", kcalorias);
+                                        tipoAlimento = rs2.getInt("tiempo_comida_id");
+                                        idAlimentoFecha = rs2.getInt("idAlimento_fecha");
+                                        if(tipoAlimento == 4){                                              
+                                %>
+                                <li class="Consumidos-item">
+                                    <p class="Consumidos-name"><%=nombre%></p>
+                                    <span class="Consumidos-subname">Consumidos: <%=calAlimento%> kcal</span>
+                                    <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
+                                </li>
+                                <%
+                                        }
                                     }
-                                }
-                            %>
-                        </ul>
-                    </div> 
-                    <div class="Registrados-header" id="tituloCena">Cena - <%=calTotalesCena%> kcal</div>
-                    <div class="Registrados-list">
-                        <ul class="Consumidos" id="comida-cena">
-                            <%
-                                //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
-                                rs2.beforeFirst();
-                                while(rs2.next()){
-                                    nombre = rs2.getString("nombre");
-                                    calorias = rs2.getInt("calorias");
-                                    gramos = rs2.getFloat("gramos");
-                                    kcalorias = (gramos * calorias)/100;
-                                    calAlimento = String.format("%.2f", kcalorias);
-                                    tipoAlimento = rs2.getInt("tiempo_comida_id");
-                                    idAlimentoFecha = rs2.getInt("idAlimento_fecha");
-                                    if(tipoAlimento == 5){                                              
-                            %>
-                            <li class="Consumidos-item">
-                                <p class="Consumidos-name"><%=nombre%></p>
-                                <span class="Consumidos-subname">Consumidos: <%=calAlimento%> kcal</span>
-                                <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
-                            </li>
-                            <%
+                                %>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="Registrados-header" id="tituloCena">Cena - <%=calTotalesCena%> kcal</h3>
+                        <div class="Registrados-list">
+                            <ul class="Consumidos" id="comida-cena">
+                                <%
+                                    //Esta parte solo se cambio de lugar para que se adapte a la nueva vista
+                                    rs2.beforeFirst();
+                                    while(rs2.next()){
+                                        nombre = rs2.getString("nombre");
+                                        calorias = rs2.getInt("calorias");
+                                        gramos = rs2.getFloat("gramos");
+                                        kcalorias = (gramos * calorias)/100;
+                                        calAlimento = String.format("%.2f", kcalorias);
+                                        tipoAlimento = rs2.getInt("tiempo_comida_id");
+                                        idAlimentoFecha = rs2.getInt("idAlimento_fecha");
+                                        if(tipoAlimento == 5){                                              
+                                %>
+                                <li class="Consumidos-item">
+                                    <p class="Consumidos-name"><%=nombre%></p>
+                                    <span class="Consumidos-subname">Consumidos: <%=calAlimento%> kcal</span>
+                                    <button class="Consumidos-borrar">X <input type="hidden" value="<%=idAlimentoFecha%>"></button>
+                                </li>
+                                <%
+                                        }
                                     }
-                                }
-                            %>
-                        </ul>
-                    </div> 
-                </div>     
+                                %>
+                            </ul>
+                        </div> 
+                    </div>
+                </div>
             </div>                 
         </article>
         <aside class="Buscador x-large">

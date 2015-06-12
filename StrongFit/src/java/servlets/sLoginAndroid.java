@@ -6,8 +6,11 @@
 
 package servlets;
 
+import clases.cCifrado;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,13 +34,20 @@ public class sLoginAndroid extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String correo = request.getParameter("correo");
-            String contra = request.getParameter("contra");
-            System.out.println("correo: " + correo + " " + contra);
+            cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
+            
+            String idUser = seguro.sanar(request.getParameter("correo"));
+            String pass = seguro.sanar(request.getParameter("contra"));
+            
+            String idUS = seguro.encriptar(idUser);
+            String passS = seguro.cifrarSHA1(pass);
+            
+            System.out.println("correo: " + idUS + " " + passS);
             out.write("Si entro");
         }
     }
@@ -54,7 +64,11 @@ public class sLoginAndroid extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(sLoginAndroid.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -68,7 +82,11 @@ public class sLoginAndroid extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(sLoginAndroid.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

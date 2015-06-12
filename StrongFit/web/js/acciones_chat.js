@@ -1,3 +1,5 @@
+var idDieta = "";
+
 function mostrarMsjSol(id){
     $(function(){
         if(id === 'divMenuMsj'){
@@ -54,7 +56,33 @@ function mostrarMenu(id){
                 }
             }
         }
+        agregarDieta();
+        quitarDieta();
     });
 }
 
 
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function agregarDieta(){
+    $(function(){
+        $('.btnAgregar').on('click', function(){ 
+            $(this).addClass('invisible');
+            $(this).siblings().removeClass('invisible');
+            $('#divDietasPaciente').append($(this).parent());
+            //$(this).parent().remove();
+        });
+    });
+}
+
+function quitarDieta(){
+    $(function(){
+        $('.btnQuitar').on('click', function(){
+            $(this).addClass('invisible');
+            $(this).siblings().removeClass('invisible');
+            $('#divTusDietas').append($(this).parent());
+        });
+    });
+}

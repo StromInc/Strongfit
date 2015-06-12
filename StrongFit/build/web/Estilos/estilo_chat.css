@@ -192,3 +192,35 @@
 .sinPendientes{
     margin: 0;
 }
+
+#contenedorDietPaciente{
+    text-align: center;
+}
+
+.contenedorDietasNutriologo{
+    display: inline-block;
+    width: 40%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.misDietas:hover{
+    background-color: #f2f2f2;
+}
+
+.misDietas:last-child{
+    vertical-align: top;
+}
+
+.contenedorDietasNutriologo:first-child{
+    vertical-align: top;
+}
+
+.contenedorDietasNutriologo:first-child div{
+    border-right: 1px solid #d2d4d5;
+}
+
+.misDietas{
+    padding: .5em;
+    border-bottom: 1px solid #d2d4d5;
+}

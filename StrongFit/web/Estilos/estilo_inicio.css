@@ -204,6 +204,9 @@ a {
   text-align: center;
   border-bottom: 1px solid #d2d4d5;
   padding: 0.5em 0;
+  margin: 0;
+  font-weight: normal;
+  font-size: 1em;
 }
 .Registrados-list {
   overflow-y: auto;
