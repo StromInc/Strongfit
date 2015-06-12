@@ -163,6 +163,7 @@
                 });
                 websocket.send( idUsuario + ',' + $('#destinatario').val() + ',' + sanar(mensajeTXT.value) + ',' + sesionDestinatario);
                 log("<div class = 'remitenteDiv'><div class = 'remitente msj'>" + sanar(mensajeTXT.value) + "</div></div>");
+                mensajeTXT.value= "";
             });
         }
         function log(mensaje) { //aqui mostrará el LOG de lo que está haciendo el WebSocket

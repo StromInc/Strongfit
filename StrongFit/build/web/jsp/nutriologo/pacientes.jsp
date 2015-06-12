@@ -49,7 +49,7 @@
         %>
         <%@include file="barra_menu.jsp"%>
          
-        <script>setPosicion('miNutriologo');</script>
+        <script>setPosicion('pacientes');</script>
         <section class = "Section-tbl-usr">
             <article id="articlePerfilMsjSol" class="Article-tbl-usr2 issues" style="overflow:hidden;">
                 <div class="divGeneralSolMsj">

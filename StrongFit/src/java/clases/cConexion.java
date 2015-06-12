@@ -19,7 +19,7 @@ public class cConexion {
     public Connection conectar()
     {
         dominio = "http://localhost:8080/StrongFit/";
-        direccionWS = "ws://192.168.1.73:8080/StrongFit/endpoint";
+        direccionWS = "ws://192.168.1.171:8080/StrongFit/endpoint";
         try
         {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -571,10 +571,10 @@ public class cConexion {
     public String ruta(int i){
         String ruta = "";
         if(i == 1){
-        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Nueva carpeta\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
+        ruta = "E:\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
         //ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
         }else{
-        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Nueva carpeta\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
+        ruta = "E:\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
         }
         return  ruta;
     }

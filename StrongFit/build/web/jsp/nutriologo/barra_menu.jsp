@@ -22,14 +22,14 @@
         var sesionDestinatario = '';
         var variableInutil = true;
         var idUsuario = '<%=idUsuarioBarra%>';
-        var pos = "miNutriologo";
+        var pos = "pacientes";
         var evitarRedundar = [];
         websocket.onopen = function(evt) { //manejamos los eventos...
             websocket.send(idUsuario);//... y aparecerá en la pantalla;
         };
         websocket.onmessage = function(evt) { // cuando se recibe un mensaje
             var diferenciar = evt.data.split(',');
-            if(pos === "miNutriologo"){
+            if(pos === "pacientes"){
                 if(diferenciar[0] === 's3sI0NamIgO9321djzlqoicnzskaak1795edsklvsnd'){
                     var amigos = document.getElementsByClassName(diferenciar[2])[0];
                     amigos.value = diferenciar[1];
@@ -129,7 +129,7 @@
                     var repetir = true;
                     setInterval(function(){
                         if(repetir){
-                            $('#minutriologo').animate({
+                            $('#pacientes').animate({
                                 opacity: 0.6,
                                 background: 000
                             }, 1000, function(){
@@ -138,7 +138,7 @@
                             });
                         }
                         else{
-                            $('#minutriologo').animate({
+                            $('#pacientes').animate({
                                 opacity: 1
                             }, 1000, function(){
                                 repetir = true;
@@ -159,6 +159,7 @@
                 });
                 websocket.send( idUsuario + ',' + $('#destinatario').val() + ',' + sanar(mensajeTXT.value) + ',' + sesionDestinatario);
                 log("<div class = 'remitenteDiv'><div class = 'remitente msj'>" + sanar(mensajeTXT.value) + "</div></div>");
+                mensajeTXT.value= "";
             });
         }
         function log(mensaje) { //aqui mostrará el LOG de lo que está haciendo el WebSocket
@@ -587,8 +588,8 @@ function sanar(cadenaMala){
     <ul class="Header-lista">
         <li class="Header-li"><a href="inicio.jsp" class="icon-house"></a></li><!--Inicio-->
         <li class="Header-li"><a href= "dietas_nutriologo.jsp" class="icon-food2"></a></li><!--Dieta-->
-        <li class="Header-li"><a href = "pacientes.jsp" class="icon-user"></a></li><!--Mi Nutriólogo-->
-        <li class="Header-li user-name"><a href = "usuario.jsp"><%=idUsuarioBarra%></a></li>
+        <li class="Header-li" id="pacientes"><a href = "pacientes.jsp" class="icon-user"></a></li><!--Mi Nutriólogo-->
+        <li class="Header-li user-name" ><a href = "usuario.jsp"><%=idUsuarioBarra%></a></li>
         <li class="Header-li"><a href = "../../index.jsp" class = "icon-sign-out" onclick="cerrarsesion()"></a></li><!--log out-->
     </ul>
 </header>
