@@ -39,23 +39,68 @@ public class Scambiaformato extends HttpServlet {
             String tamano = request.getParameter("tamano");
             String color = request.getParameter("color");
             String fuente = request.getParameter("tipo");
-            boolean varconteo = false;
+            String edicion = request.getParameter("edicion");
+            boolean seleccionado = false;
+            if(!edicion.equals("")){
+            seleccionado = true;
+            }
+            boolean varconteo = true;
+            boolean formato = false;
             int contador = 0;
             String datosi = "";
+            String datos2 = "";
+            String datos3 = "";
+            String formato1 = "";
+            int poscicion = 0;
+            
+            
+            if(seleccionado){
+                System.out.println("edicion " + edicion);
+            for(int j = 0; j < datos.length();j++){
+                if(contador < edicion.length()){
+                    System.out.println("a");
+                if(datos.charAt(j) == edicion.charAt(contador)){
+                
+                if(contador + 1 == edicion.length()){
+                  poscicion = j - contador; 
+                 }
+                contador++;
+                }
+                }
+                }
+            System.out.println("pocicionon " + poscicion);
             for(int i = 0; i < datos.length();i++ ){
-                if(datos.charAt(i) == '<'){
-                varconteo = true;
+                System.out.println(i);
+               if(varconteo){
+                System.out.println("corre " + i );   
+                if(i != poscicion){
+                   if(datos.charAt(i) == '<'){
+                   formato = true;
+                   }
+                   if(formato){
+                       formato1 += datos.charAt(i);
+                   }
+                   if(datos.charAt(i) == '>'){
+                   formato = false;
+                   }
+                 datosi += datos.charAt(i);
+                 System.out.println(datosi);   
+                }else{
+                   datosi += "</p>";
+                   System.out.println("cancela");
+                   varconteo = false;
                 }
+               } 
+            } 
                 
-                if(!varconteo){
-                datosi += datos.charAt(i);
-                }
-                if(datos.charAt(i) == '>'){
-                varconteo = false;
-                }
+               
                 
-            }
-            String nuevotexto = "<p style=\"font-family: ";
+                
+               
+                
+            
+          
+            String nuevotexto = "<p  style=\"display:initial; font-family: ";
             if(fuente.equals("Arial")){
             nuevotexto += "serif;";
             }
@@ -93,8 +138,64 @@ public class Scambiaformato extends HttpServlet {
                  nuevotexto += "small;";
                     break;
             }
-             nuevotexto += "\">"+ datosi +"</p>";
-            out.print(nuevotexto);
+            for(int i = 0; i < edicion.length(); i++){
+            datos2 += edicion.charAt(i);
+            }
+             nuevotexto += "\">"+ datos2 +"</p>";
+             datos3 += formato1;
+             boolean primeravez = true;
+            for(int i = poscicion + edicion.length(); i < datos.length(); i++){
+                if(primeravez && datos.charAt(i) == '<' && datos.charAt(i + 1) != '/'){
+                datos3+="</p>";
+                primeravez = false;
+                }
+                datos3 += datos.charAt(i);
+            } 
+            out.print(datosi+nuevotexto+datos3);
+        }else{
+                
+            String nuevotexto = "<p style=\"display:initial; font-family: ";
+            if(fuente.equals("Arial")){
+            nuevotexto += "serif;";
+            }
+            if(fuente.equals("Comic Sans")){
+            nuevotexto += "sans-serif;";
+            }    
+             if(fuente.equals("Default")){
+            nuevotexto += ";";
+            }    
+                  
+                 
+                      
+            
+            nuevotexto += "color: ";
+            switch(color){
+                case "Blanco":
+                 nuevotexto += "White;";
+                    break;
+                    case "Rojo":
+                 nuevotexto += "Red;";
+                    break;
+                    case "Azul":
+                 nuevotexto += "Blue;";
+                    break;        
+            }
+            nuevotexto += "font-size: ";
+            switch(tamano){
+                case "Normal":
+                 nuevotexto += "medium;";
+                    break;
+                case "Grande":
+                 nuevotexto += "larger;";
+                    break;
+                 default:
+                 nuevotexto += "small;";
+                    break;
+            }
+             nuevotexto += "\">"+ datosi +"</p>";    
+            out.print(datos + nuevotexto);
+            }
+            
         }
     }
 

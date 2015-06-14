@@ -176,7 +176,7 @@ public class cArticulos {
    }else{
    articulo = "Titulo:<br><input type=\"text\" id=\"txtnombre\" value = '' class = \"articulosk\"><br><br>\n" +
 "                 <img src = \""+ruta+"\" class =\"portada\" alt = \"foto de usuario\">\n" +
-"                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\"><p style=\"color: white;\">  \n" +
+"                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\"><p style=\"display:initial;color: white;\">  \n" +
 "                        <br>                    \n" +
 "                    </p></div><br>\n" +
 "                <input type=\"button\" value=\"Guardar\" onclick=\"escribearticulo('escribe')\" class=\"botonenviar\">";

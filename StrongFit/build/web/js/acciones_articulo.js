@@ -125,12 +125,14 @@ function votar(Npost, numero,nvoto) {
             datos : $('#txtarticulo').html(),
             tipo: $('#fuente').val(),
             color: $('#color').val(),
-            tamano: $('#tamano').val()
+            tamano: $('#tamano').val(),
+            edicion : document.getSelection().toString()
         }, function(responseText){
         console.log($('#txtarticulo').html());    
         $('#txtarticulo').html(responseText);
             
         console.log(responseText);
+        console.log();
     });
     
     }
