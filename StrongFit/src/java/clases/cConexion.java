@@ -591,7 +591,7 @@ public class cConexion {
     contador++;
     }
     contador++;
-    System.out.println(contador + " contador");
+    
     ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
     articulos = new String[contador][2];
     articulosordenados = new String[contador];
@@ -612,7 +612,7 @@ public class cConexion {
       int resultado = rs3.getInt("arriba");
       resultado -= rs3.getInt("abajo");
       articulos[i][1] = Integer.toString(resultado);
-      System.out.println( resultado );
+   
      
      }
      }
@@ -627,25 +627,24 @@ public class cConexion {
      while(!termine){
       int e = 0;  
      for(int i = 0; i < contador;i++){
-      System.out.println(contador  + " ");
+   
      if(!articulos[i][0].equals(identifica2)){
         
          int numero = Integer.parseInt(articulos[i][1]);
-         System.out.println(numero);
-         System.out.println("val evaluados " + numero + " nombre " + articulos[i][0] );  
+          
      if(Integer.parseInt(articulos[i][1]) >= valor ){
           
      valor = Integer.parseInt(articulos[i][1]);
      identifica = articulos[i][0];
      e = i;
-     System.out.println("artic " + articulos[i][0] + " num " + valor);
+    
      }
      }
      
      }
      articulosordenados[contador3] = identifica;
      articulos[e][1] = "-201";
-     System.out.println(identifica + " el valor");
+     
      contador3--;
      
      if(contador3 == -1){
@@ -672,7 +671,7 @@ public class cConexion {
     contador++;
     }
     contador++;
-    System.out.println(contador + " contador");
+    
     ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
     articulos = new String[contador][3];
     articulosordenados = new String[contador];
@@ -694,7 +693,7 @@ public class cConexion {
       int resultado = rs3.getInt("arriba");
       resultado -= rs3.getInt("abajo");
       articulos[i][1] = Integer.toString(resultado);
-      System.out.println( resultado );
+     
      
      }
      }
@@ -710,26 +709,25 @@ public class cConexion {
      while(!termine){
        int e = 0;  
      for(int i = 0; i < contador;i++){
-      System.out.println(contador  + " ");
+     
      if(!articulos[i][0].equals(identifica2)){
         
          int numero = Integer.parseInt(articulos[i][1]);
-         System.out.println(numero);
-         System.out.println("val evaluados " + numero + " nombre " + articulos[i][0] );  
+         
      if(Integer.parseInt(articulos[i][1]) >= valor ){
           
      valor = Integer.parseInt(articulos[i][1]);
      e = i;
      identifica = articulos[i][0];
      valt = articulos[i][2];
-     System.out.println("artic " + articulos[i][0] + " num " + valor);
+     
      }
      }
      
      }
      articulosordenados[contador3] = valt;
      articulos[e][1] = "-201";
-     System.out.println(identifica + " el valor");
+     
      contador3--;
      
      if(contador3 == -1){
@@ -756,7 +754,7 @@ public class cConexion {
     contador++;
     }
     contador++;
-    System.out.println(contador + " contador");
+    
     ResultSet rs2 = this.st.executeQuery("call sp_SeleccionarArticulos();");
     articulos = new String[contador][3];
     articulosordenados = new String[contador];
@@ -778,7 +776,7 @@ public class cConexion {
       int resultado = rs3.getInt("arriba");
       resultado -= rs3.getInt("abajo");
       articulos[i][1] = Integer.toString(resultado);
-      System.out.println( resultado );
+      
      
      }
      }
@@ -794,26 +792,25 @@ public class cConexion {
      while(!termine){
      int e = 0;   
      for(int i = 0; i < contador;i++){
-      System.out.println(contador  + " ");
+     
      if(!articulos[i][0].equals(identifica2)){
         
          int numero = Integer.parseInt(articulos[i][1]);
-         System.out.println(numero);
-         System.out.println("val evaluados " + numero + " nombre " + articulos[i][0] );  
+         
      if(Integer.parseInt(articulos[i][1]) >= valor ){
           
      valor = Integer.parseInt(articulos[i][1]);
      identifica = articulos[i][0];
     e = i;
      valt = articulos[i][2];
-     System.out.println("artic " + articulos[i][0] + " num " + valor);
+     
      }
      }
      
      }
      articulosordenados[contador3] = valt;
       articulos[e][1] = "-201";
-     System.out.println(identifica + " el valor");
+     
      contador3--;
      
      if(contador3 == -1){
