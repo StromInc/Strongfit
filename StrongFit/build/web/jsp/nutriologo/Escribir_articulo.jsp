@@ -74,7 +74,7 @@
                  
                  <br>
                 Texto:<br><span contentEditable="true" id="txtarticulo" class="Article-articulosf"><p  style="display:initial; color: white;" >  
-                        <br>                    
+                           <br>                    
                     </p></span><br>
                     <input type="button" value=Guardar" onclick="escribearticulo('escribe')" class="botonenviar">            
             </span>

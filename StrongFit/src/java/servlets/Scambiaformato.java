@@ -83,7 +83,7 @@ public class Scambiaformato extends HttpServlet {
                if(varconteo){
                   
                 if(i < poscicion){
-                   if(datos.charAt(i) == '<'){
+                   if(datos.charAt(i) == '<' && datos.charAt(i+1) != '/'){
                    formato = true;
                    }
                    if(formato && c1 == 0){
@@ -154,16 +154,16 @@ public class Scambiaformato extends HttpServlet {
             }
              nuevotexto += "\">"+ datos2 +"</p>";
              datos3 += formato1;
-             boolean primeravez = true;
+             
             for(int i = poscicion + edicion.length(); i < datos.length(); i++){
-                if(primeravez && datos.charAt(i) == '<' && datos.charAt(i + 1) != '/'){
-                datos3+="</p>";
-                primeravez = false;
-                }
+                
+                
                 datos3 += datos.charAt(i);
             }
-            System.out.println(datosi+" l "+nuevotexto+" l "+datos3);
+            System.out.println(datosi+" l "+nuevotexto+" l "+datos3+" l "+formato1);
             out.print(datosi+nuevotexto+datos3);
+            
+            
         }else{
                 
             String nuevotexto = "<p style=\"display:initial; font-family: ";
@@ -204,7 +204,7 @@ public class Scambiaformato extends HttpServlet {
                  nuevotexto += "small;";
                     break;
             }
-             nuevotexto += "\">"+ datosi +"</p>";    
+             nuevotexto += "\">"+ "&nbsp;" +"</p>";    
             out.print(datos + nuevotexto);
             }
             
