@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -48,17 +50,40 @@ public class sDietasUsr extends HttpServlet {
             HttpSession sesion = request.getSession(false);
             cCifrado seguro = new cCifrado();
             seguro.AlgoritmoAES();
+            
             String idUser = seguro.encriptar((String)sesion.getAttribute("idUsr"));
+            int idPaciente = (Integer)sesion.getAttribute("idPaciente");
             int idDieta = Integer.parseInt(request.getParameter("idDieta"));
+            int accion = 1;
+            
             String quit = request.getParameter("quitar");
-            System.out.println(idDieta);
+            
+            if(!quit.equals("no")){accion = 0;}
+            
+            cConexion conecta = new cConexion();
+            conecta.conectar();
+            
+            Calendar calendario = new GregorianCalendar();
+            int diaSem = calendario.get(Calendar.DAY_OF_WEEK);
+            int diaAnio = calendario.get(Calendar.DAY_OF_YEAR);
+            
+            conecta.actualizarDieta(idUser, idDieta, quit);
+            conecta.spSetResgitroDietas(idDieta, diaSem, diaAnio, idPaciente, accion);
+            
+            try{
+                int primero = Integer.parseInt(request.getParameter("primero"));
+                conecta.spSetPosicion(idDieta, idPaciente, 1);
+            }
+            catch(Exception e){
+                
+            }
         
             Map<String, Object> map = new HashMap<>();
 //            String dieta = Integer.toString(idDieta);
             map.put("idDieta", request.getParameter("idDieta"));
             
             write(response, map);
-            registrarDieta(idUser, idDieta, quit);
+            conecta.cerrar();
         }
     }
 
@@ -119,14 +144,6 @@ public class sDietasUsr extends HttpServlet {
         response.setContentType("aplication/json");
         response.setCharacterEncoding("charset=UTF-8");
         response.getWriter().write(new Gson().toJson(map));
-    }
-    
-    //Usa el procedure para crear o eliminar una relacion con las dietas que el usuario esta usando
-    public void registrarDieta(String idUser, int idDietas, String quit) throws SQLException
-    {
-        cConexion conecta = new cConexion();
-        conecta.conectar();
-        conecta.actualizarDieta(idUser, idDietas, quit);
     }
 
 }

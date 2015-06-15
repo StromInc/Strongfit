@@ -151,9 +151,9 @@
                     <div class="prueba is-active" id="formu_1">
                         <h2 class = "Article-title">Información de cuenta</h2>
                         <p class = "personal-p">Nombre</p>
-                        <input type = "text" name = "name" required class = "Section-usr" value = "<%=nombre%>">
+                        <input type = "text" name = "name" required class = "Section-usr" value = "<%=nombre%>" >
                         <p class = "personal-p">Correo</p>
-                        <input type = "email" name = "email" required class = "Section-usr" value="<%=idUsr%>">
+                        <input type = "email" name = "email" required class = "Section-usr" value="<%=idUsr%>" >
                         <p class = "personal-p">Contraseña</p>
                         <input type = "password" name = "contra" required class = "Section-usr" value="<%=pass%>">
                     </div>               
@@ -166,19 +166,19 @@
                                 %>
                                     <div class = "div-nutrimental">
                                         <p class = "m1 medidas-p">Peso</p>
-                                        <input type = "text" name = "peso" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=peso%>" placeholder="(Kg)">
+                                        <input type = "text" name = "peso" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=peso%>" placeholder="(Kg)" maxlength = "3">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "m2 medidas-p">Estatura</p>
-                                        <input type = "text" name = "estatura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=estatura%>" placeholder="cm">
+                                        <input type = "text" name = "estatura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=estatura%>" placeholder="cm" maxlength = "3">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "m3 medidas-p">Cintura</p>
-                                        <input type = "text" name = "cintura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=cintura%>" placeholder="cm">
+                                        <input type = "text" name = "cintura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=cintura%>" placeholder="cm" maxlength = "3">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "medidas-p">Edad</p>
-                                        <input type = "text" name = "edad" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=edad%>" placeholder="años">
+                                        <input type = "text" name = "edad" onkeypress="return numerossolo(event);" required class = "Section-m" value = "<%=edad%>" placeholder="años" maxlength = "3">
                                     </div>
                                 <%
                             }
@@ -187,19 +187,19 @@
                                 %>
                                     <div class = "div-nutrimental">
                                         <p class = "m1 medidas-p">Peso</p>
-                                        <input type = "text" name = "peso" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="(Kg)">
+                                        <input type = "text" name = "peso" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="(Kg)" maxlength = "3">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "m2 medidas-p">Estatura</p>
-                                        <input type = "text" name = "estatura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="cm">
+                                        <input type = "text" name = "estatura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="cm" maxlength = "3">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "m3 medidas-p">Cintura</p>
-                                        <input type = "text" name = "cintura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="cm">
+                                        <input type = "text" name = "cintura" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="cm" maxlength = "3">
                                     </div>
                                     <div class = "div-nutrimental">
                                         <p class = "medidas-p">Edad</p>
-                                        <input type = "text" name = "edad" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="años">
+                                        <input type = "text" name = "edad" onkeypress="return numerossolo(event);" required class = "Section-m" value = "" placeholder="años" maxlength = "3">
                                     </div>
                                 <%
                             }

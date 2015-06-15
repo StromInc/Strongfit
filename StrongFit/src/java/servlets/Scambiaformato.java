@@ -59,7 +59,7 @@ public class Scambiaformato extends HttpServlet {
             if(fuente.equals("Arial")){
             nuevotexto += "serif;";
             }
-            if(fuente.equals("comic sans")){
+            if(fuente.equals("Comic Sans")){
             nuevotexto += "sans-serif;";
             }    
              if(fuente.equals("Default")){

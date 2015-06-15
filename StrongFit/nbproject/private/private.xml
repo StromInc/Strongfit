@@ -5,14 +5,11 @@
         <group>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/nutriologo/barra_menu.jsp</file>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/js/acciones_dietasnutriologo.js</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sAltaDeUsuario.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/webSockets/StrongfitEndPoint.java</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/dietas_paciente.jsp</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/clases/cConexion.java</file>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/nutriologo/pacientes.jsp</file>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sLogIn.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/barra_menu.jsp</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sAltaDeMedico.java</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/index.jsp</file>
-            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/minutriologo.jsp</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sAsociarDietas.java</file>
         </group>
     </open-files>
 </project-private>

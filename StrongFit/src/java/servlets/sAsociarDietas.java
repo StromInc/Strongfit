@@ -40,7 +40,7 @@ public class sAsociarDietas extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -54,21 +54,30 @@ public class sAsociarDietas extends HttpServlet {
             
             int idMedico = 0;
             int idPaciente = 0;
+            String idOtro = "";
             int accion = 0;
             int idDieta = 0;
             String idUsr = "";
             
-            try{
+//            try{
                 idMedico = (Integer)sesion.getAttribute("idMedico");
                 idUsr = seguro.encriptar((String)sesion.getAttribute("idUsr"));
                 
-                idPaciente = Integer.parseInt(request.getParameter("idPa"));
+                idOtro = seguro.encriptar(request.getParameter("idPa"));
                 accion = Integer.parseInt(request.getParameter("accion"));
                 idDieta = Integer.parseInt(request.getParameter("idDieta"));
-            }
-            catch(Exception e){
                 
-            }
+                ResultSet idP = conecta.spTraerIdPaciente(idOtro);
+                if(idP.next()){
+                    idPaciente = idP.getInt("idPaciente");
+                }
+//            }
+//            catch(Exception e){
+//                System.out.print(e);
+//                Map<String, Object> mapa = new HashMap();
+//                mapa.put("estado", e);
+//                write(response, mapa);
+//            }
             
             ResultSet rs = conecta.spSetAsociasiones(idPaciente, idMedico, idDieta, idUsr, accion);
             if(rs.next()){
@@ -97,6 +106,8 @@ public class sAsociarDietas extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(sAsociarDietas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(sAsociarDietas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -114,6 +125,8 @@ public class sAsociarDietas extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(sAsociarDietas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(sAsociarDietas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

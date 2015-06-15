@@ -21,6 +21,7 @@ public class cArticulos {
         String[] articulosAut = objconexion.getArticulosAut();
         String[] articulosTex = objconexion.getArticulosTex();
         String articulos = "";
+        if(articulosNom != null){      
         clases.CImagen objimg = new clases.CImagen();
               String ruta = "";
               
@@ -118,6 +119,9 @@ public class cArticulos {
             articulos+= "</span><input type='text' id='t"+i+"'><button id='botoncoment' onclick=comentar('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+",'1')>comentar</button><hr>";
             articulos+="<button id='botonabrir' onclick=abrir('"+objcifrado.sustituye(articulosNom[i],1)+"',"+i+")>Seguir leyendo</button>";
        }
+        }else{
+        
+        }
     return articulos;
     }
    public String buscamisarticulos(String idUsr) throws SQLException{
@@ -209,7 +213,7 @@ public class cArticulos {
                         break;
               }
               
-            articulos += "<img src = \""+ruta+"\" class =\"portada2\" alt = \"foto de usuario\">";
+            //articulos += "<img src = \""+ruta+"\" class =\"portada2\" alt = \"foto de usuario\">";
             articulos+= articulosAut[1];
             
             articulos+= "</span>";

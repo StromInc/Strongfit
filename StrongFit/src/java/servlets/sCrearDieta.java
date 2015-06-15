@@ -46,6 +46,9 @@ public class sCrearDieta extends HttpServlet {
             
             HttpSession sesion = request.getSession();
             
+            cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
+            
             int idDietaEdicion = 0;
                         //nombreDieta = (String)sesion.getAttribute("nombreDieta");
             
@@ -68,6 +71,9 @@ public class sCrearDieta extends HttpServlet {
                 String porcion[] = null;
                 String cantidad[] = null;
                 String nom = null;
+                
+                String idUsr = seguro.encriptar((String)sesion.getAttribute("idUsr"));
+                String nomC = seguro.encriptar((String)sesion.getAttribute("nombre"));
                 
                 try{
                     cuantos = request.getParameter("cuantos").split(",");
@@ -107,17 +113,10 @@ public class sCrearDieta extends HttpServlet {
                 }
             
             if(idDietaEdicion == 0){
-                cCifrado seguro = new cCifrado();
-                seguro.AlgoritmoAES();
-
-                String idUsr = (String)sesion.getAttribute("idUsr");
-                       idUsr = seguro.encriptar(idUsr);
 
                 cConexion conector = new cConexion();
                 conector.conectar();
-
                 
-
                 int tipo = 2;
                 int kcal2 = 0;
                 int considera = 1;
@@ -162,7 +161,7 @@ public class sCrearDieta extends HttpServlet {
                 }
                 catch(Exception e){}
                 
-                ResultSet dieta = conector.spSetDieta(idDieta, nom, tipo, kcal2, pro, car, lip, considera);
+                ResultSet dieta = conector.spSetDieta(idDieta, nom, tipo, kcal2, pro, car, lip, considera, idUsr, nomC);
                 if(dieta.next()){
                     idDieta = dieta.getInt("idDietaCreada");
                 }
@@ -197,6 +196,7 @@ public class sCrearDieta extends HttpServlet {
                         cuanto++;
                     }
                 }
+                conector.cerrar();
                 response.sendRedirect("jsp/nutriologo/dietas_nutriologo.jsp");
             }
             else{

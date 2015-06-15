@@ -49,7 +49,7 @@
         %>
         <%@include file="barra_menu.jsp"%>
          
-        <script>setPosicion('miNutriologo');</script>
+        <script>setPosicion('pacientes');</script>
         <section class = "Section-tbl-usr">
             <article id="articlePerfilMsjSol" class="Article-tbl-usr2 issues" style="overflow:hidden;">
                 <div class="divGeneralSolMsj">
@@ -315,11 +315,13 @@
                             <%
                                 ResultSet misdietas = conecta.getDietasRegistradas(idS);
                                 String nomDieta = "";
+                                int idD = 0;
                                 int contadorD = 0;
                                 while(misdietas.next()){
                                     nomDieta = misdietas.getString("nombre");
+                                    idD = misdietas.getInt("idDieta");
                                     %>
-                                    <div class="misDietas"><%=nomDieta%><input type="button" name="btnAgregar" class="btnAgregar" value="Agregar" onclick="agregarDieta();"><input type="button" name="btnQuitar" class="btnQuitar invisible" value="Quitar" onclick="quitarDieta();"></div>
+                                    <div class="misDietas"><%=nomDieta%><input type="hidden" id="idDietaNutriologo" value="<%=idD%>"><input type="button" name="btnAgregar" class="btnAgregar" value="Agregar" onclick="agregarDieta();"><input type="button" name="btnQuitar" class="btnQuitar invisible" value="Quitar" onclick="quitarDieta();"></div>
                                     <%
                                     contadorD++;
                                 }

@@ -19,7 +19,7 @@ public class cConexion {
     public Connection conectar()
     {
         dominio = "http://localhost:8080/StrongFit/";
-        direccionWS = "ws://192.168.1.73:8080/StrongFit/endpoint";
+        direccionWS = "ws://192.168.1.76:8080/StrongFit/endpoint";
         try
         {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -443,10 +443,10 @@ public class cConexion {
     }
     
     //Con esto se crea una nueva dieta
-    public ResultSet spSetDieta(int idD, String nom, int tipo, int kcal, float pro, float car, float lip, int considera) throws SQLException
+    public ResultSet spSetDieta(int idD, String nom, int tipo, int kcal, float pro, float car, float lip, int considera, String idCreador, String nomC) throws SQLException
     {
         this.st = con.createStatement();
-        return this.st.executeQuery("call spSetDieta("+idD+", '"+nom+"', "+tipo+", "+kcal+", "+pro+", "+car+", "+lip+", "+considera+");");
+        return this.st.executeQuery("call spSetDieta("+idD+", '"+nom+"', "+tipo+", "+kcal+", "+pro+", "+car+", "+lip+", "+considera+", '"+idCreador+"', '"+nomC+"');");
     }
     
     //Esto es para crear un dia de la dieta
@@ -571,10 +571,10 @@ public class cConexion {
     public String ruta(int i){
         String ruta = "";
         if(i == 1){
-        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Nueva carpeta\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
+        ruta = "E:\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
         //ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
         }else{
-        ruta = "C:\\Users\\jorge pastrana\\trabajo\\Nueva carpeta\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
+        ruta = "E:\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
         }
         return  ruta;
     }
@@ -996,21 +996,51 @@ public class cConexion {
     }
      
     //spGetAlimentosMes(in id_paciente int, in numMes int, in numYear int)
-     public ResultSet spGetAlimentosMes(int idPaciente, int numMes, int year)throws SQLException{
-        this.st = con.createStatement();
-        return this.st.executeQuery("call spGetAlimentosMes("+idPaciente+", "+numMes+", "+year+");");
+    public ResultSet spGetAlimentosMes(int idPaciente, int numMes, int year)throws SQLException{
+       this.st = con.createStatement();
+       return this.st.executeQuery("call spGetAlimentosMes("+idPaciente+", "+numMes+", "+year+");");
     }
      
      //spGetAlimentosMes(in id_paciente int, in numMes int, in numYear int)
-     public ResultSet spSetAsociasiones(int idPaciente, int idMe, int idD, String idUsrM, int accion)throws SQLException{
-        this.st = con.createStatement();
-        return this.st.executeQuery("call spSetAsociasiones("+idPaciente+", "+idMe+", "+idD+", '"+idUsrM+"', "+accion+");");
+    public ResultSet spSetAsociasiones(int idPaciente, int idMe, int idD, String idUsrM, int accion)throws SQLException{
+       this.st = con.createStatement();
+       return this.st.executeQuery("call spSetAsociasiones("+idPaciente+", "+idMe+", "+idD+", '"+idUsrM+"', "+accion+");");
     }
      
      //spGetAlimentosMes(in id_paciente int, in numMes int, in numYear int)
-     public ResultSet spGetAsociaciones(int idPaciente)throws SQLException{
-        this.st = con.createStatement();
-        return this.st.executeQuery("call spGetAsociaciones("+idPaciente+");");
+    public ResultSet spGetAsociaciones(int idPaciente)throws SQLException{
+       this.st = con.createStatement();
+       return this.st.executeQuery("call spGetAsociaciones("+idPaciente+");");
+    }
+     
+     //nos trae el idPaciente de el usuario paciente
+    public ResultSet spTraerIdPaciente(String idPaciente)throws SQLException{
+       this.st = con.createStatement();
+       return this.st.executeQuery("call spTraerIdPaciente('"+idPaciente+"');");
+    }
+     
+     //nos trae el idPaciente de el usuario paciente
+    public ResultSet spTraerIdMedico(String idPaciente)throws SQLException{
+       this.st = con.createStatement();
+       return this.st.executeQuery("call spTraerIdMedico('"+idPaciente+"');");
+    }
+     
+    //Agrega, actualiza o borra un registro de dietas
+    public ResultSet spSetResgitroDietas(int dieta, int idSemana, int idAnio, int Paciente, int accion)throws SQLException{
+       this.st = con.createStatement();
+       return this.st.executeQuery("call spSetResgitroDietas("+dieta+", "+idSemana+", "+idAnio+", "+Paciente+", "+accion+");");
+    } 
+     
+    //nos trae el idPaciente de el usuario paciente
+    public ResultSet spSetPosicion(int idDieta, int idPaciente, int pos)throws SQLException{
+       this.st = con.createStatement();
+       return this.st.executeQuery("call spSetPosicion('"+idDieta+"', '"+idPaciente+"', '"+pos+"');");
+    }
+     
+     //nos trae el idPaciente de el usuario paciente
+    public ResultSet spGetRegistroDietas(int idPaciente)throws SQLException{
+       this.st = con.createStatement();
+       return this.st.executeQuery("call spGetRegistroDietas("+idPaciente+");");
     }
 }
 

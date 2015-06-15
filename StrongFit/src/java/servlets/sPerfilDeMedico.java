@@ -108,6 +108,7 @@ public class sPerfilDeMedico extends HttpServlet {
                  response.sendRedirect("jsp/nutriologo/usuario.jsp");
              }else{
              verificacion = objconexion.cambiarcorreo(idUserS);
+             System.out.print("verificacion   " + verificacion);
              if(verificacion.equals("libre")){
              objconexion.cambioUsuariomedicoConCorreo(idUserS, nombreS, passS, cedula, escuelaS, carreraS, edad, sexo, estadoS, municipioS, coloniaS, idUsrS, idMedico, nombre2);
              sesion.setAttribute("idUsr",idUsr);
