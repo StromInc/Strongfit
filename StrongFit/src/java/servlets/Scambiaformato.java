@@ -46,48 +46,59 @@ public class Scambiaformato extends HttpServlet {
             }
             boolean varconteo = true;
             boolean formato = false;
+            boolean contador2 = true;
             int contador = 0;
             String datosi = "";
             String datos2 = "";
             String datos3 = "";
             String formato1 = "";
             int poscicion = 0;
-            
+            int c1 = 0;
             
             if(seleccionado){
-                System.out.println("edicion " + edicion);
-            for(int j = 0; j < datos.length();j++){
-                if(contador < edicion.length()){
-                    System.out.println("a");
-                if(datos.charAt(j) == edicion.charAt(contador)){
                 
-                if(contador + 1 == edicion.length()){
-                  poscicion = j - contador; 
+            for(int j = 0; j < datos.length();j++){                           
+                if(datos.charAt(j) == edicion.charAt(contador)){
+                    int nveces = 1;
+                for(int k = j + 1;k < datos.length();k++){
+                    if(contador2){                   
+                        if(datos.charAt(k) != edicion.charAt(contador + nveces)){
+                        contador2 = false;
+                    }                                    
+                    nveces++;
+                   
+                    if(nveces == edicion.length()){
+                    poscicion = k - nveces + 1;
+                    contador2 = false;
                  }
-                contador++;
                 }
                 }
                 }
-            System.out.println("pocicionon " + poscicion);
+                contador2 = true;
+                }
+                
+           
             for(int i = 0; i < datos.length();i++ ){
-                System.out.println(i);
+               
                if(varconteo){
-                System.out.println("corre " + i );   
-                if(i != poscicion){
+                  
+                if(i < poscicion){
                    if(datos.charAt(i) == '<'){
                    formato = true;
                    }
-                   if(formato){
+                   if(formato && c1 == 0){
                        formato1 += datos.charAt(i);
                    }
                    if(datos.charAt(i) == '>'){
                    formato = false;
+                   c1++;
                    }
                  datosi += datos.charAt(i);
-                 System.out.println(datosi);   
+                  
                 }else{
+                    
                    datosi += "</p>";
-                   System.out.println("cancela");
+                   
                    varconteo = false;
                 }
                } 
@@ -150,7 +161,8 @@ public class Scambiaformato extends HttpServlet {
                 primeravez = false;
                 }
                 datos3 += datos.charAt(i);
-            } 
+            }
+            System.out.println(datosi+" l "+nuevotexto+" l "+datos3);
             out.print(datosi+nuevotexto+datos3);
         }else{
                 

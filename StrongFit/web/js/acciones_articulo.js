@@ -129,8 +129,7 @@ function votar(Npost, numero,nvoto) {
             edicion : document.getSelection().toString()
         }, function(responseText){
         console.log($('#txtarticulo').html());    
-        $('#txtarticulo').html(responseText);
-            
+        $('#txtarticulo').html(responseText);   
         console.log(responseText);
         console.log();
     });
