@@ -63,6 +63,10 @@
     padding: .5em 0;
 }
 
+.filtros{
+    padding: .3em 0;
+}
+
 @media screen and (max-width: 767px) {
   .Section-dietas {
     margin-top: 6em;
