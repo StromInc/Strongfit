@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package servlets;
 
-import clases.cAlimento;
-import clases.cAlimentoN;
+import clases.AlimentoAndroid;
+import clases.cCifrado;
 import clases.cConexion;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -14,6 +15,8 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -24,10 +27,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ian
+ * @author Alumno
  */
-@WebServlet(name = "sBusquedaN", urlPatterns = {"/sBusquedaN"})
-public class sBusquedaN extends HttpServlet {
+@WebServlet(name = "sGetDatospaciente", urlPatterns = {"/sGetDatospaciente"})
+public class sGetDatospaciente extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,46 +42,43 @@ public class sBusquedaN extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             cConexion con = new cConexion();
             con.conectar();
+             cCifrado seguro = new cCifrado();
+            seguro.AlgoritmoAES();
+            Map<String, String> datosPaciente = new HashMap<>();
+            String idUser = seguro.sanar(request.getParameter("correo"));
+            String pass = seguro.sanar(request.getParameter("contra"));
             
-            ArrayList<cAlimentoN> lista = new ArrayList<>();
-            
-            String valor = request.getParameter("nombre-alimento");
-            int filtro = Integer.parseInt(request.getParameter("filtro"));
-            
-            ResultSet rs = con.spGetAlimentoNutriologo(valor);
+            String idUS = seguro.encriptar(idUser);
+            String passS = seguro.cifrarSHA1(pass);
+            ResultSet rs = con.spGetDatosPaciente(idUS, passS);
+            String nombre = "";
+            String idPaciente = "";
+            int i =0;
             while(rs.next()){
-//                int id;
-//                String nombre;
-//                float calorias;
-//                float proteinas;
-//                float carbohidratos;
-//                float lipidos;
-//                int consideracion;
-//                float porcion;
-                if(filtro > 0){
-                    if(rs.getInt("idTipoAlimento") == filtro){
-                        lista.add(new cAlimentoN(rs.getInt("idAlimento"), rs.getString("nombre"), rs.getFloat("calorias"), rs.getFloat("proteinas"), rs.getFloat("carbohidratos"), rs.getFloat("lipidos"), rs.getInt("consideracion"), rs.getInt("porcion")));
-                    }
-                }
-                else
-                    lista.add(new cAlimentoN(rs.getInt("idAlimento"), rs.getString("nombre"), rs.getFloat("calorias"), rs.getFloat("proteinas"), rs.getFloat("carbohidratos"), rs.getFloat("lipidos"), rs.getInt("consideracion"), rs.getInt("porcion")));
+                nombre =rs.getString("nombre");
+                idPaciente =String.valueOf(rs.getInt("idPaciente"));
+                i++;
             }
-            buscarRespuesta(response, lista);
+            datosPaciente.put("nombre", seguro.desencriptar(nombre));
+            datosPaciente.put("idPaciente", idPaciente);
+            System.out.println("Nombre: " + seguro.desencriptar(nombre) + " idPaciente: " + idPaciente);
+            con.cerrar();
+            regresarDatos(response, datosPaciente);
         }
     }
     
-    private void buscarRespuesta(HttpServletResponse response, ArrayList<cAlimentoN> lista) throws IOException 
+    private void regresarDatos(HttpServletResponse response, Map<String, String> datosPaciente) throws IOException 
     {
         response.setContentType("aplication/json");
         response.setCharacterEncoding("charset=UTF-8");
-        response.getWriter().write(new Gson().toJson(lista));
-        System.out.print(lista);
+        response.getWriter().write(new Gson().toJson(datosPaciente));
+        System.out.print(datosPaciente);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -96,7 +96,9 @@ public class sBusquedaN extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sBusquedaN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sGetDatospaciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(sGetDatospaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -114,7 +116,9 @@ public class sBusquedaN extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sBusquedaN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sGetDatospaciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(sGetDatospaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

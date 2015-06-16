@@ -19,7 +19,7 @@ public class cConexion {
     public Connection conectar()
     {
         dominio = "http://localhost:8080/StrongFit/";
-        direccionWS = "ws://192.168.1.76:8080/StrongFit/endpoint";
+        direccionWS = "ws://192.168.1.202:8080/StrongFit/endpoint";
         try
         {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -571,7 +571,7 @@ public class cConexion {
     public String ruta(int i){
         String ruta = "";
         if(i == 1){
-        ruta = "E:\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
+        ruta = "C:\\Users\\Alumno\\Documents\\GitHub\\Strongfit\\Strongfit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
         //ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
         }else{
         ruta = "E:\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
@@ -1039,5 +1039,23 @@ public class cConexion {
        this.st = con.createStatement();
        return this.st.executeQuery("call spGetRegistroDietas("+idPaciente+");");
     }
+    public ResultSet spGetTodosAlimentos() throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("select * from alimento;");
+    }
+<<<<<<< HEAD
+
+    public ResultSet spGetDatosPaciente(String correo, String contra) throws SQLException {
+        this.st = con.createStatement();
+        return this.st.executeQuery("select nombre, idPaciente from usuario where idUsuario='" + correo + "' and passUsuario='" + contra + "';");
+    }
+=======
+    
+    public ResultSet spGetTiposAlimento() throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetTiposAlimento();");
+    }
+    
+>>>>>>> origin/master
 }
 

@@ -40,6 +40,8 @@ public class sLoginAndroid extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             cCifrado seguro = new cCifrado();
             seguro.AlgoritmoAES();
+            clases.cConexion objconexion = new clases.cConexion();
+            objconexion.conectar();
             
             String idUser = seguro.sanar(request.getParameter("correo"));
             String pass = seguro.sanar(request.getParameter("contra"));
@@ -48,7 +50,10 @@ public class sLoginAndroid extends HttpServlet {
             String passS = seguro.cifrarSHA1(pass);
             
             System.out.println("correo: " + idUS + " " + passS);
-            out.write("Si entro");
+            String verificacion = objconexion.busquedadeusuarios(idUS, passS);
+            System.out.println("El resultado de la verificacion: " + verificacion);
+            objconexion.cerrar();
+            out.write(verificacion);
         }
     }
 

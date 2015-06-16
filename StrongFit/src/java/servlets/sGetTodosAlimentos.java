@@ -5,8 +5,8 @@
  */
 package servlets;
 
+import clases.AlimentoAndroid;
 import clases.cAlimento;
-import clases.cAlimentoN;
 import clases.cConexion;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -24,10 +24,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ian
+ * @author USER
  */
-@WebServlet(name = "sBusquedaN", urlPatterns = {"/sBusquedaN"})
-public class sBusquedaN extends HttpServlet {
+@WebServlet(name = "sGetTodosAlimentos", urlPatterns = {"/sGetTodosAlimentos"})
+public class sGetTodosAlimentos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,40 +45,34 @@ public class sBusquedaN extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             cConexion con = new cConexion();
             con.conectar();
-            
-            ArrayList<cAlimentoN> lista = new ArrayList<>();
-            
-            String valor = request.getParameter("nombre-alimento");
-            int filtro = Integer.parseInt(request.getParameter("filtro"));
-            
-            ResultSet rs = con.spGetAlimentoNutriologo(valor);
+            ArrayList<AlimentoAndroid> alimentos = new ArrayList<AlimentoAndroid>();
+            ResultSet rs = con.spGetTodosAlimentos();
+            int i =0;
             while(rs.next()){
-//                int id;
-//                String nombre;
-//                float calorias;
-//                float proteinas;
-//                float carbohidratos;
-//                float lipidos;
-//                int consideracion;
-//                float porcion;
-                if(filtro > 0){
-                    if(rs.getInt("idTipoAlimento") == filtro){
-                        lista.add(new cAlimentoN(rs.getInt("idAlimento"), rs.getString("nombre"), rs.getFloat("calorias"), rs.getFloat("proteinas"), rs.getFloat("carbohidratos"), rs.getFloat("lipidos"), rs.getInt("consideracion"), rs.getInt("porcion")));
-                    }
-                }
-                else
-                    lista.add(new cAlimentoN(rs.getInt("idAlimento"), rs.getString("nombre"), rs.getFloat("calorias"), rs.getFloat("proteinas"), rs.getFloat("carbohidratos"), rs.getFloat("lipidos"), rs.getInt("consideracion"), rs.getInt("porcion")));
+                AlimentoAndroid miAlimento = new AlimentoAndroid();        
+                miAlimento.setAlimentoID(rs.getInt("idAlimento"));
+                miAlimento.setName(rs.getString("nombre"));
+                miAlimento.setCalories(rs.getFloat("calorias"));
+                miAlimento.setLipidos(rs.getFloat("lipidos"));
+                miAlimento.setCarbohidratos(rs.getFloat("carbohidratos"));
+                miAlimento.setProteinas(rs.getFloat("proteinas"));
+                miAlimento.setAlimentoTipo(rs.getInt("idTipoAlimento")); 
+                alimentos.add(miAlimento);
+                i++;
             }
-            buscarRespuesta(response, lista);
+            System.out.println("Numero de alimentos: " + i);
+            con.cerrar();
+            regresarAlimentos(response, alimentos);
         }
     }
     
-    private void buscarRespuesta(HttpServletResponse response, ArrayList<cAlimentoN> lista) throws IOException 
+    //Esto convierte el array en un Json y lo regresa al html
+    private void regresarAlimentos(HttpServletResponse response, ArrayList<AlimentoAndroid> alimentos) throws IOException 
     {
         response.setContentType("aplication/json");
         response.setCharacterEncoding("charset=UTF-8");
-        response.getWriter().write(new Gson().toJson(lista));
-        System.out.print(lista);
+        response.getWriter().write(new Gson().toJson(alimentos));
+        System.out.print(alimentos);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -96,7 +90,7 @@ public class sBusquedaN extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sBusquedaN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sGetTodosAlimentos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -114,7 +108,7 @@ public class sBusquedaN extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sBusquedaN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sGetTodosAlimentos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

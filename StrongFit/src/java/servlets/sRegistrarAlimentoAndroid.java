@@ -5,15 +5,10 @@
  */
 package servlets;
 
-import clases.cAlimento;
-import clases.cAlimentoN;
 import clases.cConexion;
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -24,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ian
+ * @author USER
  */
-@WebServlet(name = "sBusquedaN", urlPatterns = {"/sBusquedaN"})
-public class sBusquedaN extends HttpServlet {
+@WebServlet(name = "sRegistrarAlimentoAndroid", urlPatterns = {"/sRegistrarAlimentoAndroid"})
+public class sRegistrarAlimentoAndroid extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,39 +41,19 @@ public class sBusquedaN extends HttpServlet {
             cConexion con = new cConexion();
             con.conectar();
             
-            ArrayList<cAlimentoN> lista = new ArrayList<>();
+            int idPaciente = Integer.parseInt(request.getParameter("idPaciente"));
+            int idAlimento = Integer.parseInt(request.getParameter("idAlimento"));
+            float gramos = Float.parseFloat(request.getParameter("gramos"));
+            int diaMes = Integer.parseInt(request.getParameter("day"));
+            int mes = Integer.parseInt(request.getParameter("month")); //Es un array de meses
+            int year = Integer.parseInt(request.getParameter("year"));
+            int tipo = Integer.parseInt(request.getParameter("tipoComida"));          
             
-            String valor = request.getParameter("nombre-alimento");
-            int filtro = Integer.parseInt(request.getParameter("filtro"));
-            
-            ResultSet rs = con.spGetAlimentoNutriologo(valor);
-            while(rs.next()){
-//                int id;
-//                String nombre;
-//                float calorias;
-//                float proteinas;
-//                float carbohidratos;
-//                float lipidos;
-//                int consideracion;
-//                float porcion;
-                if(filtro > 0){
-                    if(rs.getInt("idTipoAlimento") == filtro){
-                        lista.add(new cAlimentoN(rs.getInt("idAlimento"), rs.getString("nombre"), rs.getFloat("calorias"), rs.getFloat("proteinas"), rs.getFloat("carbohidratos"), rs.getFloat("lipidos"), rs.getInt("consideracion"), rs.getInt("porcion")));
-                    }
-                }
-                else
-                    lista.add(new cAlimentoN(rs.getInt("idAlimento"), rs.getString("nombre"), rs.getFloat("calorias"), rs.getFloat("proteinas"), rs.getFloat("carbohidratos"), rs.getFloat("lipidos"), rs.getInt("consideracion"), rs.getInt("porcion")));
-            }
-            buscarRespuesta(response, lista);
+            int idAlta = con.spSetAlimentoFecha(idAlimento, idPaciente, tipo, diaMes, mes, year, gramos);
+            System.out.println("El id del alta: " + idAlta);
+            con.cerrar();
+            out.write("ok");
         }
-    }
-    
-    private void buscarRespuesta(HttpServletResponse response, ArrayList<cAlimentoN> lista) throws IOException 
-    {
-        response.setContentType("aplication/json");
-        response.setCharacterEncoding("charset=UTF-8");
-        response.getWriter().write(new Gson().toJson(lista));
-        System.out.print(lista);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -96,7 +71,7 @@ public class sBusquedaN extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sBusquedaN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sRegistrarAlimentoAndroid.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -114,7 +89,7 @@ public class sBusquedaN extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sBusquedaN.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sRegistrarAlimentoAndroid.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
