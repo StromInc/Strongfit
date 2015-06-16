@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets;
 
-import clases.cCifrado;
+import clases.AlimentoAndroid;
+import clases.cAlimento;
+import clases.cConexion;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -19,10 +24,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Alumno
+ * @author USER
  */
-@WebServlet(name = "sLoginAndroid", urlPatterns = {"/sLoginAndroid"})
-public class sLoginAndroid extends HttpServlet {
+@WebServlet(name = "sGetTodosAlimentos", urlPatterns = {"/sGetTodosAlimentos"})
+public class sGetTodosAlimentos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,27 +39,43 @@ public class sLoginAndroid extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            cCifrado seguro = new cCifrado();
-            seguro.AlgoritmoAES();
-            clases.cConexion objconexion = new clases.cConexion();
-            objconexion.conectar();
-            
-            String idUser = seguro.sanar(request.getParameter("correo"));
-            String pass = seguro.sanar(request.getParameter("contra"));
-            
-            String idUS = seguro.encriptar(idUser);
-            String passS = seguro.cifrarSHA1(pass);
-            
-            System.out.println("correo: " + idUS + " " + passS);
-            String verificacion = objconexion.busquedadeusuarios(idUS, passS);
-            System.out.println("El resultado de la verificacion: " + verificacion);
-            objconexion.cerrar();
-            out.write(verificacion);
+            cConexion con = new cConexion();
+            con.conectar();
+            ArrayList<AlimentoAndroid> alimentos = new ArrayList<AlimentoAndroid>();
+            ResultSet rs = con.spGetTodosAlimentos();
+            int i =0;
+            while(rs.next()){
+                if(i>5){
+                    break;
+                }
+                AlimentoAndroid miAlimento = new AlimentoAndroid();        
+                miAlimento.setAlimentoID(rs.getInt("idAlimento"));
+                miAlimento.setName(rs.getString("nombre"));
+                miAlimento.setCalories(rs.getFloat("calorias"));
+                miAlimento.setLipidos(rs.getFloat("lipidos"));
+                miAlimento.setCarbohidratos(rs.getFloat("carbohidratos"));
+                miAlimento.setProteinas(rs.getFloat("proteinas"));
+                miAlimento.setAlimentoTipo(rs.getInt("idTipoAlimento")); 
+                alimentos.add(miAlimento);
+                i++;
+            }
+            System.out.println("Numero de alimentos: " + i);
+            con.cerrar();
+            regresarAlimentos(response, alimentos);
         }
+    }
+    
+    //Esto convierte el array en un Json y lo regresa al html
+    private void regresarAlimentos(HttpServletResponse response, ArrayList<AlimentoAndroid> alimentos) throws IOException 
+    {
+        response.setContentType("aplication/json");
+        response.setCharacterEncoding("charset=UTF-8");
+        response.getWriter().write(new Gson().toJson(alimentos));
+        System.out.print(alimentos);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,8 +92,8 @@ public class sLoginAndroid extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(sLoginAndroid.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(sGetTodosAlimentos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -89,8 +110,8 @@ public class sLoginAndroid extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(sLoginAndroid.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(sGetTodosAlimentos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

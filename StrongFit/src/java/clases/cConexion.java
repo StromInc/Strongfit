@@ -1039,5 +1039,9 @@ public class cConexion {
        this.st = con.createStatement();
        return this.st.executeQuery("call spGetRegistroDietas("+idPaciente+");");
     }
+    public ResultSet spGetTodosAlimentos() throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("select * from alimento;");
+    }
 }
 
