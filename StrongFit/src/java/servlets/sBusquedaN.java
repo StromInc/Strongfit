@@ -49,6 +49,7 @@ public class sBusquedaN extends HttpServlet {
             ArrayList<cAlimentoN> lista = new ArrayList<>();
             
             String valor = request.getParameter("nombre-alimento");
+            int filtro = Integer.parseInt(request.getParameter("filtro"));
             
             ResultSet rs = con.spGetAlimentoNutriologo(valor);
             while(rs.next()){
@@ -60,7 +61,13 @@ public class sBusquedaN extends HttpServlet {
 //                float lipidos;
 //                int consideracion;
 //                float porcion;
-                lista.add(new cAlimentoN(rs.getInt("idAlimento"), rs.getString("nombre"), rs.getFloat("calorias"), rs.getFloat("proteinas"), rs.getFloat("carbohidratos"), rs.getFloat("lipidos"), rs.getInt("consideracion"), rs.getInt("porcion")));
+                if(filtro > 0){
+                    if(rs.getInt("idTipoAlimento") == filtro){
+                        lista.add(new cAlimentoN(rs.getInt("idAlimento"), rs.getString("nombre"), rs.getFloat("calorias"), rs.getFloat("proteinas"), rs.getFloat("carbohidratos"), rs.getFloat("lipidos"), rs.getInt("consideracion"), rs.getInt("porcion")));
+                    }
+                }
+                else
+                    lista.add(new cAlimentoN(rs.getInt("idAlimento"), rs.getString("nombre"), rs.getFloat("calorias"), rs.getFloat("proteinas"), rs.getFloat("carbohidratos"), rs.getFloat("lipidos"), rs.getInt("consideracion"), rs.getInt("porcion")));
             }
             buscarRespuesta(response, lista);
         }

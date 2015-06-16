@@ -1,6 +1,7 @@
 var idAlimentoD = 0;
 var contadorD = 0;
 var dia = 0;
+var filtro = 0;
 
 var idRandom = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 var idReforzado = 0;
@@ -208,12 +209,16 @@ function buscarAlimento(){
         $('#buscar').autocomplete({
             source: function(request, response){
                 var alimento = request.term;
+                filtro = $('#filtro').val();
                 if(alimento.length  > 0){
                     $.ajax({
                         url: 'http://localhost:8080/StrongFit/sBusquedaN',
                         type: 'get',
                         dataType: 'json',
-                        data: {'nombre-alimento': alimento},
+                        data: {
+                            'nombre-alimento': alimento,
+                            filtro: filtro
+                        },
                         success: function(datos){
                             $('#idcontenedor-resultados').html('<div class = "resultado invisible" id = "resultadoClon" draggable = "true" ondragstart="drag(event, id)"></div>');
                             var nombre = [];
