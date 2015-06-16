@@ -571,7 +571,7 @@ public class cConexion {
     public String ruta(int i){
         String ruta = "";
         if(i == 1){
-        ruta = "E:\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
+        ruta = "C:\\Users\\Alumno\\Documents\\GitHub\\Strongfit\\Strongfit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
         //ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
         }else{
         ruta = "E:\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
@@ -1042,6 +1042,11 @@ public class cConexion {
     public ResultSet spGetTodosAlimentos() throws SQLException{
         this.st = con.createStatement();
         return this.st.executeQuery("select * from alimento;");
+    }
+
+    public ResultSet spGetDatosPaciente(String correo, String contra) throws SQLException {
+        this.st = con.createStatement();
+        return this.st.executeQuery("select nombre, idPaciente from usuario where idUsuario='" + correo + "' and passUsuario='" + contra + "';");
     }
 }
 
