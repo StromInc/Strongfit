@@ -49,7 +49,7 @@ public class sGetTodosAlimentos extends HttpServlet {
             ResultSet rs = con.spGetTodosAlimentos();
             int i =0;
             while(rs.next()){
-                if(i>5){
+                if(i>15){
                     break;
                 }
                 AlimentoAndroid miAlimento = new AlimentoAndroid();        
