@@ -2,6 +2,8 @@ var circulo;
 var $tituloFecha;
 var fechaCambia;
 var texto = "Hoy";
+var diaSem = 0;
+var diaAnio = 0;
 
 $(function(){
     //Se ejecuta cuando se busca un alimento
@@ -401,4 +403,24 @@ function reducir(e){
         input = input - 10;
     }
     $(this).siblings('input').val(input);
+}
+
+function setIds(dSem, dA){
+    diaSem = dSem;
+    diaAnio = dA;
+}
+
+function cargarComidaDieta(){
+    $.ajax({
+        url: 'http://localhost:8080/StrongFit/sGetAlimentosComida',
+        type: 'post',
+        dataType: 'post',
+        data:{
+            diaSemana: diaSem,
+            diaAnio: dAnio
+        },
+        success: function(res){
+            
+        }
+    });
 }

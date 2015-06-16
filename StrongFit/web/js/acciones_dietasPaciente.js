@@ -27,7 +27,15 @@ function drop(ev) {
         
         divF.appendChild(document.getElementById(dat));
         
-        var primero = $('#divForm .Figure-dietas').first().children('.idDOculto').first().val();
+//        var primero = $('#divForm .Figure-dietas').first().children('.idDOculto').first().val();
+        var lugares = "";
+        $('#divForm .Figure-dietas').each(function(index){
+            lugares += $(this).children('.idDOculto').first().val();
+            if($('#divForm .Figure-dietas').length !== index+1){
+                lugares += ',';
+            }
+        });
+
         //funcion para enviar la dieta de una por una para su registro
         $.ajax({
             
@@ -37,7 +45,7 @@ function drop(ev) {
             data: {
                 idDieta: idD,
                 quitar: 'no',
-                primero: primero
+                lugares: lugares
             },
             success: function(datos){
                 console.log("Exito");
@@ -80,6 +88,9 @@ function dropDiv(ev) {
         
         
         var idFineal = document.getElementById(idR);
+        if(idFineal === undefined || idFineal === null){
+            idFineal = document.getElementById($('#'+data+' .acomodarEn').first().val());
+        }
         
         form.appendChild(document.getElementById(data));
         $('#inputQuitar2').val("si");
@@ -87,8 +98,16 @@ function dropDiv(ev) {
         idFineal.appendChild(document.getElementById(data));
         
         var idD = $('#'+data).children('.idDOculto').first().val();
-        var primero = $('#divForm .Figure-dietas').first().children('.idDOculto').first().val();
-        debugger;
+//        var primero = $('#divForm .Figure-dietas').first().children('.idDOculto').first().val();
+        
+        var lugares = "";
+        $('#divForm .Figure-dietas').each(function(index){
+            lugares += $(this).children('.idDOculto').first().val();
+            if($('#divForm .Figure-dietas').length !== index+1){
+                lugares += ',';
+            }
+        });
+
         $.ajax({
             url: 'http://localhost:8080/StrongFit/sDietasUsr',
             type: 'POST',
@@ -96,7 +115,7 @@ function dropDiv(ev) {
             data: {
                 idDieta: idD,
                 quitar: 'si',
-                primero: primero
+                lugares: lugares
             }
             
         })

@@ -71,11 +71,19 @@ public class sDietasUsr extends HttpServlet {
             conecta.spSetResgitroDietas(idDieta, diaSem, diaAnio, idPaciente, accion);
             
             try{
-                int primero = Integer.parseInt(request.getParameter("primero"));
-                conecta.spSetPosicion(idDieta, idPaciente, 1);
+                String primero[] = request.getParameter("lugares").split(",");
+                int lugares[] = new int[primero.length];
+                int pos = 0;
+                for(int i = 0; i < primero.length; ++i){
+                    lugares[i] = Integer.parseInt(primero[i]);
+                    pos = i + 1;
+                    conecta.spSetPosicion(lugares[i], idPaciente, pos);
+                }              
             }
             catch(Exception e){
-                
+                System.out.println("111111111111111111111111111111111111111111111111111111111");
+                System.out.println("UN ERRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOR");
+                System.out.println("111111111111111111111111111111111111111111111111111111111");
             }
         
             Map<String, Object> map = new HashMap<>();
