@@ -5,8 +5,11 @@
         <group>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sGetAlimentosComida.java</file>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/jsp/paciente/inicio.jsp</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sAgregarAlimento.java</file>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/src/java/servlets/sDietasUsr.java</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/js/acciones_dietasPaciente.js</file>
             <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/js/buscar-alimento.js</file>
+            <file>file:/home/ian/Documentos/cecyt9/Strom/Strongfit/StrongFit/web/Estilos/estilo_inicio.css</file>
         </group>
     </open-files>
 </project-private>
