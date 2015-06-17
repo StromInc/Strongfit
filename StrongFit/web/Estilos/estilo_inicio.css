@@ -13,7 +13,8 @@ a {
   text-align: center;
   color: #000;
 }
-.Alimentos {
+.Alimentos,
+.AlimentosDieta{
   list-style: none;
   padding: 0;
   margin: 0;
@@ -26,7 +27,8 @@ a {
   width: 70px;
   text-align: center;
 }
-.Alimentos-agregar {
+.Alimentos-agregar,
+.Alimentos-agregar2{
   position: absolute;
   right: 10px;
   background-color: #fff;
@@ -38,10 +40,18 @@ a {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   border: 1px solid #0070c8;
 }
-.Alimentos-agregar:hover {
+
+.Alimentos-agregar2{
+    top: 4px;
+}
+
+.Alimentos-agregar:hover,
+.Alimentos-agregar2:hover{
   background: #f2f2f2;
 }
-.Alimentos-item {
+.Alimentos-item,
+.Alimentos-item2
+{
   border-bottom: 1px solid #d2d4d5;
   padding: 4px 0.5em;
   position: relative;
@@ -161,6 +171,11 @@ a {
   margin: 0;
   font-weight: normal;
 }
+
+.buscarh3{
+    position: relative;
+}
+
 .Buscador-btn {
   background-color: #0070c8;
   color: #fff;
@@ -185,7 +200,7 @@ a {
 }
 .Buscador-list {
   overflow-y: auto;
-  max-height: 630px;
+  max-height: 600px;
 }
 .Buscador-list::-webkit-scrollbar {
   width: 2px;

@@ -5,14 +5,16 @@
  */
 package servlets;
 
-import clases.cCifrado;
+import clases.cAlimento;
 import clases.cConexion;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -28,8 +30,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ian
  */
-@WebServlet(name = "sDietasUsr", urlPatterns = {"/sDietasUsr"})
-public class sDietasUsr extends HttpServlet {
+@WebServlet(name = "sGetAlimentosComida", urlPatterns = {"/sGetAlimentosComida"})
+public class sGetAlimentosComida extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,59 +41,38 @@ public class sDietasUsr extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, Exception {
+            throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            HttpSession sesion = request.getSession(false);
-            cCifrado seguro = new cCifrado();
-            seguro.AlgoritmoAES();
-            
-            String idUser = seguro.encriptar((String)sesion.getAttribute("idUsr"));
-            int idPaciente = (Integer)sesion.getAttribute("idPaciente");
-            int idDieta = Integer.parseInt(request.getParameter("idDieta"));
-            int accion = 1;
-            
-            String quit = request.getParameter("quitar");
-            
-            if(!quit.equals("no")){accion = 0;}
+            /* TODO output your page here. You may use following sample code. */
+            HttpSession sesion = request.getSession();
+            ArrayList<cAlimento> lista = new ArrayList<>();
+            Map<String, Object> mapa = new HashMap();
             
             cConexion conecta = new cConexion();
             conecta.conectar();
             
-            Calendar calendario = new GregorianCalendar();
-            int diaSem = calendario.get(Calendar.DAY_OF_WEEK);
-            int diaAnio = calendario.get(Calendar.DAY_OF_YEAR);
+            int idPaciente = (Integer)sesion.getAttribute("idPaciente");
             
-            conecta.actualizarDieta(idUser, idDieta, quit);
-            conecta.spSetResgitroDietas(idDieta, diaSem, diaAnio, idPaciente, accion);
+            int diaSemana = Integer.parseInt(request.getParameter("diaSemana"));
+            int diaAnio = Integer.parseInt(request.getParameter("diaAnio"));
+            int comida = Integer.parseInt(request.getParameter("comidaId"));
             
-            try{
-                String primero[] = request.getParameter("lugares").split(",");
-                int lugares[] = new int[primero.length];
-                int pos = 0;
-                for(int i = 0; i < primero.length; ++i){
-                    lugares[i] = Integer.parseInt(primero[i]);
-                    pos = i + 1;
-                    conecta.spSetPosicion(lugares[i], idPaciente, pos);
-                }              
+            float cal = 0;
+            
+            conecta.spAjustarPos(idPaciente, diaAnio);
+            
+            DecimalFormat formateador = new DecimalFormat("####.##"); 
+            ResultSet rs = conecta.spGetComidasDieta(idPaciente, diaSemana, comida);
+            while(rs.next()){
+                cal = rs.getFloat("calorias") *  rs.getFloat("cantidad") / 100;
+                cal = formateador.parse(formateador.format(cal)).floatValue();
+                lista.add(new cAlimento(rs.getInt("idAlimento"), rs.getString("nombre"), cal, rs.getFloat("cantidad")));
             }
-            catch(Exception e){
-                System.out.println("111111111111111111111111111111111111111111111111111111111");
-                System.out.println("UN ERRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOR");
-                System.out.println("111111111111111111111111111111111111111111111111111111111");
-            }
-        
-            Map<String, Object> map = new HashMap<>();
-//            String dieta = Integer.toString(idDieta);
-            map.put("idDieta", request.getParameter("idDieta"));
-            
-            write(response, map);
-            conecta.cerrar();
+            mapa.put("alimentos", lista);
+            write(response, mapa);
         }
     }
 
@@ -110,9 +91,9 @@ public class sDietasUsr extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sDietasUsr.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(sDietasUsr.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sGetAlimentosComida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(sGetAlimentosComida.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -130,9 +111,9 @@ public class sDietasUsr extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(sDietasUsr.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(sDietasUsr.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(sGetAlimentosComida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(sGetAlimentosComida.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -146,12 +127,10 @@ public class sDietasUsr extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    //Escribe un archivo json como respuesta a la peticion ajax
     private void write(HttpServletResponse response, Map<String, Object> map) throws IOException 
     {
         response.setContentType("aplication/json");
         response.setCharacterEncoding("charset=UTF-8");
         response.getWriter().write(new Gson().toJson(map));
     }
-
 }

@@ -1047,10 +1047,19 @@ public class cConexion {
     public ResultSet spGetDatosPaciente(String correo, String contra) throws SQLException {
         this.st = con.createStatement();
         return this.st.executeQuery("select nombre, idPaciente from usuario where idUsuario='" + correo + "' and passUsuario='" + contra + "';");
-    } 
+    }
     public ResultSet spGetTiposAlimento() throws SQLException{
         this.st = con.createStatement();
         return this.st.executeQuery("call spGetTiposAlimento();");
+    }
+    //spAjustarPos(in idPac int, in diaA int)
+    public ResultSet spAjustarPos(int idPaciente, int diaAnio) throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spAjustarPos("+idPaciente+","+diaAnio+");");
+    }
+    public ResultSet spGetComidasDieta(int idPaciente, int diaSemana, int comida) throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetComidasDieta("+idPaciente+", "+diaSemana+", "+comida+");");
     }
 }
 
