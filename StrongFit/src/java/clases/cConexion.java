@@ -1043,19 +1043,14 @@ public class cConexion {
         this.st = con.createStatement();
         return this.st.executeQuery("select * from alimento;");
     }
-<<<<<<< HEAD
 
     public ResultSet spGetDatosPaciente(String correo, String contra) throws SQLException {
         this.st = con.createStatement();
         return this.st.executeQuery("select nombre, idPaciente from usuario where idUsuario='" + correo + "' and passUsuario='" + contra + "';");
-    }
-=======
-    
+    } 
     public ResultSet spGetTiposAlimento() throws SQLException{
         this.st = con.createStatement();
         return this.st.executeQuery("call spGetTiposAlimento();");
     }
-    
->>>>>>> origin/master
 }
 
