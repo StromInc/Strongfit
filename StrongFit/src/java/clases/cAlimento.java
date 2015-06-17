@@ -22,6 +22,14 @@ public class cAlimento {
         this.nombre = nom;
         this.calorias = String.valueOf(calo);
     }
+    
+    public cAlimento(int ids, String nom, float calo, float gramos){
+        this.id = ids;
+        this.nombre = nom;
+        this.calorias = String.valueOf(calo);
+        this.gramos = gramos;
+    }
+    
     public cAlimento(){
         
     }

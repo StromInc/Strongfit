@@ -5,11 +5,20 @@
  */
 package servlets;
 
+import clases.cAlimento;
 import clases.cConexion;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,19 +43,36 @@ public class sGetAlimentosComida extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession sesion = request.getSession();
+            ArrayList<cAlimento> lista = new ArrayList<>();
+            Map<String, Object> mapa = new HashMap();
             
             cConexion conecta = new cConexion();
             conecta.conectar();
             
+            int idPaciente = (Integer)sesion.getAttribute("idPaciente");
+            
             int diaSemana = Integer.parseInt(request.getParameter("diaSemana"));
             int diaAnio = Integer.parseInt(request.getParameter("diaAnio"));
+            int comida = Integer.parseInt(request.getParameter("comidaId"));
             
-             
+            float cal = 0;
+            
+            conecta.spAjustarPos(idPaciente, diaAnio);
+            
+            DecimalFormat formateador = new DecimalFormat("####.##"); 
+            ResultSet rs = conecta.spGetComidasDieta(idPaciente, diaSemana, comida);
+            while(rs.next()){
+                cal = rs.getFloat("calorias") *  rs.getFloat("cantidad") / 100;
+                cal = formateador.parse(formateador.format(cal)).floatValue();
+                lista.add(new cAlimento(rs.getInt("idAlimento"), rs.getString("nombre"), cal, rs.getFloat("cantidad")));
+            }
+            mapa.put("alimentos", lista);
+            write(response, mapa);
         }
     }
 
@@ -62,7 +88,13 @@ public class sGetAlimentosComida extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(sGetAlimentosComida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(sGetAlimentosComida.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -76,7 +108,13 @@ public class sGetAlimentosComida extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(sGetAlimentosComida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(sGetAlimentosComida.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

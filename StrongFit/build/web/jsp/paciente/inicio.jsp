@@ -23,6 +23,7 @@
             
             int dia = c2.get(Calendar.DAY_OF_WEEK);
             int diaA = c2.get(Calendar.DAY_OF_YEAR);
+            %><scritpt></scritpt><%
             int caloriasdia = 0;
             int diaMes = c2.get(Calendar.DATE); //Agregue esta variable
             int numMes = c2.get(Calendar.MONTH); //Esto se maneja como arreglos
@@ -286,6 +287,23 @@
                     <span class="icon-search"></span>
                 </button>
             </div>
+            <div class="dietaDia">
+                <h3 class="Buscador-aviso buscarh3">Alimentos sugeridos por tu dieta<button class="Alimentos-agregar2" onclick="agregarDieta();">+</button></h3>
+                <div>
+                    <ul class="AlimentosDieta">
+                        <li class="Alimentos-item2 ocultar">
+                            <p class="Alimentos-name">Taco</p>            
+                            <span class="Alimentos-subname">Contiene: 5 kcal/100g</span>
+                            <div class="Alimentos-subname">
+                                Cantidad:
+                                <span class="icon3-circle-up Alimentos-arriba"></span>
+                                <input class="Alimentos-cantidad" id="alimentoCantidad" type="number" value="100"> g
+                                <span class="icon3-circle-down Alimentos-abajo"></span>     
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="Buscador-contenedor">
                 <h3 class="Buscador-aviso" id="Buscador-aviso">Alimentos por defecto</h3>
                 <div class="Buscador-list">
@@ -309,5 +327,9 @@
     <div class="FloatButton">
         <a href="#">+</a>
     </div>
+        <script>
+            setIds(<%=dia%>, <%=diaA%>);
+            cargarComidaDieta();
+        </script>
     </body>
 </html>

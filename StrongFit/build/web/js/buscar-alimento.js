@@ -4,6 +4,7 @@ var fechaCambia;
 var texto = "Hoy";
 var diaSem = 0;
 var diaAnio = 0;
+var comidaId = 1;
 
 $(function(){
     //Se ejecuta cuando se busca un alimento
@@ -39,6 +40,24 @@ $(function(){
              $comidas.removeClass('Seleccionado');
              $(this).addClass('Seleccionado');
              $menuComidas.fadeOut(200);
+             switch($(this).text()){
+                 case 'Desayuno':
+                     comidaId = 1;
+                     break;
+                 case 'Colacion 1':
+                     comidaId = 2;
+                     break;
+                 case 'Comida':
+                     comidaId = 3;
+                     break;
+                 case 'Colacion 2':
+                     comidaId = 4;
+                     break;
+                 case 'Cena':
+                     comidaId = 5;
+                     break;
+             }
+             cargarComidaDieta();
          });
         $menuComidas.fadeToggle(200);
     }
@@ -50,6 +69,8 @@ $(function(){
         var $contenedor = $('.Alimentos');
         var $buscadorAviso = $('#Buscador-aviso');
         if(nombre.length > 0){
+            $('.AlimentosDieta').first().slideUp();
+            $('.AlimentosDieta').first().hide();
             $contenedor.empty();
             for(var i in nombre){
                 var $clon = $alimentoItem.clone().removeClass("ocultar");
@@ -205,6 +226,15 @@ function cambiarAtras(e){
     $tituloFecha.text(texto);
     setValores(); //Esto actualiza la grafica 
     getAlimentosFecha();
+    diaSem -= 1;
+    diaAnio -= 1;
+    if(diaSem === 0){
+        diaSem = 7;
+    }
+    if(diaAnio === 0){
+        diaAnio = 365;
+    }
+    cargarComidaDieta();
 }
 
 function cambiarAdelante(e){
@@ -214,6 +244,15 @@ function cambiarAdelante(e){
     $tituloFecha.text(texto);
     setValores(); //Esto actualiza la grafica
     getAlimentosFecha();
+    diaSem += 1;
+    diaAnio += 1;
+    if(diaSem === 8){
+        diaSem = 1;
+    }
+    if(diaAnio === 366){
+        diaAnio = 1;
+    }
+    cargarComidaDieta();
 }
 
 function setValores(){
@@ -299,7 +338,7 @@ function agregar(e){
         calTiempoTexto = parseFloat($calTiempo.text().split(" ")[2]);
     }else if(elemento === "Colacion 1"){
         tipo = 2;
-        otroTitulo = "Colacion 1";
+        otroTitulo = "Colación 1";
         $calTiempo = $('#tituloColacion1');
         $listaTipo = $('#comida-colacion1');
         calTiempoTexto = parseFloat($calTiempo.text().split(" ")[3]);
@@ -311,7 +350,7 @@ function agregar(e){
         calTiempoTexto = parseFloat($calTiempo.text().split(" ")[2]);
     }else if(elemento === "Colacion 2"){
         tipo = 4;
-        otroTitulo = "Colacion 2";
+        otroTitulo = "Colación 2";
         $calTiempo = $('#tituloColacion2');
         $listaTipo = $('#comida-colacion2');
         calTiempoTexto = parseFloat($calTiempo.text().split(" ")[3]);
@@ -322,6 +361,7 @@ function agregar(e){
         $listaTipo = $('#comida-cena');
         calTiempoTexto = parseFloat($calTiempo.text().split(" ")[2]);
     }
+    comidaId = tipo;
     
     calTiempoTexto = ((calTiempoTexto*100) + (calorias*100))/100;
     calTiempoTexto = calTiempoTexto.toFixed(2);
@@ -414,13 +454,134 @@ function cargarComidaDieta(){
     $.ajax({
         url: 'http://localhost:8080/StrongFit/sGetAlimentosComida',
         type: 'post',
-        dataType: 'post',
+        dataType: 'json',
         data:{
             diaSemana: diaSem,
-            diaAnio: dAnio
+            diaAnio: diaAnio,
+            comidaId: comidaId
         },
         success: function(res){
-            
+            console.log(res);
+
+            var $alimentoItem = $('.Alimentos-item2').first(); 
+            var $contenedor = $('.AlimentosDieta');
+            $contenedor.html('<li class="Alimentos-item2 ocultar"><p class="Alimentos-name">Taco</p><span class="Alimentos-subname">Contiene: 5 kcal/100g</span><div class="Alimentos-subname">Cantidad:<span class="icon3-circle-up Alimentos-arriba"></span><input class="Alimentos-cantidad" id="alimentoCantidad" type="number" value="100"> g<span class="icon3-circle-down Alimentos-abajo"></span>     </div>');
+            for(var i = 0; i < res.alimentos.length; ++i){
+                var $clon = $alimentoItem.clone().removeClass("ocultar");
+                $clon.html('<p class="Alimentos-name">'+res.alimentos[i].nombre+'</p>\n\
+                            <span class="Alimentos-subname">Contiene: '+res.alimentos[i].calorias+' kcal/'+res.alimentos[i].gramos+'g</span>\n\
+                            <div class="Alimentos-subname">\n\
+                                Cantidad:\n\
+                                <span class="icon3-circle-up Alimentos-arriba"></span>\n\
+                                <input class="Alimentos-cantidad" type="text" disabled id="alimentoCantidad" value="'+res.alimentos[i].gramos+'"> g\n\
+                                <span class="icon3-circle-down Alimentos-abajo"></span>\n\
+                            </div>\n\
+                            <span class="dietaSuegiraSpan"><input type="hidden" class="idDietaSugerida" value="'+res.alimentos[i].id+'"><input type="hidden" class="nomDietaSugerida" value="'+res.alimentos[i].nombre+'"><input type="hidden" class="calDietaSugerida" value="'+res.alimentos[i].calorias+'"><input type="hidden" class="canDietaSugerida" value="'+res.alimentos[i].gramos+'"></span>');
+                $clon.hide();
+                $contenedor.prepend($clon);
+                $clon.slideDown();
+            }
         }
     });
 }
+
+
+function agregarDieta(){
+    
+    var $listaTipo; //Sabemos a que lista agregar el alimento en el html
+    var idAlimento; //El valor de hidden
+//    var textCalorias =  $(this).siblings('span').text(); //Calorias del alimento seleccionado
+    var calorias;
+    var textNombre; //Nombre del alimento seleccionado
+    var misGramos;
+    
+//    calorias = (misGramos * calorias)/100;
+//    calorias = calorias.toFixed(2);
+    console.log(calorias);
+    var $clonBorrar = $('#prototipo-borrar').clone().removeClass("ocultar"); //Necesario para poder agregar un div de alimento a borrar
+    var elemento = $('.Seleccionado').text(); //Con esto sabemos que tipo de comida es
+    var tipo = 1;
+    var $calTiempo;
+    var calTiempoTexto;
+    var otroTitulo;
+    
+    var dayOfMonth = fechaCambia.getDate(); 
+    var month = fechaCambia.getMonth();
+    var year = fechaCambia.getFullYear();
+    
+    if(elemento === "Desayuno"){
+        tipo = 1;
+        $calTiempo = $('#tituloDesayuno');
+        otroTitulo = "Desayuno";
+        $listaTipo = $('#comida-desayuno');
+        calTiempoTexto = parseFloat($calTiempo.text().split(" ")[2]);
+    }else if(elemento === "Colacion 1"){
+        tipo = 2;
+        otroTitulo = "Colación 1";
+        $calTiempo = $('#tituloColacion1');
+        $listaTipo = $('#comida-colacion1');
+        calTiempoTexto = parseFloat($calTiempo.text().split(" ")[3]);
+    }else if(elemento === "Comida"){
+        tipo = 3;
+        otroTitulo = "Comida";
+        $calTiempo = $('#tituloComida');
+        $listaTipo = $('#comida-comida');
+        calTiempoTexto = parseFloat($calTiempo.text().split(" ")[2]);
+    }else if(elemento === "Colacion 2"){
+        tipo = 4;
+        otroTitulo = "Colación 2";
+        $calTiempo = $('#tituloColacion2');
+        $listaTipo = $('#comida-colacion2');
+        calTiempoTexto = parseFloat($calTiempo.text().split(" ")[3]);
+    }else if(elemento === "Cena"){
+        tipo = 5;
+        otroTitulo = "Cena";
+        $calTiempo = $('#tituloCena');
+        $listaTipo = $('#comida-cena');
+        calTiempoTexto = parseFloat($calTiempo.text().split(" ")[2]);
+    }
+    
+    $('.dietaSuegiraSpan').each(function(item){
+        
+        var $clonBorrar = $('#prototipo-borrar').clone().removeClass("ocultar");
+ 
+        //console.log($(this).children('.idDietaSugerida').first().val());
+        idAlimento = $(this).children('.idDietaSugerida').first().val();
+        textNombre = $(this).children('.nomDietaSugerida').first().val();
+        calorias = $(this).children('.calDietaSugerida').first().val();
+        misGramos = $(this).children('.canDietaSugerida').first().val();
+        
+        calTiempoTexto = ((calTiempoTexto*100) + (calorias*100))/100;
+        calTiempoTexto = calTiempoTexto.toFixed(2);
+        $calTiempo.html(otroTitulo + " - " + calTiempoTexto + " kcal");
+        
+        
+        $.ajax({
+            url: "http://localhost:8080/StrongFit/sAgregarAlimento",
+            type: "post",
+            dataType: "text",
+            data: {
+                tipo: tipo, 
+                valor: idAlimento,
+                diaMes: dayOfMonth,
+                mes: month,
+                thisYear: year,
+                gramos: misGramos
+              },
+            success: function(datos){
+                console.log(datos + " Y los datos apa");
+                setValores();
+                //Variable datos es el id del catalo fecha_alimento, con esto lo borramos ya ya no se muestra al usuario
+                $clonBorrar.html('<p class="Consumidos-name">'+textNombre+'</p><span class="Consumidos-subname">Consumidos: '+calorias+' kcal</span><button class="Consumidos-borrar">X<input type="hidden" value="'+datos+'"></button>');
+                $listaTipo.append($clonBorrar);
+                $('.Consumidos-borrar').unbind("click", borrarAlimento);
+                $('.Consumidos-borrar').on('click', borrarAlimento); 
+                
+            },error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+            }
+        });
+    });
+}
+
