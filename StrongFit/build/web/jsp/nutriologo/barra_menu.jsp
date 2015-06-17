@@ -531,6 +531,17 @@ function getDietasPaciente(){
                 },
                 success: function(res){
                     evitarRedundar[1] = evitarRepeticion;
+                    var contenedor = document.getElementsByClassName("contenedorDietasNutriologo")[1];
+                    contenedor.innerHTML = "<p>Diestas del paciente</p><div id='divDietasPaciente'></div>";
+                    for(var i = 0; i < res.asociadas.length; ++i){
+
+                        if(res.asociadas[i].nombreN === idUsuario){
+                            contenedor.innerHTML += '<div class="misDietas">'+res.asociadas[i].nombreD+'<input type="hidden" id="idDietaNutriologo" value="'+res.asociadas[i].idDieta+'"><input type="button" name="btnAgregar" class="btnAgregar invisible" value="Agregar" onclick="agregarDieta();"><input type="button" name="btnQuitar" class="btnQuitar" value="Quitar" onclick="quitarDieta();"></div>';
+                        }
+                        else{
+                            contenedor.innerHTML += '<div class="misDietas"><span class="deRellenoIzquierda"></span><span>'+res.asociadas[i].nombreD+'</span><input type="hidden" id="idDietaNutriologo" value="'+res.asociadas[i].idDieta+'"></div>';
+                        }
+                    }
                 }
             });
         }
@@ -601,6 +612,8 @@ function sanar(cadenaMala){
     }
     return cadenaBuena;
 }
+
+
 </script>
 <!--Su hoja de estilos esta definida en la pagina meta.jsp, que debe de ser incluida en todas las paginas de este proyecto-->
 <header class = "Header">

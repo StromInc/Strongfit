@@ -1061,5 +1061,17 @@ public class cConexion {
         this.st = con.createStatement();
         return this.st.executeQuery("call spGetComidasDieta("+idPaciente+", "+diaSemana+", "+comida+");");
     }
+    
+    //Retorna el idUsuario de un paciente
+    public ResultSet spGetUsrId(int idPaciente) throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetUsrId("+idPaciente+");");
+    }
+    
+    //Esto trae si o no dependiendo de si 
+    public ResultSet spGetAsociacionEspecifica(int idDieta, int idPaciente) throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetAsociacionEspecifica("+idDieta+", "+idPaciente+");");
+    }
 }
 

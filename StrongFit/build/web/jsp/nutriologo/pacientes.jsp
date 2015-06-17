@@ -321,7 +321,11 @@
                                     nomDieta = misdietas.getString("nombre");
                                     idD = misdietas.getInt("idDieta");
                                     %>
-                                    <div class="misDietas"><%=nomDieta%><input type="hidden" id="idDietaNutriologo" value="<%=idD%>"><input type="button" name="btnAgregar" class="btnAgregar" value="Agregar" onclick="agregarDieta();"><input type="button" name="btnQuitar" class="btnQuitar invisible" value="Quitar" onclick="quitarDieta();"></div>
+                                    <div class="misDietas"><input type="hidden" id="idDietaNutriologo" value="<%=idD%>">
+                                        <span name="btnAgregar" class="btnAgregar" value="Agregar" onclick="agregarDieta();">></span>
+                                        <span><%=nomDieta%></span>
+                                        <span name="btnQuitar" class="btnQuitar invisible" value="Quitar" onclick="quitarDieta();"><</span>
+                                    </div>
                                     <%
                                     contadorD++;
                                 }
