@@ -40,6 +40,8 @@ public class Scambiaformato extends HttpServlet {
             String color = request.getParameter("color");
             String fuente = request.getParameter("tipo");
             String edicion = request.getParameter("edicion");
+            String sub = request.getParameter("sub");
+            String neg = request.getParameter("neg");
             boolean seleccionado = false;
             if(!edicion.equals("")){
             seleccionado = true;
@@ -54,18 +56,29 @@ public class Scambiaformato extends HttpServlet {
             String formato1 = "";
             int poscicion = 0;
             int c1 = 0;
-            
+            boolean contador3 = false;
             if(seleccionado){
                 
             for(int j = 0; j < datos.length();j++){                           
                 if(datos.charAt(j) == edicion.charAt(contador)){
                     int nveces = 1;
                 for(int k = j + 1;k < datos.length();k++){
-                    if(contador2){                   
+                    if(datos.charAt(k) == '<'){
+                    contador3 = true;
+                    }
+                    if(datos.charAt(k - 1) == '>'){
+                    contador3 = false;
+                    }
+                     if(!contador3){
+                    if(contador2){
+                       
                         if(datos.charAt(k) != edicion.charAt(contador + nveces)){
                         contador2 = false;
-                    }                                    
+                        }
+                    }
                     nveces++;
+                     }
+                    
                    
                     if(nveces == edicion.length()){
                     poscicion = k - nveces + 1;
@@ -73,9 +86,10 @@ public class Scambiaformato extends HttpServlet {
                  }
                 }
                 }
-                }
                 contador2 = true;
                 }
+                
+                
                 
            
             for(int i = 0; i < datos.length();i++ ){
@@ -121,14 +135,18 @@ public class Scambiaformato extends HttpServlet {
              if(fuente.equals("Default")){
             nuevotexto += ";";
             }    
-                  
-                 
+            if(!sub.equals("no")){
+            nuevotexto +="text-decoration: underline;";
+            }      
+            if(!neg.equals("no")){
+            nuevotexto +="font-weight: bolder;";
+            }     
                       
             
             nuevotexto += "color: ";
             switch(color){
-                case "Blanco":
-                 nuevotexto += "White;";
+                case "Negro":
+                 nuevotexto += "Black;";
                     break;
                     case "Rojo":
                  nuevotexto += "Red;";
@@ -149,13 +167,23 @@ public class Scambiaformato extends HttpServlet {
                  nuevotexto += "small;";
                     break;
             }
+            boolean c2 = true;
+            
             for(int i = 0; i < edicion.length(); i++){
+            if(edicion.charAt(i) == '<'){
+            c2 = false;
+            }
+            if(edicion.charAt(i) == '>'){
+            c2 = true;
+            }
+            if(c2){
             datos2 += edicion.charAt(i);
+            }
             }
              nuevotexto += "\">"+ datos2 +"</p>";
              datos3 += formato1;
              
-            for(int i = poscicion + edicion.length(); i < datos.length(); i++){
+            for(int i = poscicion + edicion.length() + 2; i < datos.length(); i++){
                 
                 
                 datos3 += datos.charAt(i);
@@ -192,6 +220,12 @@ public class Scambiaformato extends HttpServlet {
                  nuevotexto += "Blue;";
                     break;        
             }
+            if(!sub.equals("no")){
+            nuevotexto +="text-decoration: underline;";
+            }      
+            if(!neg.equals("no")){
+            nuevotexto +="font-weight: bolder;";
+            } 
             nuevotexto += "font-size: ";
             switch(tamano){
                 case "Normal":

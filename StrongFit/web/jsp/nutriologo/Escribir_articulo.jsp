@@ -98,10 +98,15 @@
                     </span><hr>
                     <span id="tipo" >Color: 
                         <select id="color" onChange="cambia()"  class = "articulosk">
-                            <option selected>Blanco</option>
+                            <option selected>Negro</option>
                             <option>Rojo</option>
                             <option>Azul</option>
+                            <option>Verde</option>
                         </select>
+                    </span><hr>
+                    <span id="tipo" >
+                        Subrayado<input id="sub" type="checkbox" value="subrayado" class = "articulosk" onChange="cambia()"> 
+                        Negritas<input id="neg" type="checkbox" value="subrayado" class = "articulosk" onChange="cambia()"> 
                     </span><hr>
                 </span>
         </section> 

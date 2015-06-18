@@ -121,8 +121,22 @@ function votar(Npost, numero,nvoto) {
     }); 
     }
     function cambia(){
+        var txtsub = "";
+        var neg = "";
+        if($('#sub').is(':checked')){
+            txtsub = $('#sub').val();
+        }else{
+          txtsub = "no";  
+        }
+        if($('#neg').is(':checked')){
+            neg = $('#neg').val();
+        }else{
+            neg = "no"; 
+        }
        $.post('../../Scambiaformato', {
             datos : $('#txtarticulo').html(),
+            sub: txtsub,
+            neg: neg,
             tipo: $('#fuente').val(),
             color: $('#color').val(),
             tamano: $('#tamano').val(),
@@ -132,6 +146,7 @@ function votar(Npost, numero,nvoto) {
         $('#txtarticulo').html(responseText);   
         console.log(responseText);
         console.log();
+        
     });
     
     }
