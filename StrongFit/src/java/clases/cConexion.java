@@ -571,7 +571,7 @@ public class cConexion {
     public String ruta(int i){
         String ruta = "";
         if(i == 1){
-        ruta = "D:\\Strom\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
+        ruta = "J:\\Strom\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios\\"; //La ruta de Jorge
         //ruta = "C:\\Users\\USER\\Documents\\Git\\Strongfit\\StrongFit\\web\\Imagenes\\Usuarios";  //Ruta de Tona
         }else{
         ruta = "E:\\Strongfit\\StrongFit\\web\\Imagenes\\Articulos\\";
