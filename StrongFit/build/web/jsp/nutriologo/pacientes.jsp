@@ -16,6 +16,7 @@
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_chat.css" >
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_pacientes.css" >
         <!--<script src="../../js/acciones_chatBuscar.js"></script>-->
@@ -51,9 +52,9 @@
          
         <script>setPosicion('pacientes');</script>
         <section class = "Section-tbl-usr">
-            <article id="articlePerfilMsjSol" class="Article-tbl-usr2 issues" style="overflow:hidden;">
+            <article id="articlePerfilMsjSol" class="Article-tbl-usr2 issues sinP" style="overflow:hidden;">
                 <div class="divGeneralSolMsj">
-                <div class="menuMS">
+                <div class="menuMS Content-title">
                     <div id="divMenuMsj" style="cursor:pointer;" onclick="mostrarMsjSol(id);">Mensajes</div>
                     <div id="divMenuSol" style="cursor:pointer;" onclick="mostrarMsjSol(id);">Solicitudes</div>
                 </div>
@@ -210,13 +211,15 @@
             </article>
             
 <!--===========================================================================================-->
-            <article class = "Article-tbl-usr2 cajachat">               
-                <ul class="menuChatNutriologo">
-                    <li onclick="mostrarMenu('contenedorChatNutriologo');"><input type="radio" name="menuChat" id="chatN"><label id="cN" for="chatN">Chat</label></li>
-                    <li onclick="mostrarMenu('contenedorInfoPaciente');"><input type="radio" onclick="getInfoNutricional();" name="menuChat" id="infoN"><label id="iN" for="infoN">Información</label></li>
-                    <li onclick="mostrarMenu('contenedorEstaPaciente');"><input type="radio" name="menuChat" id="estaN"><label id="eN" for="estaN">Estadísticas</label></li>
-                    <li onclick="mostrarMenu('contenedorDietPaciente');"><input type="radio" onclick="getDietasPaciente();" name="menuChat" id="dietN"><label id="dN" for="dietN">Dietas</label></li>
-                </ul>
+            <article class = "Article-tbl-usr2 cajachat sinP">               
+                <div class="Content-title">
+                    <ul class="menuChatNutriologo ">
+                        <li onclick="mostrarMenu('contenedorChatNutriologo');"><input type="radio" name="menuChat" id="chatN"><label id="cN" for="chatN">Chat</label></li>
+                        <li onclick="mostrarMenu('contenedorInfoPaciente');"><input type="radio" onclick="getInfoNutricional();" name="menuChat" id="infoN"><label id="iN" for="infoN">Información</label></li>
+                        <li onclick="mostrarMenu('contenedorEstaPaciente');"><input type="radio" name="menuChat" id="estaN"><label id="eN" for="estaN">Estadísticas</label></li>
+                        <li onclick="mostrarMenu('contenedorDietPaciente');"><input type="radio" onclick="getDietasPaciente();" name="menuChat" id="dietN"><label id="dN" for="dietN">Dietas</label></li>
+                    </ul>
+                </div>
                 <div id="contenedorChatNutriologo" class="ventanasChat invisible" >
                     <div class="mensajes" id = "log">
                         <div class="mensaje" ></div>
@@ -305,8 +308,22 @@
                         </table>
                     </div>
                 </div>
+                <!--============================ESTADISTICAS=================================================================-->
                 <div id="contenedorEstaPaciente" class="ventanasChat invisible">
-                    Aqui va la parte de las estadisticas
+                    <div id="btnLabels" class="Estadisticas-header">
+                        <input type="radio" checked name="estadistics" id="caloriasEst" onclick="nuevoPor();"><label for="caloriasEst" id="labelCalEst">Calorías</label>
+                        <input type="radio" name="estadistics" id="procarlip" onclick="nuevoPor();"><label for="procarlip" id="labelProCarLip">Pro/Car/Lip</label>
+                    </div>
+                    <div id="chart_div">
+                        <br>
+                        No has seleccionado ninguna opción.
+                    </div>
+                    <ul>
+                        <li class="listaGraficas" id="labelG1" onclick="datosGrafica(id);"><span class="spanCambiarDia" onclick="cambiarDia(0);"><</span><span id="spanInfoDia">Hoy</span><span class="spanCambiarDia" onclick="cambiarDia(1);">></span></li>
+                        <!--<li class="listaGraficas" id="labelG2" onclick="datosGrafica(id);"><span class="spanCambiarSemana"><</span><span id="spanInfoSem">Esta semana</span><span class="spanCambiarSemana">></span></li>-->
+                        <li class="listaGraficas" id="labelG3" onclick="datosGrafica(id);"><span class="spanCambiarMensual" onclick="cambiarMensual(0);"><</span><span id="spanInfoMes">Este mes</span><span class="spanCambiarMensual" onclick="cambiarMensual(1);">></span></li>
+                        <!--<li class="listaGraficas" id="labelG4" onclick="datosGrafica(id);"><span><</span>Alimentos<span>></span></li>-->
+                    </ul>
                 </div>
                 <div id="contenedorDietPaciente" class="ventanasChat invisible">
                     <div class="contenedorDietasNutriologo">
@@ -321,7 +338,11 @@
                                     nomDieta = misdietas.getString("nombre");
                                     idD = misdietas.getInt("idDieta");
                                     %>
-                                    <div class="misDietas"><%=nomDieta%><input type="hidden" id="idDietaNutriologo" value="<%=idD%>"><input type="button" name="btnAgregar" class="btnAgregar" value="Agregar" onclick="agregarDieta();"><input type="button" name="btnQuitar" class="btnQuitar invisible" value="Quitar" onclick="quitarDieta();"></div>
+                                    <div class="misDietas"><input type="hidden" id="idDietaNutriologo" value="<%=idD%>">
+                                        <span name="btnAgregar" class="btnAgregar" value="Agregar" onclick="agregarDieta();">></span>
+                                        <span><%=nomDieta%></span>
+                                        <span name="btnQuitar" class="btnQuitar invisible" value="Quitar" onclick="quitarDieta();"><</span>
+                                    </div>
                                     <%
                                     contadorD++;
                                 }

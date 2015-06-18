@@ -12,6 +12,25 @@
     height: 70%;
 }
 
+.Estadisticas-header {
+  background: #9c6;
+  text-align: center;
+  padding: 0.5em 0;
+  color: #fff;
+}
+
+.Content-title{
+    background: #1b5e20;
+    padding: 0.5em;
+    color: #fff;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+
+.sinP{
+    padding: 0 0 1em 0;
+}
+
 .cajachat{
     width: 45%;
     position: fixed;
@@ -171,8 +190,8 @@
 .divPerfilOtro{
     z-index: 3;
     margin-top: 3em;
-    border-top: solid;
-    border-top-width: thin;
+/*    border-top: solid;
+    border-top-width: thin;*/
 }
 
 .divGeneralSolMsj{
@@ -216,11 +235,122 @@
     vertical-align: top;
 }
 
-.contenedorDietasNutriologo:first-child div{
-    border-right: 1px solid #d2d4d5;
-}
-
 .misDietas{
     padding: .5em;
     border-bottom: 1px solid #d2d4d5;
 }
+
+.btnAgregar{
+    float: right;
+    width: 40%;
+    text-align: right;
+    padding-right: 1.5em;
+    cursor: pointer;
+}
+
+.btnQuitar{
+    float: left;
+    width: 40%;
+    text-align: left;
+    padding-left: 1.5em;
+    cursor: pointer;
+}
+
+.deRellenoIzquierda{
+    float: left;
+    width: 40%;
+    text-align: left;
+    padding-left: 1.5em;
+    cursor: pointer;
+}
+
+
+
+
+
+#chart_div{
+    width: 70%;
+    display: inline-block;
+    height: 20em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.particularEst{
+    margin-right: 1%;
+}
+
+.graficas{
+    left: 30.5%;
+}
+
+input[type = "radio"]{
+    display: none;
+}
+
+#btnLabels{
+    text-align: center;
+}
+
+#labelCalEst,
+#labelProCarLip{
+    cursor: pointer;
+    width: 40%;
+    display: inline-block;
+}
+
+#caloriasEst:checked ~ #labelCalEst,
+#procarlip:checked ~ #labelProCarLip{
+    text-decoration: underline;
+}
+
+.Content-title ~ ul{
+    padding: 0;
+    margin: 0;
+}
+
+.listaGraficas{
+    border-bottom: 1px solid #d2d4d5;
+    display: inline-block;
+    cursor: pointer;
+    width: 40%;
+    padding: .5em 0;
+}
+
+.listaGraficas label{
+    cursor: pointer;
+}
+
+.listaGraficas:hover{
+    background-color: #f2f2f2;
+}
+
+#listaG1:checked ~ #labelG1,
+#listaG2:checked ~ #labelG2,
+#listaG3:checked ~ #labelG3,
+#listaG4:checked ~ #labelG4{
+    background-color: #f2f2f2;
+}
+
+.fondoGris{
+    background-color: #f2f2f2;
+}
+
+.spanCambiarMensual:first-child,
+.spanCambiarSemana:first-child,
+.spanCambiarDia:first-child{
+    float: left;
+    margin-left: 1em;
+}
+.spanCambiarMensual:last-child,
+.spanCambiarSemana:last-child,
+.spanCambiarDia:last-child{
+    float: right;
+    margin-right: 1em;
+}
+
+
+
+
+
+

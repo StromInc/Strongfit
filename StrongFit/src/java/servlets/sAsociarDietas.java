@@ -58,6 +58,8 @@ public class sAsociarDietas extends HttpServlet {
             int accion = 0;
             int idDieta = 0;
             String idUsr = "";
+            String idUsrP = "";
+            String quit = "no";
             
 //            try{
                 idMedico = (Integer)sesion.getAttribute("idMedico");
@@ -78,6 +80,17 @@ public class sAsociarDietas extends HttpServlet {
 //                mapa.put("estado", e);
 //                write(response, mapa);
 //            }
+                
+            ResultSet idO = conecta.spGetUsrId(idPaciente);
+            if(idO.next()){
+                idUsrP = idO.getString("idUsuario");
+            }
+            
+            if(accion == 0){
+                quit = "si";
+                conecta.actualizarDieta(idUsrP, idDieta, quit);
+            }
+            
             
             ResultSet rs = conecta.spSetAsociasiones(idPaciente, idMedico, idDieta, idUsr, accion);
             if(rs.next()){

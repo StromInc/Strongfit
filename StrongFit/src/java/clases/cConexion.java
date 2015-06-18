@@ -19,7 +19,7 @@ public class cConexion {
     public Connection conectar()
     {
         dominio = "http://localhost:8080/StrongFit/";
-        direccionWS = "ws://192.168.1.202:8080/StrongFit/endpoint";
+        direccionWS = "ws://192.168.1.76:8080/StrongFit/endpoint";
         try
         {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -1048,22 +1048,30 @@ public class cConexion {
         this.st = con.createStatement();
         return this.st.executeQuery("select nombre, idPaciente from usuario where idUsuario='" + correo + "' and passUsuario='" + contra + "';");
     }
-    
     public ResultSet spGetTiposAlimento() throws SQLException{
         this.st = con.createStatement();
         return this.st.executeQuery("call spGetTiposAlimento();");
     }
-    
     //spAjustarPos(in idPac int, in diaA int)
     public ResultSet spAjustarPos(int idPaciente, int diaAnio) throws SQLException{
         this.st = con.createStatement();
         return this.st.executeQuery("call spAjustarPos("+idPaciente+","+diaAnio+");");
     }
-    
-    //spGetComidasDieta(in idPac int, in diaS int, in com int)
     public ResultSet spGetComidasDieta(int idPaciente, int diaSemana, int comida) throws SQLException{
         this.st = con.createStatement();
         return this.st.executeQuery("call spGetComidasDieta("+idPaciente+", "+diaSemana+", "+comida+");");
+    }
+    
+    //Retorna el idUsuario de un paciente
+    public ResultSet spGetUsrId(int idPaciente) throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetUsrId("+idPaciente+");");
+    }
+    
+    //Esto trae si o no dependiendo de si 
+    public ResultSet spGetAsociacionEspecifica(int idDieta, int idPaciente) throws SQLException{
+        this.st = con.createStatement();
+        return this.st.executeQuery("call spGetAsociacionEspecifica("+idDieta+", "+idPaciente+");");
     }
 }
 

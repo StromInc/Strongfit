@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import clases.cCifrado;
 import clases.cConexion;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -49,7 +50,24 @@ public class sGetDatosGrafica extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession sesion = request.getSession();
             
-            int idPaciente = (Integer)sesion.getAttribute("idPaciente");
+            cConexion conecta = new cConexion();
+            conecta.conectar();
+            
+            int idPaciente = 0;
+            String idP = "";
+            
+            try{
+                cCifrado seguro = new cCifrado();
+                seguro.AlgoritmoAES();
+                idP = seguro.encriptar(request.getParameter("idPaciente"));
+                ResultSet id = conecta.spTraerIdPaciente(idP);
+                if(id.next()){
+                    idPaciente = id.getInt("idPaciente");
+                }
+            }
+            catch(Exception e){
+                idPaciente = (Integer)sesion.getAttribute("idPaciente");
+            }
             
             Calendar calendario = new GregorianCalendar();
             
@@ -72,9 +90,6 @@ public class sGetDatosGrafica extends HttpServlet {
                 mapa.put("estado", "no");
                 write(response, mapa);
             }
-            
-            cConexion conecta = new cConexion();
-            conecta.conectar();
             
             DecimalFormat formateador = new DecimalFormat("####.##"); 
             if(por == 1){
