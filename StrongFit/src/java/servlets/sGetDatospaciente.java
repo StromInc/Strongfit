@@ -7,6 +7,7 @@
 package servlets;
 
 import clases.AlimentoAndroid;
+import clases.CImagen;
 import clases.cCifrado;
 import clases.cConexion;
 import com.google.gson.Gson;
@@ -60,11 +61,22 @@ public class sGetDatospaciente extends HttpServlet {
             String nombre = "";
             String idPaciente = "";
             int i =0;
+            CImagen imagen = new CImagen();
+            int var = imagen.devuelveexistencia(idUser, 1);
             while(rs.next()){
                 nombre =rs.getString("nombre");
                 idPaciente =String.valueOf(rs.getInt("idPaciente"));
                 i++;
             }
+            String ruta = "Imagenes/usr_sin_imagen.jpg";
+            if(var == 1){
+                ruta = "Imagenes/Usuarios/" + idUser + ".jpg";
+            } else if(var == 2){
+                ruta = "Imagenes/Usuarios/" + idUser + ".png";
+            } else if(var == 3){
+                ruta = "Imagenes/Usuarios/" + idUser + ".gif";
+            }
+            datosPaciente.put("avatar", ruta);
             datosPaciente.put("nombre", seguro.desencriptar(nombre));
             datosPaciente.put("idPaciente", idPaciente);
             System.out.println("Nombre: " + seguro.desencriptar(nombre) + " idPaciente: " + idPaciente);
