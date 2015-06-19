@@ -99,11 +99,13 @@ public class Scambiaformato extends HttpServlet {
                         if(contador4){
                     recorridos++;
                         }
-                        if(datos.charAt(k+1) != '/'){
-                        formato2 = "";
+                        if(datos.charAt(k+1) != '/' && datos.charAt(k-1) == '<'){
+                        formato2 = "<";
                         contador7 = k;
                             while(datos.charAt(contador7-1) != '>'){
                             formato2 += datos.charAt(contador7);
+                            System.out.println("dato: "+contador7+" valor: "+formato2);
+                            contador7++;
                             }        
                         }
                     }
@@ -206,7 +208,7 @@ public class Scambiaformato extends HttpServlet {
             }
             }
              nuevotexto += "\">"+ datos2 +"</p>";
-             if(!formato2.equals("")){
+             if(formato2.equals("")){
              datos3 += formato1;
              }else{
              datos3+=formato2;
