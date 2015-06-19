@@ -105,8 +105,8 @@
                         </select>
                     </span><hr>
                     <span id="tipo" >
-                        Subrayado<input id="sub" type="checkbox" value="subrayado" class = "articulosk" onChange="cambia()"> 
-                        Negritas<input id="neg" type="checkbox" value="subrayado" class = "articulosk" onChange="cambia()"> 
+                        <p style="diplay: initial;">Subrayado</p><input id="sub" type="checkbox" value="subrayado" class = "articulosk" style="display:initial;" onChange="cambia()"><br> 
+                        <p style="display: initial;">Negritas</p><input id="neg" type="checkbox" value="subrayado" class = "articulosk" style="display:initial;" onChange="cambia()"> 
                     </span><hr>
                 </span>
         </section> 

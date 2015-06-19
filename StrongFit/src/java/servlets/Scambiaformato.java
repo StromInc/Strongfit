@@ -180,7 +180,10 @@ public class Scambiaformato extends HttpServlet {
                     break;
                     case "Azul":
                  nuevotexto += "Blue;";
-                    break;        
+                    break;
+                    case "Verde":
+                    nuevotexto += "Green;";
+                    break;    
             }
             nuevotexto += "font-size: ";
             switch(tamano){
@@ -248,7 +251,10 @@ public class Scambiaformato extends HttpServlet {
                     break;
                     case "Azul":
                  nuevotexto += "Blue;";
-                    break;        
+                    break;
+                    case "Verde":
+                    nuevotexto += "Green;";
+                    break;     
             }
             if(!sub.equals("no")){
             nuevotexto +="text-decoration: underline;";
