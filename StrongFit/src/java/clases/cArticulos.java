@@ -48,13 +48,43 @@ public class cArticulos {
               
             articulos += "<img src = \""+ruta+"\" class =\"portada2\" alt = \"foto de usuario\">";
             articulos+= "<br><br><br><br><br><br><br><br>por: " + articulosAut[i] + " <br>";
+            String recorte = "";
+            int contador2 = 0;
+            boolean checador = false;
             for(int j = 0; j < 200;j++){
-            articulos+= articulosTex[i].charAt(j);
+            recorte+= articulosTex[i].charAt(j);
             if(j == (articulosTex[i].length()-1) ){
             break;
             }
             }
-            articulos+="...<br><br>";
+            for (int l = recorte.length()-1; l > 0;l--){
+              
+            if(recorte.charAt(l)  == '>'){
+                
+            checador = true;    
+            for(int m = l; m < recorte.length();m++ ){
+            if(recorte.charAt(m)== '<' ){
+                checador = false;
+                contador2 = m;
+                
+            }
+            }    
+            
+            }
+            }
+            
+            
+            if(checador){
+            articulos+= recorte;
+            
+            }else{            
+            for (int l = 0; l < recorte.length();l++){
+            if(l < contador2){
+            articulos+=recorte.charAt(l);          
+            }
+            }            
+            }                                                          
+            articulos+="<br><br>...<br><br>";
              articulos+= "Comentarios: " + "<hr>";
              articulos+= "<div id='P"+i+"'>";
              String[][] arreglodecomentarios = objconexion.regresacomentarios(objcifrado.sustituye(articulosNom[i],1));
@@ -176,7 +206,7 @@ public class cArticulos {
    }else{
    articulo = "Titulo:<br><input type=\"text\" id=\"txtnombre\" value = '' class = \"articulosk\"><br><br>\n" +
 "                 <img src = \""+ruta+"\" class =\"portada\" alt = \"foto de usuario\">\n" +
-"                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\"><p style=\"display:initial;color: white;\">  \n" +
+"                Texto:<br><div contenteditable=\"true\" id=\"txtarticulo\" class=\"Article-articulosf\"><p style=\"display:initial;color: Black;\">  \n" +
 "                        <br>                    \n" +
 "                    </p></div><br>\n" +
 "                <input type=\"button\" value=\"Guardar\" onclick=\"escribearticulo('escribe')\" class=\"botonenviar\">";

@@ -40,6 +40,8 @@ public class Scambiaformato extends HttpServlet {
             String color = request.getParameter("color");
             String fuente = request.getParameter("tipo");
             String edicion = request.getParameter("edicion");
+            String sub = request.getParameter("sub");
+            String neg = request.getParameter("neg");
             boolean seleccionado = false;
             if(!edicion.equals("")){
             seleccionado = true;
@@ -47,12 +49,19 @@ public class Scambiaformato extends HttpServlet {
             boolean varconteo = true;
             boolean formato = false;
             boolean contador2 = true;
+            boolean contador3 = false;
             int contador = 0;
             String datosi = "";
             String datos2 = "";
             String datos3 = "";
             String formato1 = "";
             int poscicion = 0;
+            int recorridos = 0;
+            boolean contador4 = false;
+            boolean contador5 = true;
+            boolean contador6 = false;
+            int contador7 = 0;
+            String formato2 = "";
             int c1 = 0;
             
             if(seleccionado){
@@ -61,23 +70,55 @@ public class Scambiaformato extends HttpServlet {
                 if(datos.charAt(j) == edicion.charAt(contador)){
                     int nveces = 1;
                 for(int k = j + 1;k < datos.length();k++){
+                    if(contador5){
+                    if(datos.charAt(k-1) == '>'){
+                     contador3 = false;
+                     contador4 = false;
+                     contador6 = false;
+                    }
+                    if(datos.charAt(k) == '<'){
+                     contador3 = true;
+                     contador4 = true;
+                     contador6 = true;
+                    }                  
+                    if(!contador3){
                     if(contador2){                   
                         if(datos.charAt(k) != edicion.charAt(contador + nveces)){
                         contador2 = false;
+                        contador5 = false;
                     }                                    
                     nveces++;
                    
                     if(nveces == edicion.length()){
-                    poscicion = k - nveces + 1;
+                    poscicion = k - nveces + 1 - recorridos;
                     contador2 = false;
+                    contador5 = false;
                  }
                 }
+                    }else{
+                        if(contador4){
+                    recorridos++;
+                        }
+                        if(datos.charAt(k+1) != '/' && datos.charAt(k-1) == '<'){
+                        formato2 = "<";
+                        contador7 = k;
+                            while(datos.charAt(contador7-1) != '>'){
+                            formato2 += datos.charAt(contador7);
+                            System.out.println("dato: "+contador7+" valor: "+formato2);
+                            contador7++;
+                            }        
+                        }
+                    }
+                }else{
+                    
+                    }
                 }
                 }
                 contador2 = true;
+                contador5 = true;
                 }
                 
-           
+           System.out.println("------" + recorridos);
             for(int i = 0; i < datos.length();i++ ){
                
                if(varconteo){
@@ -121,21 +162,28 @@ public class Scambiaformato extends HttpServlet {
              if(fuente.equals("Default")){
             nuevotexto += ";";
             }    
-                  
-                 
+            if(!sub.equals("no")){
+            nuevotexto +="text-decoration: underline;";
+            }      
+            if(!neg.equals("no")){
+            nuevotexto +="font-weight: bolder;";
+            }     
                       
             
             nuevotexto += "color: ";
             switch(color){
-                case "Blanco":
-                 nuevotexto += "White;";
+                case "Negro":
+                 nuevotexto += "Black;";
                     break;
                     case "Rojo":
                  nuevotexto += "Red;";
                     break;
                     case "Azul":
                  nuevotexto += "Blue;";
-                    break;        
+                    break;
+                    case "Verde":
+                    nuevotexto += "Green;";
+                    break;    
             }
             nuevotexto += "font-size: ";
             switch(tamano){
@@ -149,13 +197,26 @@ public class Scambiaformato extends HttpServlet {
                  nuevotexto += "small;";
                     break;
             }
+            boolean c2 = true;
+            
             for(int i = 0; i < edicion.length(); i++){
+            if(edicion.charAt(i) == '<'){
+            c2 = false;
+            }
+            if(edicion.charAt(i) == '>'){
+            c2 = true;
+            }
+            if(c2){
             datos2 += edicion.charAt(i);
             }
+            }
              nuevotexto += "\">"+ datos2 +"</p>";
+             if(formato2.equals("")){
              datos3 += formato1;
-             
-            for(int i = poscicion + edicion.length(); i < datos.length(); i++){
+             }else{
+             datos3+=formato2;
+             }
+            for(int i = poscicion + edicion.length() + recorridos; i < datos.length(); i++){
                 
                 
                 datos3 += datos.charAt(i);
@@ -190,8 +251,17 @@ public class Scambiaformato extends HttpServlet {
                     break;
                     case "Azul":
                  nuevotexto += "Blue;";
-                    break;        
+                    break;
+                    case "Verde":
+                    nuevotexto += "Green;";
+                    break;     
             }
+            if(!sub.equals("no")){
+            nuevotexto +="text-decoration: underline;";
+            }      
+            if(!neg.equals("no")){
+            nuevotexto +="font-weight: bolder;";
+            } 
             nuevotexto += "font-size: ";
             switch(tamano){
                 case "Normal":
