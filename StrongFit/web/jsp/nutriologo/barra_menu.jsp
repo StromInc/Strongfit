@@ -13,7 +13,7 @@
         response.sendRedirect("../../index.jsp");        
     }
 %>
-
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
         google.load("visualization", "1", {packages:["corechart"]});
              //notar el protocolo.. es 'ws' y no 'http'
@@ -239,6 +239,7 @@
                                         $clone.appendTo('#log');
                                     }
                                 }
+                                $('#infoN').is(':checked', getInfoNutricional());
                                 $('#log').animate({
                                     scrollTop: $('#m0').height() * remitentes.length * 2
                                 }, 200, function(){
@@ -474,7 +475,7 @@ function setPosicion(p){
 }
 
 function getInfoNutricional(){
-    if(evitarRepeticion !== evitarRedundar[1]){
+    if(evitarRepeticion !== evitarRedundar[1] && evitarRepeticion !== ""){
         $.ajax({
             url: 'http://localhost:8080/StrongFit/sGetInfoNutricional',
             type: 'post',

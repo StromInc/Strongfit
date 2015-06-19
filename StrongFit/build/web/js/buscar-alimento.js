@@ -39,7 +39,7 @@ $(function(){
              $('.Buscador-title').text('Agregar alimentos a: ' + $(this).text());
              $comidas.removeClass('Seleccionado');
              $(this).addClass('Seleccionado');
-             $menuComidas.fadeOut(200);
+             
              switch($(this).text()){
                  case 'Desayuno':
                      comidaId = 1;
@@ -57,7 +57,7 @@ $(function(){
                      comidaId = 5;
                      break;
              }
-             cargarComidaDieta();
+             $menuComidas.fadeOut(200, cargarComidaDieta);
          });
         $menuComidas.fadeToggle(200);
     }
@@ -462,10 +462,11 @@ function cargarComidaDieta(){
         },
         success: function(res){
             console.log(res);
-
-            var $alimentoItem = $('.Alimentos-item2').first(); 
-            var $contenedor = $('.AlimentosDieta');
+            
+            var $contenedor = $('.AlimentosDieta').first();
             $contenedor.html('<li class="Alimentos-item2 ocultar"><p class="Alimentos-name">Taco</p><span class="Alimentos-subname">Contiene: 5 kcal/100g</span><div class="Alimentos-subname">Cantidad:<span class="icon3-circle-up Alimentos-arriba"></span><input class="Alimentos-cantidad" id="alimentoCantidad" type="number" value="100"> g<span class="icon3-circle-down Alimentos-abajo"></span>     </div>');
+            var $alimentoItem = $('.Alimentos-item2').first(); 
+
             for(var i = 0; i < res.alimentos.length; ++i){
                 var $clon = $alimentoItem.clone().removeClass("ocultar");
                 $clon.html('<p class="Alimentos-name">'+res.alimentos[i].nombre+'</p>\n\
@@ -566,13 +567,16 @@ function agregarDieta(){
                 diaMes: dayOfMonth,
                 mes: month,
                 thisYear: year,
-                gramos: misGramos
+                gramos: misGramos,
+                nomb: textNombre,
+                calorias: calorias
               },
             success: function(datos){
+                datos = $.parseJSON(datos);
                 console.log(datos + " Y los datos apa");
                 setValores();
                 //Variable datos es el id del catalo fecha_alimento, con esto lo borramos ya ya no se muestra al usuario
-                $clonBorrar.html('<p class="Consumidos-name">'+textNombre+'</p><span class="Consumidos-subname">Consumidos: '+calorias+' kcal</span><button class="Consumidos-borrar">X<input type="hidden" value="'+datos+'"></button>');
+                $clonBorrar.html('<p class="Consumidos-name">'+datos.nomAlimento+'</p><span class="Consumidos-subname">Consumidos: '+datos.caloriasA+' kcal</span><button class="Consumidos-borrar">X<input type="hidden" value="'+datos.idAlta+'"></button>');
                 $listaTipo.append($clonBorrar);
                 $('.Consumidos-borrar').unbind("click", borrarAlimento);
                 $('.Consumidos-borrar').on('click', borrarAlimento); 
@@ -582,6 +586,7 @@ function agregarDieta(){
                 console.log(thrownError);
             }
         });
+        setTimeout(function(){console.log("siguiente")}, 100);
     });
 }
 

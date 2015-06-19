@@ -1,6 +1,6 @@
 var idAlimentoD = 0;
 var contadorD = 0;
-var dia = 0;
+var diaDietas = 0;
 var filtro = 0;
 
 var idRandom = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
@@ -176,11 +176,11 @@ function remover(id)
 {
     $(function(){
         ajustarCantidad(id);
-        caloriasDia[dia] -= calTem;
-        caloriasDia[dia] = parseFloat(caloriasDia[dia].toFixed(1));
+        caloriasDia[diaDietas] -= calTem;
+        caloriasDia[diaDietas] = parseFloat(caloriasDia[diaDietas].toFixed(1));
         
-        if(caloriasDia[dia] < 0){
-            caloriasDia[dia] = 0;
+        if(caloriasDia[diaDietas] < 0){
+            caloriasDia[diaDietas] = 0;
         }
 
         caloriasPromedio = 0;
@@ -190,13 +190,13 @@ function remover(id)
         caloriasPromedio = caloriasPromedio / 7;
         caloriasPromedio = parseFloat(caloriasPromedio.toFixed(1));
         
-        proteinas[dia] -= proTem;
-        lipidos[dia] -= lipTem;
-        carbohidratos[dia] -= carTem;
+        proteinas[diaDietas] -= proTem;
+        lipidos[diaDietas] -= lipTem;
+        carbohidratos[diaDietas] -= carTem;
         
-        proteinas[dia] = parseFloat(proteinas[dia].toFixed(1));
-        lipidos[dia] = parseFloat(lipidos[dia].toFixed(1));
-        carbohidratos[dia] = parseFloat(carbohidratos[dia].toFixed(1));
+        proteinas[diaDietas] = parseFloat(proteinas[diaDietas].toFixed(1));
+        lipidos[diaDietas] = parseFloat(lipidos[diaDietas].toFixed(1));
+        carbohidratos[diaDietas] = parseFloat(carbohidratos[diaDietas].toFixed(1));
         
         porcentajes();
         $("#"+id).remove();
@@ -290,18 +290,18 @@ function setCaloriasMeta(){
 
 function automatizarCalculos(id){
     $(function(){
-        caloriasDia[dia] += calTem;
-        caloriasDia[dia] = parseFloat(caloriasDia[dia].toFixed(1));
+        caloriasDia[diaDietas] += calTem;
+        caloriasDia[diaDietas] = parseFloat(caloriasDia[diaDietas].toFixed(1));
         
         
-        proteinas[dia] += proTem;
-        lipidos[dia] += lipTem;
-        carbohidratos[dia] += carTem;
+        proteinas[diaDietas] += proTem;
+        lipidos[diaDietas] += lipTem;
+        carbohidratos[diaDietas] += carTem;
         
-        proteinas[dia] = parseFloat(proteinas[dia].toFixed(1));
-        lipidos[dia] = parseFloat(lipidos[dia].toFixed(1));
-        carbohidratos[dia] = parseFloat(carbohidratos[dia].toFixed(1));
-        
+        proteinas[diaDietas] = parseFloat(proteinas[diaDietas].toFixed(1));
+        lipidos[diaDietas] = parseFloat(lipidos[diaDietas].toFixed(1));
+        carbohidratos[diaDietas] = parseFloat(carbohidratos[diaDietas].toFixed(1));
+
         porcentajes();
     });
 }
@@ -341,19 +341,19 @@ function porcentajes(){
      * 1g de carbohidrato --------- 4 kcal
      */
     
-    if(caloriasDia[dia] > 0){
-        proPorciento[dia] = ((4 * proteinas[dia]) / caloriasDia[dia]) * 100;
-        lipPorciento[dia] = ((9 * lipidos[dia]) / caloriasDia[dia]) * 100;
-        carPorciento[dia] = ((4 * carbohidratos[dia]) / caloriasDia[dia]) * 100;
+    if(caloriasDia[diaDietas] > 0){
+        proPorciento[diaDietas] = ((4 * proteinas[diaDietas]) / caloriasDia[diaDietas]) * 100;
+        lipPorciento[diaDietas] = ((9 * lipidos[diaDietas]) / caloriasDia[diaDietas]) * 100;
+        carPorciento[diaDietas] = ((4 * carbohidratos[diaDietas]) / caloriasDia[diaDietas]) * 100;
 
-        proPorciento[dia] = parseInt(proPorciento[dia].toFixed());
-        carPorciento[dia] = parseInt(carPorciento[dia].toFixed());
-        lipPorciento[dia] = parseInt(lipPorciento[dia].toFixed());
+        proPorciento[diaDietas] = parseInt(proPorciento[diaDietas].toFixed());
+        carPorciento[diaDietas] = parseInt(carPorciento[diaDietas].toFixed());
+        lipPorciento[diaDietas] = parseInt(lipPorciento[diaDietas].toFixed());
     }
     else{
-        proPorciento[dia] = 0;
-        lipPorciento[dia] = 0;
-        carPorciento[dia] = 0;
+        proPorciento[diaDietas] = 0;
+        lipPorciento[diaDietas] = 0;
+        carPorciento[diaDietas] = 0;
     }
     
     caloriasPromedio = 0;
@@ -363,11 +363,11 @@ function porcentajes(){
     caloriasPromedio = caloriasPromedio / 7;
     caloriasPromedio = parseFloat(caloriasPromedio.toFixed());
     
-    $('#caloriasDia').html(caloriasDia[dia]);
+    $('#caloriasDia').html(caloriasDia[diaDietas]);
     $('#caloriasPromedio').html(caloriasPromedio);
-    $('#proteinasPromedio').html(proPorciento[dia]);
-    $('#lipidosPromedio').html(lipPorciento[dia]);
-    $('#carbohidratosPromedio').html(carPorciento[dia]);
+    $('#proteinasPromedio').html(proPorciento[diaDietas]);
+    $('#lipidosPromedio').html(lipPorciento[diaDietas]);
+    $('#carbohidratosPromedio').html(carPorciento[diaDietas]);
 }
 
 function incrementaBaja(id, tipo3){
@@ -384,23 +384,23 @@ function incrementaBaja(id, tipo3){
         
         if($canAsignada > 0){
             ajustarCantidad2(id, $can);
-            caloriasDia[dia] -= calTem;
-            proteinas[dia] -= proTem;
-            lipidos[dia] -= lipTem;
-            carbohidratos[dia] -= carTem;
+            caloriasDia[diaDietas] -= calTem;
+            proteinas[diaDietas] -= proTem;
+            lipidos[diaDietas] -= lipTem;
+            carbohidratos[diaDietas] -= carTem;
 
-            caloriasDia[dia] = parseFloat(caloriasDia[dia].toFixed(1));
-            proteinas[dia] = parseFloat(proteinas[dia].toFixed(1));
-            lipidos[dia] = parseFloat(lipidos[dia].toFixed(1));
-            carbohidratos[dia] = parseFloat(carbohidratos[dia].toFixed(1));
+            caloriasDia[diaDietas] = parseFloat(caloriasDia[diaDietas].toFixed(1));
+            proteinas[diaDietas] = parseFloat(proteinas[diaDietas].toFixed(1));
+            lipidos[diaDietas] = parseFloat(lipidos[diaDietas].toFixed(1));
+            carbohidratos[diaDietas] = parseFloat(carbohidratos[diaDietas].toFixed(1));
 
             $('#cantidadAsignada'+id).val($canAsignada);
             ajustarCantidad2(id, $canAsignada);
 
-            caloriasDia[dia] += calTem;
-            proteinas[dia] += proTem;
-            lipidos[dia] += lipTem;
-            carbohidratos[dia] += carTem;
+            caloriasDia[diaDietas] += calTem;
+            proteinas[diaDietas] += proTem;
+            lipidos[diaDietas] += lipTem;
+            carbohidratos[diaDietas] += carTem;
 
             porcentajes();
             if($canAsignada <= 10){
@@ -427,15 +427,15 @@ function cambiarIndependiente(id){
         }
         
         ajustarCantidad2(id, $can);
-        caloriasDia[dia] -= calTem;
-        proteinas[dia] -= proTem;
-        lipidos[dia] -= lipTem;
-        carbohidratos[dia] -= carTem;
+        caloriasDia[diaDietas] -= calTem;
+        proteinas[diaDietas] -= proTem;
+        lipidos[diaDietas] -= lipTem;
+        carbohidratos[diaDietas] -= carTem;
         
-        caloriasDia[dia] = parseFloat(caloriasDia[dia].toFixed(1));
-        proteinas[dia] = parseFloat(proteinas[dia].toFixed(1));
-        lipidos[dia] = parseFloat(lipidos[dia].toFixed(1));
-        carbohidratos[dia] = parseFloat(carbohidratos[dia].toFixed(1));
+        caloriasDia[diaDietas] = parseFloat(caloriasDia[diaDietas].toFixed(1));
+        proteinas[diaDietas] = parseFloat(proteinas[diaDietas].toFixed(1));
+        lipidos[diaDietas] = parseFloat(lipidos[diaDietas].toFixed(1));
+        carbohidratos[diaDietas] = parseFloat(carbohidratos[diaDietas].toFixed(1));
         
         if($canAsignada < 0){
             $canAsignada = $canAsignada * -1;
@@ -444,10 +444,10 @@ function cambiarIndependiente(id){
         $('#cantidadAsignada'+id).val($canAsignada);
         ajustarCantidad2(id, $canAsignada);
 
-        caloriasDia[dia] += calTem;
-        proteinas[dia] += proTem;
-        lipidos[dia] += lipTem;
-        carbohidratos[dia] += carTem;
+        caloriasDia[diaDietas] += calTem;
+        proteinas[diaDietas] += proTem;
+        lipidos[diaDietas] += lipTem;
+        carbohidratos[diaDietas] += carTem;
         
         porcentajes();
         if($canAsignada <= 10){

@@ -16,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_usuario.css">
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_chat.css" >
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
         <link rel="stylesheet" type="text/css" href="../../Estilos/estilo_pacientes.css" >
         <!--<script src="../../js/acciones_chatBuscar.js"></script>-->
@@ -358,11 +358,11 @@
             </article>
 <!--===========================================================================================-->
             
-            <article class = "Article-tbl-usr2 contactos">
+            <article class = "Article-tbl-usr2 contactos sinP">
                 <div>
                     <p class="contenedor-search">
-                        <input type="search" id="search" name="search" onkeypress="buscarUsuario();" class="search" style="width:10em;"  placeholder="Buscar personas...">
-                        <label class = "icon-search label-search" for = "buscar"></label>
+                        <span class = "span-search"><label class = "icon-search label-search" for = "buscar"></label></span>
+                        <input type="search" id="search" name="search" onkeypress="buscarUsuario();" class="search input-search" style="width:10em;"  placeholder="Buscar personas...">
                     </p>
                 </div>
                 <%
@@ -387,9 +387,9 @@
                             ses = rs.getString("sesion");
                             if(!usr.equals(idUsr)){
                         %>
-                        <div style="cursor:pointer;" onclick="activarMensajes('<%=usr%>', '<%=idUsr%>', 'no');">
+                        <div class="misDietas" style="cursor:pointer;" onclick="activarMensajes('<%=usr%>', '<%=idUsr%>', 'no');">
                             <input type="hidden" id="ses<%=con%>" class="<%=usr%>" value="<%=ses%>" >
-                            <p id="usr<%=con%>"><%=usr%></p>
+                            <p class="noM" id="usr<%=con%>"><%=usr%></p>
                         </div>
                         <%
                             con++;

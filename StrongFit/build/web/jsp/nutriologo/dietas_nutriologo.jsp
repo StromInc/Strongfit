@@ -203,7 +203,7 @@
                 <p class="contenedor-search">
                     <span class = "span-search"><label class = "icon-search label-search" for = "buscar"></label></span>
                     <input type="search" onkeypress="buscarAlimento();" placeholder = "buscar alimentos ..." class = "input-search" id = "buscar">
-                    
+                </p>    
                     <span>
                         <select class = "filtros" id="filtro" onchange="buscarAlimento();">
                             <option value="0">Todos</option>
@@ -221,7 +221,7 @@
                             %>
                         </select>
                     </span>
-                </p>
+                
                 <div class = "contenedor-resultados" id="idcontenedor-resultados">
                     <div class = "resultado invisible" id = "resultadoClon" draggable = "true" ondragstart="drag(event, id)"></div>
                 </div>

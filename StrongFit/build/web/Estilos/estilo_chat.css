@@ -10,6 +10,7 @@
     left: 0;
     width: 25%;
     height: 70%;
+    margin-left: 1em;
 }
 
 .Estadisticas-header {
@@ -36,6 +37,7 @@
     position: fixed;
     left: 28.5%;
     height: 70%;
+    margin-left: 1em;
 }
 
 .formularioChat{
@@ -240,6 +242,10 @@
     border-bottom: 1px solid #d2d4d5;
 }
 
+.noM{
+    margin: 0;
+}
+
 .btnAgregar{
     float: right;
     width: 40%;
@@ -349,6 +355,34 @@ input[type = "radio"]{
     margin-right: 1em;
 }
 
+.span-search {
+  cursor: pointer;
+  position: absolute;
+  top: 7px;
+  left: 3px;
+}
+.label-search {
+  cursor: pointer;
+  padding: 0 0.2em 0 0.3em;
+  background-color: transparent;
+  display: inline-block;
+}
+.contenedor-search {
+  margin: 1em 0;
+  position: relative;
+  display: inline-block;
+}
+.input-search {
+  padding: 0.3em 0.2em 0.3em 2.1em;
+  border: none;
+  background-color: #fff;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 2px solid #0f5515;
+}
+.input-search:focus {
+  outline: none;
+}
 
 
 
