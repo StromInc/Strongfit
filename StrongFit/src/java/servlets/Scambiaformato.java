@@ -58,6 +58,10 @@ public class Scambiaformato extends HttpServlet {
             int poscicion = 0;
             int recorridos = 0;
             boolean contador4 = false;
+            boolean contador5 = true;
+            boolean contador6 = false;
+            int contador7 = 0;
+            String formato2 = "";
             int c1 = 0;
             
             if(seleccionado){
@@ -66,34 +70,50 @@ public class Scambiaformato extends HttpServlet {
                 if(datos.charAt(j) == edicion.charAt(contador)){
                     int nveces = 1;
                 for(int k = j + 1;k < datos.length();k++){
-                    if(datos.charAt(k) == '<'){
-                     contador3 = true;
-                     contador4 = true;
-                    }
+                    if(contador5){
                     if(datos.charAt(k-1) == '>'){
                      contador3 = false;
                      contador4 = false;
+                     contador6 = false;
                     }
+                    if(datos.charAt(k) == '<'){
+                     contador3 = true;
+                     contador4 = true;
+                     contador6 = true;
+                    }                  
                     if(!contador3){
                     if(contador2){                   
                         if(datos.charAt(k) != edicion.charAt(contador + nveces)){
                         contador2 = false;
+                        contador5 = false;
                     }                                    
                     nveces++;
                    
                     if(nveces == edicion.length()){
                     poscicion = k - nveces + 1 - recorridos;
                     contador2 = false;
+                    contador5 = false;
                  }
                 }
                     }else{
                         if(contador4){
                     recorridos++;
                         }
-                    }      
+                        if(datos.charAt(k+1) != '/'){
+                        formato2 = "";
+                        contador7 = k;
+                            while(datos.charAt(contador7-1) != '>'){
+                            formato2 += datos.charAt(contador7);
+                            }        
+                        }
+                    }
+                }else{
+                    
+                    }
                 }
                 }
                 contador2 = true;
+                contador5 = true;
                 }
                 
            System.out.println("------" + recorridos);
@@ -186,9 +206,12 @@ public class Scambiaformato extends HttpServlet {
             }
             }
              nuevotexto += "\">"+ datos2 +"</p>";
+             if(!formato2.equals("")){
              datos3 += formato1;
-             
-            for(int i = poscicion + edicion.length() + recorridos - 4; i < datos.length(); i++){
+             }else{
+             datos3+=formato2;
+             }
+            for(int i = poscicion + edicion.length() + recorridos; i < datos.length(); i++){
                 
                 
                 datos3 += datos.charAt(i);
