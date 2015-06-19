@@ -49,14 +49,17 @@ public class Scambiaformato extends HttpServlet {
             boolean varconteo = true;
             boolean formato = false;
             boolean contador2 = true;
+            boolean contador3 = false;
             int contador = 0;
             String datosi = "";
             String datos2 = "";
             String datos3 = "";
             String formato1 = "";
             int poscicion = 0;
+            int recorridos = 0;
+            boolean contador4 = false;
             int c1 = 0;
-            boolean contador3 = false;
+            
             if(seleccionado){
                 
             for(int j = 0; j < datos.length();j++){                           
@@ -64,34 +67,36 @@ public class Scambiaformato extends HttpServlet {
                     int nveces = 1;
                 for(int k = j + 1;k < datos.length();k++){
                     if(datos.charAt(k) == '<'){
-                    contador3 = true;
+                     contador3 = true;
+                     contador4 = true;
                     }
-                    if(datos.charAt(k - 1) == '>'){
-                    contador3 = false;
+                    if(datos.charAt(k-1) == '>'){
+                     contador3 = false;
+                     contador4 = false;
                     }
-                     if(!contador3){
-                    if(contador2){
-                       
+                    if(!contador3){
+                    if(contador2){                   
                         if(datos.charAt(k) != edicion.charAt(contador + nveces)){
                         contador2 = false;
-                        }
-                    }
+                    }                                    
                     nveces++;
-                     }
-                    
                    
                     if(nveces == edicion.length()){
-                    poscicion = k - nveces + 1;
+                    poscicion = k - nveces + 1 - recorridos;
                     contador2 = false;
                  }
+                }
+                    }else{
+                        if(contador4){
+                    recorridos++;
+                        }
+                    }      
                 }
                 }
                 contador2 = true;
                 }
                 
-                
-                
-           
+           System.out.println("------" + recorridos);
             for(int i = 0; i < datos.length();i++ ){
                
                if(varconteo){
@@ -183,7 +188,7 @@ public class Scambiaformato extends HttpServlet {
              nuevotexto += "\">"+ datos2 +"</p>";
              datos3 += formato1;
              
-            for(int i = poscicion + edicion.length() + 2; i < datos.length(); i++){
+            for(int i = poscicion + edicion.length() + recorridos - 4; i < datos.length(); i++){
                 
                 
                 datos3 += datos.charAt(i);
